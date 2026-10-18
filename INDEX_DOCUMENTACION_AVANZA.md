@@ -1,22 +1,24 @@
 # Índice Maestro de Documentación Oficial: AVANZA
 
 > **Organización:** AVANZA (AI & Software Studio)  
-> **Fecha:** 17 de Octubre, 2026  
+> **Fecha de Actualización:** 18 de Octubre, 2026  
 > **Liderazgo Técnico:** Manuel Callañaupa (Arquitecto de Software) & Magno Alomía (Director Comercial)  
 > **Estado:** **Aprobado para Producción con Calificación A+ (100% de Pruebas Superadas)**  
-> **Compilación:** 18 Rutas Next.js 16 (App Router + Turbopack) generadas en 777ms  
+> **Despliegue Oficial en Producción:** [https://avanza-one.vercel.app](https://avanza-one.vercel.app)  
+> **Repositorio de Código Fuente:** [https://github.com/MFC224/avanza](https://github.com/MFC224/avanza)  
+> **Compilación Turbopack:** 18 Rutas Next.js 16 (App Router) generadas en 11s con 0 errores TypeScript y 0 ESLint.
 
 ---
 
-## Estructura de la Suite de Documentación (5 Volúmenes Oficiales)
+## Estructura de la Suite de Documentación (5 Volúmenes Oficiales con Imágenes)
 
-Para cubrir con máxima profundidad cada dimensión del sistema, la documentación ha sido dividida en **5 volúmenes técnicos y estratégicos independientes en formato Microsoft Word (.docx)** con tablas formales, gráficos comparativos, resúmenes ejecutivos y capturas de pantalla en alta resolución:
+Para cubrir con máxima profundidad cada dimensión del sistema, la documentación técnica y estratégica está disponible en **5 volúmenes técnicos independientes en formato Microsoft Word (.docx)** y un **Documento Maestro Consolidado**, todos con tablas comparativas, métricas de rendimiento y capturas de pantalla en alta resolución:
 
 ```mermaid
 flowchart TD
-    Core["Plataforma AVANZA v2.6"] --> V1["Volumen I: Arquitectura y Seguridad"]
+    Core["Plataforma AVANZA v2.6\n(https://avanza-one.vercel.app)"] --> V1["Volumen I: Arquitectura y Seguridad"]
     Core --> V2["Volumen II: Dirección de Arte & Motion"]
-    Core --> V3["Volumen III: Auditoría y QA"]
+    Core --> V3["Volumen III: Auditoría y QA (61/61 PASS)"]
     Core --> V4["Volumen IV: Catálogo y Metodología"]
     Core --> V5["Volumen V: Manual Operativo y Despliegue"]
 
@@ -30,9 +32,11 @@ flowchart TD
 ---
 
 ### [Volumen I: Arquitectura Técnica, Backend y Seguridad](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_01_ARQUITECTURA_TECNICA_Y_SEGURIDAD.docx)
-* **Archivo:** `DOC_01_ARQUITECTURA_TECNICA_Y_SEGURIDAD.docx` (1.14 MB)
+* **Archivo:** `DOC_01_ARQUITECTURA_TECNICA_Y_SEGURIDAD.docx` (1.81 MB)
+* **Capturas Embebidas:** Despliegue en Vivo Vercel Edge (`production_vercel_live.png`), Monitor de Arquitectura 21:9 (`14_cinematic_reel.png`) y Radar Defensivo 404 (`13_not_found.png`).
 * **Alcance:**
   - Fundamentos de Next.js 16 (App Router con Turbopack) y React 19.2.8.
+  - Despliegue serverless global sobre la red Edge de Vercel con SSL automático y CDN Anycast.
   - Modelo de datos relacional normalizado en Tercera Forma Normal (3NF) sobre PostgreSQL (Supabase).
   - Políticas de seguridad a nivel de fila (Row Level Security - RLS) para aislamiento absoluto entre organizaciones.
   - Middleware de protección SSR con redirección HTTP 307 para rutas restringidas (`/dashboard`, `/leads`, `/clients`, `/sprints`).
@@ -42,54 +46,58 @@ flowchart TD
 ---
 
 ### [Volumen II: Dirección de Arte, Motion Graphics y Experiencia UX](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_02_DIRECCION_DE_ARTE_MOTION_Y_UX.docx)
-* **Archivo:** `DOC_02_DIRECCION_DE_ARTE_MOTION_Y_UX.docx` (1.92 MB)
+* **Archivo:** `DOC_02_DIRECCION_DE_ARTE_MOTION_Y_UX.docx` (3.91 MB)
+* **Capturas Embebidas:** Hero Cinético Dolly (`01_home_hero.png`), Bento Grid Spotlight (`03_home_bento.png`), Reseteo de Scroll Validado (`verify_scroll_reset_contacto.png`), Paleta ⌘K (`uat_01_command_palette.png`), Hub Flotante (`uat_02_floating_hub.png`) y Barra de Lectura (`uat_09_smooth_scroll_progress.png`).
 * **Alcance:**
   - Identidad visual Dark Mode cinematográfica (`bg-slate-950`) inspirada en estándares Awwwards y FWA.
-  - Motor de desplazamiento suave continuo asistido por **Lenis Smooth Scroll** con amortiguación inercial.
-  - Lienzo dinámico reactivo en Canvas 3D (`CinematicWarp`) con física de partículas estelares aceleradas por el scroll.
+  - **Motor de Scroll y Sincronización de Rutas:** Integración de Lenis Smooth Scroll con el router de Next.js (`usePathname()`) que resetea las coordenadas virtuales y del navegador a `(0, 0)` en cada navegación (evitando quedarse anclado en el fondo de página).
+  - Lienzo dinámico reactivo en Canvas 3D (`CinematicWarp`) con física de partículas estelares aceleradas por el scroll (60 FPS sin sobrecarga de GPU).
   - Capas de textura cinematográfica: grano analógico de 35mm, viñeta anamórfica e interfaz tipo Director HUD.
   - Bento Grids modulares con tarjetas Spotlight que reflejan el cursor del mouse.
   - **Paleta Global de Comandos ⌘K (`CommandMenu`)** con búsqueda instantánea y navegación 100% por teclado (estilo Raycast y Linear).
-  - Barra de lectura superior (`ScrollProgress`) con gradiente de neón impulsada por Framer Motion (`useSpring`).
+  - Hub Omnicanal Flotante con asesor en vivo y deep-links a WhatsApp (+51 942 498 841).
 
 ---
 
 ### [Volumen III: Auditoría Integral, Testing y QA](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_03_AUDITORIA_INTEGRAL_TESTING_Y_QA.docx)
-* **Archivo:** `DOC_03_AUDITORIA_INTEGRAL_TESTING_Y_QA.docx` (0.37 MB)
+* **Archivo:** `DOC_03_AUDITORIA_INTEGRAL_TESTING_Y_QA.docx` (2.74 MB)
+* **Capturas Embebidas:** Simulador Interactivo (`uat_03_estimator_interactive.png`), Matriz Comparativa (`uat_04_comparison_matrix.png`), Formulario 15s (`uat_05_express_contact_filled.png`), Acordeón FAQs (`uat_06_faqs_expanded.png`), Drawer Móvil iPhone (`uat_10_mobile_touch_drawer.png`).
 * **Alcance:**
-  - Marco automatizado de pruebas en Python con Playwright sobre Chromium headless.
-  - **10 Pruebas de Integración:** Latencias de respuesta HTTP de 3ms a 40ms, cabeceras de seguridad y redirección SSR 307.
-  - **8 Pruebas de Sistema (E2E):** Renderizado DOM de Hero, Bento, Reel 21:9, Servicios, Metodología, Nosotros, Login y 404.
-  - **5 Pruebas de Aceptación de Usuario (UAT):** Paleta de comandos (⌘K), cotizador de 15 segundos, acordeones FAQ, drawer móvil y deep link de WhatsApp.
-  - Cumplimiento de estándares de accesibilidad WCAG 2.1 AA (Landmark skip to content, contrastes cromáticos y etiquetas ARIA).
-  - Matriz de resultados con **100% de éxito (23 de 23 pruebas aprobadas)**.
+  - **Suite Automatizada de 61 Pruebas (100% PASS):**
+    - **24 Pruebas Unitarias por Función:** `cn()`, `robots()`, `sitemap()`, Zod `contactSchema`, `ProjectEstimator`, `CommandMenu` y SSR Middleware.
+    - **19 Pruebas de Integración:** Rutas públicas (200 OK en 3ms-42ms), rutas privadas (307 redirect), 404 defensivo y 3 cabeceras HTTP de seguridad.
+    - **10 Pruebas de Aceptación de Usuario (UAT):** Paleta ⌘K, hub omnicanal, estimador reactivo, tabla comparativa, formulario express, FAQs, WCAG 2.1 AA, 404 recovery, barra de lectura y responsividad táctil 390x844.
+    - **8 Pruebas de Sistema:** Renderizado de todos los módulos principales de la plataforma.
+  - Certificación de Calidad Nivel Producción A+ (100/100).
 
 ---
 
 ### [Volumen IV: Catálogo de Servicios y Metodología SCRUM](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_04_CATALOGO_DE_SERVICIOS_Y_METODOLOGIA.docx)
 * **Archivo:** `DOC_04_CATALOGO_DE_SERVICIOS_Y_METODOLOGIA.docx` (4.21 MB)
+* **Capturas Embebidas:** Catálogo de Soluciones (`05_servicios.png`), Ciclo SCRUM en 4 Cuadrantes (`06_metodologia.png`), Matriz Comparativa (`15_comparison_matrix.png`), Estimador de Proyectos (`16_project_estimator.png`) y Formulario con FAQs (`08_contacto.png`).
 * **Alcance:**
   - Catálogo de las **17 Soluciones de Software e Inteligencia Artificial** con SLAs garantizados de 7 a 14 días.
   - Verticales clave: Páginas Web de Alto Impacto, Sistemas Web / CRM Interno, Automatización con Agentes IA y Apps Móviles.
   - Ciclo de Desarrollo Ágil SCRUM (Planificación, Sprints Semanales con despliegue en producción, Demos en Vivo y Retrospectivas).
   - **Matriz de Diferenciación:** El Estándar AVANZA frente a los métodos convencionales de agencias tradicionales y freelancers.
   - **Simulador Interactivo de Proyecto & Retorno (ROI):** Calculadora visual reactiva con botón de cotización para WhatsApp en 1 toque.
-  - Formulario ultra-simplificado de 15 segundos (solo 2 campos esenciales + chips táctiles de servicio).
+  - Formulario ultra-simplificado de 15 segundos con trampa honeypot invisible anti-spam.
 
 ---
 
-### [Volumen V: Manual Operativo y Guía de Despliegue](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_05_MANUAL_OPERATIVO_Y_DESPLIEGUE.docx)
-* **Archivo:** `DOC_05_MANUAL_OPERATIVO_Y_DESPLIEGUE.docx` (1.39 MB)
+### [Volumen V: Manual Operativo y Guía de Despliegue en Producción](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOC_05_MANUAL_OPERATIVO_Y_DESPLIEGUE.docx)
+* **Archivo:** `DOC_05_MANUAL_OPERATIVO_Y_DESPLIEGUE.docx` (2.06 MB)
+* **Capturas Embebidas:** Despliegue en Vivo Vercel (`production_vercel_live.png`), Portal de Autenticación de Administradores (`09_login.png`) y Equipo Fundador (`07_nosotros.png`).
 * **Alcance:**
-  - Prerrequisitos de infraestructura y software base (Node.js 20+, npm, Python 3.10+, Chromium Playwright).
-  - Diccionario de variables de entorno seguras (`.env.local` vs entornos de staging y producción).
-  - Pipeline de compilación y verificación de tipos con Turbopack (`npm run build`).
-  - Procedimiento de despliegue distribuido en Edge CDN con disponibilidad continua (Zero-Downtime Deployment).
-  - Protocolo de gobernanza y respaldo de base de datos (Point-in-Time Recovery en Supabase).
-  - Credenciales corporativas y canales de soporte directo con los directores Manuel Callañaupa y Magno Alomía.
+  - Arquitectura de despliegue en producción en la nube de Vercel (`https://avanza-one.vercel.app`).
+  - Gestión de variables de entorno seguras (`NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`) inyectadas en Vercel.
+  - Control de versiones y flujo CI/CD en GitHub (`https://github.com/MFC224/avanza`).
+  - Pipeline de compilación y optimización Turbopack (`npm run build`).
+  - Políticas de respaldo automatizado (Point-in-Time Recovery en Supabase) y mitigación DDoS en Vercel Edge.
+  - Directorio de gobernanza y contacto directo con los directores Manuel Callañaupa y Magno Alomía.
 
 ---
 
 ### Documento Consolidado Maestro
-* **Archivo:** [DOCUMENTACION_SISTEMA_AVANZA.docx](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOCUMENTACION_SISTEMA_AVANZA.docx) (11.82 MB)
-* Reúne la totalidad de los 5 volúmenes en un único archivo encuadernado digitalmente con las **17 capturas de pantalla de alta resolución**.
+* **Archivo:** [DOCUMENTACION_SISTEMA_AVANZA.docx](file:///C:/Users/MFC2/OneDrive/Documentos/05_Desarrollo_Web/Avanza/DOCUMENTACION_SISTEMA_AVANZA.docx) (12.96 MB)
+* Reúne la totalidad de los 5 volúmenes en un único archivo encuadernado digitalmente con más de **20 capturas de pantalla de alta resolución** organizadas paso a paso.

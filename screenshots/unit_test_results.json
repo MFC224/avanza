@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 5
+    "latency_ms": 4
   },
   {
     "id": "UT-02",
@@ -69,7 +69,7 @@
     "description": "Acepta datos válidos y normaliza correos electrónicos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 2
   },
   {
     "id": "UT-10",
