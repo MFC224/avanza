@@ -1,0 +1,119 @@
+{
+  "audit_summary": {},
+  "integration_tests": [
+    {
+      "name": "HTTP Root Endpoint Availability",
+      "status": "PASS",
+      "details": "Status 200 OK en 184ms"
+    },
+    {
+      "name": "Ruta / (Página de Inicio (Home))",
+      "status": "PASS",
+      "details": "Status 200 OK (7ms)"
+    },
+    {
+      "name": "Ruta /servicios (Nuestros Servicios)",
+      "status": "PASS",
+      "details": "Status 200 OK (34ms)"
+    },
+    {
+      "name": "Ruta /metodologia (Metodología SCRUM)",
+      "status": "PASS",
+      "details": "Status 200 OK (13ms)"
+    },
+    {
+      "name": "Ruta /nosotros (Nosotros / Equipo)",
+      "status": "PASS",
+      "details": "Status 200 OK (13ms)"
+    },
+    {
+      "name": "Ruta /contacto (Contacto y Cotizaciones)",
+      "status": "PASS",
+      "details": "Status 200 OK (11ms)"
+    },
+    {
+      "name": "Ruta /login (Portal de Autenticación)",
+      "status": "PASS",
+      "details": "Status 200 OK (36ms)"
+    },
+    {
+      "name": "Middleware de Protección SSR (/dashboard)",
+      "status": "PASS",
+      "details": "Status 307 Redirige a '/login'"
+    },
+    {
+      "name": "Cabeceras de Seguridad HTTP",
+      "status": "PASS",
+      "details": "X-Frame-Options, nosniff y Permissions-Policy verificados"
+    },
+    {
+      "name": "Directivas SEO (robots.txt y sitemap.xml)",
+      "status": "PASS",
+      "details": "Archivos de rastreo generados dinámicamente"
+    }
+  ],
+  "system_tests": [
+    {
+      "name": "Home Page - Renderizado de Hero y Tipografía",
+      "status": "PASS",
+      "details": "Título H1: 'Impulsa tu empresa con\ntecnología que im...'"
+    },
+    {
+      "name": "Página de Servicios - Módulos y SLAs",
+      "status": "PASS",
+      "details": "17 tarjetas de servicios identificadas"
+    },
+    {
+      "name": "Página Metodología - Ciclo SCRUM",
+      "status": "PASS",
+      "details": "H1: Velocidad, Transparencia e\nInteligencia Artificial"
+    },
+    {
+      "name": "Página Nosotros - Perfiles de Liderazgo",
+      "status": "PASS",
+      "details": "Detectados perfiles de Manuel y Magno"
+    },
+    {
+      "name": "Portal de Acceso Administrativo (/login)",
+      "status": "PASS",
+      "details": "Formulario de inicio de sesión activo"
+    },
+    {
+      "name": "Accesibilidad WCAG - Enlace Saltar al Contenido",
+      "status": "PASS",
+      "details": "Landmark de accesibilidad presente en encabezado"
+    },
+    {
+      "name": "Manejo Defensivo - Página 404 Personalizada",
+      "status": "PASS",
+      "details": "Título H1: 'Página no encontrada'"
+    }
+  ],
+  "user_tests": [
+    {
+      "name": "Paleta de Comandos Global (Cmd+K / Ctrl+K)",
+      "status": "PASS",
+      "details": "Paleta de comandos modal interactiva verificada"
+    },
+    {
+      "name": "Formulario Contacto - Presencia de Botón de Envío",
+      "status": "PASS",
+      "details": "Botón de acción disponible"
+    },
+    {
+      "name": "Interacción de Preguntas Frecuentes (Accordion)",
+      "status": "PASS",
+      "details": "FAQ expandida fluidamente"
+    },
+    {
+      "name": "Navegación Móvil - Menú Hamburguesa Sheet",
+      "status": "PASS",
+      "details": "Menú lateral móvil abre correctamente"
+    },
+    {
+      "name": "Botón Flotante WhatsApp - Deep Link",
+      "status": "PASS",
+      "details": "URL destino: https://wa.me/51942498841..."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+# Contexto del Proyecto: "AVANZA"
+
+Eres un Ingeniero de Software Principal. Estás construyendo "AVANZA", una agencia de creación de startups con IA.
+El sistema contiene dos partes en un mismo repositorio:
+
+1. Un sitio web de marketing público.
+2. Un sistema interno (CRM/Dashboard) para gestión de clientes, proyectos y tiempos.
+
+## 1. Stack Tecnológico Estricto
+
+- **Framework:** Next.js 14+ (App Router).
+- **Lenguaje:** TypeScript (Modo estricto).
+- **Estilos:** Tailwind CSS.
+- **Componentes UI:** shadcn/ui y Radix Primitives. No uses librerías de componentes obsoletas.
+- **Base de Datos y Autenticación:** Supabase (usa `@supabase/ssr`).
+- **Iconos:** Lucide React.
+- **Manejo de Fechas:** `date-fns`.
+
+## 2. Arquitectura de Rutas (Next.js App Router)
+
+Debes mantener una separación estricta utilizando rutas agrupadas:
+
+- `app/(public)/`: Contiene la landing page, nosotros, servicios y contacto. (Debe ser SEO-friendly, renderizado en servidor).
+- `app/(dashboard)/`: Contiene el sistema interno. Debe estar protegido por autenticación. Incluye subrutas como `/clients`, `/projects`, `/time-tracking`.
+- `app/api/`: Para rutas de backend (Route Handlers) si son estrictamente necesarias.
+
+## 3. Reglas de Código y Convenciones
+
+- Nombra todos los archivos, variables, funciones y tablas de base de datos en **INGLÉS** (ej. `ClientList`, `project-details.tsx`).
+- Todo el texto visible en la interfaz de usuario (textos, botones, alertas) debe estar en **ESPAÑOL**.
+- Usa `Server Components` por defecto. Solo usa `"use client"` al inicio del archivo si el componente requiere estado (`useState`), efectos (`useEffect`) o interactividad del usuario (botones, formularios).
+- Extrae la lógica compleja a `hooks` personalizados.
+
+## 4. Interfaz de Usuario y Experiencia (UI/UX)
+
+- **Diseño AVANZA:** Mantén una estética futurista, limpia y profesional (acorde a una agencia de IA). Usa modo oscuro (Dark Mode) por defecto, con acentos en colores modernos (ej. violeta, azul eléctrico o esmeralda).
+- Todo debe ser completamente responsivo (Mobile-First).
+- Usa tarjetas (Cards), tablas de datos (Data Tables) y modales para organizar la información en el Dashboard interno.
+- Muestra estados de carga (Loading Skeletons o Spinners) mientras se obtienen datos de Supabase.
+
+## 5. Instrucciones de Ejecución
+
+- Si el usuario te pide un componente de shadcn/ui, asume que debes ejecutar el comando de instalación correspondiente a través de npx (ej. `npx shadcn-ui@latest add button`).
+- Maneja los errores de manera elegante usando bloques `try/catch` y muestra notificaciones (Toasts) al usuario si una acción falla.
+- Escribe código modular. No crees archivos de más de 300 líneas. Si crece mucho, divídelo en componentes más pequeños.
+
+## 6. Manifiesto de Skills y Estándares Globales (AVANZA)
+- Consulta y respeta rigurosamente las pautas de [AVANZA_SKILLS_MANIFESTO.md](./AVANZA_SKILLS_MANIFESTO.md) para diseño visual no genérico (Aceternity UI, Magic UI, Motion, Canvas Confetti), arquitectura Next.js/Supabase, pruebas de calidad y ciberseguridad.

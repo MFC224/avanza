@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Integración Ruta / (Página de Inicio (Home))",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'AVANZA' confirmada",
+    "latency_ms": 91
+  },
+  {
+    "name": "Integración Ruta /servicios (Catálogo de Servicios)",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'Servicios' confirmada",
+    "latency_ms": 28
+  },
+  {
+    "name": "Integración Ruta /metodologia (Metodología SCRUM)",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'SCRUM' confirmada",
+    "latency_ms": 3
+  },
+  {
+    "name": "Integración Ruta /nosotros (Nosotros / Equipo)",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'Manuel' confirmada",
+    "latency_ms": 25
+  },
+  {
+    "name": "Integración Ruta /contacto (Contacto y Cotizaciones)",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'WhatsApp' confirmada",
+    "latency_ms": 14
+  },
+  {
+    "name": "Integración Ruta /login (Portal Administrativo)",
+    "status": "PASS",
+    "details": "Status 200 OK · Keyword 'password' confirmada",
+    "latency_ms": 3
+  },
+  {
+    "name": "Middleware SSR: /dashboard (Panel de Control)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 25
+  },
+  {
+    "name": "Middleware SSR: /leads (Gestión de Prospectos)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 14
+  },
+  {
+    "name": "Middleware SSR: /clients (Directorio de Clientes)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 15
+  },
+  {
+    "name": "Middleware SSR: /projects (Administración de Proyectos)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 15
+  },
+  {
+    "name": "Middleware SSR: /finances (Hitos Financieros)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 2
+  },
+  {
+    "name": "Middleware SSR: /sprints (Control de Sprints SCRUM)",
+    "status": "PASS",
+    "details": "Status 307 interceptado correctamente · Redirige a '/login'",
+    "latency_ms": 12
+  },
+  {
+    "name": "Manejo 404: /coordenada-falsa-404 (Ruta Inválida Web)",
+    "status": "PASS",
+    "details": "Status 404 retornado defensivamente (9ms)",
+    "latency_ms": 9
+  },
+  {
+    "name": "Manejo 404: /api/endpoint-inexistente (Ruta Inválida API)",
+    "status": "PASS",
+    "details": "Status 404 retornado defensivamente (22ms)",
+    "latency_ms": 22
+  },
+  {
+    "name": "Cabecera X-Frame-Options (Anti-Clickjacking)",
+    "status": "PASS",
+    "details": "Valor: DENY",
+    "latency_ms": 4
+  },
+  {
+    "name": "Cabecera X-Content-Type-Options (Anti-MIME Sniff)",
+    "status": "PASS",
+    "details": "Valor: nosniff",
+    "latency_ms": 4
+  },
+  {
+    "name": "Cabecera Permissions-Policy (Hardware Sandbox)",
+    "status": "PASS",
+    "details": "Valor: camera=(), microphone=(), geolocation=()",
+    "latency_ms": 4
+  },
+  {
+    "name": "SEO Dinámico: /robots.txt",
+    "status": "PASS",
+    "details": "Status 200 OK · Directiva sitemap presente",
+    "latency_ms": 38
+  },
+  {
+    "name": "SEO Dinámico: /sitemap.xml",
+    "status": "PASS",
+    "details": "Status 200 OK · XML bien formado con URLs canónicas",
+    "latency_ms": 24
+  }
+]

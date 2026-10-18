@@ -1,0 +1,194 @@
+[
+  {
+    "id": "UT-01",
+    "module": "cn()",
+    "description": "Fusiona clases estándar de Tailwind sin conflictos",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 5
+  },
+  {
+    "id": "UT-02",
+    "module": "cn()",
+    "description": "Resuelve conflictos de especificidad (Tailwind Merge overrides)",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-03",
+    "module": "cn()",
+    "description": "Filtra valores falsy, undefined, null y booleanos condicionales",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-04",
+    "module": "robots()",
+    "description": "Retorna User-Agent comodín '*' permitiendo '/'",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-05",
+    "module": "robots()",
+    "description": "Protege explícitamente todas las rutas de administración y dashboard",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-06",
+    "module": "robots()",
+    "description": "Apunta al sitemap canónico de AVANZA",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-07",
+    "module": "sitemap()",
+    "description": "Genera las 5 rutas canónicas públicas principales",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-08",
+    "module": "sitemap()",
+    "description": "Asigna prioridades jerárquicas válidas (1.0 raíz, 0.9 comercial, 0.8 institucional)",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-09",
+    "module": "contactForm",
+    "description": "Acepta datos válidos y normaliza correos electrónicos",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 1
+  },
+  {
+    "id": "UT-10",
+    "module": "contactForm",
+    "description": "Normaliza números de teléfono/WhatsApp a dirección lead-whatsapp",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-11",
+    "module": "contactForm",
+    "description": "Rechaza nombres menores a 2 caracteres con mensaje amigable",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-12",
+    "module": "contactForm",
+    "description": "Rechaza datos de contacto menores a 5 caracteres",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-13",
+    "module": "contactForm",
+    "description": "Intercepta envíos de bots automáticamente mediante honeypot (_honey)",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-14",
+    "module": "ProjectEstimator",
+    "description": "Calcula tiempos base y ROI correctos por tipo de solución",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-15",
+    "module": "ProjectEstimator",
+    "description": "Construye URL de WhatsApp con teléfono oficial y parámetros codificados",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-16",
+    "module": "CommandMenu",
+    "description": "Filtra comandos por coincidencia de subcadena insensible a mayúsculas",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-17",
+    "module": "CommandMenu",
+    "description": "Filtra por categoría (ej. 'Contacto')",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-18",
+    "module": "CommandMenu",
+    "description": "Retorna todos los comandos si la búsqueda está vacía",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-19",
+    "module": "ClientActions",
+    "description": "Valida datos de cliente completos y aplica status 'Activo' por defecto",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-20",
+    "module": "ClientActions",
+    "description": "Lanza excepción controlada si falta algún campo obligatorio",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-21",
+    "module": "SSRMiddleware",
+    "description": "Redirige a /login cuando un usuario anónimo intenta acceder a /dashboard",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-22",
+    "module": "SSRMiddleware",
+    "description": "Protege todas las subrutas administrativas (ej. /projects, /finances)",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-23",
+    "module": "SSRMiddleware",
+    "description": "Redirige a /dashboard si un usuario ya autenticado visita /login",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-24",
+    "module": "SSRMiddleware",
+    "description": "Permite acceso sin redirección a rutas públicas para cualquier usuario",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  }
+]

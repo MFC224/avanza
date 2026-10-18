@@ -1,0 +1,82 @@
+[
+  {
+    "id": "UAT-01",
+    "name": "Paleta de Comandos Cmd+K (Navegacion Rapida)",
+    "status": "PASS",
+    "details": "Atajo y disparador abren paleta modal, filtrado reactivo operativo y cierre modal verificado",
+    "latency_ms": 3977,
+    "screenshot": "uat_01_command_palette.png"
+  },
+  {
+    "id": "UAT-02",
+    "name": "Hub Omnicanal Flotante de Contacto",
+    "status": "PASS",
+    "details": "Hub flotante desplegado con asesor en linea, 3 temas pre-armados, enlace a WhatsApp (+51 942 498 841) y llamada",
+    "latency_ms": 1996,
+    "screenshot": "uat_02_floating_hub.png"
+  },
+  {
+    "id": "UAT-03",
+    "name": "Simulador Interactivo de Proyectos y ROI",
+    "status": "PASS",
+    "details": "Calculo reactivo dinamico verificado: seleccion de solucion IA, Sprint Express y pre-llenado de mensaje WhatsApp",
+    "latency_ms": 4204,
+    "screenshot": "uat_03_estimator_interactive.png"
+  },
+  {
+    "id": "UAT-04",
+    "name": "Matriz de Comparacion Diferenciadora",
+    "status": "PASS",
+    "details": "Tabla comparativa de dimensiones tecnicas, propiedad intelectual y tiempos de entrega",
+    "latency_ms": 2176,
+    "screenshot": "uat_04_comparison_matrix.png"
+  },
+  {
+    "id": "UAT-05",
+    "name": "Formulario Express de Cotizacion (15s)",
+    "status": "PASS",
+    "details": "Formulario unificado llenado en <15s, proteccion honeypot activa y confirmacion de recepcion con animacion",
+    "latency_ms": 3407,
+    "screenshot": "uat_05_express_contact_filled.png"
+  },
+  {
+    "id": "UAT-06",
+    "name": "Acordeon Interactivo de Preguntas Frecuentes",
+    "status": "PASS",
+    "details": "Despliegue y colapso interactivo de FAQs fluidas sin desajustes de layout (CLS = 0.00)",
+    "latency_ms": 2775,
+    "screenshot": "uat_06_faqs_expanded.png"
+  },
+  {
+    "id": "UAT-07",
+    "name": "Accesibilidad y Landmark WCAG 2.1 AA",
+    "status": "PASS",
+    "details": "Landmark de navegacion accesible 'Saltar al contenido principal' y foco por teclado verificado",
+    "latency_ms": 1415,
+    "screenshot": null
+  },
+  {
+    "id": "UAT-08",
+    "name": "Manejo Defensivo y Recuperacion 404",
+    "status": "PASS",
+    "details": "Radar cosmico 404 renderizado correctamente y recuperacion con un solo clic hacia la pagina de inicio",
+    "latency_ms": 2423,
+    "screenshot": "uat_08_recovery_404.png"
+  },
+  {
+    "id": "UAT-09",
+    "name": "Indicador de Progreso y Smooth Scroll",
+    "status": "PASS",
+    "details": "Barra de progreso de lectura (Apple/Stripe style) activa con desplazamiento de inercia suave (Lenis)",
+    "latency_ms": 1956,
+    "screenshot": "uat_09_smooth_scroll_progress.png"
+  },
+  {
+    "id": "UAT-10",
+    "name": "Experiencia Movil Touch y Drawer Lateral",
+    "status": "PASS",
+    "details": "Viewport responsivo sin desborde horizontal (390px), menu hamburguesa tactil fluido y navegacion completa",
+    "latency_ms": 2150,
+    "screenshot": "uat_10_mobile_touch_drawer.png"
+  }
+]
