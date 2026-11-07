@@ -10,24 +10,17 @@ export function HeroMotion() {
   const smoothY = useSpring(scrollY, { damping: 25, stiffness: 180 });
 
   // Camera Dolly-out & 3D tilt effects tied to vertical scroll
-  const cameraY = useTransform(smoothY, [0, 700], [0, 160]);
-  const cameraScale = useTransform(smoothY, [0, 700], [1, 0.92]);
-  const cameraOpacity = useTransform(smoothY, [0, 550], [1, 0.25]);
-  const cameraRotateX = useTransform(smoothY, [0, 700], [0, 5]);
+  const cameraY = useTransform(smoothY, [0, 800], [0, 140]);
+  const cameraScale = useTransform(smoothY, [0, 800], [1, 0.94]);
+  const cameraOpacity = useTransform(smoothY, [0, 600], [1, 0.3]);
+  const cameraRotateX = useTransform(smoothY, [0, 800], [0, 4]);
 
   return (
-    <section className="relative w-full py-28 md:py-36 lg:py-44 overflow-hidden flex flex-col items-center text-center px-4 perspective-[1200px]">
-      {/* Soft Ambient Radiance in Light Mode */}
-      <motion.div
-        style={{ y: useTransform(smoothY, [0, 700], [0, -80]) }}
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-blue-100/40 blur-[150px] rounded-full pointer-events-none"
-      />
-      <motion.div
-        style={{ y: useTransform(smoothY, [0, 700], [0, 60]) }}
-        className="absolute top-1/3 left-1/3 w-[350px] h-[350px] bg-slate-100/60 blur-[130px] rounded-full pointer-events-none"
-      />
+    <section className="relative w-full pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-44 lg:pb-36 overflow-hidden flex flex-col items-center text-center px-4">
+      {/* Subtle Architectural Ambient Blur */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-slate-100/70 blur-[160px] rounded-full pointer-events-none -z-10" />
 
-      {/* Camera Stage (Dollying in 3D perspective) */}
+      {/* Main Hero Container */}
       <motion.div
         style={{
           y: cameraY,
@@ -36,31 +29,30 @@ export function HeroMotion() {
           rotateX: cameraRotateX,
           transformStyle: "preserve-3d",
         }}
-        className="relative z-10 max-w-5xl mx-auto flex flex-col items-center transition-all"
+        className="relative z-10 max-w-5xl mx-auto flex flex-col items-center"
       >
-        {/* Editorial Eyebrow Badge */}
+        {/* Squarespace-Style Editorial Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-8"
         >
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-800 text-[11px] sm:text-xs font-mono font-medium tracking-[0.16em] uppercase backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#021761]" />
-            <span>Studio de Ingeniería de Software & Inteligencia Artificial</span>
+          <div className="inline-flex items-center gap-3 text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-slate-500 font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-slate-900" />
+            <span>AI & SOFTWARE STUDIO · ESTÁNDAR ÉLITE</span>
           </div>
         </motion.div>
 
-        {/* Hero Title with Kinetic Stagger & High Contrast Typography */}
+        {/* Hero Title with Squarespace Sans + Serif Pairing */}
         <motion.h1
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.2rem] font-black tracking-[-0.04em] text-slate-950 mb-8 leading-[0.98] max-w-5xl"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.6rem] font-black tracking-[-0.04em] text-slate-950 mb-8 leading-[0.94] max-w-5xl"
         >
-          Impulsa tu empresa con <br className="hidden md:block" />
-          <span className="text-slate-950">tecnología que </span>
-          <span className="text-[#021761]">impresiona.</span>
+          Sistemas web y software con IA <br className="hidden md:block" />
+          <span className="font-serif italic font-normal text-[#021761]">para liderar tu industria.</span>
         </motion.h1>
 
         {/* Hero Subtitle */}
@@ -70,56 +62,112 @@ export function HeroMotion() {
           transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
           className="text-lg md:text-2xl text-slate-600 max-w-3xl mb-12 leading-relaxed font-normal"
         >
-          Diseñamos sistemas web de alta gama, plataformas a medida y arquitecturas con Inteligencia Artificial. Precisión milimétrica, entregas cada 7 a 14 días y cero deuda técnica.
+          Diseñamos plataformas web de alta conversión, sistemas a medida y arquitecturas con Inteligencia Artificial. Entregas ágiles cada 7 a 14 días. 100% código propio.
         </motion.p>
 
-        {/* Action Buttons */}
+        {/* Squarespace Iconic CTA Actions */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          className="flex flex-col sm:flex-row items-center gap-5"
         >
           <Link href="/contacto">
             <Button
               size="lg"
-              className="bg-[#021761] hover:bg-[#082282] text-white h-15 px-10 text-base shadow-sm hover:shadow-lg transition-all rounded-full font-semibold group cursor-pointer"
+              className="bg-slate-950 hover:bg-[#021761] text-white h-15 px-10 text-[12px] uppercase font-bold tracking-[0.16em] transition-all shadow-md hover:shadow-xl rounded-none md:rounded-xs cursor-pointer group"
             >
               Comenzar Proyecto
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
           <Link href="/metodologia">
             <Button
               variant="outline"
               size="lg"
-              className="border-slate-300/80 bg-white hover:bg-slate-50 text-slate-900 h-15 px-8 text-base rounded-full font-semibold shadow-2xs hover:border-slate-400 cursor-pointer"
+              className="border-slate-300 bg-white hover:bg-slate-50 text-slate-900 h-15 px-8 text-[12px] uppercase font-bold tracking-[0.16em] transition-all rounded-none md:rounded-xs shadow-2xs hover:border-slate-900 cursor-pointer"
             >
               Ver Metodología SCRUM
             </Button>
           </Link>
         </motion.div>
 
-        {/* Executive Value Metrics Strip */}
+        {/* Squarespace Iconic Statistics Strip */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 pt-12 border-t border-slate-200/70 w-full max-w-4xl"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 pt-12 border-t border-slate-200/80 w-full max-w-4xl"
         >
           <div className="text-center sm:text-left">
-            <div className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">7 a 14 Días</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-slate-500 mt-1">Sprints Ágiles en Producción</div>
+            <div className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">7 a 14 Días</div>
+            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">Sprints Ágiles en Producción</div>
           </div>
 
           <div className="text-center sm:text-left">
-            <div className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">100% Type-Safe</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-slate-500 mt-1">Next.js 16 & PostgreSQL 3NF</div>
+            <div className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">100% Type-Safe</div>
+            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">Next.js 16 & PostgreSQL 3NF</div>
           </div>
 
           <div className="text-center sm:text-left">
-            <div className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">Zero Lock-In</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-slate-500 mt-1">100% Propiedad del Código</div>
+            <div className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">Zero Lock-In</div>
+            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">100% Propiedad del Código</div>
+          </div>
+        </motion.div>
+
+        {/* Squarespace Device Showcase: Elegant SaaS Interface Stage */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.65, ease: "easeOut" }}
+          className="w-full max-w-5xl mt-16 rounded-2xl border border-slate-200/90 bg-white shadow-2xl overflow-hidden text-left"
+        >
+          {/* Browser Window Chrome */}
+          <div className="bg-slate-50 border-b border-slate-200/80 px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-slate-300" />
+              <span className="w-3 h-3 rounded-full bg-slate-300" />
+              <span className="w-3 h-3 rounded-full bg-slate-300" />
+            </div>
+            <div className="px-4 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600 flex items-center gap-2 max-w-xs w-full justify-center">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>avanzastudio.com/portal</span>
+            </div>
+            <div className="text-xs font-mono text-slate-400 hidden sm:block">Next.js 16 · Supabase</div>
+          </div>
+
+          {/* Interactive UI Mockup Showcase */}
+          <div className="p-6 sm:p-10 bg-slate-50/40 grid md:grid-cols-12 gap-6 items-center">
+            <div className="md:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Sistema Operativo en Producción</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+                Panel de Control de Clientes & Facturación Automatizada
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Arquitectura PostgreSQL con Row Level Security, sincronización de pagos en tiempo real y agentes de Inteligencia Artificial que procesan consultas 24/7.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                <span className="text-xs font-mono bg-white border border-slate-200 px-3 py-1 rounded text-slate-700">TypeScript Estricto</span>
+                <span className="text-xs font-mono bg-white border border-slate-200 px-3 py-1 rounded text-slate-700">Supabase SSR</span>
+                <span className="text-xs font-mono bg-white border border-slate-200 px-3 py-1 rounded text-slate-700">OpenAI LLM Orchestrator</span>
+              </div>
+            </div>
+
+            <div className="md:col-span-5 space-y-3">
+              <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+                <div className="text-xs font-mono text-slate-500 uppercase">Tasa de Conversión</div>
+                <div className="text-2xl font-black text-slate-950 mt-1">+284%</div>
+                <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Optimizado para ventas directas</div>
+              </div>
+              <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+                <div className="text-xs font-mono text-slate-500 uppercase">Tiempo de Respuesta Edge</div>
+                <div className="text-2xl font-black text-[#021761] mt-1">14ms</div>
+                <div className="text-[11px] text-slate-500 font-medium mt-0.5">Despliegue distribuido en CDN global</div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </motion.div>

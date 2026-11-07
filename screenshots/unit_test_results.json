@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 10
+    "latency_ms": 6
   },
   {
     "id": "UT-02",
@@ -21,7 +21,7 @@
     "description": "Filtra valores falsy, undefined, null y booleanos condicionales",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 0
+    "latency_ms": 1
   },
   {
     "id": "UT-04",
@@ -69,7 +69,7 @@
     "description": "Acepta datos válidos y normaliza correos electrónicos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 3
+    "latency_ms": 1
   },
   {
     "id": "UT-10",
@@ -85,7 +85,7 @@
     "description": "Rechaza nombres menores a 2 caracteres con mensaje amigable",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 0
   },
   {
     "id": "UT-12",
@@ -285,7 +285,7 @@
     "description": "Valida el esquema Zod del Libro de Reclamaciones, rechazo de datos inválidos y formato del código REC-YYYY-XXXX",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 4
+    "latency_ms": 2
   },
   {
     "id": "UT-37",

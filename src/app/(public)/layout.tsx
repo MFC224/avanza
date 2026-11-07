@@ -60,35 +60,35 @@ export default function PublicLayout({
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-slate-100/80 border border-slate-200/80 backdrop-blur-md">
+          <nav className="hidden md:flex items-center gap-1 p-1 bg-slate-100/70 border border-slate-200/80 backdrop-blur-md rounded-full">
             <Link
               href="/"
-              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all"
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
             >
               Inicio
             </Link>
             <Link
               href="/servicios"
-              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all"
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
             >
               Servicios
             </Link>
             <Link
               href="/metodologia"
-              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all flex items-center gap-1.5"
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all flex items-center gap-1.5"
             >
               Metodología
-              <span className="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono font-medium">SCRUM</span>
+              <span className="text-[9px] bg-slate-950 text-white px-1.5 py-0.5 rounded font-mono font-bold tracking-wider">SCRUM</span>
             </Link>
             <Link
               href="/nosotros"
-              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all"
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
             >
               Nosotros
             </Link>
             <Link
               href="/contacto"
-              className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all"
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
             >
               Contacto
             </Link>
@@ -101,9 +101,9 @@ export default function PublicLayout({
             <CommandMenuTrigger />
 
             <Link href="/contacto" className="hidden sm:block">
-              <Button className="bg-[#021761] hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all px-6 py-5 rounded-full font-semibold group">
+              <Button className="bg-slate-950 hover:bg-[#021761] text-white shadow-xs hover:shadow-md transition-all px-6 py-2.5 rounded-none md:rounded-xs text-[11px] uppercase font-bold tracking-[0.16em] group cursor-pointer">
                 <span>Cotizar Proyecto</span>
-                <ArrowUpRight className="ml-1.5 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Button>
             </Link>
 
