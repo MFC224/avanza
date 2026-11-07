@@ -47,40 +47,40 @@ export function ComparisonMatrix() {
   ];
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-200/80">
-      <FadeInView className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
-          <Award className="w-3.5 h-3.5" /> El Estándar de la Industria
+    <section className="w-full max-w-7xl mx-auto px-4 py-28 md:py-36 relative z-10 border-t border-slate-200/70">
+      <FadeInView className="text-center mb-20">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-[11px] font-mono uppercase tracking-[0.18em] font-semibold mb-6">
+          <Award className="w-3.5 h-3.5 text-[#021761]" /> El Estándar de la Industria
         </div>
-        <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-6 tracking-[-0.035em]">
           Por qué las empresas eligen AVANZA
         </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg">
+        <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed">
           Compara nuestro modelo de ingeniería de software de alta velocidad frente a los métodos convencionales.
         </p>
       </FadeInView>
 
       <FadeInView delay={0.2}>
-        <div className="overflow-x-auto rounded-3xl border border-slate-200/90 bg-white shadow-xl">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200/80 bg-white shadow-lg">
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50/90">
-                <th className="py-5 px-6 text-sm font-semibold text-slate-700 w-1/4">
+              <tr className="border-b border-slate-200 bg-slate-50/80">
+                <th className="py-6 px-6 text-xs font-mono uppercase tracking-wider text-slate-500 w-1/4">
                   Criterio Técnico
                 </th>
-                <th className="py-5 px-6 text-sm font-bold text-slate-900 bg-blue-50/80 border-x border-blue-200 w-5/12">
-                  <div className="flex items-center gap-2 text-blue-900">
-                    <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
-                    <span className="text-base font-black tracking-wide">AVANZA</span>
-                    <span className="text-[10px] bg-blue-200/70 text-blue-800 px-2 py-0.5 rounded-full font-mono uppercase font-bold">
+                <th className="py-6 px-6 text-sm font-bold text-white bg-[#021761] border-x border-[#021761] w-5/12">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-base font-black tracking-wide text-white">AVANZA</span>
+                    <span className="text-[10px] bg-white/15 text-white px-2 py-0.5 rounded-full font-mono uppercase font-semibold">
                       Software Studio
                     </span>
                   </div>
                 </th>
-                <th className="py-5 px-6 text-sm font-semibold text-slate-500 w-1/4">
+                <th className="py-6 px-6 text-xs font-mono uppercase tracking-wider text-slate-500 w-1/4">
                   Agencias Tradicionales
                 </th>
-                <th className="py-5 px-6 text-sm font-semibold text-slate-500 w-1/6">
+                <th className="py-6 px-6 text-xs font-mono uppercase tracking-wider text-slate-500 w-1/6">
                   Freelancers
                 </th>
               </tr>
@@ -90,27 +90,27 @@ export function ComparisonMatrix() {
                 <tr
                   key={idx}
                   className={`hover:bg-slate-50/80 transition-colors ${
-                    item.highlight ? "bg-blue-50/20" : ""
+                    item.highlight ? "bg-slate-50/40" : ""
                   }`}
                 >
-                  <td className="py-5 px-6 font-semibold text-slate-800">
+                  <td className="py-5 px-6 font-semibold text-slate-900">
                     {item.feature}
                   </td>
 
                   {/* AVANZA Column (Hero) */}
-                  <td className="py-5 px-6 bg-blue-50/40 border-x border-blue-100 text-slate-900 font-medium">
+                  <td className="py-5 px-6 bg-blue-50/30 border-x border-slate-200/60 text-slate-900 font-medium">
                     <div className="flex items-start gap-2.5">
                       <div className="p-1 rounded-full bg-emerald-100 text-emerald-700 mt-0.5 shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-sm leading-relaxed">{item.avanza}</span>
+                      <span className="text-sm leading-relaxed font-semibold text-slate-950">{item.avanza}</span>
                     </div>
                   </td>
 
                   {/* Traditional Agencies */}
                   <td className="py-5 px-6 text-slate-500">
                     <div className="flex items-start gap-2.5">
-                      <div className="p-1 rounded-full bg-rose-100 text-rose-600 mt-0.5 shrink-0">
+                      <div className="p-1 rounded-full bg-slate-100 text-slate-400 mt-0.5 shrink-0">
                         <X className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-xs sm:text-sm leading-relaxed">{item.traditional}</span>
@@ -120,7 +120,7 @@ export function ComparisonMatrix() {
                   {/* Freelancers */}
                   <td className="py-5 px-6 text-slate-500">
                     <div className="flex items-start gap-2.5">
-                      <div className="p-1 rounded-full bg-amber-100 text-amber-700 mt-0.5 shrink-0">
+                      <div className="p-1 rounded-full bg-slate-100 text-slate-400 mt-0.5 shrink-0">
                         <X className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-xs sm:text-sm leading-relaxed">{item.freelancer}</span>

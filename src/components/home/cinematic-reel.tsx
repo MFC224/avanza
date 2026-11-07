@@ -47,21 +47,21 @@ export function CinematicReel() {
   }, [isPlaying, steps.length]);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-200/80">
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
-          <Film className="w-3.5 h-3.5" /> Arquitectura en Movimiento
+    <section className="w-full max-w-7xl mx-auto px-4 py-28 md:py-36 relative z-10 border-t border-slate-200/70">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-[11px] font-mono uppercase tracking-[0.18em] font-semibold mb-6">
+          <Film className="w-3.5 h-3.5 text-[#021761]" /> Arquitectura en Movimiento
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-6 tracking-[-0.035em]">
           La ingeniería de AVANZA en tiempo real
         </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+        <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed">
           Observa cómo se construye y despliega una solución de élite en una secuencia de alta velocidad.
         </p>
       </div>
 
       {/* Cinematic Frame Container (21:9 Ultra-Wide Screen) */}
-      <div className="relative rounded-3xl p-1 bg-gradient-to-b from-blue-500/20 via-sky-400/10 to-slate-200/50 shadow-xl overflow-hidden">
+      <div className="relative rounded-3xl border border-slate-200/80 bg-slate-950 p-2 shadow-2xl overflow-hidden">
         <div className="rounded-[22px] bg-slate-950 p-6 md:p-10 backdrop-blur-2xl relative overflow-hidden">
           {/* Ambient Video Glow Inside */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />

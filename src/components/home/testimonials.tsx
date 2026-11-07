@@ -33,15 +33,15 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-200/80">
-      <FadeInView className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold uppercase tracking-wider mb-4">
-          <CheckCircle2 className="w-3.5 h-3.5" /> Casos de Éxito & Resultados
+    <section className="w-full max-w-7xl mx-auto px-4 py-28 md:py-36 relative z-10 border-t border-slate-200/70">
+      <FadeInView className="text-center mb-20">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-[11px] font-mono uppercase tracking-[0.18em] font-semibold mb-6">
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#021761]" /> Casos de Éxito & Resultados
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-6 tracking-[-0.035em]">
           La confianza de quienes ya escalaron con nosotros
         </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+        <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed">
           No prometemos código, entregamos rentabilidad, velocidad y tranquilidad operativa.
         </p>
       </FadeInView>
@@ -49,31 +49,31 @@ export function TestimonialsSection() {
       <div className="grid md:grid-cols-3 gap-8">
         {reviews.map((rev, idx) => (
           <FadeInView key={idx} delay={idx * 0.15}>
-            <SpotlightCard className="p-8 border-slate-200/90 bg-white flex flex-col justify-between h-full group hover:-translate-y-2 transition-transform duration-300 shadow-xs hover:shadow-lg">
+            <SpotlightCard className="p-8 border-slate-200/80 bg-white flex flex-col justify-between h-full group hover:-translate-y-2 transition-transform duration-300 shadow-2xs hover:shadow-xl rounded-2xl">
               <div>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-6">
                   <div className="flex gap-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-amber-400" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
+                  <span className="text-[11px] font-mono text-slate-800 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full font-bold">
                     {rev.metric}
                   </span>
                 </div>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                <p className="text-slate-700 text-base leading-relaxed mb-8 font-normal">
                   &ldquo;{rev.quote}&rdquo;
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#021761] to-blue-600 flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-xs">
+              <div className="pt-6 border-t border-slate-100 flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-full bg-[#021761] flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-xs">
                   {rev.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="text-slate-900 font-bold text-sm">{rev.name}</h4>
-                  <p className="text-slate-500 text-xs">{rev.role} · <span className="text-blue-600 font-semibold">{rev.company}</span></p>
+                  <h4 className="text-slate-950 font-bold text-base">{rev.name}</h4>
+                  <p className="text-slate-500 text-xs">{rev.role} · <span className="text-slate-700 font-semibold">{rev.company}</span></p>
                 </div>
               </div>
             </SpotlightCard>
