@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BackgroundGrid } from "@/components/ui/background-grid";
 import { CinematicWarp } from "@/components/ui/cinematic-warp";
@@ -51,19 +52,19 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative flex flex-col items-center overflow-hidden">
+    <div className="relative flex flex-col items-center overflow-hidden bg-white text-slate-900">
       {/* Dynamic Cybernetic Grid Background */}
       <BackgroundGrid />
 
-      {/* 3D Cinematic Starfield / Particle Warp Engine */}
+      {/* 120 FPS High-Refresh Ambient Mesh Warp */}
       <CinematicWarp />
 
       {/* Animated Hero Section with Camera Dolly */}
       <HeroMotion />
 
       {/* Infinite Tech Marquee */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-8 border-y border-slate-800/60 bg-slate-950/40 backdrop-blur-sm relative z-10">
-        <div className="text-center mb-3 text-xs font-mono uppercase tracking-widest text-slate-500">
+      <div className="w-full max-w-7xl mx-auto px-4 py-8 border-y border-slate-200/80 bg-slate-50/60 backdrop-blur-sm relative z-10">
+        <div className="text-center mb-3 text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           Tecnologías y Frameworks de Élite
         </div>
         <InfiniteMarquee items={techStack} speed={30} />
@@ -72,13 +73,13 @@ export default function Home() {
       {/* Solutions Section with Spotlight Cards & Scroll Reveal */}
       <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10">
         <FadeInView className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5" /> Nuestras Soluciones
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
             Diseñadas para dominar tu industria
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
             No usamos plantillas prefabricadas. Construimos cada solución desde cero con ingeniería de precisión y arquitectura escalable.
           </p>
         </FadeInView>
@@ -86,33 +87,36 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           {solutions.map((item, idx) => (
             <FadeInView key={idx} delay={idx * 0.15}>
-              <SpotlightCard className="p-0 flex flex-col group h-full hover:-translate-y-2 transition-transform duration-300">
-                <div className="h-56 relative overflow-hidden border-b border-slate-800">
-                  <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <img
+              <SpotlightCard className="p-0 flex flex-col group h-full hover:-translate-y-2 transition-transform duration-300 border-slate-200/90 bg-white shadow-xs hover:shadow-xl">
+                <div className="h-56 relative overflow-hidden border-b border-slate-100">
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    width={800}
+                    height={450}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={80}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <span className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-700 text-indigo-300 text-xs font-medium">
+                  <span className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-blue-800 text-xs font-semibold shadow-xs">
                     {item.tag}
                   </span>
                 </div>
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-white text-xl font-bold mb-2 group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-slate-900 text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
                       {item.description}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-wider text-indigo-400 font-semibold">
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-xs uppercase tracking-wider text-blue-700 font-bold">
                       Cotización Personalizada
                     </span>
                     <Link href="/contacto">
-                      <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white hover:bg-indigo-600/20 p-2 h-auto rounded-lg">
+                      <Button variant="ghost" size="sm" className="text-slate-600 hover:text-blue-700 hover:bg-blue-50 p-2 h-auto rounded-lg">
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
@@ -125,15 +129,15 @@ export default function Home() {
       </section>
 
       {/* Bento Grid: Por qué AVANZA */}
-      <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-800/60">
+      <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-200/80">
         <FadeInView className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-semibold uppercase tracking-wider mb-4">
             <Zap className="w-3.5 h-3.5" /> Ventaja Tecnológica
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
             Ingeniería que se nota en cada detalle
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
             Aplicamos las mejores prácticas globales del ecosistema de software moderno.
           </p>
         </FadeInView>
@@ -146,9 +150,9 @@ export default function Home() {
               description="No nos limitamos a crear interfaces bonitas. Integramos modelos de lenguaje, asistentes automatizados y flujos con agentes autónomos para optimizar la toma de decisiones y atención al cliente."
               icon={<Bot className="w-8 h-8" />}
               header={
-                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-indigo-500/15 via-slate-900 to-slate-950 border border-indigo-500/20 p-4 flex items-center justify-center">
-                  <div className="flex items-center gap-3 text-indigo-300 font-mono text-xs">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-50 via-indigo-50/50 to-white border border-blue-100 p-4 flex items-center justify-center">
+                  <div className="flex items-center gap-3 text-blue-900 font-mono text-xs font-semibold">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                     <span>AI Agent Ready · LLM Pipelines · Real-time Inference</span>
                   </div>
                 </div>
@@ -160,8 +164,8 @@ export default function Home() {
               description="Entregas funcionales cada 7 a 14 días. Puedes probar el sistema en producción semana a semana."
               icon={<Workflow className="w-8 h-8" />}
               header={
-                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-cyan-500/10 to-slate-950 border border-cyan-500/20 p-4 flex items-center justify-center">
-                  <span className="text-cyan-400 font-mono text-xs font-bold">100% Transparencia en Sprints</span>
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-cyan-50 to-white border border-cyan-200 p-4 flex items-center justify-center">
+                  <span className="text-cyan-800 font-mono text-xs font-bold">100% Transparencia en Sprints</span>
                 </div>
               }
             />
@@ -171,8 +175,8 @@ export default function Home() {
               description="Bases de datos PostgreSQL normalizadas hasta 3NF con Row Level Security (RLS) y tiempos de respuesta ultra veloces."
               icon={<Cpu className="w-8 h-8" />}
               header={
-                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-indigo-500/10 to-slate-950 border border-indigo-500/20 p-4 flex items-center justify-center">
-                  <span className="text-indigo-400 font-mono text-xs font-bold">PostgreSQL 3NF · Edge Functions</span>
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-50 to-white border border-blue-200 p-4 flex items-center justify-center">
+                  <span className="text-blue-800 font-mono text-xs font-bold">PostgreSQL 3NF · Edge Functions</span>
                 </div>
               }
             />
@@ -183,8 +187,8 @@ export default function Home() {
               description="Pruebas de calidad unitarias y de integración antes de cada despliegue. Protegemos tu activo más valioso con arquitectura defensiva de nivel bancario."
               icon={<ShieldCheck className="w-8 h-8" />}
               header={
-                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-emerald-500/10 via-slate-900 to-slate-950 border border-emerald-500/20 p-4 flex items-center justify-center">
-                  <div className="flex items-center gap-3 text-emerald-400 font-mono text-xs">
+                <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-emerald-50 via-teal-50/40 to-white border border-emerald-200 p-4 flex items-center justify-center">
+                  <div className="flex items-center gap-3 text-emerald-800 font-mono text-xs font-semibold">
                     <span>Zero-Trust Auth · OWASP Guardrails · Full Data Encryption</span>
                   </div>
                 </div>
@@ -206,18 +210,18 @@ export default function Home() {
       {/* Social Proof & Quantifiable Case Studies */}
       <TestimonialsSection />
 
-      {/* Floating CTA Banner */}
-      <section className="w-full bg-slate-900/60 border-t border-slate-800/80 py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-600/10 blur-[130px] rounded-full pointer-events-none" />
+      {/* High-Impact CTA Banner */}
+      <section className="w-full bg-gradient-to-b from-slate-50 to-blue-50/40 border-t border-slate-200/80 py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-100/60 blur-[130px] rounded-full pointer-events-none" />
         <FadeInView className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
             ¿Listo para construir el software que tu empresa merece?
           </h2>
-          <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
             Hablemos de tus ideas, requerimientos y metas de negocio. Te entregamos un plan técnico claro y sin costo inicial.
           </p>
           <Link href="/contacto">
-            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white h-16 px-12 text-lg shadow-[0_0_35px_rgba(79,70,229,0.5)] hover:shadow-[0_0_50px_rgba(79,70,229,0.7)] transition-all rounded-full font-bold">
+            <Button size="lg" className="bg-[#021761] hover:bg-blue-700 text-white h-16 px-12 text-lg shadow-md shadow-blue-900/15 hover:shadow-lg transition-all rounded-full font-bold">
               Agendar Asesoría Técnica
               <ArrowRight className="ml-2 w-6 h-6" />
             </Button>

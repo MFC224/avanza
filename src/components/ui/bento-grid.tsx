@@ -36,16 +36,16 @@ export function BentoGridItem({
   return (
     <div
       className={cn(
-        "row-span-1 rounded-2xl group/bento hover:shadow-2xl transition duration-300 p-6 bg-slate-900/70 border border-slate-800/80 hover:border-indigo-500/40 justify-between flex flex-col space-y-4 overflow-hidden relative",
+        "row-span-1 rounded-2xl group/bento hover:shadow-xl transition duration-300 p-6 bg-white border border-slate-200/90 hover:border-blue-500/40 justify-between flex flex-col space-y-4 overflow-hidden relative shadow-xs",
         className
       )}
     >
-      <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl group-hover/bento:bg-indigo-500/10 transition-colors" />
+      <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover/bento:bg-blue-500/10 transition-colors" />
       {header}
       <div className="group-hover/bento:translate-x-1 transition duration-300 z-10">
-        <div className="mb-3 text-indigo-400">{icon}</div>
-        <div className="font-bold text-white text-xl mb-1.5">{title}</div>
-        <div className="font-normal text-slate-400 text-sm leading-relaxed">{description}</div>
+        <div className="mb-3 text-blue-600">{icon}</div>
+        <div className="font-bold text-slate-900 text-xl mb-1.5">{title}</div>
+        <div className="font-normal text-slate-600 text-sm leading-relaxed">{description}</div>
       </div>
     </div>
   );

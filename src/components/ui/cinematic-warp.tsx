@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { getHardwareAccelerationStyle } from "@/lib/performance-config";
 
 interface Particle {
   x: number;
   y: number;
-  z: number;
-  pz: number;
+  vx: number;
+  vy: number;
+  size: number;
+  color: string;
 }
 
 export function CinematicWarp() {
@@ -16,7 +19,7 @@ export function CinematicWarp() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -28,103 +31,77 @@ export function CinematicWarp() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
 
-    const numParticles = Math.min(220, Math.floor(window.innerWidth / 7));
+    // Efficient particle count for steady 90Hz–120Hz rendering
+    const numParticles = Math.min(38, Math.floor(window.innerWidth / 35));
+    const colors = [
+      "rgba(37, 99, 235, 0.25)",  // Cobalt Blue
+      "rgba(2, 23, 97, 0.18)",    // Navy Blue Logo
+      "rgba(14, 165, 233, 0.22)", // Sky Cyan
+      "rgba(16, 185, 129, 0.15)", // Emerald
+    ];
+
     const particles: Particle[] = [];
-
     for (let i = 0; i < numParticles; i++) {
       particles.push({
-        x: (Math.random() - 0.5) * width * 2,
-        y: (Math.random() - 0.5) * height * 2,
-        z: Math.random() * width,
-        pz: Math.random() * width,
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        size: Math.random() * 2.5 + 1.2,
+        color: colors[i % colors.length],
       });
     }
 
-    let scrollSpeed = 0;
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY;
-      lastScrollY = currentScrollY;
-      // Boost warp speed based on scroll velocity
-      scrollSpeed = Math.min(Math.max(delta * 0.45, -35), 45);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    let currentSpeed = 1.2;
-
     const render = () => {
-      // Smooth dampening back to ambient cruising speed
-      scrollSpeed *= 0.92;
-      currentSpeed += (1.2 + scrollSpeed - currentSpeed) * 0.1;
+      // Clean transparent clear for crisp Light Mode
+      ctx.clearRect(0, 0, width, height);
 
-      // Dark fade trail for cinematic motion blur
-      ctx.fillStyle = "rgba(2, 6, 23, 0.22)";
-      ctx.fillRect(0, 0, width, height);
-
-      const cx = width / 2;
-      const cy = height / 2;
-
+      // Draw subtle connecting webs between close nodes
       for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.pz = p.z;
-        p.z -= currentSpeed;
+        const p1 = particles[i];
+        p1.x += p1.vx;
+        p1.y += p1.vy;
 
-        if (p.z <= 1) {
-          p.z = width;
-          p.pz = width;
-          p.x = (Math.random() - 0.5) * width * 2;
-          p.y = (Math.random() - 0.5) * height * 2;
-        } else if (p.z > width) {
-          p.z = 2;
-          p.pz = 2;
-        }
+        // Wrap around boundaries smoothly
+        if (p1.x < 0) p1.x = width;
+        if (p1.x > width) p1.x = 0;
+        if (p1.y < 0) p1.y = height;
+        if (p1.y > height) p1.y = 0;
 
-        const k = 280 / p.z;
-        const px = p.x * k + cx;
-        const py = p.y * k + cy;
-
-        const pk = 280 / p.pz;
-        const prevX = p.x * pk + cx;
-        const prevY = p.y * pk + cy;
-
-        // Skip particles outside viewport
-        if (px < 0 || px >= width || py < 0 || py >= height) continue;
-
-        const alpha = Math.min(1, Math.max(0.1, (1 - p.z / width) * 0.85));
-        const isStreaking = Math.abs(currentSpeed) > 4;
-
+        // Draw particle dot
         ctx.beginPath();
-        if (isStreaking) {
-          // Draw cinematic streak line
-          ctx.strokeStyle = `rgba(129, 140, 248, ${alpha * 0.8})`;
-          ctx.lineWidth = Math.max(1, (1 - p.z / width) * 2.5);
-          ctx.moveTo(prevX, prevY);
-          ctx.lineTo(px, py);
-          ctx.stroke();
-        } else {
-          // Draw soft glowing point
-          const radius = Math.max(0.75, (1 - p.z / width) * 2);
-          ctx.fillStyle = i % 3 === 0 
-            ? `rgba(6, 182, 212, ${alpha})` 
-            : `rgba(165, 180, 252, ${alpha})`;
-          ctx.arc(px, py, radius, 0, Math.PI * 2);
-          ctx.fill();
+        ctx.arc(p1.x, p1.y, p1.size, 0, Math.PI * 2);
+        ctx.fillStyle = p1.color;
+        ctx.fill();
+
+        // Connect nearby particles with subtle filaments
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            const lineAlpha = (1 - dist / 130) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
         }
       }
 
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", handleScroll);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -132,7 +109,8 @@ export function CinematicWarp() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-45 mix-blend-screen"
+      style={getHardwareAccelerationStyle()}
+      className="pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-60 transition-opacity duration-1000"
       aria-hidden="true"
     />
   );

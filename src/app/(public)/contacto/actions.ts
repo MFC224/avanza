@@ -19,6 +19,11 @@ const contactSchema = z.object({
     .trim()
     .optional()
     .default("Página Web de Alto Impacto"),
+  pais: z
+    .string()
+    .trim()
+    .optional()
+    .default("Perú (+51)"),
   mensaje: z
     .string()
     .trim()
@@ -36,11 +41,13 @@ export async function submitContactForm(formData: FormData) {
   const rawNombre = (formData.get("nombre") as string) || "";
   const rawApellidos = (formData.get("apellidos") as string) || "";
   const fullName = rawApellidos ? `${rawNombre} ${rawApellidos}`.trim() : rawNombre.trim();
+  const rawPais = (formData.get("pais") as string) || "Perú (+51)";
 
   const rawData = {
     nombre: fullName,
     contacto: rawContact,
     servicio: (formData.get("servicio") as string) || "Página Web de Alto Impacto",
+    pais: rawPais,
     mensaje: (formData.get("mensaje") as string) || "Interesado en una cotización de software.",
     _honey: (formData.get("_honey") as string) || "",
   };
@@ -65,8 +72,10 @@ export async function submitContactForm(formData: FormData) {
     const isEmail = data.contacto.includes("@");
     const contactEmail = isEmail ? data.contacto.toLowerCase() : `${data.contacto.replace(/\D/g, '')}@lead-whatsapp.avanza.dev`;
 
+    const displayName = data.pais ? `${data.nombre} (${data.pais})` : data.nombre;
+
     const { error: leadError } = await supabase.from("leads").insert({
-      contact_name: data.nombre,
+      contact_name: displayName,
       contact_email: contactEmail,
       interest_level: "Alto",
       funnel_status: "Contacto Inicial",

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_CONFIG } from "@/lib/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,14 +14,18 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: "AVANZA | Agencia de Desarrollo de Software & Inteligencia Artificial",
-  description: "Desarrollo de páginas web de alto impacto, sistemas web a medida, automatización con IA y aplicaciones móviles en Perú. Metodología ágil SCRUM con entregas semanales.",
+  metadataBase: new URL(SITE_CONFIG.url),
+  title: {
+    default: "AVANZA | AI & Software Studio de Alto Rendimiento",
+    template: "%s | AVANZA",
+  },
+  description: SITE_CONFIG.description,
   keywords: [
     "desarrollo de software peru",
     "agencia de software lima",
@@ -29,15 +34,18 @@ export const metadata: Metadata = {
     "next.js supabase desarrollo",
     "desarrollo web peru",
     "automatizacion con ia",
-    "metodologia scrum software"
+    "metodologia scrum software",
   ],
-  authors: [{ name: "Manuel Callañaupa" }, { name: "Magno Alomia" }],
+  authors: [
+    { name: SITE_CONFIG.founders.manuel.name },
+    { name: SITE_CONFIG.founders.magno.name },
+  ],
   openGraph: {
     title: "AVANZA | AI & Software Studio",
-    description: "Impulsa tu empresa con tecnología de vanguardia y arquitectura escalable. Entregas continuas cada 7 a 14 días.",
-    url: "https://avanza.dev",
-    siteName: "AVANZA",
-    locale: "es_PE",
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    locale: SITE_CONFIG.locale,
     type: "website",
   },
   twitter: {
@@ -57,8 +65,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}>
-      <body className="min-h-screen flex flex-col bg-background text-foreground selection:bg-indigo-500/30">
+    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-500/20">
         {children}
       </body>
     </html>

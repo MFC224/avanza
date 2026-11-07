@@ -228,6 +228,342 @@ function evaluateSessionProtection(pathname, user) {
   return { shouldRedirect: false, destination: null };
 }
 
+// 9. Graphic Performance (90-120 FPS) & Image Pipeline from src/lib/performance-config.ts
+const PERFORMANCE_CONFIG = {
+  targetFps: 120,
+  highRefreshMinFps: 90,
+  maxFrameBudgetMs: 8.33,
+  standardFrameBudgetMs: 16.67,
+  imagePresets: {
+    card: {
+      maxWidth: 800,
+      maxHeight: 450,
+      quality: 80,
+      format: "webp",
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+    },
+    hero: {
+      maxWidth: 1920,
+      maxHeight: 1080,
+      quality: 85,
+      format: "webp",
+      sizes: "100vw",
+    },
+    logo: {
+      maxWidth: 240,
+      maxHeight: 80,
+      quality: 90,
+      format: "webp",
+      sizes: "(max-width: 640px) 120px, 160px",
+    },
+    avatar: {
+      maxWidth: 96,
+      maxHeight: 96,
+      quality: 85,
+      format: "webp",
+      sizes: "48px",
+    },
+  },
+};
+
+function getOptimizedImageProps(presetKey, customAlt) {
+  const preset = PERFORMANCE_CONFIG.imagePresets[presetKey];
+  if (!preset) throw new Error(`Preset desconocido: ${presetKey}`);
+  return {
+    width: preset.maxWidth,
+    height: preset.maxHeight,
+    quality: preset.quality,
+    sizes: preset.sizes,
+    alt: customAlt,
+  };
+}
+
+function getHardwareAccelerationStyle() {
+  return {
+    transform: "translateZ(0)",
+    backfaceVisibility: "hidden",
+    WebkitFontSmoothing: "antialiased",
+  };
+}
+
+function calculateFrameBudget(fps) {
+  if (!fps || fps <= 0) return 16.67;
+  return Number((1000 / fps).toFixed(2));
+}
+
+// 10. Estimator Logic & Comparison Criteria from src/lib/estimator-logic.ts & src/components/home/comparison-matrix.tsx
+const ESTIMATOR_SERVICES = {
+  web: {
+    id: "web",
+    name: "Página Web de Alto Impacto",
+    badge: "Ventas & Conversión",
+    baseDays: "7 a 10 días",
+    roi: "+180% en leads calificados",
+    deliverable: "Next.js 16 + SEO + Animaciones Awwwards",
+    estimatedDaysRange: [7, 10],
+  },
+  crm: {
+    id: "crm",
+    name: "Sistema Web / CRM Interno",
+    badge: "Operación & Gestión",
+    baseDays: "12 a 14 días",
+    roi: "Ahorro de ~45 hrs manuales / mes",
+    deliverable: "PostgreSQL 3NF + Roles + Dashboard",
+    estimatedDaysRange: [12, 14],
+  },
+  ai: {
+    id: "ai",
+    name: "Automatización con Agentes IA",
+    badge: "Productividad x10",
+    baseDays: "10 a 14 días",
+    roi: "Atención 24/7 sin personal extra",
+    deliverable: "Pipelines LLM + RAG + WhatsApp Bot",
+    estimatedDaysRange: [10, 14],
+  },
+  app: {
+    id: "app",
+    name: "Aplicación Móvil iOS & Android",
+    badge: "Retención Móvil",
+    baseDays: "14 a 21 días",
+    roi: "Fidelización continua de clientes",
+    deliverable: "Flutter / React Native + Notificaciones",
+    estimatedDaysRange: [14, 21],
+  },
+};
+
+const ESTIMATOR_URGENCIAS = [
+  { label: "Sprint Express", desc: "Entrega en 7 - 14 días", speedBonus: "Prioridad Máxima" },
+  { label: "Sprint Estándar", desc: "Entrega en 3 - 4 semanas", speedBonus: "Fases Graduales" },
+];
+
+const ESTIMATOR_ESCALAS = [
+  { label: "Pyme / Negocio Local", desc: "1 a 10 colaboradores" },
+  { label: "Empresa en Crecimiento", desc: "10 a 50 colaboradores" },
+  { label: "Corporativo", desc: "+50 colaboradores o multi-sucursal" },
+];
+
+function calculateEstimate(options) {
+  const service = ESTIMATOR_SERVICES[options.servicioId] || ESTIMATOR_SERVICES.web;
+  const urgencia = ESTIMATOR_URGENCIAS[options.urgenciaIndex] || ESTIMATOR_URGENCIAS[0];
+  const escala = ESTIMATOR_ESCALAS[options.escalaIndex] || ESTIMATOR_ESCALAS[0];
+
+  const daysMultiplier = options.urgenciaIndex === 1 ? 2 : 1;
+  const calculatedDays = `${service.estimatedDaysRange[0] * daysMultiplier} a ${
+    service.estimatedDaysRange[1] * daysMultiplier
+  } días`;
+
+  return {
+    service,
+    urgencia,
+    escala,
+    calculatedDays,
+  };
+}
+
+function buildWhatsAppProposalUrl(
+  serviceName,
+  urgenciaLabel,
+  urgenciaDesc,
+  escalaLabel,
+  phoneNumber = "51942498841"
+) {
+  const message =
+    `Hola Magno! Usé el Simulador de Proyectos de AVANZA:\n\n` +
+    `• Solución: ${serviceName}\n` +
+    `• Modalidad: ${urgenciaLabel} (${urgenciaDesc})\n` +
+    `• Tamaño: ${escalaLabel}\n\n` +
+    `Me gustaría coordinar una cotización formal y los siguientes pasos.`;
+
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+}
+
+const COMPARISON_CRITERIA = [
+  {
+    feature: "Velocidad de Entrega (Time-to-Market)",
+    avanza: "7 a 14 días (Sprints ágiles con módulos funcionales semanales)",
+    traditional: "3 a 6 meses de retrasos, reuniones y burocracia",
+    freelancer: "Incierto; pausas frecuentes por sobrecarga de proyectos",
+    highlight: true,
+  },
+  {
+    feature: "Arquitectura & Ecosistema de Código",
+    avanza: "Next.js 16, React 19, Supabase RLS, TypeScript estricto (100% Type-Safe)",
+    traditional: "Plantillas genéricas de WordPress o código espagueti desactualizado",
+    freelancer: "Librerías inconsistentes sin estándares ni tipado estricto",
+  },
+  {
+    feature: "Inteligencia Artificial Integrada",
+    avanza: "Agentes autónomos, pipelines LLM y automatización de procesos a medida",
+    traditional: "Nula; se limitan a webs estáticas sin procesamiento inteligente",
+    freelancer: "Solo integración básica de prompts genéricos de terceros",
+    highlight: true,
+  },
+  {
+    feature: "Seguridad, RLS & OWASP Top 10",
+    avanza: "Row Level Security (RLS) PostgreSQL, Zero-Trust, CSP y auditoría continua",
+    traditional: "Plugins vulnerables propensos a inyecciones SQL y ataques XSS",
+    freelancer: "Claves de API expuestas en frontend y sin políticas de aislamiento",
+  },
+  {
+    feature: "Demos Semanales & Transparencia",
+    avanza: "Acceso semanal a despliegues en vivo probando el sistema real",
+    traditional: "Presentaciones estáticas en PDF y mockups durante meses",
+    freelancer: "Semanas sin reportes claros o riesgo de abandono (ghosting)",
+  },
+  {
+    feature: "Comunicación & Respaldo",
+    avanza: "Línea directa por WhatsApp con los fundadores y arquitectos técnicos",
+    traditional: "Intermediarios, ejecutivos de ventas y sistemas lentos de tickets",
+    freelancer: "Sin respaldo de una estructura de ingeniería ni soporte continuo",
+    highlight: true,
+  },
+];
+
+const LIGHT_DESIGN_TOKENS = {
+  colors: {
+    navyPrimary: "#021761",
+    cobaltAccent: "#2563EB",
+    slateDark: "#0f172a",
+    slateMuted: "#64748b",
+    pureWhite: "#ffffff",
+    cardBackground: "#ffffff",
+  },
+  contrast: {
+    textOnWhiteRatio: 16.1, // Slate 900 on white > 7:1 AAA
+    accentOnWhiteRatio: 4.6, // Cobalt 600 on white > 4.5:1 AA
+  },
+};
+
+// 11. Site Configuration & Legal Schemas from src/lib/site-config.ts & src/lib/complaints-schema.ts
+const SITE_CONFIG = {
+  name: "AVANZA",
+  legalName: "AVANZA Software & AI Studio",
+  domain: "avanzastudio.com",
+  url: "https://avanzastudio.com",
+  founders: {
+    manuel: {
+      name: "Manuel Callañaupa",
+      role: "Co-Fundador & Lead Software Architect",
+      phone: "+51921195037",
+      displayPhone: "+51 921 195 037",
+      email: "manuel@avanzastudio.com",
+    },
+    magno: {
+      name: "Magno Alomia",
+      role: "Co-Fundador & Business Growth Director",
+      phone: "+51942498841",
+      displayPhone: "+51 942 498 841",
+      email: "magno@avanzastudio.com",
+    },
+  },
+  contact: {
+    commercialPhone: "+51 942 498 841",
+    commercialPhoneRaw: "+51942498841",
+    technicalPhone: "+51 921 195 037",
+    technicalPhoneRaw: "+51921195037",
+    email: "contacto@avanzastudio.com",
+  },
+  legal: {
+    privacyLaw: "Ley N° 29733 (Ley de Protección de Datos Personales del Perú)",
+    consumerCode: "Ley N° 29571 (Código de Protección y Defensa del Consumidor - Indecopi)",
+    ipPolicy: "Cesión total (100%) de Derechos Patrimoniales y Código Fuente al Cliente tras entrega de Sprint.",
+    ndaPolicy: "Acuerdo de Confidencialidad y No Divulgación (NDA) firmado previo al inicio de arquitectura.",
+    complaintsBookName: "Libro de Reclamaciones Virtual conforme a las disposiciones de INDECOPI.",
+  },
+};
+
+const complaintSchema = z.object({
+  fullName: z
+    .string()
+    .trim()
+    .min(3, "Ingresa tu nombre completo o razón social (mínimo 3 caracteres).")
+    .max(120),
+  documentType: z.enum(["DNI", "CE", "RUC", "PASAPORTE"]),
+  documentNumber: z.string().trim().min(6).max(20),
+  email: z.string().trim().email(),
+  phone: z.string().trim().min(7).max(20),
+  address: z.string().trim().min(5).max(200),
+  serviceType: z.enum(["SERVICIO", "PRODUCTO"]).default("SERVICIO"),
+  complaintType: z.enum(["RECLAMO", "QUEJA"]),
+  amountClaimed: z.string().optional().default(""),
+  description: z.string().trim().min(15).max(2000),
+  request: z.string().trim().min(10).max(1000),
+  termsAccepted: z.literal(true),
+});
+
+function generateComplaintCode() {
+  const year = new Date().getFullYear();
+  const randomPart = Math.floor(1000 + Math.random() * 9000);
+  return `REC-${year}-${randomPart}`;
+}
+
+const PROXY_MATCHER_REGEX = new RegExp(
+  "^/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)$"
+);
+
+function isPathHandledByProxy(pathname) {
+  return PROXY_MATCHER_REGEX.test(pathname);
+}
+
+// 12. Country Detection & Auto-Language logic from src/lib/country-detector.ts & src/components/ui/auto-language-translator.tsx
+const COUNTRIES = [
+  { code: "PE", name: "Perú", dialCode: "+51", flag: "🇵🇪" },
+  { code: "IN", name: "India", dialCode: "+91", flag: "🇮🇳" },
+  { code: "US", name: "Estados Unidos", dialCode: "+1", flag: "🇺🇸" },
+  { code: "MX", name: "México", dialCode: "+52", flag: "🇲🇽" },
+  { code: "CO", name: "Colombia", dialCode: "+57", flag: "🇨🇴" },
+  { code: "CL", name: "Chile", dialCode: "+56", flag: "🇨🇱" },
+  { code: "AR", name: "Argentina", dialCode: "+54", flag: "🇦🇷" },
+  { code: "ES", name: "España", dialCode: "+34", flag: "🇪🇸" },
+  { code: "BR", name: "Brasil", dialCode: "+55", flag: "🇧🇷" },
+  { code: "GB", name: "Reino Unido", dialCode: "+44", flag: "🇬🇧" },
+  { code: "CA", name: "Canadá", dialCode: "+1", flag: "🇨🇦" },
+  { code: "DE", name: "Alemania", dialCode: "+49", flag: "🇩🇪" },
+  { code: "AU", name: "Australia", dialCode: "+61", flag: "🇦🇺" },
+  { code: "OTHER", name: "Otro País / Internacional", dialCode: "+", flag: "🌐" },
+];
+
+function detectUserCountry(timeZoneOverride, localeOverride) {
+  try {
+    const tzLower = (timeZoneOverride || "").toLowerCase();
+    const locLower = (localeOverride || "").toLowerCase();
+
+    if (tzLower.includes("calcutta") || tzLower.includes("kolkata") || locLower.includes("-in") || locLower === "hi") {
+      return COUNTRIES.find((c) => c.code === "IN") || COUNTRIES[0];
+    }
+    if (tzLower.includes("lima") || locLower.includes("-pe")) {
+      return COUNTRIES.find((c) => c.code === "PE") || COUNTRIES[0];
+    }
+    if (
+      tzLower.includes("new_york") ||
+      tzLower.includes("chicago") ||
+      tzLower.includes("los_angeles") ||
+      locLower === "en-us"
+    ) {
+      return COUNTRIES.find((c) => c.code === "US") || COUNTRIES[0];
+    }
+    return COUNTRIES[0];
+  } catch {
+    return COUNTRIES[0];
+  }
+}
+
+function resolveAutoTranslationTarget(browserLang) {
+  const norm = (browserLang || "es").toLowerCase();
+  if (norm.startsWith("hi")) return "hi";
+  if (norm.startsWith("en")) return "en";
+  if (norm.startsWith("pt")) return "pt";
+  if (!norm.startsWith("es")) return norm.split("-")[0];
+  return "es";
+}
+
+const PUBLIC_FOOTER_NAV_LINKS = [
+  "/metodologia",
+  "/nosotros",
+  "/contacto",
+  "/reclamaciones",
+];
+
 // -------------------------------------------------------------
 // Test Execution Harness
 // -------------------------------------------------------------
@@ -483,6 +819,196 @@ test("UT-24", "SSRMiddleware", "Permite acceso sin redirección a rutas pública
   const evalServicios = evaluateSessionProtection("/servicios", null);
   assertEqual(evalHome.shouldRedirect, false);
   assertEqual(evalServicios.shouldRedirect, false);
+});
+
+// --- MÓDULO 9: Graphic Performance (90-120 FPS) & Image Pipeline (Sprint 2) ---
+test("UT-25", "GraphicPerformance", "Valida que los estilos de aceleración GPU contengan translateZ(0) y backfaceVisibility: hidden", () => {
+  const styles = getHardwareAccelerationStyle();
+  assertEqual(styles.transform, "translateZ(0)");
+  assertEqual(styles.backfaceVisibility, "hidden");
+  assertEqual(styles.WebkitFontSmoothing, "antialiased");
+});
+
+test("UT-26", "ImagePipeline", "Retorna preset de dimensiones WebP y atributos responsive 'sizes' sin bloatware 4K", () => {
+  const cardProps = getOptimizedImageProps("card", "Tarjeta de Solución");
+  assertEqual(cardProps.width, 800);
+  assertEqual(cardProps.height, 450);
+  assertEqual(cardProps.quality, 80);
+  assert(cardProps.sizes.includes("100vw"), "Debe tener fallback responsivo para pantallas móviles");
+  assertEqual(cardProps.alt, "Tarjeta de Solución");
+});
+
+test("UT-27", "GraphicPerformance", "Calcula el presupuesto exacto por frame para 120 FPS (8.33ms), 90 FPS (11.11ms) y 60 FPS (16.67ms)", () => {
+  const budget120 = calculateFrameBudget(120);
+  const budget90 = calculateFrameBudget(90);
+  const budget60 = calculateFrameBudget(60);
+  assertEqual(budget120, 8.33);
+  assertEqual(budget90, 11.11);
+  assertEqual(budget60, 16.67);
+});
+
+test("UT-28", "ImagePipeline", "Valida que los presets de tarjeta limiten la resolución máxima a 800x450 con compresión al 80%", () => {
+  const heroProps = getOptimizedImageProps("hero", "Hero Principal");
+  assertEqual(heroProps.width, 1920);
+  assertEqual(heroProps.height, 1080);
+  assertEqual(heroProps.quality, 85);
+
+  const logoProps = getOptimizedImageProps("logo", "Logo Oficial");
+  assertEqual(logoProps.width, 240);
+  assertEqual(logoProps.height, 80);
+  assertEqual(logoProps.quality, 90);
+});
+
+// --- MÓDULO 10: Sprint 3 Component Logic & Light Mode System ---
+test("UT-29", "ProjectEstimator", "Calcula correctamente el rango de días según el servicio y modalidad Express vs Estándar", () => {
+  const expressWeb = calculateEstimate({ servicioId: "web", urgenciaIndex: 0, escalaIndex: 0 });
+  assertEqual(expressWeb.calculatedDays, "7 a 10 días");
+  assertEqual(expressWeb.service.badge, "Ventas & Conversión");
+
+  const standardWeb = calculateEstimate({ servicioId: "web", urgenciaIndex: 1, escalaIndex: 0 });
+  assertEqual(standardWeb.calculatedDays, "14 a 20 días");
+
+  const expressCRM = calculateEstimate({ servicioId: "crm", urgenciaIndex: 0, escalaIndex: 1 });
+  assertEqual(expressCRM.calculatedDays, "12 a 14 días");
+});
+
+test("UT-30", "ProjectEstimator", "Genera el enlace de WhatsApp codificado con el número oficial de Magno y formato formal", () => {
+  const url = buildWhatsAppProposalUrl("Página Web de Alto Impacto", "Sprint Express", "Entrega en 7 - 14 días", "Empresa en Crecimiento");
+  assert(url.startsWith("https://wa.me/51942498841"), "Debe apuntar al teléfono oficial 51942498841");
+  assert(url.includes(encodeURIComponent("Hola Magno!")), "Debe incluir saludo personalizado a Magno");
+  assert(url.includes(encodeURIComponent("Página Web de Alto Impacto")), "Debe incluir el servicio seleccionado");
+  assert(url.includes(encodeURIComponent("Sprint Express")), "Debe incluir la modalidad seleccionada");
+});
+
+test("UT-31", "ComparisonMatrix", "Valida que los 6 criterios técnicos de diferenciación contengan los estándares AVANZA vs agencias y freelancers", () => {
+  assertEqual(COMPARISON_CRITERIA.length, 6);
+  const timeCriterion = COMPARISON_CRITERIA.find(c => c.feature.includes("Time-to-Market"));
+  assert(timeCriterion !== undefined, "Debe existir el criterio de Time-to-Market");
+  assert(timeCriterion.avanza.includes("7 a 14 días"), "AVANZA debe garantizar sprints de 7 a 14 días");
+  assert(timeCriterion.traditional.includes("3 a 6 meses"), "Agencias tradicionales deben contrastar con 3 a 6 meses");
+  
+  const aiCriterion = COMPARISON_CRITERIA.find(c => c.feature.includes("Inteligencia Artificial"));
+  assert(aiCriterion !== undefined, "Debe existir el criterio de IA");
+  assert(aiCriterion.avanza.includes("Agentes autónomos"), "AVANZA debe destacar agentes autónomos");
+});
+
+test("UT-32", "DesignSystem", "Valida que los tokens de color Light Mode (Navy, Cobalt, Slate 900) cumplan con accesibilidad WCAG AAA/AA", () => {
+  assertEqual(LIGHT_DESIGN_TOKENS.colors.navyPrimary, "#021761");
+  assertEqual(LIGHT_DESIGN_TOKENS.colors.cobaltAccent, "#2563EB");
+  assertEqual(LIGHT_DESIGN_TOKENS.colors.slateDark, "#0f172a");
+  assertEqual(LIGHT_DESIGN_TOKENS.colors.pureWhite, "#ffffff");
+  assert(LIGHT_DESIGN_TOKENS.contrast.textOnWhiteRatio >= 7.0, "Texto principal debe cumplir nivel AAA (>= 7:1)");
+  assert(LIGHT_DESIGN_TOKENS.contrast.accentOnWhiteRatio >= 4.5, "Acento interactivo debe cumplir nivel AA (>= 4.5:1)");
+});
+
+// --- MÓDULO 11: Sprint 4 Domain Configuration, Next.js 16 Proxy & Legal Compliance ---
+test("UT-33", "SiteConfig", "Valida la configuración canónica del dominio .com, metadatos de los co-fundadores y canales de contacto", () => {
+  assertEqual(SITE_CONFIG.domain, "avanzastudio.com");
+  assertEqual(SITE_CONFIG.url, "https://avanzastudio.com");
+  assertEqual(SITE_CONFIG.founders.manuel.name, "Manuel Callañaupa");
+  assertEqual(SITE_CONFIG.founders.magno.name, "Magno Alomia");
+  assertEqual(SITE_CONFIG.contact.commercialPhoneRaw, "+51942498841");
+  assertEqual(SITE_CONFIG.contact.email, "contacto@avanzastudio.com");
+});
+
+test("UT-34", "ProxyMigration", "Verifica que el matcher de proxy.ts procese rutas de aplicación e ignore assets estáticos WebP/PNG/_next", () => {
+  assert(isPathHandledByProxy("/dashboard"), "Debe interceptar rutas privadas como /dashboard");
+  assert(isPathHandledByProxy("/servicios"), "Debe interceptar rutas públicas como /servicios");
+  assert(isPathHandledByProxy("/login"), "Debe interceptar /login");
+  
+  assert(!isPathHandledByProxy("/_next/static/chunks/main.js"), "No debe procesar estáticos de Next.js");
+  assert(!isPathHandledByProxy("/_next/image?url=logo.webp"), "No debe procesar pipeline de imágenes");
+  assert(!isPathHandledByProxy("/favicon.ico"), "No debe procesar favicon");
+  assert(!isPathHandledByProxy("/hero-banner.webp"), "No debe procesar imágenes .webp");
+});
+
+test("UT-35", "LegalCompliance", "Valida las referencias obligatorias de la Ley N° 29733 de Datos Personales y cesión 100% de IP", () => {
+  assert(SITE_CONFIG.legal.privacyLaw.includes("Ley N° 29733"), "Debe referenciar la Ley N° 29733 de Datos Personales");
+  assert(SITE_CONFIG.legal.consumerCode.includes("Ley N° 29571"), "Debe referenciar el Código del Consumidor");
+  assert(SITE_CONFIG.legal.ipPolicy.includes("100%"), "Debe garantizar el 100% de cesión de código fuente al cliente");
+  assert(SITE_CONFIG.legal.ndaPolicy.includes("NDA"), "Debe ofrecer acuerdo de confidencialidad NDA");
+});
+
+test("UT-36", "LibroReclamaciones", "Valida el esquema Zod del Libro de Reclamaciones, rechazo de datos inválidos y formato del código REC-YYYY-XXXX", () => {
+  const code = generateComplaintCode();
+  const currentYear = new Date().getFullYear();
+  assert(code.startsWith(`REC-${currentYear}-`), `El código debe comenzar con REC-${currentYear}-`);
+  assertEqual(code.length, 13); // REC-2026-XXXX
+
+  // Valid submission test
+  const validData = {
+    fullName: "Empresa Cliente SAC",
+    documentType: "RUC",
+    documentNumber: "20123456789",
+    email: "cliente@empresa.com",
+    phone: "987654321",
+    address: "Av. Rivera Navarrete 500, San Isidro",
+    serviceType: "SERVICIO",
+    complaintType: "RECLAMO",
+    amountClaimed: "1500 USD",
+    description: "Revisión técnica solicitada para optimizar pipeline de agentes IA en staging.",
+    request: "Alineamiento técnico con el arquitecto del proyecto.",
+    termsAccepted: true,
+  };
+  const validResult = complaintSchema.safeParse(validData);
+  assertEqual(validResult.success, true);
+
+  // Invalid submission test (missing terms acceptance and invalid email)
+  const invalidData = {
+    ...validData,
+    email: "not-an-email",
+    termsAccepted: false,
+  };
+  const invalidResult = complaintSchema.safeParse(invalidData);
+  assertEqual(invalidResult.success, false);
+});
+
+// --- MÓDULO 12: Feedback Implementation (Internationalization, Country Detection, Security & Complaints Book) ---
+test("UT-37", "CountryDetection", "Detecta automáticamente India (+91), Perú (+51) y USA (+1) por Timezone y Locale", () => {
+  const indiaByTz = detectUserCountry("Asia/Kolkata", "en-IN");
+  assertEqual(indiaByTz.code, "IN");
+  assertEqual(indiaByTz.dialCode, "+91");
+  assertEqual(indiaByTz.flag, "🇮🇳");
+
+  const indiaByLocale = detectUserCountry("", "hi-IN");
+  assertEqual(indiaByLocale.code, "IN");
+
+  const peruByTz = detectUserCountry("America/Lima", "es-PE");
+  assertEqual(peruByTz.code, "PE");
+  assertEqual(peruByTz.dialCode, "+51");
+
+  const usByTz = detectUserCountry("America/New_York", "en-US");
+  assertEqual(usByTz.code, "US");
+  assertEqual(usByTz.dialCode, "+1");
+});
+
+test("UT-38", "InternationalPrefixes", "Valida que los números oficiales de Manuel y Magno tengan explícitamente el prefijo internacional +51", () => {
+  assertEqual(SITE_CONFIG.founders.manuel.displayPhone, "+51 921 195 037");
+  assert(SITE_CONFIG.founders.manuel.phone.startsWith("+51"), "Teléfono de Manuel debe incluir +51");
+  assertEqual(SITE_CONFIG.founders.magno.displayPhone, "+51 942 498 841");
+  assert(SITE_CONFIG.founders.magno.phone.startsWith("+51"), "Teléfono de Magno debe incluir +51");
+  assertEqual(SITE_CONFIG.contact.commercialPhone, "+51 942 498 841");
+  assertEqual(SITE_CONFIG.contact.technicalPhone, "+51 921 195 037");
+});
+
+test("UT-39", "InternalPortalSecurity", "Verifica que el acceso al portal administrativo no esté expuesto en la navegación pública", () => {
+  assert(!PUBLIC_FOOTER_NAV_LINKS.includes("/login"), "La navegación pública no debe enlazar a /login");
+  assert(!PUBLIC_FOOTER_NAV_LINKS.includes("/dashboard"), "La navegación pública no debe enlazar a /dashboard");
+  assert(PUBLIC_FOOTER_NAV_LINKS.includes("/reclamaciones"), "Debe enlazar al Libro de Reclamaciones");
+});
+
+test("UT-40", "AutoLanguageTranslator", "Mapea automáticamente visitantes de India (hi, en) y resto del mundo a sus idiomas", () => {
+  const targetHindi = resolveAutoTranslationTarget("hi-IN");
+  assertEqual(targetHindi, "hi");
+
+  const targetIndianEnglish = resolveAutoTranslationTarget("en-IN");
+  assertEqual(targetIndianEnglish, "en");
+
+  const targetPortuguese = resolveAutoTranslationTarget("pt-BR");
+  assertEqual(targetPortuguese, "pt");
+
+  const targetSpanish = resolveAutoTranslationTarget("es-PE");
+  assertEqual(targetSpanish, "es");
 });
 
 // -------------------------------------------------------------

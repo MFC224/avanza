@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
 import { Play, Pause, Film } from "lucide-react";
 
 export function CinematicReel() {
@@ -48,47 +47,47 @@ export function CinematicReel() {
   }, [isPlaying, steps.length]);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10">
+    <section className="w-full max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10 border-t border-slate-200/80">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
           <Film className="w-3.5 h-3.5" /> Arquitectura en Movimiento
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
           La ingeniería de AVANZA en tiempo real
         </h2>
-        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+        <p className="text-slate-600 max-w-2xl mx-auto text-lg">
           Observa cómo se construye y despliega una solución de élite en una secuencia de alta velocidad.
         </p>
       </div>
 
       {/* Cinematic Frame Container (21:9 Ultra-Wide Screen) */}
-      <div className="relative rounded-3xl p-1 bg-gradient-to-b from-indigo-500/40 via-cyan-500/20 to-slate-900/60 shadow-[0_0_80px_rgba(79,70,229,0.25)] overflow-hidden">
-        <div className="rounded-[22px] bg-slate-950/95 border border-slate-800/80 p-6 md:p-10 backdrop-blur-2xl relative overflow-hidden">
+      <div className="relative rounded-3xl p-1 bg-gradient-to-b from-blue-500/20 via-sky-400/10 to-slate-200/50 shadow-xl overflow-hidden">
+        <div className="rounded-[22px] bg-slate-950 p-6 md:p-10 backdrop-blur-2xl relative overflow-hidden">
           {/* Ambient Video Glow Inside */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none" />
 
           {/* Film Monitor Bar */}
           <div className="flex flex-wrap items-center justify-between pb-6 mb-6 border-b border-slate-800 text-xs font-mono text-slate-400 gap-4">
             <div className="flex items-center gap-3">
               <span className="flex h-2.5 w-2.5 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
               </span>
-              <span className="font-bold text-white tracking-wider">LIVE STREAM // AVANZA-DEV</span>
+              <span className="font-bold text-white tracking-wider">STUDIO ARCHITECTURE // AVANZA</span>
               <span className="hidden sm:inline text-slate-600">|</span>
-              <span className="hidden sm:inline text-indigo-400 font-semibold">4K SCOPE · 60 FPS</span>
+              <span className="hidden sm:inline text-cyan-400 font-semibold">120 FPS HIGH REFRESH · WEBP READY</span>
             </div>
 
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-slate-300 hover:text-white transition-all"
+                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 hover:border-blue-500/50 text-slate-300 hover:text-white transition-all cursor-pointer"
               >
                 {isPlaying ? <Pause className="w-3.5 h-3.5 text-amber-400" /> : <Play className="w-3.5 h-3.5 text-emerald-400" />}
                 <span>{isPlaying ? "Pausar Reel" : "Reproducir"}</span>
               </button>
-              <span className="text-slate-500">ESCENA {activeStep + 1}/4</span>
+              <span className="text-slate-500 font-mono">ESCENA {activeStep + 1}/4</span>
             </div>
           </div>
 
@@ -102,22 +101,22 @@ export function CinematicReel() {
                   <button
                     key={idx}
                     onClick={() => setActiveStep(idx)}
-                    className={`w-full text-left p-4 rounded-xl border transition-all flex items-start gap-3.5 ${
+                    className={`w-full text-left p-4 rounded-xl border transition-all flex items-start gap-3.5 cursor-pointer ${
                       isActive
-                        ? "bg-slate-900/90 border-indigo-500/60 shadow-[0_0_20px_rgba(99,102,241,0.25)] translate-x-1"
+                        ? "bg-slate-900/90 border-blue-500/60 shadow-[0_0_20px_rgba(37,99,235,0.25)] translate-x-1"
                         : "bg-slate-950/40 border-slate-900 hover:border-slate-800 text-slate-500 hover:text-slate-300"
                     }`}
                   >
                     <div
                       className={`w-7 h-7 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 ${
-                        isActive ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-900 text-slate-600"
+                        isActive ? "bg-blue-600 text-white shadow-sm" : "bg-slate-900 text-slate-600"
                       }`}
                     >
                       {idx + 1}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-indigo-400 font-bold" : "text-slate-500"}`}>
+                        <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-blue-400 font-bold" : "text-slate-500"}`}>
                           {s.tag}
                         </span>
                         <span className="text-[10px] font-mono text-slate-600">{s.time}</span>
@@ -138,58 +137,28 @@ export function CinematicReel() {
                   {/* Terminal Header */}
                   <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800/80">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                      <span className="text-[11px] text-slate-500 ml-2 font-mono">bash ~ avanza-studio</span>
+                      <span className="w-3 h-3 rounded-full bg-rose-500/80" />
+                      <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+                      <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                      <span className="text-slate-500 text-[11px] ml-2">terminal ~ avanza-deploy</span>
                     </div>
-                    <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
-                      EJECUTANDO
-                    </span>
+                    <span className="text-[10px] text-slate-500 uppercase">{steps[activeStep].tag}</span>
                   </div>
 
                   {/* Code Line */}
                   <div className="space-y-3">
-                    <div className="text-slate-400 flex items-start gap-2">
-                      <span className="text-indigo-400 font-bold select-none">&gt;</span>
-                      <motion.code
-                        key={`code-${activeStep}`}
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-slate-200 block"
-                      >
-                        {steps[activeStep].code}
-                      </motion.code>
+                    <div className="text-slate-400">
+                      <span className="text-emerald-400">$</span> {steps[activeStep].code}
                     </div>
-
-                    {/* Output Line with Glow */}
-                    <motion.div
-                      key={`output-${activeStep}`}
-                      initial={{ opacity: 0, x: -5 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.15 }}
-                      className="p-3 rounded-lg bg-indigo-950/30 border border-indigo-500/20 text-indigo-300 font-semibold"
-                    >
+                    <div className="text-emerald-400/90 pl-3 border-l-2 border-emerald-500/40">
                       {steps[activeStep].output}
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Video Playhead Timeline Bar */}
-                <div className="pt-4 border-t border-slate-800/80">
-                  <div className="flex items-center justify-between text-[10px] text-slate-500 mb-2">
-                    <span>FRAME 00:{((activeStep + 1) * 24).toString().padStart(2, "0")} / 96</span>
-                    <span className="text-cyan-400 font-semibold">100% BUFFERED</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden">
-                    <motion.div
-                      key={`progress-${activeStep}`}
-                      initial={{ width: `${(activeStep / steps.length) * 100}%` }}
-                      animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-                      transition={{ duration: isPlaying ? 2.8 : 0, ease: "linear" }}
-                      className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full"
-                    />
-                  </div>
+                <div className="pt-4 mt-6 border-t border-slate-900 flex items-center justify-between text-[11px] text-slate-600">
+                  <span>Engine: Turbopack v16.3.3</span>
+                  <span className="text-blue-400 font-semibold">100% PASS</span>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 4
+    "latency_ms": 5
   },
   {
     "id": "UT-02",
@@ -13,7 +13,7 @@
     "description": "Resuelve conflictos de especificidad (Tailwind Merge overrides)",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 0
+    "latency_ms": 1
   },
   {
     "id": "UT-03",
@@ -69,7 +69,7 @@
     "description": "Acepta datos válidos y normaliza correos electrónicos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 2
+    "latency_ms": 1
   },
   {
     "id": "UT-10",
@@ -187,6 +187,134 @@
     "id": "UT-24",
     "module": "SSRMiddleware",
     "description": "Permite acceso sin redirección a rutas públicas para cualquier usuario",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-25",
+    "module": "GraphicPerformance",
+    "description": "Valida que los estilos de aceleración GPU contengan translateZ(0) y backfaceVisibility: hidden",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-26",
+    "module": "ImagePipeline",
+    "description": "Retorna preset de dimensiones WebP y atributos responsive 'sizes' sin bloatware 4K",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-27",
+    "module": "GraphicPerformance",
+    "description": "Calcula el presupuesto exacto por frame para 120 FPS (8.33ms), 90 FPS (11.11ms) y 60 FPS (16.67ms)",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-28",
+    "module": "ImagePipeline",
+    "description": "Valida que los presets de tarjeta limiten la resolución máxima a 800x450 con compresión al 80%",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-29",
+    "module": "ProjectEstimator",
+    "description": "Calcula correctamente el rango de días según el servicio y modalidad Express vs Estándar",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-30",
+    "module": "ProjectEstimator",
+    "description": "Genera el enlace de WhatsApp codificado con el número oficial de Magno y formato formal",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-31",
+    "module": "ComparisonMatrix",
+    "description": "Valida que los 6 criterios técnicos de diferenciación contengan los estándares AVANZA vs agencias y freelancers",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-32",
+    "module": "DesignSystem",
+    "description": "Valida que los tokens de color Light Mode (Navy, Cobalt, Slate 900) cumplan con accesibilidad WCAG AAA/AA",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-33",
+    "module": "SiteConfig",
+    "description": "Valida la configuración canónica del dominio .com, metadatos de los co-fundadores y canales de contacto",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-34",
+    "module": "ProxyMigration",
+    "description": "Verifica que el matcher de proxy.ts procese rutas de aplicación e ignore assets estáticos WebP/PNG/_next",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-35",
+    "module": "LegalCompliance",
+    "description": "Valida las referencias obligatorias de la Ley N° 29733 de Datos Personales y cesión 100% de IP",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-36",
+    "module": "LibroReclamaciones",
+    "description": "Valida el esquema Zod del Libro de Reclamaciones, rechazo de datos inválidos y formato del código REC-YYYY-XXXX",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 2
+  },
+  {
+    "id": "UT-37",
+    "module": "CountryDetection",
+    "description": "Detecta automáticamente India (+91), Perú (+51) y USA (+1) por Timezone y Locale",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-38",
+    "module": "InternationalPrefixes",
+    "description": "Valida que los números oficiales de Manuel y Magno tengan explícitamente el prefijo internacional +51",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-39",
+    "module": "InternalPortalSecurity",
+    "description": "Verifica que el acceso al portal administrativo no esté expuesto en la navegación pública",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
+  },
+  {
+    "id": "UT-40",
+    "module": "AutoLanguageTranslator",
+    "description": "Mapea automáticamente visitantes de India (hi, en) y resto del mundo a sus idiomas",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
     "latency_ms": 0

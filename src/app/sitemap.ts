@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://avanza.dev";
+  const baseUrl = SITE_CONFIG.url;
   const currentDate = new Date();
 
   return [
@@ -34,6 +35,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/privacidad`,
+      lastModified: currentDate,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/terminos`,
+      lastModified: currentDate,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/reclamaciones`,
+      lastModified: currentDate,
+      changeFrequency: "yearly",
+      priority: 0.5,
     },
   ];
 }

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -16,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
         "/login",
       ],
     },
-    sitemap: "https://avanza.dev/sitemap.xml",
+    sitemap: `${SITE_CONFIG.url}/sitemap.xml`,
   };
 }
