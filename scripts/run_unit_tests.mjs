@@ -1011,6 +1011,31 @@ test("UT-40", "AutoLanguageTranslator", "Mapea automáticamente visitantes de In
   assertEqual(targetSpanish, "es");
 });
 
+// --- MÓDULO 13: Sprint 1 White Luxury Identity, Design Tokens & Jargon Deprecation ---
+test("UT-41", "Sprint1WhiteLuxury", "Valida tokens White Luxury en globals.css, ausencia de clase 'dark' en layout y eliminación de jerga técnica", () => {
+  const globalsCssPath = path.join(ROOT_DIR, "src", "app", "globals.css");
+  const layoutPath = path.join(ROOT_DIR, "src", "app", "layout.tsx");
+
+  assert(fs.existsSync(globalsCssPath), "globals.css debe existir");
+  assert(fs.existsSync(layoutPath), "layout.tsx debe existir");
+
+  const globalsContent = fs.readFileSync(globalsCssPath, "utf-8");
+  const layoutContent = fs.readFileSync(layoutPath, "utf-8");
+
+  // 1. Verificación de tokens de degradado de lujo (#021761 -> #070a12)
+  assert(globalsContent.includes("--gradient-luxury"), "globals.css debe definir --gradient-luxury");
+  assert(globalsContent.includes("#021761"), "globals.css debe contener el color Navy Primario #021761");
+  assert(globalsContent.includes(".bg-gradient-luxury"), "globals.css debe tener la clase .bg-gradient-luxury");
+  assert(globalsContent.includes(".text-gradient-luxury"), "globals.css debe tener la clase .text-gradient-luxury");
+
+  // 2. Verificación de que el layout público no tenga la clase 'dark' forzada en html/body
+  assert(!layoutContent.includes('<html lang="es" className="dark"'), "layout.tsx no debe forzar la clase 'dark' en <html>");
+  assert(!layoutContent.includes('<body className="dark"'), "layout.tsx no debe forzar la clase 'dark' en <body>");
+
+  // 3. Verificación de que la marca oficial y dominio canónico estén en metadata de layout
+  assert(layoutContent.includes("AVANZA Software Studio"), "layout.tsx debe usar la marca oficial AVANZA Software Studio");
+});
+
 // -------------------------------------------------------------
 // Resumen Final y Persistencia
 // -------------------------------------------------------------

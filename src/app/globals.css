@@ -84,6 +84,7 @@
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #2563eb;
+  --gradient-luxury: linear-gradient(135deg, #021761 0%, #070a12 100%);
 }
 
 .dark {
@@ -130,6 +131,17 @@
   html {
     @apply font-sans;
   }
+}
+
+/* White Luxury Architectural Gradient Utilities */
+.bg-gradient-luxury {
+  background: linear-gradient(135deg, #021761 0%, #070a12 100%);
+}
+
+.text-gradient-luxury {
+  background: linear-gradient(135deg, #021761 0%, #070a12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Lenis Smooth Scroll Overrides */

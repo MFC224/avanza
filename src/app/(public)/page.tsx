@@ -30,9 +30,9 @@ export default function Home() {
     {
       index: "02",
       title: "Arquitectura Cloud",
-      subtitle: "Next.js 16 & PostgreSQL 3NF",
+      subtitle: "Next.js 16 & Bases de Datos Seguras",
       description:
-        "Bases de datos relacionales normalizadas con Row Level Security (RLS) y renderizado en el Edge para latencias inferiores a 20 milisegundos.",
+        "Bases de datos de alta integridad con aislamiento estricto de privacidad y renderizado en el Edge para respuestas en milisegundos.",
     },
     {
       index: "03",

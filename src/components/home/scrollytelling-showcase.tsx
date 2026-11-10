@@ -57,7 +57,7 @@ const STAGES: StageData[] = [
     bulletPoints: [
       "Arquitectura Next.js 16 con Server Components y Streaming SSR",
       "Tipografía editorial curada con espaciado matemático áureo",
-      "Microinteracciones a 120 FPS aceleradas por hardware GPU",
+      "Microinteracciones fluidas aceleradas por hardware GPU",
       "Totalmente responsive con adaptación dinámica por dispositivo",
     ],
     ctaText: "Cotizar Plataforma Web",
@@ -66,19 +66,19 @@ const STAGES: StageData[] = [
   {
     id: "crm-systems",
     tabLabel: "02 CRM & SISTEMAS CLOUD",
-    tag: "02 · ARQUITECTURA EMPRESARIAL 3NF",
+    tag: "02 · ARQUITECTURA EMPRESARIAL CLOUD",
     title: "Sistemas operativos y CRM a medida para",
     italicTitle: "controlar cada sol, lead y operación interna.",
     description:
       "Elimina las hojas de cálculo dispersas y el software rígido. Construimos tu propia plataforma de gestión con flujos personalizados, roles jerárquicos y analítica en tiempo real.",
-    badge: "PostgreSQL 3NF · 12ms Latency RLS",
+    badge: "PostgreSQL Enterprise · Consulta en 12ms",
     metrics: [
-      { label: "Latencia de Consulta", value: "12ms", detail: "Supabase Postgres 3NF" },
+      { label: "Latencia de Consulta", value: "12ms", detail: "Supabase Postgres Cloud" },
       { label: "Tiempo Operativo Ahorrado", value: "65%", detail: "Procesos automatizados" },
       { label: "Disponibilidad SLA", value: "99.98%", detail: "Respaldo continuo 24/7" },
     ],
     bulletPoints: [
-      "Bases de datos relacionales normalizadas en 3FN con Row Level Security",
+      "Bases de datos relacionales seguras con aislamiento estricto de privacidad",
       "Pipelines de ventas estilo Kanban interactivo con WebSockets en vivo",
       "Módulos financieros con emisión de comprobantes y conciliación",
       "Control granular de permisos por roles, sedes y departamentos",
@@ -288,7 +288,7 @@ export function ScrollytellingShowcase() {
                 {/* Active Latency Badge */}
                 <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                   <Activity className="w-3 h-3 animate-pulse" />
-                  <span>120 FPS</span>
+                  <span>12ms EDGE</span>
                 </div>
               </div>
 
@@ -387,7 +387,7 @@ export function ScrollytellingShowcase() {
                             PANEL DE CONTROL CORPORATIVO · OPERACIONES
                           </span>
                           <span className="text-[10px] text-slate-400 font-mono">
-                            Supabase Enterprise · Multi-Tenant RLS
+                            Supabase Enterprise · Multi-Tenant Seguro
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -396,7 +396,7 @@ export function ScrollytellingShowcase() {
                         </div>
                       </div>
 
-                      {/* 3NF Pipeline Analytics */}
+                      {/* Pipeline Analytics */}
                       <div className="grid grid-cols-3 gap-3">
                         <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
                           <span className="text-[10px] font-mono text-slate-400 uppercase block">Facturación Mensual</span>
@@ -413,7 +413,7 @@ export function ScrollytellingShowcase() {
                         <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
                           <span className="text-[10px] font-mono text-slate-400 uppercase block">Latencia Postgres</span>
                           <span className="text-xl sm:text-2xl font-black text-white">12ms</span>
-                          <span className="text-[10px] font-mono text-emerald-400 mt-1 block">3NF Optimizado</span>
+                          <span className="text-[10px] font-mono text-emerald-400 mt-1 block">Estructura Optimizada</span>
                         </div>
                       </div>
 

@@ -40,7 +40,7 @@ const TEMPLATES: TemplateProject[] = [
     tagline: "Plataforma de banca privada & gestión de activos",
     description:
       "Plataforma institucional con arquitectura de microservicios, analítica de portafolios en milisegundos y bóveda de autenticación biométrica.",
-    techStack: ["Next.js 16", "PostgreSQL 3NF", "Supabase SSR", "Tailwind v4"],
+    techStack: ["Next.js 16", "PostgreSQL Enterprise", "Supabase SSR", "Tailwind v4"],
     metrics: { label: "Latencia de Carga", value: "0.58s LCP" },
     gradient: "from-slate-900 via-[#0a1538] to-slate-900",
     previewUrl: "/servicios",
@@ -66,7 +66,7 @@ const TEMPLATES: TemplateProject[] = [
     tagline: "ERP de despacho de flotas & trazabilidad en tiempo real",
     description:
       "Control de rutas mediante telemetría IoT satelital, sincronización de guías de remisión electrónicas y portal de clientes automatizado.",
-    techStack: ["Next.js 16", "WebSockets", "Supabase RLS", "PostgreSQL"],
+    techStack: ["Next.js 16", "WebSockets", "Supabase Cloud", "PostgreSQL"],
     metrics: { label: "Ahorro de Combustible", value: "24.6%" },
     gradient: "from-[#022c22] via-[#064e3b] to-[#021761]",
     previewUrl: "/servicios",
@@ -92,7 +92,7 @@ const TEMPLATES: TemplateProject[] = [
     tagline: "Sistema médico integral con historia clínica electrónica",
     description:
       "Cumplimiento estricto de protección de datos de salud, gestión de recetas digitales y portal para médicos y pacientes con notificaciones.",
-    techStack: ["Next.js 16", "HIPAA/Ley 29733", "PostgreSQL", "Supabase Auth"],
+    techStack: ["Next.js 16", "Ley N° 29733 (Perú)", "PostgreSQL", "Supabase Auth"],
     metrics: { label: "Eficiencia de Citas", value: "+45% Capacidad" },
     gradient: "from-[#082f49] via-[#0c4a6e] to-[#021761]",
     previewUrl: "/servicios",

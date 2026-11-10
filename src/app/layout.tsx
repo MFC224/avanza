@@ -28,8 +28,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: "AVANZA | AI & Software Studio de Alto Rendimiento",
-    template: "%s | AVANZA",
+    default: "AVANZA Software Studio | Desarrollo de Software & Plataformas Web de Élite",
+    template: "%s | AVANZA Software Studio",
   },
   description: SITE_CONFIG.description,
   keywords: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     { name: SITE_CONFIG.founders.magno.name },
   ],
   openGraph: {
-    title: "AVANZA | AI & Software Studio",
+    title: "AVANZA Software Studio",
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
@@ -56,8 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AVANZA | AI & Software Studio",
-    description: "Desarrollo de software rápido, confiable y potenciado con Inteligencia Artificial.",
+    title: "AVANZA Software Studio",
+    description: "Desarrollo de software ágil, plataformas web de alta conversión y automatización con IA.",
   },
   robots: {
     index: true,

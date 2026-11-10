@@ -111,7 +111,7 @@ export function HeroMotion() {
 
           <div className="text-center sm:text-left">
             <div className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">100% Type-Safe</div>
-            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">Next.js 16 & PostgreSQL 3NF</div>
+            <div className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">Next.js 16 & Base de Datos Cloud</div>
           </div>
 
           <div className="text-center sm:text-left">
@@ -156,7 +156,7 @@ export function HeroMotion() {
                   Panel de Control de Clientes & Facturación Automatizada
                 </h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Arquitectura PostgreSQL con Row Level Security, sincronización de pagos en tiempo real y agentes de Inteligencia Artificial que procesan consultas 24/7.
+                  Arquitectura Cloud con aislamiento estricto de privacidad, sincronización de pagos en tiempo real y agentes de Inteligencia Artificial que procesan consultas 24/7.
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   <span className="text-xs font-mono bg-white border border-slate-200 px-3 py-1 rounded text-slate-700">TypeScript Estricto</span>

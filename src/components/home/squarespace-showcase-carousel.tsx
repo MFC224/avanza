@@ -68,7 +68,7 @@ const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     subheadline: "NEW YORK / LONDON · A creative agency creating iconic identities, luxury digital commerce, and cultural relevance.",
     themeStyle: "dark-agency",
     metrics: { label: "Ticket Promedio", value: "+280%" },
-    highlights: ["Renderizado WebGL de texturas", "Checkout instantáneo en 1-clic", "Microinteracciones 120 FPS"],
+    highlights: ["Renderizado fluido de catálogo", "Checkout instantáneo en 1-clic", "Microinteracciones de alta fidelidad"],
     imageSrc: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80",
     secondaryImageSrc: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80",
     details: "Perfecto para marcas premium de moda, perfumería, inmobiliarias de lujo y estudios de arquitectura que compiten internacionalmente.",
@@ -100,8 +100,8 @@ const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     headline: "ORQUESTADOR DE FLOTA & RUTA",
     subheadline: "LIMA - CALLAO · Telemetría satelital en vivo, control de combustible y facturación electrónica automatizada.",
     themeStyle: "navy-system",
-    metrics: { label: "Latencia Postgres", value: "12ms RLS" },
-    highlights: ["WebSockets en tiempo real", "Base de datos 3NF Supabase", "Facturación Sunat automática"],
+    metrics: { label: "Velocidad de Respuesta", value: "12ms Edge" },
+    highlights: ["WebSockets en tiempo real", "Base de datos segura Supabase", "Facturación Sunat automática"],
     imageSrc: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80",
     details: "Reemplaza el desorden de hojas de cálculo por un sistema centralizado donde cada área opera con datos verídicos.",
   },
@@ -550,7 +550,7 @@ export function SquarespaceShowcaseCarousel() {
                     <div className="relative z-10 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center my-auto">
                       <div className="sm:col-span-7 space-y-3">
                         <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-blue-400 font-bold block">
-                          CONTROL CENTRAL EN VIVO // POSTGRESQL 3NF
+                          CONTROL CENTRAL EN VIVO // BASE DE DATOS SEGURA
                         </span>
                         <h3 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.02]">
                           Orquestador de Flota &amp; Ruta
@@ -565,7 +565,7 @@ export function SquarespaceShowcaseCarousel() {
                           </div>
                           <div className="p-2.5 rounded-lg bg-white/5 border border-white/10">
                             <span className="text-[9px] font-mono text-slate-400 block">LATENCIA EDGE</span>
-                            <span className="text-base font-bold text-emerald-400 font-mono">12ms RLS</span>
+                            <span className="text-base font-bold text-emerald-400 font-mono">12ms Edge</span>
                           </div>
                         </div>
                       </div>

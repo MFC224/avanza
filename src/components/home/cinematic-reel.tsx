@@ -17,10 +17,10 @@ export function CinematicReel() {
     },
     {
       time: "00:08",
-      tag: "DATABASE 3NF",
-      label: "Generando migraciones con Row Level Security",
+      tag: "DATABASE CLOUD",
+      label: "Generando migraciones con aislamiento de datos",
       code: "create policy \"tenant_isolation\" on public.leads for select using (auth.uid() = user_id);",
-      output: "✓ 12 Políticas RLS aplicadas · Conexiones cifradas SSL",
+      output: "✓ Políticas de seguridad y aislamiento aplicadas · Cifrado SSL",
     },
     {
       time: "00:12",
@@ -34,7 +34,7 @@ export function CinematicReel() {
       tag: "PRODUCCIÓN",
       label: "Despliegue distribuido en Edge CDN global",
       code: "git push origin main // Automated GitHub Actions pipeline triggered",
-      output: "🚀 Despliegue en vivo en https://avanza.dev · 99.99% Uptime",
+      output: "🚀 Despliegue en vivo en https://avanzape.com · 99.99% Uptime",
     },
   ];
 
@@ -76,7 +76,7 @@ export function CinematicReel() {
               </span>
               <span className="font-bold text-white tracking-wider">STUDIO ARCHITECTURE // AVANZA</span>
               <span className="hidden sm:inline text-slate-600">|</span>
-              <span className="hidden sm:inline text-cyan-400 font-semibold">120 FPS HIGH REFRESH · WEBP READY</span>
+              <span className="hidden sm:inline text-cyan-400 font-semibold">ALTO RENDIMIENTO VISUAL · WEBP READY</span>
             </div>
 
             <div className="flex items-center gap-3">
