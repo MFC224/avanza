@@ -41,6 +41,13 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-brand: var(--brand);
+  --color-muted-on-paper: var(--muted-on-paper);
+  --color-muted-on-ink: var(--muted-on-ink);
+  --color-line-on-paper: var(--line-on-paper);
+  --color-line-on-ink: var(--line-on-ink);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -51,6 +58,13 @@
 }
 
 :root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --brand: #021761;
+  --muted-on-paper: #5f6368;
+  --muted-on-ink: #a3a3a3;
+  --line-on-paper: #e5e5e5;
+  --line-on-ink: #262626;
   --background: #ffffff;
   --foreground: #0f172a;
   --card: #ffffff;
@@ -148,6 +162,72 @@
 html.lenis,
 html.lenis body {
   height: auto;
+}
+
+/* =========================================================================
+   SQUARESPACE-TIER TYPOGRAPHIC UTILITIES (Geist Strict Scale - Section 5.2)
+   ========================================================================= */
+.text-display {
+  font-size: 2.5rem; /* 40px */
+  line-height: 1.05;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+}
+@media (min-width: 768px) {
+  .text-display {
+    font-size: 4rem; /* 64px */
+  }
+}
+
+.text-section {
+  font-size: 1.75rem; /* 28px */
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 768px) {
+  .text-section {
+    font-size: 2.5rem; /* 40px */
+  }
+}
+
+.text-card {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .text-card {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+.text-body {
+  font-size: 1rem; /* 16px */
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@media (min-width: 768px) {
+  .text-body {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+.text-small {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.text-button {
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .lenis.lenis-smooth {
