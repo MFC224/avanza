@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 5
+    "latency_ms": 4
   },
   {
     "id": "UT-02",
@@ -325,7 +325,7 @@
     "description": "Valida tokens White Luxury en globals.css, ausencia de clase 'dark' en layout y eliminación de jerga técnica",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 0
   },
   {
     "id": "UT-42",
@@ -341,7 +341,7 @@
     "description": "Valida base de conocimiento de ARM, validación Zod de mensajes, rate limiting (10 msgs/sesión) y fallback de resiliencia",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 2
   },
   {
     "id": "UT-44",
@@ -349,6 +349,6 @@
     "description": "Valida motor de agendamiento ARM v2, prevención de solapamientos, generación de Google Meet y tablero de fuga",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 0
+    "latency_ms": 1
   }
 ]
