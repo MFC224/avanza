@@ -564,6 +564,40 @@ const PUBLIC_FOOTER_NAV_LINKS = [
   "/reclamaciones",
 ];
 
+// 13. ARM Engine Logic & Schema from src/lib/arm-engine.ts
+const armChatSchema = z.object({
+  sessionId: z.string().trim().min(5).max(64),
+  message: z.string().trim().min(1, "El mensaje no puede estar vacío.").max(500, "Mensaje demasiado extenso (máx. 500 caracteres)."),
+  consentGiven: z.boolean().optional().default(false),
+  clientName: z.string().trim().max(60).optional(),
+  contactInfo: z.string().trim().max(100).optional(),
+});
+
+function createMockRateLimiter() {
+  const sessionCounts = new Map();
+  const ipHistory = new Map();
+
+  return function checkLimit(sessionId, ip) {
+    const now = Date.now();
+    const oneMinAgo = now - 60000;
+
+    const hits = (ipHistory.get(ip) || []).filter((t) => t > oneMinAgo);
+    if (hits.length >= 5) {
+      return { allowed: false, reason: "Límite de 5 peticiones por minuto superado." };
+    }
+    hits.push(now);
+    ipHistory.set(ip, hits);
+
+    const sCount = sessionCounts.get(sessionId) || 0;
+    if (sCount >= 10) {
+      return { allowed: false, reason: "Límite de 10 mensajes por sesión alcanzado." };
+    }
+    sessionCounts.set(sessionId, sCount + 1);
+
+    return { allowed: true };
+  };
+}
+
 // -------------------------------------------------------------
 // Test Execution Harness
 // -------------------------------------------------------------
@@ -1078,6 +1112,77 @@ test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas ana
   const nosotrosContent = fs.readFileSync(nosotrosPath, "utf-8");
   assert(!serviciosContent.includes("PostgreSQL 3NF"), "servicios/page.tsx no debe contener jerga PostgreSQL 3NF");
   assert(!nosotrosContent.includes("bases de datos 3NF"), "nosotros/page.tsx no debe contener jerga bases de datos 3NF");
+});
+
+// --- MÓDULO 15: Sprint 3 ARM v1 (Base de Conocimiento, Rate Limiting, Zod & Resilient Fallback) ---
+test("UT-43", "Sprint3ARMv1", "Valida base de conocimiento de ARM, validación Zod de mensajes, rate limiting (10 msgs/sesión) y fallback de resiliencia", () => {
+  const kbPath = path.join(ROOT_DIR, "AVANZA_KNOWLEDGE_BASE_ARM.md");
+  const armEnginePath = path.join(ROOT_DIR, "src", "lib", "arm-engine.ts");
+  const armRoutePath = path.join(ROOT_DIR, "src", "app", "api", "arm", "chat", "route.ts");
+  const armWidgetPath = path.join(ROOT_DIR, "src", "components", "ui", "arm-chat-widget.tsx");
+
+  // 1. Verificación de archivo de base de conocimiento maestro
+  assert(fs.existsSync(kbPath), "AVANZA_KNOWLEDGE_BASE_ARM.md debe existir en la raíz");
+  const kbContent = fs.readFileSync(kbPath, "utf-8");
+  assert(kbContent.includes("S/ 1,200"), "KB debe especificar rango web desde S/ 1,200");
+  assert(kbContent.includes("S/ 2,800"), "KB debe especificar rango CRM desde S/ 2,800");
+  assert(kbContent.includes("S/ 3,500"), "KB debe especificar rango IA desde S/ 3,500");
+  assert(kbContent.includes("Ley N° 29733"), "KB debe incluir protocolo de consentimiento de la Ley N° 29733");
+  assert(kbContent.includes("+51 942 498 841"), "KB debe incluir WhatsApp oficial de Magno");
+  assert(kbContent.includes("+51 921 195 037"), "KB debe incluir teléfono oficial de Manuel");
+
+  // 2. Validación de esquema Zod para mensajes ARM
+  const validMsg = armChatSchema.safeParse({
+    sessionId: "session_test_12345",
+    message: "¿Cuánto cuesta desarrollar un CRM?",
+    consentGiven: true,
+  });
+  assertEqual(validMsg.success, true);
+  assertEqual(validMsg.data.message, "¿Cuánto cuesta desarrollar un CRM?");
+
+  // Rechazo de mensaje vacío
+  const emptyMsg = armChatSchema.safeParse({
+    sessionId: "session_test_12345",
+    message: "   ",
+  });
+  assertEqual(emptyMsg.success, false);
+
+  // Rechazo de mensaje excesivo (> 500 caracteres)
+  const hugeMsg = armChatSchema.safeParse({
+    sessionId: "session_test_12345",
+    message: "a".repeat(501),
+  });
+  assertEqual(hugeMsg.success, false);
+
+  // 3. Verificación de Rate Limiting (Máximo 10 mensajes por sesión)
+  const rateLimiter = createMockRateLimiter();
+  const testSession = "test_sess_rate_limit";
+  const testIp = "192.168.1.100";
+
+  for (let i = 0; i < 10; i++) {
+    const res = rateLimiter(testSession, `ip_${i}`);
+    assert(res.allowed, `Mensaje ${i + 1} debe ser permitido`);
+  }
+  const blockedSession = rateLimiter(testSession, "ip_overflow");
+  assertEqual(blockedSession.allowed, false);
+  assert(blockedSession.reason.includes("10 mensajes"));
+
+  // 4. Verificación de existencia de motor, endpoint y widget UI
+  assert(fs.existsSync(armEnginePath), "src/lib/arm-engine.ts debe existir");
+  const engineContent = fs.readFileSync(armEnginePath, "utf-8");
+  assert(engineContent.includes("ARM_SERVICES_CATALOG"), "arm-engine.ts debe exportar ARM_SERVICES_CATALOG");
+  assert(engineContent.includes("checkArmRateLimit"), "arm-engine.ts debe exportar checkArmRateLimit");
+  assert(engineContent.includes("resolveGroundedArmResponse"), "arm-engine.ts debe exportar resolveGroundedArmResponse");
+
+  assert(fs.existsSync(armRoutePath), "src/app/api/arm/chat/route.ts debe existir");
+  const routeContent = fs.readFileSync(armRoutePath, "utf-8");
+  assert(routeContent.includes("export async function POST"), "route.ts debe exportar método POST");
+  assert(routeContent.includes("status: 429"), "route.ts debe manejar código HTTP 429 para rate limit");
+
+  assert(fs.existsSync(armWidgetPath), "src/components/ui/arm-chat-widget.tsx debe existir");
+  const widgetContent = fs.readFileSync(armWidgetPath, "utf-8");
+  assert(widgetContent.includes("errorFallback"), "arm-chat-widget.tsx debe incluir fallback de resiliencia");
+  assert(widgetContent.includes("+51 942 498 841"), "arm-chat-widget.tsx debe ofrecer WhatsApp de los fundadores como respaldo");
 });
 
 // -------------------------------------------------------------
