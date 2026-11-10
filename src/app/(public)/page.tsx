@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BackgroundGrid } from "@/components/ui/background-grid";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { HeroMotion } from "@/components/home/hero-motion";
-import { SquarespaceShowcaseCarousel } from "@/components/home/squarespace-showcase-carousel";
+import { PortfolioRow } from "@/components/home/portfolio-row";
 import { ScrollytellingShowcase } from "@/components/home/scrollytelling-showcase";
 import { TemplateCarousel } from "@/components/home/template-carousel";
 import { CinematicReel } from "@/components/home/cinematic-reel";
@@ -61,12 +61,8 @@ export default function Home() {
       {/* Squarespace Hero Section with Monumental Typography & 3D Tilt Device Stage */}
       <HeroMotion />
 
-      {/* =========================================================================
-          SQUARESPACE SIGNATURE 3D COVER-FLOW CAROUSEL (BENCHMARK EXACTO)
-          Agregado en lugar de la barra simple: Muestra las oportunidades de
-          páginas web, sistemas operativos a medida y agentes de IA.
-          ========================================================================= */}
-      <SquarespaceShowcaseCarousel />
+      {/* Squarespace Signature Horizontal Portfolio Row */}
+      <PortfolioRow />
 
       {/* =========================================================================
           SQUARESPACE SIGNATURE PINNED SCROLLYTELLING SHOWCASE (AWWWARDS STANDARD)

@@ -33,9 +33,11 @@ export default function PublicLayout({
       <PublicHeader />
 
       {/* Page Content with dynamic padding for non-home routes */}
-      <PublicMainWrapper>
-        {children}
-      </PublicMainWrapper>
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col focus:outline-none">
+        <PublicMainWrapper>
+          {children}
+        </PublicMainWrapper>
+      </main>
 
       {/* High-Impact Light Footer */}
       <footer className="border-t border-slate-200/80 bg-slate-50 py-16 mt-24 relative overflow-hidden text-slate-600">

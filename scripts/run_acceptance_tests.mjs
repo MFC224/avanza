@@ -171,29 +171,22 @@ runTest("UAT-04", "GPU Optimization", "Fondo dinámico acelerado por hardware (t
 // CATEGORÍA 2: SQUARESPACE SIGNATURE 3D COVER-FLOW CAROUSEL
 // ---------------------------------------------------------------------------
 
-runTest("UAT-05", "Squarespace Carousel", "Apertura por defecto en la tarjeta editorial clara ('ACADEMIC LESSONS')", () => {
-  const carouselCode = readSrc("src/components/home/squarespace-showcase-carousel.tsx");
-  assert(carouselCode.includes("academic-lessons"), "El primer slide debe ser academic-lessons");
-  assert(carouselCode.includes("cream-editorial"), "El estilo visual debe ser cream-editorial");
-  assert(carouselCode.includes("ACADEMIC LESSONS"), "Debe titularse ACADEMIC LESSONS");
-  assert(carouselCode.includes("SCOTT SMITH TUTORING"), "Debe pertenecer a SCOTT SMITH TUTORING");
+runTest("UAT-05", "Portfolio Row", "Apertura y presencia de la tarjeta editorial ('Scott Smith Tutoring')", () => {
+  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
+  assert(rowCode.includes("academic-lessons"), "El primer slide debe ser academic-lessons");
+  assert(rowCode.includes("Scott Smith Tutoring"), "Debe pertenecer a Scott Smith Tutoring");
 });
 
-runTest("UAT-06", "Coverflow 3D", "Simetría visual y presencia simultánea de recuadros izquierdo y derecho en 3D", () => {
-  const carouselCode = readSrc("src/components/home/squarespace-showcase-carousel.tsx");
-  assert(carouselCode.includes("prevSlide"), "Debe calcular y renderizar prevSlide (izquierda)");
-  assert(carouselCode.includes("nextSlide"), "Debe calcular y renderizar nextSlide (derecha)");
-  assert(carouselCode.includes("rotateY(14deg)"), "El recuadro izquierdo debe tener rotación 3D positiva");
-  assert(carouselCode.includes("rotateY(-14deg)"), "El recuadro derecho debe tener rotación 3D negativa");
-  assert(carouselCode.includes("perspective: 1200"), "El contenedor debe fijar perspectiva de 1200px");
+runTest("UAT-06", "Portfolio Controls", "Controles discretos de desplazamiento izquierda y derecha", () => {
+  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
+  assert(rowCode.includes("scroll(\"left\")"), "Debe permitir desplazamiento a la izquierda");
+  assert(rowCode.includes("scroll(\"right\")"), "Debe permitir desplazamiento a la derecha");
 });
 
-runTest("UAT-07", "Carousel Autoplay", "Ciclo de rotación de 10 segundos con barra de progreso fluida y control manual", () => {
-  const carouselCode = readSrc("src/components/home/squarespace-showcase-carousel.tsx");
-  assert(carouselCode.includes("AUTOPLAY_SECONDS = 10"), "Debe tener configurado ciclo de 10 segundos");
-  assert(carouselCode.includes("progress"), "Debe actualizar estado de barra de progreso continuo");
-  assert(carouselCode.includes("paginate(-1)"), "Debe permitir retroceder manualmente");
-  assert(carouselCode.includes("paginate(1)"), "Debe permitir avanzar manualmente");
+runTest("UAT-07", "Portfolio Keyboard Navigation", "Soporte de navegación accesible por teclado (ArrowLeft y ArrowRight)", () => {
+  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
+  assert(rowCode.includes("ArrowLeft"), "Debe capturar flecha izquierda");
+  assert(rowCode.includes("ArrowRight"), "Debe capturar flecha derecha");
 });
 
 // ---------------------------------------------------------------------------

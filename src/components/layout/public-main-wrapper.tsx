@@ -9,15 +9,13 @@ export function PublicMainWrapper({ children }: { children: React.ReactNode }) {
   const isHome = pathname === "/";
 
   return (
-    <main
-      id="main-content"
-      tabIndex={-1}
+    <div
       className={cn(
         "flex-1 flex flex-col focus:outline-none",
         !isHome && "pt-16 md:pt-20"
       )}
     >
       {children}
-    </main>
+    </div>
   );
 }
