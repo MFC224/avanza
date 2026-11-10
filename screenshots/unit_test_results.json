@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 4
+    "latency_ms": 5
   },
   {
     "id": "UT-02",
@@ -85,7 +85,7 @@
     "description": "Rechaza nombres menores a 2 caracteres con mensaje amigable",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 0
   },
   {
     "id": "UT-12",
@@ -341,6 +341,14 @@
     "description": "Valida base de conocimiento de ARM, validación Zod de mensajes, rate limiting (10 msgs/sesión) y fallback de resiliencia",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 2
+    "latency_ms": 1
+  },
+  {
+    "id": "UT-44",
+    "module": "Sprint4ARMv2Scheduling",
+    "description": "Valida motor de agendamiento ARM v2, prevención de solapamientos, generación de Google Meet y tablero de fuga",
+    "status": "PASS",
+    "details": "Aserciones superadas satisfactoriamente",
+    "latency_ms": 0
   }
 ]

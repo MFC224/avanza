@@ -134,7 +134,22 @@ export function resolveGroundedArmResponse(userMessage: string, consentGiven = f
 } {
   const lower = userMessage.toLowerCase();
 
-  // 1. Detección de contacto o solicitud directa de hablar con un humano
+  // 1. Detección de agendamiento de cita / Google Meet
+  if (
+    lower.includes("agendar") ||
+    lower.includes("cita") ||
+    lower.includes("reunion") ||
+    lower.includes("reunión") ||
+    lower.includes("demo") ||
+    lower.includes("meet")
+  ) {
+    return {
+      reply: "¡Excelente! Realizamos sesiones técnicas de 25 minutos con Manuel Callañaupa y Magno Alomía mediante Google Meet privado (Lunes a Viernes de 10:00 AM a 7:00 PM en hora de Perú). Evaluamos tu proyecto en vivo y definimos la arquitectura del Sprint 1 sin costo. ¿Qué día y horario te acomoda mejor?",
+      suggestedAction: "continue",
+    };
+  }
+
+  // 2. Detección de contacto o solicitud directa de hablar con un humano
   if (
     lower.includes("magno") ||
     lower.includes("manuel") ||

@@ -1185,6 +1185,29 @@ test("UT-43", "Sprint3ARMv1", "Valida base de conocimiento de ARM, validación Z
   assert(widgetContent.includes("+51 942 498 841"), "arm-chat-widget.tsx debe ofrecer WhatsApp de los fundadores como respaldo");
 });
 
+// --- MÓDULO 16: Sprint 4 ARM v2 (Scheduling, Concurrency Control, Google Meet & Dropoff Analytics) ---
+test("UT-44", "Sprint4ARMv2Scheduling", "Valida motor de agendamiento ARM v2, prevención de solapamientos, generación de Google Meet y tablero de fuga", () => {
+  const schedulingTsPath = path.join(ROOT_DIR, "src", "lib", "arm-scheduling.ts");
+  const scheduleRoutePath = path.join(ROOT_DIR, "src", "app", "api", "arm", "schedule", "route.ts");
+  const dashboardPath = path.join(ROOT_DIR, "src", "app", "(dashboard)", "dashboard", "page.tsx");
+
+  assert(fs.existsSync(schedulingTsPath), "src/lib/arm-scheduling.ts debe existir");
+  assert(fs.existsSync(scheduleRoutePath), "src/app/api/arm/schedule/route.ts debe existir");
+  assert(fs.existsSync(dashboardPath), "src/app/(dashboard)/dashboard/page.tsx debe existir");
+
+  const schedulingCode = fs.readFileSync(schedulingTsPath, "utf-8");
+  assert(schedulingCode.includes("checkAvailability"), "arm-scheduling.ts debe exportar checkAvailability");
+  assert(schedulingCode.includes("bookAppointment"), "arm-scheduling.ts debe exportar bookAppointment");
+  assert(schedulingCode.includes("https://meet.google.com/"), "arm-scheduling.ts debe generar enlace Google Meet");
+  assert(schedulingCode.includes("duration_minutes: 25"), "arm-scheduling.ts debe fijar 25 minutos de duración");
+  assert(schedulingCode.includes("America/Lima"), "arm-scheduling.ts debe operar en America/Lima");
+
+  const dashboardCode = fs.readFileSync(dashboardPath, "utf-8");
+  assert(dashboardCode.includes("appointments"), "dashboard/page.tsx debe contener tabla appointments");
+  assert(dashboardCode.includes("sales_dropoff_analytics"), "dashboard/page.tsx debe contener tabla de fuga");
+  assert(dashboardCode.includes("Manuel & Magno"), "dashboard/page.tsx debe mostrar a Manuel & Magno como anfitriones");
+});
+
 // -------------------------------------------------------------
 // Resumen Final y Persistencia
 // -------------------------------------------------------------

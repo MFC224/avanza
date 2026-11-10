@@ -57,7 +57,7 @@ export function ArmChatWidget() {
   const quickPrompts = [
     "¿Cuánto cuesta una página web?",
     "¿Qué incluye un sistema CRM?",
-    "¿Cómo son los Sprints SCRUM?",
+    "Agendar sesión en Google Meet",
     "Quiero hablar con Magno o Manuel",
   ];
 
