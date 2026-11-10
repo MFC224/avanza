@@ -1,96 +1,84 @@
-"use client";
+import React from "react";
+import { Reveal } from "@/components/site/reveal";
 
-import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { FadeInView } from "@/components/ui/fade-in-view";
-import { Star, CheckCircle2, Landmark, Truck, Building2 } from "lucide-react";
+interface TestimonialItem {
+  quote: string;
+  role: string;
+  industry: string;
+  companySize: string;
+}
+
+const TESTIMONIALS: TestimonialItem[] = [
+  {
+    quote:
+      "Estábamos atascados con una agencia tradicional que nos pedía 4 meses. AVANZA entendió el negocio desde el primer día y en el Sprint 1 ya teníamos la plataforma transaccional operando.",
+    role: "CEO y cofundador",
+    industry: "Fintech",
+    companySize: "Startup",
+  },
+  {
+    quote:
+      "Llevábamos la gestión en 6 archivos de Excel con constantes desajustes de stock. El sistema web a medida que nos desarrollaron automatizó los despachos y eliminó los errores humanos por completo.",
+    role: "Gerente de operaciones",
+    industry: "Logística",
+    companySize: "Empresa mediana",
+  },
+  {
+    quote:
+      "El bot con Inteligencia Artificial contesta a nuestros clientes en segundos a cualquier hora y agenda las visitas automáticamente. Triplicamos la tasa de cierre sin contratar más personal.",
+    role: "Director de marketing",
+    industry: "Inmobiliaria",
+    companySize: "Empresa mediana",
+  },
+];
 
 export function TestimonialsSection() {
-  const reviews = [
-    {
-      role: "CEO y cofundador",
-      industry: "Fintech",
-      companySize: "Startup",
-      icon: Landmark,
-      project: "MVP SaaS & Pasarela",
-      metric: "Lanzamiento en 11 días",
-      quote: "Estábamos atascados con una agencia tradicional que nos pedía 4 meses. AVANZA entendió el negocio desde el primer día y en el Sprint 1 ya teníamos la plataforma transaccional operando.",
-    },
-    {
-      role: "Gerente de operaciones",
-      industry: "Logística",
-      companySize: "Empresa mediana",
-      icon: Truck,
-      project: "Sistema Web & Inventario",
-      metric: "Ahorro de 4 hrs/día",
-      quote: "Llevábamos la gestión en 6 archivos de Excel con constantes desajustes de stock. El sistema web a medida que nos desarrollaron automatizó los despachos y eliminó los errores humanos por completo.",
-    },
-    {
-      role: "Director de marketing",
-      industry: "Inmobiliaria",
-      companySize: "Empresa mediana",
-      icon: Building2,
-      project: "Agente IA en WhatsApp & CRM",
-      metric: "x3 en Leads Calificados",
-      quote: "El bot con Inteligencia Artificial contesta a nuestros clientes en segundos a cualquier hora y agenda las visitas automáticamente. Triplicamos la tasa de cierre sin contratar más personal.",
-    },
-  ];
-
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-28 md:py-36 relative z-10 border-t border-slate-200/70">
-      <FadeInView className="text-center mb-20">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-[11px] font-mono uppercase tracking-[0.18em] font-semibold mb-6">
-          <CheckCircle2 className="w-3.5 h-3.5 text-[#021761]" /> Casos de Éxito & Resultados
+    <section
+      data-tone="paper"
+      className="w-full bg-[var(--paper)] text-[var(--ink)] py-24 lg:py-36 border-t border-[var(--line-on-paper)] overflow-hidden"
+      aria-label="Testimonios y casos de éxito"
+    >
+      <div className="max-w-7xl mx-auto px-5 lg:px-12 w-full">
+        {/* Header */}
+        <Reveal className="mb-14 lg:mb-20">
+          <span className="text-small text-[var(--muted-on-paper)] block mb-3 font-normal">
+            Testimonios
+          </span>
+          <h2 className="text-section font-normal text-[var(--ink)] tracking-tight max-w-3xl">
+            La confianza de quienes ya escalaron su operación con nosotros
+          </h2>
+        </Reveal>
+
+        {/* Three Columns on White */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          {TESTIMONIALS.map((item, idx) => (
+            <Reveal
+              key={idx}
+              staggerIndex={idx}
+              className="flex flex-col justify-between"
+            >
+              <div>
+                <p className="text-card font-normal text-[var(--ink)] leading-[1.35] mb-6">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+              </div>
+
+              <div>
+                <div className="w-12 h-px bg-[var(--line-on-paper)] mb-4" />
+                <p className="text-small text-[var(--muted-on-paper)] font-normal">
+                  {item.role} · {item.industry} ({item.companySize})
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-        <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-6 tracking-[-0.035em]">
-          La confianza de quienes ya escalaron con nosotros
-        </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed">
-          No prometemos código, entregamos rentabilidad, velocidad y tranquilidad operativa.
-        </p>
-      </FadeInView>
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {reviews.map((rev, idx) => {
-          const Icon = rev.icon;
-          return (
-            <FadeInView key={idx} delay={idx * 0.15}>
-              <SpotlightCard className="p-8 border-slate-200/80 bg-white flex flex-col justify-between h-full group hover:-translate-y-2 transition-transform duration-300 shadow-2xs hover:shadow-xl rounded-2xl">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex gap-1 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-400" />
-                      ))}
-                    </div>
-                    <span className="text-[11px] font-mono text-slate-800 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full font-bold">
-                      {rev.metric}
-                    </span>
-                  </div>
-
-                  <p className="text-slate-700 text-base leading-relaxed mb-8 font-normal">
-                    &ldquo;{rev.quote}&rdquo;
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-slate-100 flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#021761] flex items-center justify-center text-white shrink-0 shadow-xs">
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-slate-950 font-bold text-base">{rev.role}</h4>
-                    <p className="text-slate-500 text-xs font-mono">{rev.industry} · {rev.companySize}</p>
-                  </div>
-                </div>
-              </SpotlightCard>
-            </FadeInView>
-          );
-        })}
-      </div>
-
-      <div className="mt-12 text-center">
-        <p className="text-xs text-slate-400 font-mono">
-          Nombres reservados por acuerdo de confidencialidad.
-        </p>
+        <div className="mt-16 text-center">
+          <p className="text-small text-[var(--muted-on-paper)] font-normal">
+            Nombres reservados por estricto acuerdo de confidencialidad.
+          </p>
+        </div>
       </div>
     </section>
   );
