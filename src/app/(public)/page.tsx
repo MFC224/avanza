@@ -51,7 +51,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative flex flex-col items-center overflow-hidden bg-white text-slate-900 selection:bg-blue-500/20 font-sans antialiased">
+    <div className="relative flex flex-col items-center overflow-x-clip bg-white text-slate-900 selection:bg-blue-500/20 font-sans antialiased">
       {/* Dynamic Cybernetic Grid Background */}
       <BackgroundGrid />
 

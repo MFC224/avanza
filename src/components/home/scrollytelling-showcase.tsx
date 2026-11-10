@@ -169,15 +169,17 @@ export function ScrollytellingShowcase() {
       {/* Background Architectural Grid Lines */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
-      {/* Ambient Radial Gradient Spotlights */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 blur-[180px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-emerald-500/10 blur-[180px] rounded-full" />
-      </div>
+      {/* Pinned Stage Container (Single Sticky Viewport with Ambient Background) */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-6 px-4 sm:px-6 lg:px-12 z-10">
+        {/* Ambient Radial Gradient Spotlights */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+          <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 blur-[180px] rounded-full" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[450px] bg-emerald-500/10 blur-[180px] rounded-full" />
+        </div>
 
-      {/* Pinned Stage Container (Awwwards / Squarespace Standard) */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-between py-6 px-4 sm:px-6 lg:px-12 z-10 max-w-7xl mx-auto">
-        {/* Header / Tab Navigation (Clickable + Synchronized with Scroll) */}
+        {/* Content Container Constrained to max-w-7xl mx-auto */}
+        <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-between relative z-10">
+          {/* Header / Tab Navigation (Clickable + Synchronized with Scroll) */}
         <div className="w-full flex flex-col items-center gap-4 pt-2">
           {/* Section Master Label */}
           <div className="flex items-center gap-2.5 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.28em] text-slate-400">
@@ -588,5 +590,6 @@ export function ScrollytellingShowcase() {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
