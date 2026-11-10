@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node scripts/run_unit_tests.mjs && node scripts/run_acceptance_tests.mjs",
+    "test:unit": "node scripts/run_unit_tests.mjs",
+    "test:acceptance": "node scripts/run_acceptance_tests.mjs",
+    "test:scheduling": "node scripts/test_arm_scheduling.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -1,0 +1,250 @@
+{
+  "timestamp": "2026-11-10T19:59:31.285Z",
+  "environment": "Production Certified (Turbopack + Next.js 16.3.3)",
+  "totalTests": 30,
+  "passed": 30,
+  "failed": 0,
+  "passRate": "100%",
+  "tests": [
+    {
+      "id": "UAT-01",
+      "category": "Branding & Logo",
+      "scenario": "Renderizado exacto del Isotipo de 3 vigas y Logotipo Oficial en Header y Footer",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.49
+    },
+    {
+      "id": "UAT-02",
+      "category": "Design System",
+      "scenario": "Depuración total de jerga técnica 'cyberpunk/hacker' en favor de tono ejecutivo B2B",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.24
+    },
+    {
+      "id": "UAT-03",
+      "category": "White Luxury",
+      "scenario": "Canvas blanco estricto (#ffffff) con fondo inmaculado y sin modo oscuro forzado",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.22
+    },
+    {
+      "id": "UAT-04",
+      "category": "GPU Optimization",
+      "scenario": "Fondo dinámico acelerado por hardware (translate3d/translateZ) sin sobrecarga en la CPU",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.13
+    },
+    {
+      "id": "UAT-05",
+      "category": "Squarespace Carousel",
+      "scenario": "Apertura por defecto en la tarjeta editorial clara ('ACADEMIC LESSONS')",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.48
+    },
+    {
+      "id": "UAT-06",
+      "category": "Coverflow 3D",
+      "scenario": "Simetría visual y presencia simultánea de recuadros izquierdo y derecho en 3D",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.33
+    },
+    {
+      "id": "UAT-07",
+      "category": "Carousel Autoplay",
+      "scenario": "Ciclo de rotación de 10 segundos con barra de progreso fluida y control manual",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.57
+    },
+    {
+      "id": "UAT-08",
+      "category": "ARM v2 Slots",
+      "scenario": "Generación de 11 slots hábiles diarios de 25 min + 15 min colchón en zona Lima",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.17
+    },
+    {
+      "id": "UAT-09",
+      "category": "Filtro Fines de Semana",
+      "scenario": "Rechazo automático de solicitudes en Sábado o Domingo con mensaje explicativo",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.03
+    },
+    {
+      "id": "UAT-10",
+      "category": "Feriados Nacionales Perú",
+      "scenario": "Bloqueo estricto de agendamiento en feriados oficiales peruanos (ej. 28 de Julio)",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.05
+    },
+    {
+      "id": "UAT-11",
+      "category": "Anti Doble-Reserva",
+      "scenario": "Prevención de colisión de citas y recomendación de slots alternativos libres",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.08
+    },
+    {
+      "id": "UAT-12",
+      "category": "Google Meet Integration",
+      "scenario": "Generación de enlaces de videoconferencia únicos con formato institucional",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.09
+    },
+    {
+      "id": "UAT-13",
+      "category": "Host Assignment",
+      "scenario": "Asignación obligatoria de los fundadores Manuel & Magno como anfitriones de la sesión",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.58
+    },
+    {
+      "id": "UAT-14",
+      "category": "ARM v1 Pricing",
+      "scenario": "Cotización verídica de servicios según el catálogo oficial en Soles (S/ 1,200 a S/ 3,500)",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.17
+    },
+    {
+      "id": "UAT-15",
+      "category": "Scheduling Intent",
+      "scenario": "Detección automática de intención de reunión/demo y oferta de agendamiento Meet",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.12
+    },
+    {
+      "id": "UAT-16",
+      "category": "Ley 29733 Consent",
+      "scenario": "Micro-checkbox obligatorio de consentimiento de datos en el chat de ARM",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.12
+    },
+    {
+      "id": "UAT-17",
+      "category": "Commercial Fallback",
+      "scenario": "Enlace de rescate a WhatsApp directo ante dudas no resueltas o límite de mensajes",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.1
+    },
+    {
+      "id": "UAT-18",
+      "category": "Project Estimator",
+      "scenario": "Cálculo matemático de tiempos de sprint (7 a 12 días) y aceleración express",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.09
+    },
+    {
+      "id": "UAT-19",
+      "category": "WhatsApp CTA Generator",
+      "scenario": "Construcción de URL de WhatsApp con mensaje formal pre-redactado",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.08
+    },
+    {
+      "id": "UAT-20",
+      "category": "Anti-Bot Honeypot",
+      "scenario": "Detección y bloqueo silencioso de envíos automatizados mediante honeypot",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 3.36
+    },
+    {
+      "id": "UAT-21",
+      "category": "Libro de Reclamaciones",
+      "scenario": "Generación de código único formal REC-YYYY-XXXX y validación de DNI/RUC",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.57
+    },
+    {
+      "id": "UAT-22",
+      "category": "IP Ownership Guarantee",
+      "scenario": "Garantía contractual de 100% cesión de código fuente sin suscripciones cautivas",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.26
+    },
+    {
+      "id": "UAT-23",
+      "category": "Co-Founders Registry",
+      "scenario": "Registro formal de Manuel Callañaupa y Magno Alomía con sus números oficiales",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.44
+    },
+    {
+      "id": "UAT-24",
+      "category": "International Country Detection",
+      "scenario": "Detección de código de país por Timezone para visitantes de India, USA y Perú",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.18
+    },
+    {
+      "id": "UAT-25",
+      "category": "WCAG A11y Landmark",
+      "scenario": "Presencia de enlace de salto accesible para lectores de pantalla (#main-content)",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.16
+    },
+    {
+      "id": "UAT-26",
+      "category": "Global Command Palette",
+      "scenario": "Acceso universal a paleta de comandos mediante Cmd+K / Ctrl+K y cotizador express",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.13
+    },
+    {
+      "id": "UAT-27",
+      "category": "SSR Middleware Security",
+      "scenario": "Protección estricta de rutas /dashboard y redirección a /login para anónimos",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.05
+    },
+    {
+      "id": "UAT-28",
+      "category": "Zero Internal Leaks",
+      "scenario": "Ausencia total de enlaces administrativos expuestos en la navegación pública",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.14
+    },
+    {
+      "id": "UAT-29",
+      "category": "Sales Dropoff Analytics",
+      "scenario": "Registro de objeciones comerciales (presupuesto, indecisión) en el tablero y modelo",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.19
+    },
+    {
+      "id": "UAT-30",
+      "category": "Appointments Live View",
+      "scenario": "Visualización en vivo de citas confirmadas con enlace a Google Meet y anfitrión",
+      "status": "PASS",
+      "error": null,
+      "durationMs": 0.13
+    }
+  ]
+}
