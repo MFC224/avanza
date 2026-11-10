@@ -147,13 +147,13 @@ const CATEGORIES = [
   { id: "fintech", label: "FINTECH & ERP" },
 ] as const;
 
-// Luxury, buttery-smooth transition variants (slower and softer easing curve)
+// Transition variants for smooth right-to-left / left-to-right 3D sliding animation (0.85s silk-smooth)
 const slideVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? "48%" : "-48%",
+    x: direction > 0 ? "46%" : "-46%",
     scale: 0.86,
     opacity: 0.25,
-    rotateY: direction > 0 ? -12 : 12,
+    rotateY: direction > 0 ? -14 : 14,
     zIndex: 10,
   }),
   center: {
@@ -164,14 +164,14 @@ const slideVariants = {
     zIndex: 30,
     transition: {
       duration: 0.85,
-      ease: [0.16, 1, 0.3, 1] as const, // Silk-smooth luxury cubic bezier
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? "-48%" : "48%",
+    x: direction > 0 ? "-46%" : "46%",
     scale: 0.86,
     opacity: 0.2,
-    rotateY: direction > 0 ? 12 : -12,
+    rotateY: direction > 0 ? 14 : -14,
     zIndex: 10,
     transition: {
       duration: 0.85,
@@ -221,7 +221,7 @@ export function SquarespaceShowcaseCarousel() {
 
   const activeSlide = filteredSlides[currentIndex] || filteredSlides[0];
 
-  // Side peeking cards (recuadros de atrás)
+  // Side peeking cards (recuadros anterior y posterior)
   const prevIndex = (currentIndex - 1 + filteredSlides.length) % filteredSlides.length;
   const nextIndex = (currentIndex + 1) % filteredSlides.length;
   const prevSlide = filteredSlides[prevIndex];
@@ -230,10 +230,10 @@ export function SquarespaceShowcaseCarousel() {
   return (
     <section className="relative w-full bg-slate-950 text-white py-20 sm:py-28 md:py-32 overflow-hidden border-y border-slate-900 selection:bg-blue-500/30">
       {/* Ambient Radial Spotlight Behind Center Stage */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-gradient-to-tr from-blue-950/25 via-slate-900/25 to-emerald-950/15 blur-[190px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[650px] bg-gradient-to-tr from-blue-950/25 via-slate-900/25 to-emerald-950/15 blur-[200px] pointer-events-none rounded-full" />
 
-      {/* Container: Balanced width so the background recuadros are prominently visible */}
-      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
+      {/* Container: Balanced width allowing the side cards to extend gracefully */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
         {/* Top Eyebrow */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs font-mono uppercase tracking-[0.22em] mb-6">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -278,43 +278,76 @@ export function SquarespaceShowcaseCarousel() {
         </div>
 
         {/* =========================================================================
-            SQUARESPACE 3D COVER-FLOW CAROUSEL (PROPORCIÓN PERFECTA & RECUADROS DE ATRÁS)
-            Ancho equilibrado (~960px) permitiendo que los recuadros laterales sean
-            visibles con total claridad y profundidad 3D
+            SQUARESPACE 3D COVER-FLOW CAROUSEL (AMBAS TARJETAS LATERALES VISIBLES)
+            El recuadro de la izquierda (anterior) y el de la derecha (siguiente)
+            se posicionan simétricamente con desplazamiento exacto en el eje X
             ========================================================================= */}
         <div
           className="relative w-full min-h-[500px] sm:min-h-[560px] md:min-h-[620px] lg:min-h-[640px] flex items-center justify-center my-2"
           style={{ perspective: 1200 }}
         >
-          {/* RECUADRO DE ATRÁS (IZQUIERDA) - Siempre visible y clicable */}
+          {/* RECUADRO DE ATRÁS (IZQUIERDA / ANTERIOR) - Simétrico, visible y clicable */}
           {prevSlide && (
             <motion.div
               onClick={() => paginate(-1)}
               style={{
-                transform: "translateX(-48%) scale(0.85) rotateY(12deg)",
+                left: "50%",
+                top: "50%",
+                transform: "translateX(calc(-50% - min(40vw, 440px))) translateY(-50%) scale(0.85) rotateY(14deg)",
               }}
-              className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[85vw] max-w-[880px] aspect-[16/10] sm:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 hidden sm:block opacity-35 hover:opacity-60 transition-opacity duration-300 z-10 bg-slate-900"
+              className="absolute w-[94vw] sm:w-[90vw] md:w-[86vw] lg:w-[940px] xl:w-[980px] aspect-[16/11] sm:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/15 hidden sm:block opacity-45 hover:opacity-75 transition-all duration-300 z-10 bg-slate-900 group"
             >
-              <div className="w-full h-full relative p-6 sm:p-8 flex flex-col justify-between text-white">
-                <Image
-                  src={prevSlide.imageSrc}
-                  alt={prevSlide.brandName}
-                  fill
-                  sizes="500px"
-                  className="object-cover opacity-20"
-                />
-                <div className="relative z-10 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-400">
-                  {prevSlide.categoryBadge}
+              <div
+                className={`w-full h-full relative p-6 sm:p-10 flex flex-col justify-between ${
+                  prevSlide.themeStyle === "cream-editorial"
+                    ? "bg-[#f6f2ec] text-slate-900"
+                    : prevSlide.themeStyle === "obsidian-wellness"
+                    ? "bg-[#181514] text-[#ede6df]"
+                    : "bg-[#0d0d0f] text-white"
+                }`}
+              >
+                {/* Header preview */}
+                <div className="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 text-[10px] sm:text-xs">
+                  <span className="font-mono font-bold tracking-widest uppercase">
+                    {prevSlide.brandName}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full border border-current text-[9px] font-mono uppercase">
+                    Anterior ‹
+                  </span>
                 </div>
-                <div className="relative z-10">
-                  <h4 className="text-xl sm:text-2xl font-black text-white">{prevSlide.headline}</h4>
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-1">{prevSlide.tagline}</p>
+
+                {/* Content preview */}
+                <div className="grid grid-cols-12 gap-4 items-center my-auto">
+                  <div className="col-span-7 space-y-2">
+                    <span className="text-[9px] font-mono uppercase tracking-widest opacity-60 block">
+                      {prevSlide.categoryBadge}
+                    </span>
+                    <h4 className="text-xl sm:text-3xl font-black tracking-tight line-clamp-2">
+                      {prevSlide.headline}
+                    </h4>
+                    <p className="text-xs opacity-70 line-clamp-2">{prevSlide.tagline}</p>
+                  </div>
+                  <div className="col-span-5 relative h-28 sm:h-40 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 shadow-sm">
+                    <Image
+                      src={prevSlide.imageSrc}
+                      alt={prevSlide.brandName}
+                      fill
+                      sizes="300px"
+                      className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Footer preview */}
+                <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-[10px] font-mono opacity-80">
+                  <span>{prevSlide.metrics.label}</span>
+                  <span className="font-bold">{prevSlide.metrics.value}</span>
                 </div>
               </div>
             </motion.div>
           )}
 
-          {/* TARJETA CENTRAL ACTIVA (Con animación física suave de 0.85s y proporciones originales de lujo) */}
+          {/* TARJETA CENTRAL ACTIVA (Con animación física suave de 0.85s y diseño editorial de lujo) */}
           <div className="relative z-30 w-full flex items-center justify-center">
             <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
@@ -597,7 +630,7 @@ export function SquarespaceShowcaseCarousel() {
                   </div>
                 )}
 
-                {/* SLIDE THEME VARIANT 6: Fintech Platinum (Aethelgard - El exacto diseño de la captura) */}
+                {/* SLIDE THEME VARIANT 6: Fintech Platinum (Aethelgard) */}
                 {activeSlide.themeStyle === "fintech-platinum" && (
                   <div className="w-full h-full bg-[#07101e] text-white flex flex-col justify-between p-6 sm:p-10 select-none relative overflow-hidden">
                     <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/10 text-[10px] sm:text-xs">
@@ -645,29 +678,62 @@ export function SquarespaceShowcaseCarousel() {
             </AnimatePresence>
           </div>
 
-          {/* RECUADRO DE ATRÁS (DERECHA) - Siempre visible y clicable */}
+          {/* RECUADRO DE ATRÁS (DERECHA / SIGUIENTE) - Simétrico, visible y clicable */}
           {nextSlide && (
             <motion.div
               onClick={() => paginate(1)}
               style={{
-                transform: "translateX(48%) scale(0.85) rotateY(-12deg)",
+                left: "50%",
+                top: "50%",
+                transform: "translateX(calc(-50% + min(40vw, 440px))) translateY(-50%) scale(0.85) rotateY(-14deg)",
               }}
-              className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[85vw] max-w-[880px] aspect-[16/10] sm:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 hidden sm:block opacity-35 hover:opacity-60 transition-opacity duration-300 z-10 bg-slate-900"
+              className="absolute w-[94vw] sm:w-[90vw] md:w-[86vw] lg:w-[940px] xl:w-[980px] aspect-[16/11] sm:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/15 hidden sm:block opacity-45 hover:opacity-75 transition-all duration-300 z-10 bg-slate-900 group"
             >
-              <div className="w-full h-full relative p-6 sm:p-8 flex flex-col justify-between text-white">
-                <Image
-                  src={nextSlide.imageSrc}
-                  alt={nextSlide.brandName}
-                  fill
-                  sizes="500px"
-                  className="object-cover opacity-20"
-                />
-                <div className="relative z-10 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-400">
-                  {nextSlide.categoryBadge}
+              <div
+                className={`w-full h-full relative p-6 sm:p-10 flex flex-col justify-between ${
+                  nextSlide.themeStyle === "cream-editorial"
+                    ? "bg-[#f6f2ec] text-slate-900"
+                    : nextSlide.themeStyle === "obsidian-wellness"
+                    ? "bg-[#181514] text-[#ede6df]"
+                    : "bg-[#0d0d0f] text-white"
+                }`}
+              >
+                {/* Header preview */}
+                <div className="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 text-[10px] sm:text-xs">
+                  <span className="font-mono font-bold tracking-widest uppercase">
+                    {nextSlide.brandName}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full border border-current text-[9px] font-mono uppercase">
+                    Siguiente ›
+                  </span>
                 </div>
-                <div className="relative z-10">
-                  <h4 className="text-xl sm:text-2xl font-black text-white">{nextSlide.headline}</h4>
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-1">{nextSlide.tagline}</p>
+
+                {/* Content preview */}
+                <div className="grid grid-cols-12 gap-4 items-center my-auto">
+                  <div className="col-span-7 space-y-2">
+                    <span className="text-[9px] font-mono uppercase tracking-widest opacity-60 block">
+                      {nextSlide.categoryBadge}
+                    </span>
+                    <h4 className="text-xl sm:text-3xl font-black tracking-tight line-clamp-2">
+                      {nextSlide.headline}
+                    </h4>
+                    <p className="text-xs opacity-70 line-clamp-2">{nextSlide.tagline}</p>
+                  </div>
+                  <div className="col-span-5 relative h-28 sm:h-40 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 shadow-sm">
+                    <Image
+                      src={nextSlide.imageSrc}
+                      alt={nextSlide.brandName}
+                      fill
+                      sizes="300px"
+                      className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Footer preview */}
+                <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-[10px] font-mono opacity-80">
+                  <span>{nextSlide.metrics.label}</span>
+                  <span className="font-bold">{nextSlide.metrics.value}</span>
                 </div>
               </div>
             </motion.div>
