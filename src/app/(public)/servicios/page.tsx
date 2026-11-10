@@ -12,6 +12,9 @@ import { ArrowRight, CheckCircle2, Clock, Sparkles, Layers, ShieldCheck, Zap } f
 export const metadata: Metadata = {
   title: "Servicios de Software e Inteligencia Artificial | AVANZA",
   description: "Desarrollo de páginas web de alto impacto, sistemas web, CRM, automatización con IA, apps móviles y arquitectura cloud con entrega en 7 a 14 días.",
+  alternates: {
+    canonical: "/servicios",
+  },
   openGraph: {
     title: "Servicios de Software e IA | AVANZA",
     description: "Catálogo completo de soluciones tecnológicas con ingeniería ágil y arquitectura escalable.",

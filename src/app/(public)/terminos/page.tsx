@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Términos de Servicio y Contratación",
   description:
     "Términos de Servicio, cesión de propiedad intelectual (100% IP para el cliente), garantía técnica y acuerdos NDA de AVANZA.",
+  alternates: {
+    canonical: "/terminos",
+  },
 };
 
 export default function TerminosPage() {

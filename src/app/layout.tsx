@@ -27,6 +27,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "AVANZA Software Studio | Desarrollo de Software & Plataformas Web de Élite",
     template: "%s | AVANZA Software Studio",

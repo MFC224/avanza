@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Política de Privacidad",
   description:
     "Política de Privacidad y Tratamiento de Datos Personales de AVANZA en estricto cumplimiento de la Ley N° 29733 de la República del Perú.",
+  alternates: {
+    canonical: "/privacidad",
+  },
 };
 
 export default function PrivacidadPage() {

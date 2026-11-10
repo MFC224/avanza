@@ -21,6 +21,9 @@ import {
 export const metadata: Metadata = {
   title: "Metodología Ágil SCRUM | AVANZA",
   description: "Desarrollo de software transparente y acelerado por Sprints semanales. El cliente mantiene el control total de cada entrega tangible.",
+  alternates: {
+    canonical: "/metodologia",
+  },
   openGraph: {
     title: "Metodología Ágil SCRUM | AVANZA",
     description: "Ciclo iterativo continuo de 4 fases para entregar software funcional cada 7 a 14 días.",

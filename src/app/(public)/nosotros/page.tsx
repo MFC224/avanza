@@ -23,6 +23,9 @@ import {
 export const metadata: Metadata = {
   title: "Nosotros | AVANZA AI & Software Studio",
   description: "Conoce a los fundadores y la visión de AVANZA. Liderazgo técnico por Manuel Callañaupa y estrategia comercial por Magno Alomía.",
+  alternates: {
+    canonical: "/nosotros",
+  },
   openGraph: {
     title: "Nosotros | AVANZA AI & Software Studio",
     description: "Equipo fundador, misión y valores de ingeniería de AVANZA en Perú.",
