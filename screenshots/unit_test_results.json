@@ -5,7 +5,7 @@
     "description": "Fusiona clases estándar de Tailwind sin conflictos",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 6
+    "latency_ms": 4
   },
   {
     "id": "UT-02",
@@ -21,7 +21,7 @@
     "description": "Filtra valores falsy, undefined, null y booleanos condicionales",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 0
   },
   {
     "id": "UT-04",

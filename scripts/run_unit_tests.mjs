@@ -436,17 +436,17 @@ const LIGHT_DESIGN_TOKENS = {
 
 // 11. Site Configuration & Legal Schemas from src/lib/site-config.ts & src/lib/complaints-schema.ts
 const SITE_CONFIG = {
-  name: "AVANZA",
-  legalName: "AVANZA Software & AI Studio",
-  domain: "avanzastudio.com",
-  url: "https://avanzastudio.com",
+  name: "AVANZA Software Studio",
+  legalName: "AVANZA Software Studio",
+  domain: "avanzape.com",
+  url: "https://avanzape.com",
   founders: {
     manuel: {
       name: "Manuel Callañaupa",
       role: "Co-Fundador & Lead Software Architect",
       phone: "+51921195037",
       displayPhone: "+51 921 195 037",
-      email: "manuel@avanzastudio.com",
+      email: "manuel@avanzape.com",
     },
     magno: {
       name: "Magno Alomia",
@@ -461,7 +461,7 @@ const SITE_CONFIG = {
     commercialPhoneRaw: "+51942498841",
     technicalPhone: "+51 921 195 037",
     technicalPhoneRaw: "+51921195037",
-    email: "contacto@avanzastudio.com",
+    email: "contacto@avanzape.com",
   },
   legal: {
     privacyLaw: "Ley N° 29733 (Ley de Protección de Datos Personales del Perú)",
@@ -903,12 +903,12 @@ test("UT-32", "DesignSystem", "Valida que los tokens de color Light Mode (Navy, 
 
 // --- MÓDULO 11: Sprint 4 Domain Configuration, Next.js 16 Proxy & Legal Compliance ---
 test("UT-33", "SiteConfig", "Valida la configuración canónica del dominio .com, metadatos de los co-fundadores y canales de contacto", () => {
-  assertEqual(SITE_CONFIG.domain, "avanzastudio.com");
-  assertEqual(SITE_CONFIG.url, "https://avanzastudio.com");
+  assertEqual(SITE_CONFIG.domain, "avanzape.com");
+  assertEqual(SITE_CONFIG.url, "https://avanzape.com");
   assertEqual(SITE_CONFIG.founders.manuel.name, "Manuel Callañaupa");
   assertEqual(SITE_CONFIG.founders.magno.name, "Magno Alomia");
   assertEqual(SITE_CONFIG.contact.commercialPhoneRaw, "+51942498841");
-  assertEqual(SITE_CONFIG.contact.email, "contacto@avanzastudio.com");
+  assertEqual(SITE_CONFIG.contact.email, "contacto@avanzape.com");
 });
 
 test("UT-34", "ProxyMigration", "Verifica que el matcher de proxy.ts procese rutas de aplicación e ignore assets estáticos WebP/PNG/_next", () => {

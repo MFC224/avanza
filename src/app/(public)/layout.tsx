@@ -37,7 +37,7 @@ export default function PublicLayout({
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
               <Image
-                src="/logo-avanza.jpg"
+                src="/logo-avanza-icon.jpg"
                 alt="AVANZA Logo"
                 width={40}
                 height={40}
@@ -53,8 +53,8 @@ export default function PublicLayout({
               <span className="text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
                 AVANZA
               </span>
-              <span className="text-[10px] tracking-widest text-slate-500 uppercase font-mono -mt-1 hidden sm:block">
-                AI & Software Studio
+              <span className="text-[10px] tracking-[0.22em] text-slate-500 uppercase font-mono font-medium -mt-1 hidden sm:block">
+                SOFTWARE STUDIO
               </span>
             </div>
           </Link>
@@ -115,8 +115,11 @@ export default function PublicLayout({
               <SheetContent side="right" className="bg-white border-slate-200 p-6 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
-                    <Image src="/logo-avanza.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
-                    <span className="text-xl font-bold text-slate-900">AVANZA</span>
+                    <Image src="/logo-avanza-icon.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
+                    <div className="flex flex-col">
+                      <span className="text-xl font-bold text-slate-900">AVANZA</span>
+                      <span className="text-[9px] tracking-widest text-slate-500 uppercase font-mono">SOFTWARE STUDIO</span>
+                    </div>
                   </div>
                   <nav className="flex flex-col gap-5 mt-8">
                     <Link href="/" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Inicio</Link>
@@ -155,11 +158,14 @@ export default function PublicLayout({
             {/* Col 1 */}
             <div className="flex flex-col gap-4">
               <Link href="/" className="flex items-center gap-3">
-                <Image src="/logo-avanza.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
-                <span className="text-2xl font-black text-slate-900">AVANZA</span>
+                <Image src="/logo-avanza-icon.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
+                <div className="flex flex-col">
+                  <span className="text-2xl font-black text-slate-900 leading-tight">AVANZA</span>
+                  <span className="text-[10px] tracking-[0.2em] text-slate-500 uppercase font-mono">SOFTWARE STUDIO</span>
+                </div>
               </Link>
               <p className="text-sm text-slate-600 leading-relaxed max-w-sm">
-                Agencia de desarrollo de software y transformación digital impulsada por Inteligencia Artificial. Creamos soluciones escalables para empresas líderes.
+                Studio de software ágil, plataformas web de alta conversión y automatización con Inteligencia Artificial. Construimos soluciones de alto rendimiento para empresas líderes.
               </p>
               <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full w-fit mt-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -196,9 +202,9 @@ export default function PublicLayout({
             <div className="flex flex-col gap-3">
               <h3 className="font-bold text-slate-900 text-base tracking-wide">Contacto Directo</h3>
               <div className="flex flex-col gap-2.5 text-sm text-slate-600">
-                <a href="mailto:avanza.mmoficial@gmail.com" className="flex items-center gap-2 hover:text-blue-700 transition-colors">
+                <a href="mailto:contacto@avanzape.com" className="flex items-center gap-2 hover:text-blue-700 transition-colors">
                   <Mail className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>avanza.mmoficial@gmail.com</span>
+                  <span>contacto@avanzape.com</span>
                 </a>
                 <a href="https://wa.me/51942498841" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-emerald-700 transition-colors">
                   <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -233,7 +239,7 @@ export default function PublicLayout({
           </div>
 
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-            <p>&copy; {new Date().getFullYear()} AVANZA Technology Studio. Todos los derechos reservados.</p>
+            <p>&copy; {new Date().getFullYear()} AVANZA Software Studio. Todos los derechos reservados.</p>
             <div className="flex items-center gap-3.5 text-xs text-slate-500">
               <Link href="/privacidad" className="hover:text-blue-600 transition-colors">
                 Privacidad

@@ -4,15 +4,15 @@
  */
 
 export const SITE_CONFIG = {
-  name: "AVANZA",
-  legalName: "AVANZA Software & AI Studio",
+  name: "AVANZA Software Studio",
+  legalName: "AVANZA Software Studio",
   shortName: "AVANZA",
-  tagline: "AI & Software Studio de Alto Rendimiento",
+  tagline: "Software Studio de Alto Rendimiento & Ingeniería Digital",
   description:
     "Desarrollo de software ágil, plataformas web de alta conversión y automatización con agentes de Inteligencia Artificial para empresas en Perú y Latinoamérica.",
-  domain: "avanzastudio.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://avanzastudio.com",
-  ogImage: "https://avanzastudio.com/opengraph-image",
+  domain: "avanzape.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://avanzape.com",
+  ogImage: "https://avanzape.com/opengraph-image",
   themeColor: "#ffffff",
   locale: "es_PE",
 
@@ -22,14 +22,14 @@ export const SITE_CONFIG = {
       role: "Co-Fundador & Lead Software Architect",
       phone: "+51921195037",
       displayPhone: "+51 921 195 037",
-      email: "manuel@avanzastudio.com",
+      email: "manuel@avanzape.com",
     },
     magno: {
       name: "Magno Alomia",
       role: "Co-Fundador & Business Growth Director",
       phone: "+51942498841",
       displayPhone: "+51 942 498 841",
-      email: "magno@avanzastudio.com",
+      email: "magno@avanzape.com",
     },
   },
 
@@ -38,15 +38,15 @@ export const SITE_CONFIG = {
     commercialPhoneRaw: "+51942498841",
     technicalPhone: "+51 921 195 037",
     technicalPhoneRaw: "+51921195037",
-    email: "contacto@avanzastudio.com",
+    email: "contacto@avanzape.com",
     city: "Lima, Perú",
     schedule: "Lunes a Sábado: 8:00 AM - 8:00 PM (GMT-5)",
     whatsappBaseUrl: "https://wa.me/51942498841",
   },
 
   social: {
-    github: "https://github.com/avanzastudio",
-    linkedin: "https://linkedin.com/company/avanzastudio",
+    github: "https://github.com/MFC224/avanza",
+    linkedin: "https://linkedin.com/company/avanza-software-studio",
   },
 
   legal: {
