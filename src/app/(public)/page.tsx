@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { BackgroundGrid } from "@/components/ui/background-grid";
 import { CinematicWarp } from "@/components/ui/cinematic-warp";
 import { HeroMotion } from "@/components/home/hero-motion";
+import { SquarespaceShowcaseCarousel } from "@/components/home/squarespace-showcase-carousel";
 import { ScrollytellingShowcase } from "@/components/home/scrollytelling-showcase";
 import { TemplateCarousel } from "@/components/home/template-carousel";
 import { CinematicReel } from "@/components/home/cinematic-reel";
-import { InfiniteMarquee } from "@/components/ui/infinite-marquee";
 import { FadeInView } from "@/components/ui/fade-in-view";
 import { TestimonialsSection } from "@/components/home/testimonials";
 import { ComparisonMatrix } from "@/components/home/comparison-matrix";
@@ -19,21 +19,6 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  const techStack = [
-    { name: "Next.js 16 (App Router)" },
-    { name: "React 19" },
-    { name: "Supabase SSR" },
-    { name: "PostgreSQL 3NF" },
-    { name: "Tailwind CSS v4" },
-    { name: "TypeScript Estricto" },
-    { name: "OpenAI / LLMs" },
-    { name: "Python Pipelines" },
-    { name: "Docker Containers" },
-    { name: "Cloud Architecture" },
-    { name: "Lenis Smooth Scroll" },
-    { name: "Row Level Security (RLS)" },
-  ];
-
   const pillars = [
     {
       index: "01",
@@ -76,13 +61,12 @@ export default function Home() {
       {/* Squarespace Hero Section with Monumental Typography & 3D Tilt Device Stage */}
       <HeroMotion />
 
-      {/* Infinite Tech & Frameworks Marquee */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-8 border-y border-slate-200/80 bg-white/70 backdrop-blur-md relative z-10">
-        <div className="text-center mb-4 text-[11px] font-mono uppercase tracking-[0.22em] text-slate-400 font-semibold">
-          Stack Tecnológico de Nivel Mundial
-        </div>
-        <InfiniteMarquee items={techStack} speed={30} />
-      </div>
+      {/* =========================================================================
+          SQUARESPACE SIGNATURE 3D COVER-FLOW CAROUSEL (BENCHMARK EXACTO)
+          Agregado en lugar de la barra simple: Muestra las oportunidades de
+          páginas web, sistemas operativos a medida y agentes de IA.
+          ========================================================================= */}
+      <SquarespaceShowcaseCarousel />
 
       {/* =========================================================================
           SQUARESPACE SIGNATURE PINNED SCROLLYTELLING SHOWCASE (AWWWARDS STANDARD)
@@ -91,7 +75,7 @@ export default function Home() {
       <ScrollytellingShowcase />
 
       {/* =========================================================================
-          SQUARESPACE SIGNATURE HORIZONTAL TEMPLATE & SYSTEMS CAROUSEL
+          SQUARESPACE SIGNATURE HORIZONTAL TEMPLATE & SYSTEMS CATALOG
           Interactive categorized catalog of high-end architectures
           ========================================================================= */}
       <TemplateCarousel />
