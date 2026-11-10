@@ -7,6 +7,7 @@ import { FloatingContact } from "@/components/ui/floating-contact";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { CommandMenu, CommandMenuTrigger } from "@/components/ui/command-menu";
 import { AutoLanguageTranslator } from "@/components/ui/auto-language-translator";
+import { AvanzaBrandLogo } from "@/components/ui/avanza-brand-logo";
 import { Menu, ArrowUpRight, ShieldCheck, Mail, Phone, MessageCircle, BookOpen } from "lucide-react";
 
 export default function PublicLayout({
@@ -36,25 +37,10 @@ export default function PublicLayout({
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <Image
-                src="/logo-avanza-icon.jpg"
-                alt="AVANZA Logo"
-                width={40}
-                height={40}
-                className="h-10 w-auto rounded-lg border border-slate-200 group-hover:border-blue-600/60 transition-colors shadow-xs"
-                priority
-              />
+              <AvanzaBrandLogo variant="horizontal" size={38} className="group-hover:opacity-95 transition-opacity" />
               <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
-                AVANZA
-              </span>
-              <span className="text-[10px] tracking-[0.22em] text-slate-500 uppercase font-mono font-medium -mt-1 hidden sm:block">
-                SOFTWARE STUDIO
               </span>
             </div>
           </Link>
@@ -115,11 +101,7 @@ export default function PublicLayout({
               <SheetContent side="right" className="bg-white border-slate-200 p-6 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
-                    <Image src="/logo-avanza-icon.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
-                    <div className="flex flex-col">
-                      <span className="text-xl font-bold text-slate-900">AVANZA</span>
-                      <span className="text-[9px] tracking-widest text-slate-500 uppercase font-mono">SOFTWARE STUDIO</span>
-                    </div>
+                    <AvanzaBrandLogo variant="horizontal" size={32} />
                   </div>
                   <nav className="flex flex-col gap-5 mt-8">
                     <Link href="/" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Inicio</Link>
@@ -158,11 +140,7 @@ export default function PublicLayout({
             {/* Col 1 */}
             <div className="flex flex-col gap-4">
               <Link href="/" className="flex items-center gap-3">
-                <Image src="/logo-avanza-icon.jpg" alt="AVANZA Logo" width={36} height={36} className="h-9 w-auto rounded-md" />
-                <div className="flex flex-col">
-                  <span className="text-2xl font-black text-slate-900 leading-tight">AVANZA</span>
-                  <span className="text-[10px] tracking-[0.2em] text-slate-500 uppercase font-mono">SOFTWARE STUDIO</span>
-                </div>
+                <AvanzaBrandLogo variant="horizontal" size={36} />
               </Link>
               <p className="text-sm text-slate-600 leading-relaxed max-w-sm">
                 Studio de software ágil, plataformas web de alta conversión y automatización con Inteligencia Artificial. Construimos soluciones de alto rendimiento para empresas líderes.
