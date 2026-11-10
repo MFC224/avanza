@@ -1,14 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
+import { PublicHeader } from "@/components/layout/public-header";
+import { PublicMainWrapper } from "@/components/layout/public-main-wrapper";
 import { FloatingContact } from "@/components/ui/floating-contact";
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { CommandMenu, CommandMenuTrigger } from "@/components/ui/command-menu";
+import { CommandMenu } from "@/components/ui/command-menu";
 import { AutoLanguageTranslator } from "@/components/ui/auto-language-translator";
 import { AvanzaBrandLogo } from "@/components/ui/avanza-brand-logo";
-import { Menu, ArrowUpRight, ShieldCheck, Mail, Phone, MessageCircle, BookOpen } from "lucide-react";
+import { Mail, Phone, MessageCircle, BookOpen } from "lucide-react";
 
 export default function PublicLayout({
   children,
@@ -17,14 +15,13 @@ export default function PublicLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-500/20 font-sans antialiased relative">
-      {/* High-Precision Scroll Progress Indicator (Apple/Stripe Style) */}
-      <ScrollProgress />
-      {/* Global Command Palette (Cmd + K) */}
+      {/* Global Command Palette (Cmd + K keyboard listener preserved) */}
       <CommandMenu />
+
       {/* WCAG Skip to Main Content Landmark */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#021761] focus:text-white focus:rounded-lg focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#021761] focus:text-white focus:rounded-none focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Saltar al contenido principal
       </a>
@@ -32,107 +29,14 @@ export default function PublicLayout({
       {/* Buttery-Smooth Scrolling by Lenis */}
       <SmoothScroll />
 
-      {/* Header / Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 backdrop-blur-xl bg-white/80 transition-all shadow-xs">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <AvanzaBrandLogo variant="horizontal" size={38} className="group-hover:opacity-95 transition-opacity" />
-              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-            </div>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-1 p-1 bg-slate-100/70 border border-slate-200/80 backdrop-blur-md rounded-full">
-            <Link
-              href="/"
-              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
-            >
-              Inicio
-            </Link>
-            <Link
-              href="/servicios"
-              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
-            >
-              Servicios
-            </Link>
-            <Link
-              href="/metodologia"
-              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all flex items-center gap-1.5"
-            >
-              Metodología
-              <span className="text-[9px] bg-slate-950 text-white px-1.5 py-0.5 rounded font-mono font-bold tracking-wider">SCRUM</span>
-            </Link>
-            <Link
-              href="/nosotros"
-              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
-            >
-              Nosotros
-            </Link>
-            <Link
-              href="/contacto"
-              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
-            >
-              Contacto
-            </Link>
-          </nav>
+      {/* Minimal Editorial Header (Transparent over hero, transitioning to white on scroll) */}
+      <PublicHeader />
 
-          <div className="flex items-center gap-2.5">
-            {/* Automatic Language Translation Selector */}
-            <AutoLanguageTranslator />
-
-            <CommandMenuTrigger />
-
-            <Link href="/contacto" className="hidden sm:block">
-              <Button className="bg-slate-950 hover:bg-[#021761] text-white shadow-xs hover:shadow-md transition-all px-6 py-2.5 rounded-none md:rounded-xs text-[11px] uppercase font-bold tracking-[0.16em] group cursor-pointer">
-                <span>Cotizar Proyecto</span>
-                <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Button>
-            </Link>
-
-            {/* Mobile Navigation */}
-            <Sheet>
-              <SheetTrigger aria-label="Abrir menú de navegación" className="xl:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200 transition-colors">
-                <Menu className="w-6 h-6" />
-              </SheetTrigger>
-              <SheetContent side="right" className="bg-white border-slate-200 p-6 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
-                    <AvanzaBrandLogo variant="horizontal" size={32} />
-                  </div>
-                  <nav className="flex flex-col gap-5 mt-8">
-                    <Link href="/" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Inicio</Link>
-                    <Link href="/servicios" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Servicios</Link>
-                    <Link href="/metodologia" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Metodología SCRUM</Link>
-                    <Link href="/nosotros" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Nosotros</Link>
-                    <Link href="/contacto" className="text-lg font-semibold text-slate-700 hover:text-blue-600 transition-colors">Contacto</Link>
-                  </nav>
-                </div>
-                <div className="space-y-4 pt-6 border-t border-slate-200">
-                  <div className="flex items-center gap-2 text-xs text-emerald-700 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Disponibilidad activa para nuevos proyectos</span>
-                  </div>
-                  <Link href="/contacto" className="w-full block">
-                    <Button className="w-full bg-[#021761] hover:bg-blue-700 text-white shadow-sm">
-                      Cotizar Proyecto Ahora
-                    </Button>
-                  </Link>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </header>
-      
-      {/* Page Content */}
-      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col focus:outline-none">
+      {/* Page Content with dynamic padding for non-home routes */}
+      <PublicMainWrapper>
         {children}
-      </main>
-      
+      </PublicMainWrapper>
+
       {/* High-Impact Light Footer */}
       <footer className="border-t border-slate-200/80 bg-slate-50 py-16 mt-24 relative overflow-hidden text-slate-600">
         <div className="container mx-auto px-6 relative z-10">
@@ -145,8 +49,8 @@ export default function PublicLayout({
               <p className="text-sm text-slate-600 leading-relaxed max-w-sm">
                 Studio de software ágil, plataformas web de alta conversión y automatización con Inteligencia Artificial. Construimos soluciones de alto rendimiento para empresas líderes.
               </p>
-              <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full w-fit mt-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-none w-fit mt-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span>Sistemas Operativos 24/7 · Q4</span>
               </div>
             </div>
@@ -198,9 +102,9 @@ export default function PublicLayout({
               <div className="pt-2">
                 <Link
                   href="/reclamaciones"
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200/90 hover:border-blue-300 hover:bg-blue-50/30 transition-all group shadow-2xs"
+                  className="flex items-center gap-2.5 p-2.5 rounded-none bg-white border border-slate-200/90 hover:border-blue-300 hover:bg-blue-50/30 transition-all group shadow-2xs"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+                  <div className="w-7 h-7 bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
                     <BookOpen className="w-4 h-4" />
                   </div>
                   <div>
@@ -216,7 +120,7 @@ export default function PublicLayout({
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
             <p>&copy; {new Date().getFullYear()} AVANZA Software Studio. Todos los derechos reservados.</p>
             <div className="flex items-center gap-3.5 text-xs text-slate-500">
               <Link href="/privacidad" className="hover:text-blue-600 transition-colors">
@@ -231,16 +135,13 @@ export default function PublicLayout({
                 Libro de Reclamaciones
               </Link>
             </div>
-            <p className="flex items-center gap-1">
-              <span>Construido con</span>
-              <span className="text-blue-600 font-semibold">Next.js 16</span>
-              <span>&</span>
-              <span className="text-emerald-600 font-semibold">Supabase</span>
-            </p>
+            <div className="flex items-center gap-4">
+              <AutoLanguageTranslator />
+            </div>
           </div>
         </div>
       </footer>
-      
+
       {/* Floating Action Widget (WhatsApp Quick Consultation) */}
       <FloatingContact />
     </div>
