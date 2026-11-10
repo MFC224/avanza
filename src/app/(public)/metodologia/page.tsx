@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { BackgroundGrid } from "@/components/ui/background-grid";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { FadeInView } from "@/components/ui/fade-in-view";
 import {
   ArrowRight,
@@ -93,6 +94,7 @@ export default function MetodologiaPage() {
     <div className="flex flex-col min-h-screen bg-white text-slate-900 relative overflow-hidden">
       {/* Background Cybernetic Grid */}
       <BackgroundGrid />
+      <LuxuryMeshGradient />
 
       {/* Hero Section */}
       <section className="relative w-full py-20 md:py-32 flex flex-col items-center text-center px-4">

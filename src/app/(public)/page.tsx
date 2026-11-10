@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BackgroundGrid } from "@/components/ui/background-grid";
-import { CinematicWarp } from "@/components/ui/cinematic-warp";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { HeroMotion } from "@/components/home/hero-motion";
 import { SquarespaceShowcaseCarousel } from "@/components/home/squarespace-showcase-carousel";
 import { ScrollytellingShowcase } from "@/components/home/scrollytelling-showcase";
@@ -55,8 +55,8 @@ export default function Home() {
       {/* Dynamic Cybernetic Grid Background */}
       <BackgroundGrid />
 
-      {/* 120 FPS High-Refresh Ambient Mesh Warp */}
-      <CinematicWarp />
+      {/* GPU-Accelerated Luxury Mesh Gradient */}
+      <LuxuryMeshGradient />
 
       {/* Squarespace Hero Section with Monumental Typography & 3D Tilt Device Stage */}
       <HeroMotion />

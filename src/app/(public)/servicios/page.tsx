@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { BackgroundGrid } from "@/components/ui/background-grid";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { FadeInView } from "@/components/ui/fade-in-view";
 import { ArrowRight, CheckCircle2, Clock, Sparkles, Layers, ShieldCheck, Zap } from "lucide-react";
 
@@ -38,7 +39,7 @@ export default function ServiciosPage() {
       subtitle: "Automatiza la operación y gestión interna de tu empresa.",
       description: "Deja atrás las hojas de cálculo confusas y el descontrol. Centraliza tus ventas, clientes, inventarios y finanzas en una plataforma web segura y accesible desde cualquier dispositivo.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-      stack: ["React 19", "Supabase", "PostgreSQL 3NF", "RLS Security"],
+      stack: ["React 19", "Supabase", "PostgreSQL Enterprise", "Aislamiento de Datos"],
       delivery: "12 a 20 días",
       features: [
         "Paneles administrativos con métricas en tiempo real",
@@ -94,7 +95,7 @@ export default function ServiciosPage() {
       subtitle: "Reemplaza hojas de Excel caóticas por software profesional.",
       description: "Migramos tus datos y procesos manuales a la nube sin perder un solo registro, eliminando errores humanos y duplicidad de trabajo.",
       image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80",
-      stack: ["ETL Pipelines", "PostgreSQL", "Cloud Backup", "Seguridad 3NF"],
+      stack: ["ETL Pipelines", "PostgreSQL", "Cloud Backup", "Estructura Segura"],
       delivery: "10 a 20 días",
       features: [
         "Limpieza y migración segura de datos heredados",
@@ -109,6 +110,9 @@ export default function ServiciosPage() {
     <div className="flex flex-col min-h-screen bg-white text-slate-900 relative overflow-hidden">
       {/* Background Grid */}
       <BackgroundGrid />
+      
+      {/* Luxury Mesh Gradient */}
+      <LuxuryMeshGradient />
 
       <div className="container mx-auto px-4 py-20 md:py-28 flex-1 relative z-10">
         

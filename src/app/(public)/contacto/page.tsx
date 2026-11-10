@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { submitContactForm } from "./actions";
 import { BackgroundGrid } from "@/components/ui/background-grid";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { FadeInView } from "@/components/ui/fade-in-view";
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,7 @@ export default function ContactoPage() {
   const [contacto, setContacto] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [pais, setPais] = useState("PE");
+  const [consentGiven, setConsentGiven] = useState(false);
   const [detectedCountry, setDetectedCountry] = useState<CountryInfo | null>(null);
 
   // Auto-detect visitor country based on locale/timezone
@@ -80,6 +83,13 @@ export default function ContactoPage() {
     setStatus("idle");
     setErrorMessage("");
 
+    if (!consentGiven) {
+      setStatus("error");
+      setErrorMessage("Debes aceptar la Política de Privacidad conforme a la Ley N° 29733 para enviar tus datos.");
+      setLoading(false);
+      return;
+    }
+
     const selectedCountryObj = COUNTRIES.find((c) => c.code === pais) || COUNTRIES[0];
 
     const formData = new FormData();
@@ -112,6 +122,7 @@ export default function ContactoPage() {
     <div className="min-h-screen relative overflow-hidden bg-white text-slate-900 py-16 md:py-24">
       {/* Background Cybernetic Grid */}
       <BackgroundGrid />
+      <LuxuryMeshGradient />
 
       {/* Ambient Glow Orbs */}
       <div className="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-blue-100/40 blur-[150px] rounded-full pointer-events-none" />
@@ -333,6 +344,25 @@ export default function ContactoPage() {
                     placeholder="Ej. Requiero que esté listo en 10 días..."
                     className="bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 h-11 rounded-xl text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                   />
+                </div>
+
+                {/* Ley N° 29733 Privacy Consent Checkbox (Obligatorio en Perú) */}
+                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    checked={consentGiven}
+                    onChange={(e) => setConsentGiven(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer"
+                    required
+                  />
+                  <label htmlFor="consent" className="text-xs text-slate-600 leading-relaxed cursor-pointer select-none">
+                    He leído y acepto la{" "}
+                    <Link href="/privacidad" target="_blank" className="text-blue-700 font-bold underline hover:text-blue-800">
+                      Política de Privacidad
+                    </Link>{" "}
+                    y autorizo el tratamiento de mis datos personales para fines de cotización conforme a la <strong>Ley N° 29733</strong> de la República del Perú.
+                  </label>
                 </div>
 
                 {/* Primary Submit Button */}

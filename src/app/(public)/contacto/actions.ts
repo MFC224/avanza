@@ -70,7 +70,7 @@ export async function submitContactForm(formData: FormData) {
     const supabase = await createClient();
 
     const isEmail = data.contacto.includes("@");
-    const contactEmail = isEmail ? data.contacto.toLowerCase() : `${data.contacto.replace(/\D/g, '')}@lead-whatsapp.avanza.dev`;
+    const contactEmail = isEmail ? data.contacto.toLowerCase() : `${data.contacto.replace(/\D/g, '')}@lead-whatsapp.avanzape.com`;
 
     const displayName = data.pais ? `${data.nombre} (${data.pais})` : data.nombre;
 

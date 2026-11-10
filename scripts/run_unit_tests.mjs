@@ -1036,6 +1036,50 @@ test("UT-41", "Sprint1WhiteLuxury", "Valida tokens White Luxury en globals.css, 
   assert(layoutContent.includes("AVANZA Software Studio"), "layout.tsx debe usar la marca oficial AVANZA Software Studio");
 });
 
+// --- MÓDULO 14: Sprint 2 Secondary Pages, Legal Compliance (Ley 29733) & Analog Load Removal ---
+test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas analógicas (CinematicWarp/Overlay), presencia de LuxuryMeshGradient y cumplimiento Ley 29733", () => {
+  const meshGradientPath = path.join(ROOT_DIR, "src", "components", "ui", "luxury-mesh-gradient.tsx");
+  const homePath = path.join(ROOT_DIR, "src", "app", "(public)", "page.tsx");
+  const privacidadPath = path.join(ROOT_DIR, "src", "app", "(public)", "privacidad", "page.tsx");
+  const terminosPath = path.join(ROOT_DIR, "src", "app", "(public)", "terminos", "page.tsx");
+  const reclamacionesPath = path.join(ROOT_DIR, "src", "app", "(public)", "reclamaciones", "page.tsx");
+  const contactoPath = path.join(ROOT_DIR, "src", "app", "(public)", "contacto", "page.tsx");
+  const serviciosPath = path.join(ROOT_DIR, "src", "app", "(public)", "servicios", "page.tsx");
+  const nosotrosPath = path.join(ROOT_DIR, "src", "app", "(public)", "nosotros", "page.tsx");
+
+  // 1. Verificación de creación de LuxuryMeshGradient
+  assert(fs.existsSync(meshGradientPath), "luxury-mesh-gradient.tsx debe existir");
+
+  // 2. Verificación de retiro de CinematicWarp de la portada
+  const homeContent = fs.readFileSync(homePath, "utf-8");
+  assert(!homeContent.includes("CinematicWarp"), "page.tsx no debe importar ni renderizar CinematicWarp");
+  assert(homeContent.includes("LuxuryMeshGradient"), "page.tsx debe renderizar LuxuryMeshGradient");
+
+  // 3. Verificación de cumplimiento Ley 29733 en Privacidad (Flujo transfronterizo y retención)
+  assert(fs.existsSync(privacidadPath), "privacidad/page.tsx debe existir");
+  const privacidadContent = fs.readFileSync(privacidadPath, "utf-8");
+  assert(privacidadContent.includes("Flujo Transfronterizo de Datos"), "Privacidad debe detallar el flujo transfronterizo");
+  assert(privacidadContent.includes("Estados Unidos"), "Privacidad debe especificar los servidores en EE.UU.");
+  assert(privacidadContent.includes("Política de Retención y Purga"), "Privacidad debe incluir la política de retención");
+  assert(privacidadContent.includes("doce (12) meses"), "Privacidad debe fijar retención máxima de 12 meses");
+
+  // 4. Verificación de casilla de consentimiento en formulario de contacto
+  assert(fs.existsSync(contactoPath), "contacto/page.tsx debe existir");
+  const contactoContent = fs.readFileSync(contactoPath, "utf-8");
+  assert(contactoContent.includes("consentGiven"), "contacto/page.tsx debe gestionar estado consentGiven");
+  assert(contactoContent.includes("Ley N° 29733"), "contacto/page.tsx debe exigir consentimiento conforme a la Ley N° 29733");
+
+  // 5. Verificación de páginas legales Términos y Libro de Reclamaciones
+  assert(fs.existsSync(terminosPath), "terminos/page.tsx debe existir");
+  assert(fs.existsSync(reclamacionesPath), "reclamaciones/page.tsx debe existir");
+
+  // 6. Verificación de homogeneización White Luxury en páginas secundarias (sin jerga 3NF)
+  const serviciosContent = fs.readFileSync(serviciosPath, "utf-8");
+  const nosotrosContent = fs.readFileSync(nosotrosPath, "utf-8");
+  assert(!serviciosContent.includes("PostgreSQL 3NF"), "servicios/page.tsx no debe contener jerga PostgreSQL 3NF");
+  assert(!nosotrosContent.includes("bases de datos 3NF"), "nosotros/page.tsx no debe contener jerga bases de datos 3NF");
+});
+
 // -------------------------------------------------------------
 // Resumen Final y Persistencia
 // -------------------------------------------------------------

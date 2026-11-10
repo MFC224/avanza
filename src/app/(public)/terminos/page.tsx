@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, Code2, Award } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { FadeInView } from "@/components/ui/fade-in-view";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export const metadata: Metadata = {
   title: "Términos de Servicio y Contratación",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 
 export default function TerminosPage() {
   return (
-    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
+      <LuxuryMeshGradient />
       <FadeInView>
         <Link
           href="/"
@@ -67,7 +69,7 @@ export default function TerminosPage() {
           </p>
           <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
             <li><strong>Páginas Web y Aplicaciones de Alto Rendimiento:</strong> Arquitectura moderna basada en Next.js 16, React 19 y Tailwind CSS.</li>
-            <li><strong>Sistemas Web & CRM a Medida:</strong> Bases de datos relacionales en 3NF con Supabase PostgreSQL y autenticación segura SSR.</li>
+            <li><strong>Sistemas Web & CRM a Medida:</strong> Bases de datos relacionales seguras con Supabase PostgreSQL y autenticación segura SSR.</li>
             <li><strong>Automatización con Agentes de IA:</strong> Modelos LLM, canalizaciones RAG e integraciones bidireccionales con WhatsApp y ERPs.</li>
             <li><strong>Aplicaciones Móviles:</strong> Soluciones multiplataforma para iOS y Android con Flutter o React Native.</li>
           </ul>

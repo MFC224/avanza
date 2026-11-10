@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Lock, FileText, ArrowLeft, Mail, Phone } from "lucide-react";
+import { ShieldCheck, Lock, FileText, ArrowLeft, Mail, Phone, Globe, Clock } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { FadeInView } from "@/components/ui/fade-in-view";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 
 export default function PrivacidadPage() {
   return (
-    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
+      <LuxuryMeshGradient />
       <FadeInView>
         <Link
           href="/"
@@ -100,8 +102,37 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
+          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+            <Globe className="w-5 h-5 text-blue-600" />
+            5. Flujo Transfronterizo de Datos (Estados Unidos)
+          </h2>
+          <p>
+            En estricto cumplimiento del <strong>artículo 15 de la Ley N° 29733</strong> y el Reglamento de la Autoridad Nacional de Protección de Datos Personales (ANPD), informamos a los usuarios y clientes que el servicio opera sobre infraestructura cloud moderna que implica la transferencia transfronteriza y almacenamiento seguro de datos personales en centros de datos ubicados en los <strong>Estados Unidos de América</strong>:
+          </p>
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+            <li><strong>Vercel Inc. (San Francisco, EE.UU.):</strong> Alojamiento de frontend, funciones serverless edge y renderizado SSR.</li>
+            <li><strong>Supabase Inc. / AWS (Norteamérica):</strong> Base de datos relacional PostgreSQL con cifrado en reposo AES-256 y políticas de aislamiento de datos.</li>
+            <li><strong>Google Cloud Platform / Gemini Paid API (EE.UU.):</strong> Modelos de inteligencia artificial bajo contrato comercial de pago donde los datos de los usuarios <em>nunca son utilizados para el re-entrenamiento de modelos públicos</em>.</li>
+            <li><strong>Resend Inc. (EE.UU.):</strong> Infraestructura de envío de correos transaccionales y notificaciones de cotización.</li>
+          </ul>
+          <p className="mt-3 text-slate-600">
+            Todos los proveedores internacionales seleccionados por AVANZA cuentan con certificaciones de seguridad auditadas (SOC 2 Type II, ISO 27001) garantizando niveles de protección adecuados según la normativa peruana.
+          </p>
+        </section>
+
+        <section className="border-t border-slate-100 pt-8">
+          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+            <Clock className="w-5 h-5 text-blue-600" />
+            6. Política de Retención y Purga de Datos
+          </h2>
+          <p>
+            Los datos personales capturados a través de formularios de contacto y registros de requerimientos se conservarán por un <strong>plazo máximo de doce (12) meses</strong> desde el último contacto o interacción formal. Transcurrido dicho período sin que se formalice una relación comercial o contractual, los registros son automáticamente purgados o anonimizados de manera irreversible de nuestras bases de datos operativas.
+          </p>
+        </section>
+
+        <section className="border-t border-slate-100 pt-8">
           <h2 className="text-xl font-bold text-slate-900 mb-3">
-            5. Ejercicio de Derechos ARCO
+            7. Ejercicio de Derechos ARCO
           </h2>
           <p>
             Como titular de los datos personales, usted tiene derecho a ejercer en cualquier momento sus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> reconocidos por la Ley N° 29733.
@@ -123,7 +154,7 @@ export default function PrivacidadPage() {
 
         <section className="border-t border-slate-100 pt-8">
           <h2 className="text-xl font-bold text-slate-900 mb-3">
-            6. Modificaciones y Vigencia
+            8. Modificaciones y Vigencia
           </h2>
           <p className="text-slate-600">
             Esta política entra en vigencia a partir del 1 de Noviembre de 2026 y podrá ser actualizada periódicamente para reflejar mejoras técnicas o cambios normativos. Cualquier modificación sustancial será notificada a través de esta misma URL.

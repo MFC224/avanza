@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FadeInView } from "@/components/ui/fade-in-view";
+import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export default function ReclamacionesPage() {
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,8 @@ export default function ReclamacionesPage() {
   };
 
   return (
-    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative">
+      <LuxuryMeshGradient />
       <FadeInView>
         <Link
           href="/"
