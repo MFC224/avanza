@@ -5,6 +5,7 @@ import { BackgroundGrid } from "@/components/ui/background-grid";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { HeroMotion } from "@/components/home/hero-motion";
 import { PortfolioRow } from "@/components/home/portfolio-row";
+import { MetricsStrip } from "@/components/home/metrics-strip";
 import { ScrollytellingShowcase } from "@/components/home/scrollytelling-showcase";
 import { TemplateCarousel } from "@/components/home/template-carousel";
 import { CinematicReel } from "@/components/home/cinematic-reel";
@@ -63,6 +64,9 @@ export default function Home() {
 
       {/* Squarespace Signature Horizontal Portfolio Row */}
       <PortfolioRow />
+
+      {/* High-Impact Numerical Metrics Strip on Ink (#000000) */}
+      <MetricsStrip />
 
       {/* =========================================================================
           SQUARESPACE SIGNATURE PINNED SCROLLYTELLING SHOWCASE (AWWWARDS STANDARD)
