@@ -388,7 +388,7 @@ export function CommandMenuTrigger() {
   return (
     <button
       onClick={trigger}
-      className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200 text-xs text-slate-600 hover:text-slate-900 hover:border-blue-500/50 transition-all cursor-pointer shadow-xs group"
+      className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200 text-xs text-slate-600 hover:text-slate-900 hover:border-blue-500/50 transition-all cursor-pointer shadow-xs group"
       aria-label="Abrir buscador y comandos"
     >
       <Sparkles className="w-3.5 h-3.5 text-blue-600 group-hover:rotate-12 transition-transform" />

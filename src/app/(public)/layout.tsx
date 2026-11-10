@@ -46,7 +46,7 @@ export default function PublicLayout({
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 p-1 bg-slate-100/70 border border-slate-200/80 backdrop-blur-md rounded-full">
+          <nav className="hidden xl:flex items-center gap-1 p-1 bg-slate-100/70 border border-slate-200/80 backdrop-blur-md rounded-full">
             <Link
               href="/"
               className="px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 hover:text-slate-950 hover:bg-white rounded-full transition-all"
@@ -95,7 +95,7 @@ export default function PublicLayout({
 
             {/* Mobile Navigation */}
             <Sheet>
-              <SheetTrigger aria-label="Abrir menú de navegación" className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200 transition-colors">
+              <SheetTrigger aria-label="Abrir menú de navegación" className="xl:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200 transition-colors">
                 <Menu className="w-6 h-6" />
               </SheetTrigger>
               <SheetContent side="right" className="bg-white border-slate-200 p-6 flex flex-col justify-between">
