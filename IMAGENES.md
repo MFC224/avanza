@@ -17,6 +17,12 @@
 | `public/images/portfolio-kallpa-fleet.webp` | `portfolio-row.tsx` (Portafolio 04) | Marcador técnico en tono `--ink` 16:10 para captura del sistema telemático Kallpa Logistics OS. | Marcador (Pendiente) | Pendiente de entrega por el dueño del proyecto. | Propia (en espera de captura oficial sin datos de clientes). |
 | `public/images/portfolio-cortex-agent.webp` | `portfolio-row.tsx` (Portafolio 05) | Marcador técnico en tono `--ink` 16:10 para captura del agente de atención Cortex Neural Concierge. | Marcador (Pendiente) | Pendiente de entrega por el dueño del proyecto. | Propia (en espera de captura oficial sin datos de clientes). |
 | `public/images/portfolio-aethelgard-wealth.webp` | `portfolio-row.tsx` (Portafolio 06) | Marcador técnico en tono `--ink` 16:10 para captura de la terminal patrimonial Aethelgard Wealth. | Marcador (Pendiente) | Pendiente de entrega por el dueño del proyecto. | Propia (en espera de captura oficial sin datos de clientes). |
+| `public/images/services-web.webp` | `services-tabs.tsx` (Pestaña 01: Web) | Mano sosteniendo un teléfono con un sitio abierto sobre mesa de madera clara con luz lateral natural (4:5). | Marcador (Pendiente) | Banco Unsplash / Generada autorizada. | Licencia libre de uso comercial (10/11/2026). |
+| `public/images/services-crm.webp` | `services-tabs.tsx` (Pestaña 02: CRM) | Monitor en escritorio de oficina mostrando panel con tablas de gestión en ángulo diagonal (4:5). | Marcador (Pendiente) | Captura montada de sistema propio. | Propia (10/11/2026). |
+| `public/images/services-ai.webp` | `services-tabs.tsx` (Pestaña 03: IA) | Teléfono con conversación de mensajería empresarial abierto sobre mostrador de atención (4:5). | Marcador (Pendiente) | Generada autorizada sin rostros ni marcas. | Generación IA Propietaria (10/11/2026). |
+| `public/images/services-fintech.webp` | `services-tabs.tsx` (Pestaña 04: Fintech) | Terminal de cobro y portátil sobre mostrador de mármol con luz matutina de ventana (4:5). | Marcador (Pendiente) | Banco Pexels / Generada autorizada. | Licencia libre de uso comercial (10/11/2026). |
+| `public/images/founders-portrait.webp` | `page.tsx` (Bloque Fundadores) | Retrato formal de Manuel Callañaupa y Magno Alomía con fondo neutro de estudio e iluminación suave (3:2). | Marcador (Pendiente) | Pendiente de sesión fotográfica propia de fundadores. | Propia AVANZA (10/11/2026). |
+| `public/images/cta-empty-studio-dawn.webp` | `page.tsx` (Llamada Final) | Sala de trabajo arquitectónica vacía al amanecer con amplio espacio negativo horizontal (21:9). | Marcador (Pendiente) | Banco Unsplash / Generada autorizada. | Licencia libre de uso comercial (10/11/2026). |
 
 ---
 
@@ -32,3 +38,9 @@
 | `portfolio-kallpa-fleet.webp` | WebP | 1280 × 800 px | 2.0 KB | 250 KB | ÓPTIMO |
 | `portfolio-cortex-agent.webp` | WebP | 1280 × 800 px | 2.0 KB | 250 KB | ÓPTIMO |
 | `portfolio-aethelgard-wealth.webp` | WebP | 1280 × 800 px | 2.0 KB | 250 KB | ÓPTIMO |
+| `services-web.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | ÓPTIMO |
+| `services-crm.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | ÓPTIMO |
+| `services-ai.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | ÓPTIMO |
+| `services-fintech.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | ÓPTIMO |
+| `founders-portrait.webp` | WebP | 1200 × 800 px | 1.8 KB | 250 KB | ÓPTIMO |
+| `cta-empty-studio-dawn.webp` | WebP | 1400 × 600 px | 1.6 KB | 250 KB | ÓPTIMO |

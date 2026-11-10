@@ -6,7 +6,7 @@ import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { HeroMotion } from "@/components/home/hero-motion";
 import { PortfolioRow } from "@/components/home/portfolio-row";
 import { MetricsStrip } from "@/components/home/metrics-strip";
-import { ScrollytellingShowcase } from "@/components/home/scrollytelling-showcase";
+import { ServicesTabs } from "@/components/home/services-tabs";
 import { TemplateCarousel } from "@/components/home/template-carousel";
 import { CinematicReel } from "@/components/home/cinematic-reel";
 import { FadeInView } from "@/components/ui/fade-in-view";
@@ -68,11 +68,8 @@ export default function Home() {
       {/* High-Impact Numerical Metrics Strip on Ink (#000000) */}
       <MetricsStrip />
 
-      {/* =========================================================================
-          SQUARESPACE SIGNATURE PINNED SCROLLYTELLING SHOWCASE (AWWWARDS STANDARD)
-          Pinned multi-viewport stage with live interactive interfaces and scrub animation
-          ========================================================================= */}
-      <ScrollytellingShowcase />
+      {/* Squarespace Editorial Services Tabs (Accessible Tablist) */}
+      <ServicesTabs />
 
       {/* =========================================================================
           SQUARESPACE SIGNATURE HORIZONTAL TEMPLATE & SYSTEMS CATALOG
