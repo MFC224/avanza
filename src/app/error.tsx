@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { BackgroundGrid } from "@/components/ui/background-grid";
 import { AlertTriangle, RotateCcw, Home } from "lucide-react";
 
 export default function GlobalError({
@@ -20,8 +19,6 @@ export default function GlobalError({
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center relative overflow-hidden px-4">
-      <BackgroundGrid />
-
       <div className="relative z-10 max-w-lg mx-auto text-center">
         <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
           <AlertTriangle className="w-8 h-8" />

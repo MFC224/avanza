@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, Code2, Award } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
-import { FadeInView } from "@/components/ui/fade-in-view";
+import { Reveal } from "@/components/site/reveal";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function TerminosPage() {
   return (
     <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
       <LuxuryMeshGradient />
-      <FadeInView>
+      <Reveal>
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-8 transition-colors group"
@@ -42,7 +42,7 @@ export default function TerminosPage() {
         <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed">
           Nuestra filosofía de ingeniería elimina la burocracia de las agencias tradicionales. Estos términos definen con total transparencia los compromisos, garantías y la cesión absoluta de la propiedad intelectual a tu favor.
         </p>
-      </FadeInView>
+      </Reveal>
 
       <div className="bg-white rounded-3xl border border-slate-200/90 p-8 md:p-12 shadow-sm space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
         {/* IP Clause Highlight */}

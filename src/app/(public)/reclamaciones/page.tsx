@@ -8,8 +8,10 @@ import { complaintSchema, generateComplaintCode } from "@/lib/complaints-schema"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FadeInView } from "@/components/ui/fade-in-view";
+import { Reveal } from "@/components/site/reveal";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
+import { ReclamacionSuccess } from "./reclamacion-success";
+import { ReclamacionConsumerSection } from "./reclamacion-consumer-section";
 
 export default function ReclamacionesPage() {
   const [loading, setLoading] = useState(false);
@@ -60,7 +62,7 @@ export default function ReclamacionesPage() {
   return (
     <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative">
       <LuxuryMeshGradient />
-      <FadeInView>
+      <Reveal>
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-8 transition-colors group"
@@ -100,155 +102,36 @@ export default function ReclamacionesPage() {
             </p>
           </div>
         </div>
-      </FadeInView>
+      </Reveal>
 
       {successCode ? (
-        <FadeInView className="p-8 md:p-12 rounded-3xl bg-white border border-emerald-200 shadow-xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-8 h-8" />
-          </div>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900">
-            Reclamación Registrada con Éxito
-          </h2>
-          <p className="text-slate-600 max-w-lg mx-auto text-sm leading-relaxed">
-            Hemos registrado tu comunicación en nuestro libro digital. Se ha remitido una copia formal con el código de seguimiento a tu correo: <strong>{form.email}</strong>.
-          </p>
-          <div className="inline-block p-4 rounded-2xl bg-slate-50 border border-slate-200">
-            <p className="text-xs uppercase tracking-wider text-slate-500 font-mono">Código de Seguimiento</p>
-            <p className="text-2xl font-black text-blue-600 font-mono mt-1">{successCode}</p>
-          </div>
-          <div className="pt-4">
-            <Button
-              variant="outline"
-              onClick={() => {
-                setSuccessCode(null);
-                setForm({
-                  fullName: "",
-                  documentType: "DNI",
-                  documentNumber: "",
-                  email: "",
-                  phone: "",
-                  address: "",
-                  serviceType: "SERVICIO",
-                  complaintType: "RECLAMO",
-                  amountClaimed: "",
-                  description: "",
-                  request: "",
-                  termsAccepted: false,
-                });
-              }}
-            >
-              Registrar otra comunicación
-            </Button>
-          </div>
-        </FadeInView>
+        <ReclamacionSuccess
+          email={form.email}
+          code={successCode}
+          onReset={() => {
+            setSuccessCode(null);
+            setForm({
+              fullName: "",
+              documentType: "DNI",
+              documentNumber: "",
+              email: "",
+              phone: "",
+              address: "",
+              serviceType: "SERVICIO",
+              complaintType: "RECLAMO",
+              amountClaimed: "",
+              description: "",
+              request: "",
+              termsAccepted: false,
+            });
+          }}
+        />
       ) : (
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-3xl border border-slate-200/90 p-8 md:p-12 shadow-sm space-y-8 text-slate-800"
         >
-          {/* Section 1: Datos del Consumidor */}
-          <div>
-            <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 mb-6">
-              1. Identificación del Consumidor Reclamante
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="fullName" className="text-xs font-bold text-slate-700">
-                  Nombre Completo o Razón Social *
-                </Label>
-                <Input
-                  id="fullName"
-                  placeholder="Ej. Juan Pérez o Tech Solutions SAC"
-                  value={form.fullName}
-                  onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                  className={errors.fullName ? "border-red-400" : ""}
-                />
-                {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="documentType" className="text-xs font-bold text-slate-700">
-                  Tipo de Documento *
-                </Label>
-                <select
-                  id="documentType"
-                  value={form.documentType}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      documentType: e.target.value as "DNI" | "CE" | "RUC" | "PASAPORTE",
-                    })
-                  }
-                  className="w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="DNI">DNI (Documento Nacional de Identidad)</option>
-                  <option value="RUC">RUC (Registro Único de Contribuyentes)</option>
-                  <option value="CE">Carné de Extranjería (CE)</option>
-                  <option value="PASAPORTE">Pasaporte</option>
-                </select>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="documentNumber" className="text-xs font-bold text-slate-700">
-                  Número de Documento *
-                </Label>
-                <Input
-                  id="documentNumber"
-                  placeholder="Ej. 72345678"
-                  value={form.documentNumber}
-                  onChange={(e) => setForm({ ...form, documentNumber: e.target.value })}
-                  className={errors.documentNumber ? "border-red-400" : ""}
-                />
-                {errors.documentNumber && (
-                  <p className="text-xs text-red-600">{errors.documentNumber}</p>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-xs font-bold text-slate-700">
-                  Correo Electrónico *
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="tu@empresa.com"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className={errors.email ? "border-red-400" : ""}
-                />
-                {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="phone" className="text-xs font-bold text-slate-700">
-                  Teléfono / WhatsApp *
-                </Label>
-                <Input
-                  id="phone"
-                  placeholder="Ej. +51 987 654 321"
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className={errors.phone ? "border-red-400" : ""}
-                />
-                {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
-              </div>
-
-              <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="address" className="text-xs font-bold text-slate-700">
-                  Dirección o Ciudad de Residencia *
-                </Label>
-                <Input
-                  id="address"
-                  placeholder="Ej. Av. Javier Prado Este 450, San Isidro, Lima"
-                  value={form.address}
-                  onChange={(e) => setForm({ ...form, address: e.target.value })}
-                  className={errors.address ? "border-red-400" : ""}
-                />
-                {errors.address && <p className="text-xs text-red-600">{errors.address}</p>}
-              </div>
-            </div>
-          </div>
+          <ReclamacionConsumerSection form={form} setForm={setForm} errors={errors} />
 
           {/* Section 2: Detalle del Reclamo o Queja */}
           <div className="pt-4">
