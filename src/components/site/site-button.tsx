@@ -23,7 +23,8 @@ export function SiteButton({
   children,
   ...props
 }: SiteButtonProps) {
-  const currentTone = tone ?? useSectionTone();
+  const contextTone = useSectionTone();
+  const currentTone = tone ?? contextTone;
   const isInk = currentTone === "ink";
 
   let colorClasses = "";

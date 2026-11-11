@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "AVANZA Software Studio | Desarrollo de Software & Plataformas Web de Élite",
+    default: "AVANZA Software Studio | Desarrollo de software y plataformas web con IA",
     template: "%s | AVANZA Software Studio",
   },
   description: SITE_CONFIG.description,

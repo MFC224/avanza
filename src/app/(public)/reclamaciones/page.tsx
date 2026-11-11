@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BookOpen, ShieldCheck, ArrowLeft, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { BookOpen, ShieldCheck, ArrowLeft, Send, AlertCircle } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { complaintSchema, generateComplaintCode } from "@/lib/complaints-schema";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/site/reveal";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";

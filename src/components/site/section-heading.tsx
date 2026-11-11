@@ -21,7 +21,8 @@ export function SectionHeading({
   className,
   ...props
 }: SectionHeadingProps) {
-  const currentTone = tone ?? useSectionTone();
+  const contextTone = useSectionTone();
+  const currentTone = tone ?? contextTone;
   const isInk = currentTone === "ink";
 
   return (

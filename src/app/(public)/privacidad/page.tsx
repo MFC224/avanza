@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Lock, FileText, ArrowLeft, Mail, Phone, Globe, Clock } from "lucide-react";
+import { ShieldCheck, Lock, FileText, ArrowLeft, Mail, Globe, Clock } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { Reveal } from "@/components/site/reveal";
 import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";

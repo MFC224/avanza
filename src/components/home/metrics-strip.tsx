@@ -16,8 +16,8 @@ const METRICS: MetricItem[] = [
     description: "Propiedad total del código fuente y bases de datos sin licencias cautivas.",
   },
   {
-    value: "24/7",
-    description: "Disponibilidad operativa y automatización autónoma de sistemas e IA.",
+    value: "24 h",
+    description: "Propuesta arquitectónica y presupuesto claro en menos de 24 horas.",
   },
 ];
 

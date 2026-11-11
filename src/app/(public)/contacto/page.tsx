@@ -37,8 +37,11 @@ export default function ContactoPage() {
 
   useEffect(() => {
     const detected = detectUserCountry();
-    setDetectedCountry(detected);
-    setPais(detected.code);
+    const timer = setTimeout(() => {
+      setDetectedCountry(detected);
+      setPais(detected.code);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

@@ -12,7 +12,6 @@ import {
   Laptop,
   Bot,
   Layers,
-  ArrowRight,
 } from "lucide-react";
 import { ArmChatWidget } from "@/components/ui/arm-chat-widget";
 import { trackEvent } from "@/lib/analytics";

@@ -15,7 +15,19 @@ interface AvanzaLogoProps {
  * - Pata diagonal derecha: Azul Marino Carbón (#1E293B)
  * - Tipografía: AVANZA (Bold con tracking amplio) + SOFTWARE STUDIO (Medium mono espaciado)
  */
-export function AvanzaSymbol({ size = 36, className = "" }: { size?: number; className?: string }) {
+export function AvanzaSymbol({
+  size = 36,
+  className = "",
+  theme = "light",
+}: {
+  size?: number;
+  className?: string;
+  theme?: "light" | "dark";
+}) {
+  const isDark = theme === "dark";
+  const primaryFill = isDark ? "#3b82f6" : "#00358E";
+  const secondaryFill = isDark ? "#f8fafc" : "#1E2A38";
+
   return (
     <svg
       width={size}
@@ -26,20 +38,20 @@ export function AvanzaSymbol({ size = 36, className = "" }: { size?: number; cla
       className={className}
       aria-label="AVANZA Symbol"
     >
-      {/* Viga diagonal izquierda (Azul Cobalto Oficial) */}
+      {/* Viga diagonal izquierda (Azul Cobalto Oficial / Azul vibrante en modo oscuro) */}
       <path
         d="M31.5 25.5L14 67.5H28.5L46 25.5H31.5Z"
-        fill="#00358E"
+        fill={primaryFill}
       />
-      {/* Viga diagonal central (Azul Marino Carbón / Charcoal Slate) */}
+      {/* Viga diagonal central (Azul Marino Carbón #1E2A38 / Blanco nítido en modo oscuro) */}
       <path
         d="M51.5 25.5L34 67.5H48.5L66 25.5H51.5Z"
-        fill="#1E2A38"
+        fill={secondaryFill}
       />
-      {/* Pata diagonal derecha inferior (Charcoal Slate) */}
+      {/* Pata diagonal derecha inferior (Charcoal Slate #1E2A38 / Blanco nítido en modo oscuro) */}
       <path
         d="M62 47.5L78.5 67.5H64L47.5 47.5H62Z"
-        fill="#1E2A38"
+        fill={secondaryFill}
       />
     </svg>
   );
@@ -56,13 +68,13 @@ export function AvanzaBrandLogo({
   const subtextColor = isDark ? "text-slate-400" : "text-slate-500";
 
   if (variant === "symbol") {
-    return <AvanzaSymbol size={size} className={className} />;
+    return <AvanzaSymbol size={size} className={className} theme={theme} />;
   }
 
   if (variant === "full") {
     return (
       <div className={`flex flex-col items-center text-center select-none ${className}`}>
-        <AvanzaSymbol size={size * 1.6} />
+        <AvanzaSymbol size={size * 1.6} theme={theme} />
         <span
           className={`mt-3 text-2xl sm:text-3xl font-black tracking-[0.22em] uppercase leading-none ${textColor}`}
           style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
@@ -81,7 +93,7 @@ export function AvanzaBrandLogo({
   // Variant "horizontal" (Default para Header y Footer)
   return (
     <div className={`flex items-center gap-3 select-none ${className}`}>
-      <AvanzaSymbol size={size} />
+      <AvanzaSymbol size={size} theme={theme} />
       <div className="flex flex-col">
         <span
           className={`text-xl sm:text-2xl font-black tracking-tight uppercase leading-none ${textColor}`}
