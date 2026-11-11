@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -18,8 +18,34 @@ import { ArmChatWidget } from "@/components/ui/arm-chat-widget";
 
 export function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
-  const [bubbleVisible, setBubbleVisible] = useState(true);
+  const [bubbleVisible, setBubbleVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"arm" | "whatsapp">("arm");
+
+  useEffect(() => {
+    let triggered = false;
+    const trigger = () => {
+      if (!triggered) {
+        triggered = true;
+        setBubbleVisible(true);
+      }
+    };
+
+    const timer = setTimeout(trigger, 20000);
+
+    const handleScroll = () => {
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0 && window.scrollY / scrollHeight >= 0.5) {
+        trigger();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const quickTopics = [
     {
@@ -211,17 +237,16 @@ export function FloatingContact() {
         )}
       </AnimatePresence>
 
-      {/* Floating Action Pill Trigger */}
+      {/* Floating Action Trigger */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-[#021761] hover:bg-blue-700 text-white font-semibold text-sm shadow-[0_4px_20px_rgba(2,23,97,0.35)] hover:shadow-[0_6px_25px_rgba(37,99,235,0.45)] transition-all group cursor-pointer border border-blue-400/20"
-        aria-label="Abrir asistente de contacto"
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--ink)] hover:bg-neutral-800 text-[var(--paper)] font-medium text-sm shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all group cursor-pointer border border-neutral-800"
+        aria-label="Abrir cotizador y asistente"
       >
-        <Bot className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
-        <span className="hidden md:inline font-bold">Asistente ARM · Cotizar</span>
-        <span className="md:hidden font-bold">ARM con IA</span>
+        <Bot className="w-4 h-4 text-white" />
+        <span className="font-medium text-button">Cotizar</span>
       </motion.button>
     </div>
   );
