@@ -2,59 +2,67 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+
+// Reemplazo de academic-lessons (Scott Smith Tutoring) por proyectos reales según ENCARGO_IMAGENES.md
+// Aprobado el 10/11/2026: 6 proyectos reales desarrollados por AVANZA Software Studio.
 
 interface PortfolioItem {
   id: string;
   name: string;
   rubro: string;
-  image: string;
+  image?: string;
   alt: string;
+  url?: string;
+  isTypographic?: boolean;
 }
 
 const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
-    id: "academic-lessons",
-    name: "Scott Smith Tutoring",
-    rubro: "Educación & Plataformas de Aprendizaje",
-    image: "/images/portfolio-academic-lessons.webp",
-    alt: "Captura de la plataforma educativa Scott Smith Tutoring",
+    id: "aol-domo",
+    name: "AOL-DOMO",
+    rubro: "Sitio corporativo · Holding empresarial",
+    image: "/images/portfolio-aol-domo.webp",
+    alt: "Captura de la portada de AOL-DOMO, Sitio corporativo · Holding empresarial",
+    url: "https://www.aol-domo.com/",
   },
   {
-    id: "lio-agency",
-    name: "LIO Agency",
-    rubro: "E-Commerce de Lujo & Catálogo Digital",
-    image: "/images/portfolio-lio-agency.webp",
-    alt: "Captura de la tienda de comercio electrónico LIO Agency",
+    id: "molinos-cusco",
+    name: "Molinos Cusco",
+    rubro: "Plataforma B2B · Industria alimentaria",
+    image: "/images/portfolio-molinos-cusco.webp",
+    alt: "Captura de la portada de Molinos Cusco, Plataforma B2B · Industria alimentaria",
+    url: "https://molinos-cusco-cusipata.vercel.app/",
   },
   {
-    id: "mindful-spaces",
-    name: "Essence Wellness",
-    rubro: "Portal de Reservas & Agendamiento Online",
-    image: "/images/portfolio-mindful-spaces.webp",
-    alt: "Captura del portal de reservas Essence Wellness",
+    id: "qorikancha-expeditions",
+    name: "Qorikancha Expeditions",
+    rubro: "Sitio web · Turismo de lujo",
+    image: "/images/portfolio-qorikancha.webp",
+    alt: "Captura de la portada de Qorikancha Expeditions, Sitio web · Turismo de lujo",
+    url: "https://qorikancha-cusco-luxury-tourism.vercel.app/",
   },
   {
-    id: "kallpa-fleet",
-    name: "Kallpa Logistics OS",
-    rubro: "Sistemas Web & Telemetría de Flotas",
-    image: "/images/portfolio-kallpa-fleet.webp",
-    alt: "Captura del sistema de telemetría de flotas Kallpa Logistics OS",
+    id: "sv-tuning",
+    name: "SV Tuning & Performance",
+    rubro: "Sitio web · Taller automotriz",
+    image: "/images/portfolio-sv-tuning.webp",
+    alt: "Captura de la portada de SV Tuning & Performance, Sitio web · Taller automotriz",
+    url: "https://sv-tuning-performance.vercel.app/",
   },
   {
-    id: "cortex-agent",
-    name: "Cortex Neural Concierge",
-    rubro: "Agentes Autónomos con IA & CRM Operativo",
-    image: "/images/portfolio-cortex-agent.webp",
-    alt: "Captura del agente de atención al cliente Cortex Neural Concierge",
+    id: "import-lr",
+    name: "Import L&R",
+    rubro: "Sistema POS e inventario",
+    alt: "Captura de la portada de Import L&R, Sistema POS e inventario",
+    isTypographic: true,
   },
   {
-    id: "aethelgard-wealth",
-    name: "Aethelgard Private Banking",
-    rubro: "Fintech & Gestión Patrimonial",
-    image: "/images/portfolio-aethelgard-wealth.webp",
-    alt: "Captura de la terminal financiera Aethelgard Private Banking",
+    id: "graduation-control",
+    name: "Control de ceremonias",
+    rubro: "Sistema de invitados y acceso",
+    image: "/images/portfolio-graduation-control.webp",
+    alt: "Captura de la portada de Control de ceremonias, Sistema de invitados y acceso",
   },
 ];
 
@@ -122,36 +130,78 @@ export function PortfolioRow() {
         className="flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory px-5 lg:px-12 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {PORTFOLIO_ITEMS.map((item) => (
-          <article
-            key={item.id}
-            className="snap-start shrink-0 w-[78vw] sm:w-[50vw] md:w-[38vw] lg:w-[calc((100%-48px)/3.5)] flex flex-col group cursor-pointer"
-          >
-            <Link href="/contacto" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60">
+        {PORTFOLIO_ITEMS.map((item) => {
+          const cardContent = (
+            <>
               {/* Card Container 16:10 with 12px border radius */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[12px] bg-neutral-900 border border-[var(--line-on-ink)]">
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 640px) 78vw, (max-width: 1024px) 38vw, 28vw"
-                  quality={85}
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                />
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[12px] bg-[#0a0a0a] border border-[var(--line-on-ink)]">
+                {item.isTypographic || !item.image ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#0a0a0a]">
+                    <span className="text-xs uppercase tracking-[0.2em] text-[var(--muted-on-ink)] mb-3 font-mono">
+                      Sistema Interno
+                    </span>
+                    <p className="text-xl font-medium text-[var(--paper)] tracking-tight">
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-[var(--muted-on-ink)] mt-2 max-w-[28ch]">
+                      {item.rubro}
+                    </p>
+                    <span className="inline-block mt-4 text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-0.5 rounded-full">
+                      En producción
+                    </span>
+                  </div>
+                ) : (
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 78vw, (max-width: 1024px) 38vw, 28vw"
+                    quality={85}
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                )}
               </div>
 
               {/* Caption Under the Card */}
               <div className="mt-4">
-                <h3 className="text-card font-normal text-[var(--paper)] tracking-tight">
-                  {item.name}
-                </h3>
+                <div className="flex items-center gap-1.5">
+                  <h3 className="text-card font-normal text-[var(--paper)] tracking-tight">
+                    {item.name}
+                  </h3>
+                  {item.url && (
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--muted-on-ink)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  )}
+                </div>
                 <p className="text-small text-[var(--muted-on-ink)] font-normal mt-1">
                   {item.rubro}
                 </p>
               </div>
-            </Link>
-          </article>
-        ))}
+            </>
+          );
+
+          return (
+            <article
+              key={item.id}
+              className="snap-start shrink-0 w-[78vw] sm:w-[50vw] md:w-[38vw] lg:w-[calc((100%-48px)/3.5)] flex flex-col group cursor-pointer"
+            >
+              {item.url ? (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                  aria-label={`Ver sitio web de ${item.name} (se abre en una pestaña nueva)`}
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <div className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60">
+                  {cardContent}
+                </div>
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
