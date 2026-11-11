@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { SITE_CONFIG } from "@/lib/site-config";
 
-export const alt = "AVANZA | AI & Software Studio de Alto Rendimiento";
+export const alt = "AVANZA Software Studio | Quiet Luxury Software & IA";
 export const size = {
   width: 1200,
   height: 630,
@@ -19,43 +19,64 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "70px 80px",
-          backgroundColor: "#ffffff",
-          backgroundImage:
-            "radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.08) 0%, transparent 40%), radial-gradient(circle at 90% 90%, rgba(2, 23, 97, 0.06) 0%, transparent 45%)",
+          backgroundColor: "#000000",
+          color: "#ffffff",
           fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
-        {/* Top Header Badge */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        {/* Top Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* Logo with 3 beams */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "14px",
+              gap: "16px",
             }}
           >
             <div
               style={{
-                width: "48px",
-                height: "48px",
-                borderRadius: "14px",
-                backgroundColor: "#021761",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                fontWeight: 900,
-                fontSize: "26px",
+                alignItems: "flex-end",
+                gap: "5px",
+                height: "36px",
               }}
             >
-              A
+              <div
+                style={{
+                  width: "7px",
+                  height: "20px",
+                  backgroundColor: "#ffffff",
+                }}
+              />
+              <div
+                style={{
+                  width: "7px",
+                  height: "28px",
+                  backgroundColor: "#ffffff",
+                }}
+              />
+              <div
+                style={{
+                  width: "7px",
+                  height: "36px",
+                  backgroundColor: "#ffffff",
+                }}
+              />
             </div>
             <div
               style={{
-                fontSize: "32px",
-                fontWeight: 900,
-                color: "#0f172a",
-                letterSpacing: "-0.03em",
+                fontSize: "26px",
+                fontWeight: 600,
+                color: "#ffffff",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
               }}
             >
               AVANZA
@@ -64,15 +85,10 @@ export default async function Image() {
 
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "8px 18px",
-              backgroundColor: "rgba(37, 99, 235, 0.08)",
-              borderRadius: "999px",
-              border: "1px solid rgba(37, 99, 235, 0.25)",
-              color: "#2563eb",
-              fontSize: "16px",
-              fontWeight: 700,
+              fontSize: "14px",
+              color: "#a3a3a3",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
             }}
           >
             {SITE_CONFIG.domain}
@@ -80,28 +96,39 @@ export default async function Image() {
         </div>
 
         {/* Main Content Center */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div
             style={{
-              fontSize: "58px",
-              fontWeight: 900,
-              lineHeight: 1.1,
-              color: "#021761",
-              letterSpacing: "-0.04em",
-              maxWidth: "980px",
+              fontSize: "14px",
+              color: "#a3a3a3",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
             }}
           >
-            Software de Alto Rendimiento & Automatización con IA
+            Software Studio · Arquitectura de Ingeniería
           </div>
           <div
             style={{
-              fontSize: "24px",
-              color: "#475569",
-              lineHeight: 1.4,
-              maxWidth: "920px",
+              fontSize: "56px",
+              fontWeight: 400,
+              lineHeight: 1.08,
+              color: "#ffffff",
+              letterSpacing: "-0.03em",
+              maxWidth: "1000px",
             }}
           >
-            Sistemas a medida, aplicaciones móviles y agentes inteligentes. Sprints ágiles de 7 a 14 días con código 100% transferido a tu empresa.
+            Construimos el software que tu empresa merece
+          </div>
+          <div
+            style={{
+              fontSize: "22px",
+              color: "#a3a3a3",
+              lineHeight: 1.4,
+              maxWidth: "900px",
+              fontWeight: 300,
+            }}
+          >
+            Páginas web editoriales, sistemas CRM y agentes de Inteligencia Artificial. Sprints ágiles de 7 a 14 días con código 100% de tu propiedad.
           </div>
         </div>
 
@@ -110,67 +137,15 @@ export default async function Image() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "16px",
+            justifyContent: "space-between",
             paddingTop: "24px",
-            borderTop: "1px solid #e2e8f0",
+            borderTop: "1px solid #262626",
+            fontSize: "14px",
+            color: "#737373",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              padding: "8px 16px",
-              borderRadius: "10px",
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              fontSize: "15px",
-              fontWeight: 700,
-              color: "#0f172a",
-            }}
-          >
-            Next.js 16 + React 19
-          </div>
-          <div
-            style={{
-              display: "flex",
-              padding: "8px 16px",
-              borderRadius: "10px",
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              fontSize: "15px",
-              fontWeight: 700,
-              color: "#0f172a",
-            }}
-          >
-            Supabase PostgreSQL RLS
-          </div>
-          <div
-            style={{
-              display: "flex",
-              padding: "8px 16px",
-              borderRadius: "10px",
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              fontSize: "15px",
-              fontWeight: 700,
-              color: "#0f172a",
-            }}
-          >
-            120 FPS High Refresh
-          </div>
-          <div
-            style={{
-              display: "flex",
-              padding: "8px 16px",
-              borderRadius: "10px",
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              fontSize: "15px",
-              fontWeight: 700,
-              color: "#021761",
-            }}
-          >
-            Lima, Perú · Sprints 7-14 Días
-          </div>
+          <div>Next.js 16 · React 19 · Supabase · TypeScript</div>
+          <div>Lima, Perú · Entregas Semanales</div>
         </div>
       </div>
     ),

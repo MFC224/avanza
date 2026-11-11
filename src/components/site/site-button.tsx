@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSectionTone, SectionTone } from "./section";
+import { trackEvent } from "@/lib/analytics";
 
 export interface SiteButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -56,7 +57,18 @@ export function SiteButton({
       );
     }
     return (
-      <Link href={href} className={baseClasses}>
+      <Link
+        href={href}
+        className={baseClasses}
+        onClick={(e) => {
+          if (href === "/contacto") {
+            trackEvent("click_cotizar_proyecto", {
+              label: typeof children === "string" ? children : "cotizar",
+            });
+          }
+          props.onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
+        }}
+      >
         {children}
       </Link>
     );

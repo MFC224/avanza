@@ -9,6 +9,7 @@ import {
 } from "@/lib/estimator-logic";
 import { cn } from "@/lib/utils";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export function ProjectEstimator() {
   const [servicioKey, setServicioKey] = useState<"web" | "crm" | "ai" | "app">("web");
@@ -206,6 +207,13 @@ export function ProjectEstimator() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent("submit_estimator", {
+                    service: currentServicio.name,
+                    urgency: currentUrgencia.label,
+                    scale: currentEscala.label,
+                  })
+                }
                 className="text-button w-full py-4 bg-white text-black hover:bg-neutral-200 rounded-none font-medium transition-colors duration-200 select-none inline-flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-4 h-4" />

@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ArmChatWidget } from "@/components/ui/arm-chat-widget";
+import { trackEvent } from "@/lib/analytics";
 
 export function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
@@ -239,7 +240,13 @@ export function FloatingContact() {
 
       {/* Floating Action Trigger */}
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          const next = !isOpen;
+          setIsOpen(next);
+          if (next) {
+            trackEvent("open_arm_assistant", { source: "floating_button" });
+          }
+        }}
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
         className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--ink)] hover:bg-neutral-800 text-[var(--paper)] font-medium text-sm shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all group cursor-pointer border border-neutral-800"
