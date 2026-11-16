@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface AvanzaLogoProps {
   className?: string;
@@ -9,12 +11,17 @@ interface AvanzaLogoProps {
 
 /**
  * Logotipo e Isotipo Oficial de AVANZA Software Studio
- * Reproducción vectorial exacta de la identidad corporativa oficial (Imágenes 4 y 5):
- * - Viga diagonal izquierda: Azul Royal / Cobalto (#003B95)
- * - Viga diagonal central: Azul Marino Pizarra Carbón (#1E293B / #162032)
- * - Pata diagonal derecha: Azul Marino Carbón (#1E293B)
- * - Tipografía: AVANZA (Bold con tracking amplio) + SOFTWARE STUDIO (Medium mono espaciado)
+ * Renderizado oficial mediante asset WebP de alta fidelidad:
+ * - Viga diagonal izquierda: Azul Royal / Cobalto Oficial (#00358E)
+ * - Viga diagonal central: Azul Marino Carbón (#1E2A38)
+ * - Pata diagonal derecha: Azul Marino Carbón (#1E2A38)
+ * - Tipografía: AVANZA + SOFTWARE STUDIO
  */
+export const AVANZA_BRAND_COLORS = {
+  cobalt: "#00358E",
+  slate: "#1E2A38",
+};
+
 export function AvanzaSymbol({
   size = 36,
   className = "",
@@ -25,35 +32,22 @@ export function AvanzaSymbol({
   theme?: "light" | "dark";
 }) {
   const isDark = theme === "dark";
-  const primaryFill = isDark ? "#3b82f6" : "#00358E";
-  const secondaryFill = isDark ? "#f8fafc" : "#1E2A38";
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
+    <div
+      className={cn("relative shrink-0 flex items-center justify-center select-none", className)}
+      style={{ width: Math.round(size * 1.45), height: size }}
       aria-label="AVANZA Symbol"
     >
-      {/* Viga diagonal izquierda (Azul Cobalto Oficial / Azul vibrante en modo oscuro) */}
-      <path
-        d="M31.5 25.5L14 67.5H28.5L46 25.5H31.5Z"
-        fill={primaryFill}
+      <Image
+        src={isDark ? "/images/logo-avanza-white.webp" : "/images/logo-avanza.webp"}
+        alt="AVANZA Symbol"
+        width={Math.round(size * 1.45)}
+        height={size}
+        className="w-full h-full object-contain"
+        priority
       />
-      {/* Viga diagonal central (Azul Marino Carbón #1E2A38 / Blanco nítido en modo oscuro) */}
-      <path
-        d="M51.5 25.5L34 67.5H48.5L66 25.5H51.5Z"
-        fill={secondaryFill}
-      />
-      {/* Pata diagonal derecha inferior (Charcoal Slate #1E2A38 / Blanco nítido en modo oscuro) */}
-      <path
-        d="M62 47.5L78.5 67.5H64L47.5 47.5H62Z"
-        fill={secondaryFill}
-      />
-    </svg>
+    </div>
   );
 }
 
@@ -73,16 +67,16 @@ export function AvanzaBrandLogo({
 
   if (variant === "full") {
     return (
-      <div className={`flex flex-col items-center text-center select-none ${className}`}>
-        <AvanzaSymbol size={size * 1.6} theme={theme} />
+      <div className={cn("flex flex-col items-center text-center select-none", className)}>
+        <AvanzaSymbol size={Math.round(size * 1.5)} theme={theme} />
         <span
-          className={`mt-3 text-2xl sm:text-3xl font-black tracking-[0.22em] uppercase leading-none ${textColor}`}
+          className={cn("mt-3 text-2xl sm:text-3xl font-black tracking-[0.22em] uppercase leading-none", textColor)}
           style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
         >
           AVANZA
         </span>
         <span
-          className={`mt-1.5 text-[10px] sm:text-xs font-mono font-medium tracking-[0.32em] uppercase ${subtextColor}`}
+          className={cn("mt-1.5 text-[10px] sm:text-xs font-mono font-medium tracking-[0.32em] uppercase", subtextColor)}
         >
           SOFTWARE STUDIO
         </span>
@@ -92,17 +86,17 @@ export function AvanzaBrandLogo({
 
   // Variant "horizontal" (Default para Header y Footer)
   return (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
+    <div className={cn("flex items-center gap-3 select-none", className)}>
       <AvanzaSymbol size={size} theme={theme} />
       <div className="flex flex-col">
         <span
-          className={`text-xl sm:text-2xl font-black tracking-tight uppercase leading-none ${textColor}`}
+          className={cn("text-xl sm:text-2xl font-black tracking-tight uppercase leading-none", textColor)}
           style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
         >
           AVANZA
         </span>
         <span
-          className={`text-[9px] sm:text-[10px] font-mono font-medium tracking-[0.24em] uppercase -mt-0.5 ${subtextColor}`}
+          className={cn("text-[9px] sm:text-[10px] font-mono font-medium tracking-[0.24em] uppercase -mt-0.5", subtextColor)}
         >
           SOFTWARE STUDIO
         </span>

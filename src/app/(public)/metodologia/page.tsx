@@ -5,14 +5,14 @@ import { Reveal } from "@/components/site/reveal";
 import { SiteButton } from "@/components/site/site-button";
 
 export const metadata: Metadata = {
-  title: "Metodología Ágil SCRUM | AVANZA",
+  title: "Metodología Ágil y Entregas Continuas | AVANZA",
   description:
     "Desarrollo de software transparente y acelerado por Sprints semanales. El cliente mantiene el control total de cada entrega tangible.",
   alternates: {
     canonical: "/metodologia",
   },
   openGraph: {
-    title: "Metodología Ágil SCRUM | AVANZA",
+    title: "Metodología Ágil y Entregas Continuas | AVANZA",
     description:
       "Ciclo iterativo continuo de 4 fases para entregar software funcional cada 7 a 14 días.",
   },
@@ -79,9 +79,9 @@ export default function MetodologiaPage() {
       <Section tone="paper">
         <Reveal>
           <SectionHeading
-            eyebrow="Metodología de Ingeniería"
+            eyebrow="Metodología de Trabajo"
             title="Velocidad, transparencia e Inteligencia Artificial"
-            description="Nuestra Metodología Ágil SCRUM rompe los vicios del desarrollo tradicional. Construimos tu software iteración por iteración con resultados tangibles semanales."
+            description="Nuestra metodología ágil de entregas continuas rompe los vicios del desarrollo tradicional. Construimos tu software iteración por iteración con resultados tangibles semanales."
           />
         </Reveal>
 

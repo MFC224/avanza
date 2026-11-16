@@ -124,7 +124,7 @@ export default function NotFound() {
       iconColor: "text-indigo-400",
     },
     {
-      title: "Metodología SCRUM",
+      title: "Metodología de Trabajo",
       badge: "Sprints Ágiles",
       desc: "Entregables continuos cada semana con código limpio y testeado.",
       href: "/metodologia",

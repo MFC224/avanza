@@ -84,7 +84,7 @@ export default function PublicLayout({
               </span>
               <div className="flex flex-col gap-3">
                 <Link href="/metodologia" className="text-small text-[var(--muted-on-ink)] hover:text-[var(--paper)] transition-colors font-normal">
-                  Metodología SCRUM
+                  Metodología de Trabajo
                 </Link>
                 <Link href="/nosotros" className="text-small text-[var(--muted-on-ink)] hover:text-[var(--paper)] transition-colors font-normal">
                   Equipo & Misión

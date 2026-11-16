@@ -87,8 +87,9 @@ export function PortfolioRow() {
 
   return (
     <section
+      id="portafolio"
       data-tone="ink"
-      className="w-full bg-[var(--ink)] text-[var(--paper)] py-20 lg:py-28 overflow-hidden select-none"
+      className="w-full bg-[var(--ink)] text-[var(--paper)] py-20 lg:py-28 overflow-hidden select-none scroll-mt-20"
       aria-label="Portafolio de proyectos"
     >
       <div className="max-w-7xl mx-auto px-5 lg:px-12 mb-8 lg:mb-12 flex items-end justify-between">

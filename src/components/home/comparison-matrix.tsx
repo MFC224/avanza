@@ -8,34 +8,34 @@ interface Criterion {
 
 const CRITERIA: Criterion[] = [
   {
-    feature: "Velocidad de Entrega (Time-to-Market)",
-    avanza: "7 a 14 días (Sprints ágiles con módulos funcionales semanales)",
-    traditional: "3 a 6 meses de retrasos, reuniones y burocracia",
+    feature: "Velocidad de Entrega",
+    avanza: "7 a 14 días con avances y módulos funcionales desde la primera semana",
+    traditional: "3 a 6 meses de retrasos, reuniones innecesarias y burocracia",
   },
   {
-    feature: "Arquitectura & Ecosistema de Código",
-    avanza: "Next.js 16, React 19, Supabase RLS, TypeScript estricto (100% Type-Safe)",
-    traditional: "Plantillas genéricas de WordPress o código espagueti desactualizado",
+    feature: "Calidad y Estabilidad de la Plataforma",
+    avanza: "Sistemas modernos, rápidos y sin caídas, construidos para durar y escalar",
+    traditional: "Plantillas genéricas y lentas propensas a fallas constantes y bloqueos",
   },
   {
-    feature: "Inteligencia Artificial Integrada",
-    avanza: "Agentes autónomos, pipelines LLM y automatización de procesos a medida",
-    traditional: "Nula; se limitan a webs estáticas sin procesamiento inteligente",
+    feature: "Inteligencia Artificial y Automatización",
+    avanza: "Asistentes y automatización a medida que atienden clientes y cotizan 24/7",
+    traditional: "Páginas estáticas sin automatización que exigen atención manual continua",
   },
   {
-    feature: "Seguridad, RLS & OWASP Top 10",
-    avanza: "Row Level Security (RLS) PostgreSQL, Zero-Trust, CSP y auditoría continua",
-    traditional: "Plugins vulnerables propensos a inyecciones SQL y ataques XSS",
+    feature: "Seguridad y Protección de Datos",
+    avanza: "Máxima protección de datos confidenciales con estándares de seguridad bancaria",
+    traditional: "Sistemas frágiles con plugins de terceros vulnerables a ataques y filtraciones",
   },
   {
-    feature: "Demos Semanales & Transparencia",
-    avanza: "Acceso semanal a despliegues en vivo probando el sistema real",
-    traditional: "Presentaciones estáticas en PDF y mockups durante meses",
+    feature: "Transparencia y Pruebas en Vivo",
+    avanza: "Acceso semanal a la plataforma en vivo para probar cada avance real",
+    traditional: "Meses de presentaciones en PDF y maquetas antes de ver algo funcional",
   },
   {
-    feature: "Comunicación & Respaldo",
-    avanza: "Línea directa por WhatsApp con los fundadores y arquitectos técnicos",
-    traditional: "Intermediarios, ejecutivos de ventas y sistemas lentos de tickets",
+    feature: "Comunicación y Respaldo",
+    avanza: "Línea directa por WhatsApp y videollamadas con los fundadores del estudio",
+    traditional: "Intermediarios, ejecutivos comerciales y sistemas lentos de tickets",
   },
 ];
 
@@ -58,35 +58,49 @@ export function ComparisonMatrix() {
         </div>
 
         {/* 2-Column Comparison Table (Desktop: 2 columns, Mobile: stacked per row without horizontal scroll) */}
-        <div className="divide-y divide-[var(--line-on-paper)] border-y border-[var(--line-on-paper)]">
+        <div className="border border-[var(--line-on-paper)] divide-y divide-[var(--line-on-paper)]">
+          {/* Header Row (Desktop only) */}
+          <div className="hidden md:grid grid-cols-12 bg-neutral-100/60 font-medium text-small text-[var(--ink)]">
+            <div className="col-span-4 p-5 lg:p-6 border-r border-[var(--line-on-paper)]">
+              Criterio de Evaluación
+            </div>
+            <div className="col-span-4 p-5 lg:p-6 border-r border-[var(--line-on-paper)] font-semibold text-[var(--brand)]">
+              AVANZA Software Studio
+            </div>
+            <div className="col-span-4 p-5 lg:p-6 text-[var(--muted-on-paper)]">
+              Agencias Tradicionales / Freelancers
+            </div>
+          </div>
+
+          {/* Rows */}
           {CRITERIA.map((item, idx) => (
             <div
-              key={idx}
-              className="py-6 lg:py-8 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start"
+              key={item.feature}
+              className={`grid grid-cols-1 md:grid-cols-12 transition-colors duration-150 ${
+                idx % 2 === 0 ? "bg-[var(--paper)]" : "bg-neutral-50/50"
+              }`}
             >
-              {/* Feature Title (Desktop 4 cols) */}
-              <div className="md:col-span-4">
-                <span className="text-card font-normal text-[var(--ink)] tracking-tight">
-                  {item.feature}
-                </span>
+              {/* Feature Title */}
+              <div className="p-5 lg:p-6 md:col-span-4 md:border-r border-[var(--line-on-paper)] flex items-center font-normal text-[var(--ink)] text-body">
+                <span>{item.feature}</span>
               </div>
 
-              {/* AVANZA Column (Desktop 4 cols) */}
-              <div className="md:col-span-4 p-4 md:p-0 bg-neutral-50 md:bg-transparent rounded-none">
-                <span className="text-small text-[var(--brand)] font-medium block md:hidden mb-1">
-                  AVANZA Software Studio
+              {/* AVANZA Column */}
+              <div className="p-5 lg:p-6 md:col-span-4 md:border-r border-[var(--line-on-paper)] bg-blue-50/30 md:bg-transparent">
+                <span className="md:hidden text-small font-medium text-[var(--brand)] block mb-1">
+                  AVANZA Software Studio:
                 </span>
-                <p className="text-body text-[var(--ink)] font-normal leading-relaxed">
+                <p className="text-body text-[var(--ink)] font-normal">
                   {item.avanza}
                 </p>
               </div>
 
-              {/* Traditional Agency Column (Desktop 4 cols) */}
-              <div className="md:col-span-4 p-4 md:p-0">
-                <span className="text-small text-[var(--muted-on-paper)] font-normal block md:hidden mb-1">
-                  Agencias Tradicionales
+              {/* Traditional Column */}
+              <div className="p-5 lg:p-6 md:col-span-4 text-[var(--muted-on-paper)]">
+                <span className="md:hidden text-small font-medium text-[var(--muted-on-paper)] block mb-1">
+                  Agencias Tradicionales:
                 </span>
-                <p className="text-body text-[var(--muted-on-paper)] font-normal leading-relaxed">
+                <p className="text-body text-[var(--muted-on-paper)] font-normal">
                   {item.traditional}
                 </p>
               </div>

@@ -65,7 +65,7 @@ const TABS: ServiceTab[] = [
     image: "/images/services-fintech.webp",
     alt: "Terminal de cobro y portátil sobre mostrador de mármol con luz matutina de ventana",
     benefits: [
-      "Seguridad perimetral y cifrado de transacciones grado bancario TLS 1.3.",
+      "Seguridad perimetral y cifrado de transacciones con estándares bancarios internacionales.",
       "Integración fluida con pasarelas de pago, facturación electrónica y conciliación diaria.",
       "Bases de datos relacionales en la nube con aislamiento estricto y copias de seguridad.",
     ],

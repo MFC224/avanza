@@ -68,7 +68,7 @@ export default function TerminosPage() {
             1. Alcance de los Servicios
           </h2>
           <p>
-            <strong>{SITE_CONFIG.name}</strong> provee servicios profesionales especializados de ingeniería de software bajo metodología ágil SCRUM:
+            <strong>{SITE_CONFIG.name}</strong> provee servicios profesionales especializados de desarrollo de software bajo metodología ágil de entregas continuas:
           </p>
           <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
             <li><strong>Páginas Web y Aplicaciones de Alto Rendimiento:</strong> Arquitectura moderna basada en Next.js 16, React 19 y Tailwind CSS.</li>

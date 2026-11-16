@@ -109,7 +109,7 @@ export function CommandMenu() {
     },
     {
       id: "methodology",
-      title: "Conocer la Metodología SCRUM",
+      title: "Conocer la Metodología de Trabajo",
       category: "Navegación",
       icon: RefreshCw,
       badge: "Sprints Semanales",
@@ -262,7 +262,7 @@ export function CommandMenu() {
                 <input
                   ref={inputRef}
                   type="text"
-                  placeholder="Escribe un comando o busca una sección... (ej. Servicios, WhatsApp, SCRUM)"
+                  placeholder="Escribe un comando o busca una sección... (ej. Servicios, WhatsApp, Proyectos)"
                   value={query}
                   onChange={(e) => {
                     setQuery(e.target.value);

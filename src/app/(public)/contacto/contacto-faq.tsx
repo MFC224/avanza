@@ -11,7 +11,7 @@ interface FaqItem {
 const FAQS: FaqItem[] = [
   {
     q: "¿Cuánto tiempo toma tener mi software en producción?",
-    a: "Operamos bajo metodología ágil SCRUM. Los proyectos web y landing pages se completan en 7 a 12 días; sistemas web, CRM o integraciones con IA demoran de 12 a 20 días con entregas funcionales semanales.",
+    a: "Operamos bajo metodología ágil de entregas continuas. Los proyectos web y plataformas se completan en 7 a 12 días; sistemas web, CRM o automatización con IA demoran de 12 a 20 días con entregas funcionales semanales.",
   },
   {
     q: "¿Cómo son los pagos y qué garantías tengo?",

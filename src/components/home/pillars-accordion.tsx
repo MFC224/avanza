@@ -23,7 +23,7 @@ const PILLARS: Pillar[] = [
     title: "Arquitectura Cloud",
     subtitle: "Bases de datos de alto rendimiento",
     description:
-      "Bases de datos de alta integridad con aislamiento estricto de privacidad y renderizado en el Edge para respuestas en milisegundos.",
+      "Infraestructura cloud de alta disponibilidad con máxima privacidad de datos y respuestas inmediatas en milisegundos.",
   },
   {
     index: "03",
