@@ -114,7 +114,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-T3BPNFH9K1";
 
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
