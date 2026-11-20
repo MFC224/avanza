@@ -61,6 +61,7 @@
   --ink: #000000;
   --paper: #ffffff;
   --brand: #021761;
+  --on-brand: #ffffff;
   --muted-on-paper: #5f6368;
   --muted-on-ink: #a3a3a3;
   --line-on-paper: #e5e5e5;
@@ -296,4 +297,69 @@ body {
   .hero-rise {
     animation: none;
   }
+}
+
+/* =========================================================================
+   MODO OSCURO (ronda 2). El tema se fija en <html data-theme>.
+   Las secciones "paper" cambian a superficie oscura; las "ink" siguen negras.
+   Las variables se redefinen por tono, así cada sección hereda lo correcto.
+   ========================================================================= */
+html { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+html[data-theme="dark"] [data-tone="paper"] {
+  --paper: #0d0d0f;
+  --ink: #f2f2f3;
+  --muted-on-paper: #a1a1aa;
+  --line-on-paper: #2a2a2e;
+  --brand: #c7d2fe;
+  --on-brand: #021761;
+  --background: #0d0d0f;
+  --foreground: #f2f2f3;
+}
+html[data-theme="dark"] [data-tone="ink"] {
+  --paper: #ffffff;
+  --ink: #000000;
+  --muted-on-ink: #a3a3a3;
+  --line-on-ink: #262626;
+}
+html { transition: background-color 0.3s ease; }
+[data-tone] { transition: background-color 0.35s ease, color 0.35s ease; }
+
+/* Aviso de cookies y carga: entradas suaves, sin animación si se pide menos movimiento */
+@keyframes cookie-rise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.cookie-rise { animation: cookie-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes avanza-load-bar {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  50.01% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+.avanza-load-bar { animation: avanza-load-bar 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
+@keyframes avanza-load-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.avanza-load-fade { animation: avanza-load-fade 500ms ease both 150ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-rise, .avanza-load-fade { animation: none; }
+  .avanza-load-bar { animation: none; transform: scaleX(0.4); }
+  html, [data-tone] { transition: none; }
+}
+
+/* Logos que dependen del tema */
+html[data-theme="dark"] .theme-light-only { display: none !important; }
+html:not([data-theme="dark"]) .theme-dark-only { display: none !important; }
+
+/* Impresión de la constancia del Libro de Reclamaciones */
+@media print {
+  header, footer, .no-print, [role="dialog"] { display: none !important; }
+  body, [data-tone] { background: #fff !important; color: #000 !important; }
+  .print-area { color: #000; }
 }

@@ -1,277 +1,233 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { BookOpen, ShieldCheck, ArrowLeft, Send, AlertCircle } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
-import { complaintSchema, generateComplaintCode } from "@/lib/complaints-schema";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { complaintSchema } from "@/lib/complaints-schema";
+import { Section } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
+import { submitComplaint } from "./actions";
 import { ReclamacionSuccess } from "./reclamacion-success";
-import { ReclamacionConsumerSection } from "./reclamacion-consumer-section";
+import {
+  ReclamacionConsumerSection,
+  TextField,
+  FIELD,
+  type ComplaintFormState,
+} from "./reclamacion-consumer-section";
+import { ProviderBlock, Definitions, LegalNotes } from "./reclamacion-legal";
+
+const EMPTY: ComplaintFormState = {
+  fullName: "",
+  documentType: "DNI",
+  documentNumber: "",
+  email: "",
+  phone: "",
+  address: "",
+  isMinor: false,
+  guardianName: "",
+  guardianDocument: "",
+  serviceType: "SERVICIO",
+  serviceDescription: "",
+  complaintType: "RECLAMO",
+  amountClaimed: "",
+  description: "",
+  request: "",
+  termsAccepted: false,
+};
+
+/** Hoja completa en texto, para enviarla por correo si el registro en línea falla. */
+function asEmail(form: ComplaintFormState) {
+  const body = [
+    `HOJA DE RECLAMACIÓN · ${SITE_CONFIG.legalName}`,
+    `Fecha: ${new Date().toLocaleString("es-PE")}`,
+    `Consumidor: ${form.fullName} · ${form.documentType} ${form.documentNumber}`,
+    `Correo: ${form.email} · Teléfono: ${form.phone}`,
+    `Domicilio: ${form.address}`,
+    form.isMinor ? `Padre, madre o apoderado: ${form.guardianName} (${form.guardianDocument})` : "",
+    `Bien contratado: ${form.serviceType} ${form.serviceDescription}`,
+    `Monto reclamado: ${form.amountClaimed || "-"}`,
+    `Tipo: ${form.complaintType}`,
+    `Detalle: ${form.description}`,
+    `Pedido: ${form.request}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return `mailto:${SITE_CONFIG.contact.email}?subject=${encodeURIComponent("Libro de Reclamaciones")}&body=${encodeURIComponent(body)}`;
+}
 
 export default function ReclamacionesPage() {
-  const [loading, setLoading] = useState(false);
-  const [successCode, setSuccessCode] = useState<string | null>(null);
+  const [form, setForm] = useState<ComplaintFormState>(EMPTY);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const [form, setForm] = useState({
-    fullName: "",
-    documentType: "DNI" as "DNI" | "CE" | "RUC" | "PASAPORTE",
-    documentNumber: "",
-    email: "",
-    phone: "",
-    address: "",
-    serviceType: "SERVICIO" as "SERVICIO" | "PRODUCTO",
-    complaintType: "RECLAMO" as "RECLAMO" | "QUEJA",
-    amountClaimed: "",
-    description: "",
-    request: "",
-    termsAccepted: false,
-  });
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<{ code: string; createdAt: string } | null>(null);
+  const [storageFailed, setStorageFailed] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    setLoading(true);
+    setStorageFailed(false);
 
-    const validation = complaintSchema.safeParse(form);
-
-    if (!validation.success) {
+    const local = complaintSchema.safeParse(form);
+    if (!local.success) {
       const fieldErrors: Record<string, string> = {};
-      for (const issue of validation.error.issues) {
-        if (issue.path[0]) {
-          fieldErrors[String(issue.path[0])] = issue.message;
-        }
+      for (const issue of local.error.issues) {
+        if (issue.path[0] && !fieldErrors[String(issue.path[0])]) fieldErrors[String(issue.path[0])] = issue.message;
       }
       setErrors(fieldErrors);
-      setLoading(false);
       return;
     }
 
-    // Simulate safe recording & receipt dispatch
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    const code = generateComplaintCode();
-    setSuccessCode(code);
+    setLoading(true);
+    const res = await submitComplaint(form);
     setLoading(false);
+    if (res.ok) {
+      setResult({ code: res.code, createdAt: res.createdAt });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (res.reason === "validation") {
+      setErrors(res.errors);
+    } else {
+      setStorageFailed(true);
+    }
   };
 
+  const common = { form, setForm, errors };
+
   return (
-    <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative">
-      <Reveal>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-8 transition-colors group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>Volver al inicio</span>
-        </Link>
-
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
-            <BookOpen className="w-5 h-5" />
-          </div>
-          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
-            D.S. N° 011-2011-PCM · INDECOPI
-          </span>
-        </div>
-
-        <h1 className="type-display text-[var(--ink)] mb-6">
-          Libro de Reclamaciones Virtual
-        </h1>
-        <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed">
-          Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), ponemos a tu disposición nuestro registro virtual para canalizar cualquier queja o reclamo respecto a nuestros servicios de software.
-        </p>
-
-        <div className="p-4 bg-amber-50/80 border border-amber-200 text-amber-900 text-xs md:text-sm mb-10 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-          <div>
-            <p className="font-medium">Definiciones conforme a la normativa peruana:</p>
-            <p className="mt-1">
-              <strong>Queja:</strong> Disconformidad frente a la mala atención al público o malestar administrativo.
+    <div className="flex flex-col">
+      <Section tone="paper" className="pt-[96px] lg:pt-[140px]">
+        <div className="max-w-4xl">
+          <Reveal>
+            <BookOpen className="w-10 h-10 text-[var(--ink)]" aria-hidden="true" />
+            <h1 className="type-display mt-6">Libro de Reclamaciones</h1>
+            <p className="type-body text-[var(--muted-on-paper)] mt-6 max-w-[60ch]">
+              Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), este
+              establecimiento cuenta con un Libro de Reclamaciones virtual a tu disposición.
             </p>
-            <p>
-              <strong>Reclamo:</strong> Disconformidad relacionada a los bienes adquiridos o servicios de software contratados.
-            </p>
-            <p className="mt-1 text-amber-800 font-medium">
-              Plazo legal de respuesta: Máximo 15 días hábiles conforme a ley.
-            </p>
-          </div>
-        </div>
-      </Reveal>
+          </Reveal>
 
-      {successCode ? (
-        <ReclamacionSuccess
-          email={form.email}
-          code={successCode}
-          onReset={() => {
-            setSuccessCode(null);
-            setForm({
-              fullName: "",
-              documentType: "DNI",
-              documentNumber: "",
-              email: "",
-              phone: "",
-              address: "",
-              serviceType: "SERVICIO",
-              complaintType: "RECLAMO",
-              amountClaimed: "",
-              description: "",
-              request: "",
-              termsAccepted: false,
-            });
-          }}
-        />
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-8 text-slate-800"
-        >
-          <ReclamacionConsumerSection form={form} setForm={setForm} errors={errors} />
-
-          {/* Section 2: Detalle del Reclamo o Queja */}
-          <div className="pt-4">
-            <h3 className="text-lg font-medium text-slate-900 border-b border-slate-200 pb-3 mb-6">
-              2. Detalle del Bien y de la Reclamación
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-slate-700">Tipo de Contratación *</Label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer text-sm">
-                    <input
-                      type="radio"
-                      name="serviceType"
-                      value="SERVICIO"
-                      checked={form.serviceType === "SERVICIO"}
-                      onChange={() => setForm({ ...form, serviceType: "SERVICIO" })}
-                      className="text-blue-600 focus:ring-blue-500"
-                    />
-                    <span>Servicio de Software</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-sm">
-                    <input
-                      type="radio"
-                      name="serviceType"
-                      value="PRODUCTO"
-                      checked={form.serviceType === "PRODUCTO"}
-                      onChange={() => setForm({ ...form, serviceType: "PRODUCTO" })}
-                      className="text-blue-600 focus:ring-blue-500"
-                    />
-                    <span>Producto Digital</span>
-                  </label>
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-slate-700">Tipo de Disconformidad *</Label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer text-sm">
-                    <input
-                      type="radio"
-                      name="complaintType"
-                      value="RECLAMO"
-                      checked={form.complaintType === "RECLAMO"}
-                      onChange={() => setForm({ ...form, complaintType: "RECLAMO" })}
-                      className="text-blue-600 focus:ring-blue-500"
-                    />
-                    <span>Reclamo (del servicio)</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-sm">
-                    <input
-                      type="radio"
-                      name="complaintType"
-                      value="QUEJA"
-                      checked={form.complaintType === "QUEJA"}
-                      onChange={() => setForm({ ...form, complaintType: "QUEJA" })}
-                      className="text-blue-600 focus:ring-blue-500"
-                    />
-                    <span>Queja (atención)</span>
-                  </label>
-                </div>
-              </div>
-
-              <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="description" className="text-xs font-medium text-slate-700">
-                  Detalle de los Hechos (Motivo del Reclamo o Queja) *
-                </Label>
-                <textarea
-                  id="description"
-                  rows={4}
-                  placeholder="Detalla de forma precisa los sucesos acaecidos..."
-                  value={form.description}
-                  onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  className={`w-full p-3.5 rounded-xl border ${
-                    errors.description ? "border-red-400" : "border-slate-300"
-                  } bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                />
-                {errors.description && (
-                  <p className="text-xs text-red-600">{errors.description}</p>
-                )}
-              </div>
-
-              <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="request" className="text-xs font-medium text-slate-700">
-                  Pedido Concreto del Consumidor *
-                </Label>
-                <textarea
-                  id="request"
-                  rows={3}
-                  placeholder="Indica la acción correctiva, solución o compensación requerida..."
-                  value={form.request}
-                  onChange={(e) => setForm({ ...form, request: e.target.value })}
-                  className={`w-full p-3.5 rounded-xl border ${
-                    errors.request ? "border-red-400" : "border-slate-300"
-                  } bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                />
-                {errors.request && <p className="text-xs text-red-600">{errors.request}</p>}
-              </div>
-            </div>
+          <div className="mt-14">
+            <ProviderBlock />
           </div>
 
-          <div className="pt-4 border-t border-slate-200">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.termsAccepted}
-                onChange={(e) => setForm({ ...form, termsAccepted: e.target.checked })}
-                className="mt-1 h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
+          {result ? (
+            <div className="mt-16">
+              <ReclamacionSuccess
+                form={form}
+                code={result.code}
+                createdAt={result.createdAt}
+                onReset={() => {
+                  setResult(null);
+                  setForm(EMPTY);
+                }}
               />
-              <span className="text-xs text-slate-600 leading-relaxed">
-                Declaro bajo juramento que los datos consignados en el presente formulario son verídicos y corresponden a los hechos acontecidos, conforme a lo establecido en la Ley N° 29571.
-              </span>
-            </label>
-            {errors.termsAccepted && (
-              <p className="text-xs text-red-600 mt-1">{errors.termsAccepted}</p>
-            )}
-          </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} noValidate className="mt-16 flex flex-col gap-16">
+              <ReclamacionConsumerSection {...common} />
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium flex items-center justify-center gap-2 transition-all"
-          >
-            {loading ? (
-              <span>Registrando reclamación...</span>
-            ) : (
-              <>
-                <Send className="w-4 h-4" />
-                <span>Enviar Hoja de Reclamación Virtual</span>
-              </>
-            )}
-          </Button>
+              <fieldset>
+                <legend className="type-card">2. Bien contratado</legend>
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                  <div role="radiogroup" aria-label="Bien contratado" className="flex gap-8">
+                    {(["SERVICIO", "PRODUCTO"] as const).map((v) => (
+                      <label key={v} className="flex items-center gap-2 cursor-pointer type-body">
+                        <input
+                          type="radio"
+                          name="serviceType"
+                          checked={form.serviceType === v}
+                          onChange={() => setForm({ ...form, serviceType: v })}
+                          className="accent-[var(--brand)] w-4 h-4"
+                        />
+                        {v === "SERVICIO" ? "Servicio" : "Producto"}
+                      </label>
+                    ))}
+                  </div>
+                  <TextField {...common} id="amountClaimed" label="Monto reclamado (opcional)" placeholder="Ej. S/ 1,500.00" />
+                  <TextField {...common} id="serviceDescription" label="Descripción del servicio o producto" className="md:col-span-2" />
+                </div>
+              </fieldset>
 
-          <div className="flex items-center justify-center gap-2 text-xs text-slate-500 text-center">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Tus datos están protegidos conforme a la Ley N° 29733 de Datos Personales.</span>
-          </div>
-        </form>
-      )}
+              <fieldset>
+                <legend className="type-card">3. Detalle de la reclamación</legend>
+                <div className="mt-8">
+                  <Definitions />
+                </div>
+                <div role="radiogroup" aria-label="Tipo" className="mt-8 flex gap-8">
+                  {(["RECLAMO", "QUEJA"] as const).map((v) => (
+                    <label key={v} className="flex items-center gap-2 cursor-pointer type-body">
+                      <input
+                        type="radio"
+                        name="complaintType"
+                        checked={form.complaintType === v}
+                        onChange={() => setForm({ ...form, complaintType: v })}
+                        className="accent-[var(--brand)] w-4 h-4"
+                      />
+                      {v === "RECLAMO" ? "Reclamo" : "Queja"}
+                    </label>
+                  ))}
+                </div>
+                {(["description", "request"] as const).map((id) => (
+                  <div key={id} className="mt-8">
+                    <label htmlFor={id} className="type-small text-[var(--muted-on-paper)] block">
+                      {id === "description" ? "Detalle: ¿qué ocurrió?" : "Pedido: ¿qué solución esperas?"}
+                    </label>
+                    <textarea
+                      id={id}
+                      rows={4}
+                      value={form[id]}
+                      onChange={(e) => setForm({ ...form, [id]: e.target.value })}
+                      aria-invalid={Boolean(errors[id])}
+                      aria-describedby={errors[id] ? `${id}-error` : undefined}
+                      className={`${FIELD} h-auto py-3 resize-y ${errors[id] ? "border-red-600" : "border-[var(--muted-on-paper)]"}`}
+                    />
+                    {errors[id] && (
+                      <p id={`${id}-error`} className="type-small text-red-600 mt-1">
+                        {errors[id]}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </fieldset>
 
-      <div className="mt-12 text-center text-xs text-slate-500">
-        <p>© {new Date().getFullYear()} {SITE_CONFIG.legalName} · Lima, Perú</p>
-      </div>
+              <div className="flex flex-col gap-8">
+                <LegalNotes />
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.termsAccepted}
+                    onChange={(e) => setForm({ ...form, termsAccepted: e.target.checked })}
+                    className="mt-1 w-4 h-4 cursor-pointer accent-[var(--brand)]"
+                  />
+                  <span className="type-small">
+                    Declaro que los datos consignados son verdaderos, conforme a la Ley N° 29571.
+                  </span>
+                </label>
+                {errors.termsAccepted && <p className="type-small text-red-600 -mt-6">{errors.termsAccepted}</p>}
+
+                {storageFailed && (
+                  <div role="alert" className="type-body">
+                    No pudimos registrar tu hoja en este momento. Para que no se pierda,{" "}
+                    <a href={asEmail(form)} className="underline underline-offset-4">
+                      envíala por correo con un clic
+                    </a>{" "}
+                    a {SITE_CONFIG.contact.email}. Tiene el mismo valor.
+                  </div>
+                )}
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="type-button px-8 py-4 bg-[var(--brand)] text-[var(--on-brand)] hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
+                  >
+                    {loading ? "Registrando…" : "Enviar hoja de reclamación"}
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
+      </Section>
     </div>
   );
 }

@@ -1,15 +1,17 @@
 import React from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
-interface FormState {
+export interface ComplaintFormState {
   fullName: string;
   documentType: "DNI" | "CE" | "RUC" | "PASAPORTE";
   documentNumber: string;
   email: string;
   phone: string;
   address: string;
+  isMinor: boolean;
+  guardianName: string;
+  guardianDocument: string;
   serviceType: "SERVICIO" | "PRODUCTO";
+  serviceDescription: string;
   complaintType: "RECLAMO" | "QUEJA";
   amountClaimed: string;
   description: string;
@@ -17,118 +19,99 @@ interface FormState {
   termsAccepted: boolean;
 }
 
+export const FIELD =
+  "w-full h-12 px-0 border-0 border-b bg-transparent text-[var(--ink)] type-body focus:outline-none focus:border-[var(--ink)] placeholder:text-[var(--muted-on-paper)]";
+
+interface FieldProps {
+  id: keyof ComplaintFormState;
+  label: string;
+  form: ComplaintFormState;
+  setForm: React.Dispatch<React.SetStateAction<ComplaintFormState>>;
+  errors: Record<string, string>;
+  type?: string;
+  placeholder?: string;
+  className?: string;
+  autoComplete?: string;
+}
+
+export function TextField({ id, label, form, setForm, errors, type = "text", placeholder, className, autoComplete }: FieldProps) {
+  const error = errors[id];
+  return (
+    <div className={className}>
+      <label htmlFor={id} className="type-small text-[var(--muted-on-paper)] block">
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        value={String(form[id] ?? "")}
+        onChange={(e) => setForm({ ...form, [id]: e.target.value })}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={`${FIELD} ${error ? "border-red-600" : "border-[var(--muted-on-paper)]"}`}
+      />
+      {error && (
+        <p id={`${id}-error`} className="type-small text-red-600 mt-1">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 interface ConsumerSectionProps {
-  form: FormState;
-  setForm: React.Dispatch<React.SetStateAction<FormState>>;
+  form: ComplaintFormState;
+  setForm: React.Dispatch<React.SetStateAction<ComplaintFormState>>;
   errors: Record<string, string>;
 }
 
-export function ReclamacionConsumerSection({
-  form,
-  setForm,
-  errors,
-}: ConsumerSectionProps) {
+export function ReclamacionConsumerSection({ form, setForm, errors }: ConsumerSectionProps) {
+  const common = { form, setForm, errors };
   return (
-    <div>
-      <h3 className="text-lg font-medium text-slate-900 border-b border-slate-200 pb-3 mb-6">
-        1. Identificación del Consumidor Reclamante
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="space-y-1.5 md:col-span-2">
-          <Label htmlFor="fullName" className="text-xs font-medium text-slate-700">
-            Nombre Completo o Razón Social *
-          </Label>
-          <Input
-            id="fullName"
-            placeholder="Ej. Juan Pérez o Tech Solutions SAC"
-            value={form.fullName}
-            onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-            className={errors.fullName ? "border-red-400" : ""}
-          />
-          {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
-        </div>
+    <fieldset>
+      <legend className="type-card">1. Tus datos</legend>
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+        <TextField {...common} id="fullName" label="Nombre completo o razón social" autoComplete="name" className="md:col-span-2" />
 
-        <div className="space-y-1.5">
-          <Label htmlFor="documentType" className="text-xs font-medium text-slate-700">
-            Tipo de Documento *
-          </Label>
+        <div>
+          <label htmlFor="documentType" className="type-small text-[var(--muted-on-paper)] block">
+            Tipo de documento
+          </label>
           <select
             id="documentType"
             value={form.documentType}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                documentType: e.target.value as "DNI" | "CE" | "RUC" | "PASAPORTE",
-              })
-            }
-            className="w-full h-11 px-3.5 border border-slate-300 bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setForm({ ...form, documentType: e.target.value as ComplaintFormState["documentType"] })}
+            className={`${FIELD} border-[var(--muted-on-paper)] cursor-pointer`}
           >
-            <option value="DNI">DNI (Documento Nacional de Identidad)</option>
-            <option value="RUC">RUC (Registro Único de Contribuyentes)</option>
-            <option value="CE">Carné de Extranjería (CE)</option>
+            <option value="DNI">DNI</option>
+            <option value="RUC">RUC</option>
+            <option value="CE">Carné de extranjería</option>
             <option value="PASAPORTE">Pasaporte</option>
           </select>
         </div>
+        <TextField {...common} id="documentNumber" label="Número de documento" />
+        <TextField {...common} id="email" label="Correo electrónico (aquí te responderemos)" type="email" autoComplete="email" />
+        <TextField {...common} id="phone" label="Teléfono" type="tel" autoComplete="tel" />
+        <TextField {...common} id="address" label="Domicilio" autoComplete="street-address" className="md:col-span-2" />
 
-        <div className="space-y-1.5">
-          <Label htmlFor="documentNumber" className="text-xs font-medium text-slate-700">
-            Número de Documento *
-          </Label>
-          <Input
-            id="documentNumber"
-            placeholder="Ej. 72345678"
-            value={form.documentNumber}
-            onChange={(e) => setForm({ ...form, documentNumber: e.target.value })}
-            className={errors.documentNumber ? "border-red-400" : ""}
+        <label className="md:col-span-2 flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.isMinor}
+            onChange={(e) => setForm({ ...form, isMinor: e.target.checked })}
+            className="mt-1 w-4 h-4 cursor-pointer accent-[var(--brand)]"
           />
-          {errors.documentNumber && (
-            <p className="text-xs text-red-600">{errors.documentNumber}</p>
-          )}
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-xs font-medium text-slate-700">
-            Correo Electrónico *
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="tu@empresa.com"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className={errors.email ? "border-red-400" : ""}
-          />
-          {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
-        </div>
-
-        <div className="space-y-1.5">
-          <Label htmlFor="phone" className="text-xs font-medium text-slate-700">
-            Teléfono / WhatsApp *
-          </Label>
-          <Input
-            id="phone"
-            placeholder="Ej. +51 987 654 321"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className={errors.phone ? "border-red-400" : ""}
-          />
-          {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
-        </div>
-
-        <div className="space-y-1.5 md:col-span-2">
-          <Label htmlFor="address" className="text-xs font-medium text-slate-700">
-            Dirección o Ciudad de Residencia *
-          </Label>
-          <Input
-            id="address"
-            placeholder="Ej. Av. Javier Prado Este 450, San Isidro, Lima"
-            value={form.address}
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
-            className={errors.address ? "border-red-400" : ""}
-          />
-          {errors.address && <p className="text-xs text-red-600">{errors.address}</p>}
-        </div>
+          <span className="type-body">Soy menor de edad</span>
+        </label>
+        {form.isMinor && (
+          <>
+            <TextField {...common} id="guardianName" label="Nombre del padre, madre o apoderado" />
+            <TextField {...common} id="guardianDocument" label="Documento del padre, madre o apoderado" />
+          </>
+        )}
       </div>
-    </div>
+    </fieldset>
   );
 }

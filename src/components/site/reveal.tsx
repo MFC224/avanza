@@ -19,10 +19,8 @@ export function Reveal({
 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  // Sin entradas escalonadas por tarjeta (PLAN_DISENO_UNICO.md, 3.4):
-  // staggerIndex se acepta por compatibilidad pero ya no retrasa nada.
-  void staggerIndex;
-  const computedDelay = delay ?? 0;
+  // Entradas escalonadas suaves (ronda 2): 0,09 s entre hermanos, tope 0,36 s.
+  const computedDelay = delay ?? Math.min((staggerIndex ?? 0) * 0.09, 0.36);
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>;
@@ -30,11 +28,11 @@ export function Reveal({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{
-        duration: 0.6,
+        duration: 0.8,
         delay: computedDelay,
         ease: [0.22, 1, 0.36, 1],
       }}

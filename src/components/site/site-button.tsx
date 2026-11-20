@@ -31,7 +31,7 @@ export function SiteButton({
   if (variant === "primary") {
     colorClasses = isInk
       ? "bg-[var(--paper)] text-[var(--ink)] hover:bg-neutral-200"
-      : "bg-[var(--brand)] text-[var(--paper)] hover:bg-[#032085]";
+      : "bg-[var(--brand)] text-[var(--on-brand)] hover:opacity-90";
   } else {
     // Variante secundaria: enlace de texto subrayado, sin recuadro.
     colorClasses = isInk

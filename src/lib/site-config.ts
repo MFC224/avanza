@@ -25,7 +25,7 @@ export const SITE_CONFIG = {
       email: "manuel@avanzape.com",
     },
     magno: {
-      name: "Magno Alomia",
+      name: "Magno Alomía",
       role: "Co-Fundador & Business Growth Director",
       phone: "+51942498841",
       displayPhone: "+51 942 498 841",
@@ -50,6 +50,10 @@ export const SITE_CONFIG = {
   },
 
   legal: {
+    // Datos obligatorios del proveedor en la Hoja de Reclamación (Ley 29571).
+    // Completar en cuanto AVANZA tenga RUC; se muestran solos al llenarse.
+    ruc: "",
+    fiscalAddress: "",
     privacyLaw: "Ley N° 29733 (Ley de Protección de Datos Personales del Perú)",
     consumerCode: "Ley N° 29571 (Código de Protección y Defensa del Consumidor - Indecopi)",
     ipPolicy: "Cesión total (100%) de Derechos Patrimoniales y Código Fuente al Cliente tras entrega de Sprint.",

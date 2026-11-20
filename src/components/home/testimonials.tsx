@@ -43,8 +43,9 @@ export function TestimonialsSection() {
         </Reveal>
 
         <div className="mt-16 lg:mt-24 grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20">
-          {TESTIMONIALS.map((item) => (
-            <figure key={item.attribution} className="flex flex-col">
+          {TESTIMONIALS.map((item, index) => (
+            <Reveal key={item.attribution} staggerIndex={index}>
+            <figure className="flex flex-col">
               <blockquote className="type-body lg:text-xl lg:leading-[1.55] text-[var(--ink)]">
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
@@ -52,6 +53,7 @@ export function TestimonialsSection() {
                 {item.attribution}
               </figcaption>
             </figure>
+            </Reveal>
           ))}
         </div>
 

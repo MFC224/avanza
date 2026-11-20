@@ -198,3 +198,27 @@ Un commit por fase. Al final de cada fase, el dueño ve el resultado en el naveg
 - [ ] Captura del panel de Import L&R con datos de demostración.
 - [ ] Foto de los fundadores (opcional: la sección funciona sin ella).
 - [ ] Dominio principal en Vercel (B1).
+
+---
+
+## 9. Ronda 2 (20 de noviembre de 2026)
+
+Pedidos del dueño e implementación:
+
+| Pedido | Qué se hizo |
+|--------|-------------|
+| Apellido "Alomía" con tilde en todo el sitio | Unificado en configuración, páginas, panel y pruebas. |
+| Volver al carrusel animado, solo con páginas web | `arc-carousel.tsx`: las 4 páginas públicas giran sobre medio círculo hacia abajo; avance automático cada 10 s con barra de progreso; botones anterior, pausa y siguiente; teclado; se pausa con el puntero, el foco o la pestaña oculta. |
+| Ofrecer los sistemas aparte | `systems-offer.tsx`: Import L&R y control de ceremonias con lo que resuelven y un botón "Cotizar un sistema". |
+| Modo claro y oscuro | Según el dispositivo la primera vez; botón en el encabezado (en el menú en celular); se recuerda la elección; sin destello al cargar. Las secciones claras pasan a oscuro y las negras se mantienen. |
+| Libro de Reclamaciones visible y conforme a ley | Acceso con ícono en el pie de todas las páginas. Hoja con datos del proveedor, datos del consumidor (con padre, madre o apoderado si es menor), bien contratado y monto, definiciones de reclamo y queja, pedido, plazo de 15 días hábiles y leyendas. Constancia imprimible o en PDF. |
+| Cookies (Ley 29733, D.S. 016-2024-JUS) | Google Analytics ya no se carga sin permiso: aviso con "Aceptar" y "Rechazar", y enlace "Cookies" en el pie para cambiar la elección. |
+| Animaciones | Entradas suaves escalonadas en servicios, pasos, sistemas, testimonios, cierre y páginas interiores; ampliación al pasar el puntero sobre las capturas del carrusel. |
+| Pantalla de carga | Logo de AVANZA y una línea fina que avanza, en el color del tema. |
+
+### Pendientes del dueño para cumplir la ley
+
+- [ ] **Ejecutar `supabase/migrations/20261120_complaints_book.sql` en Supabase.** Hasta entonces, las hojas no se guardan en la base de datos: el formulario avisa y ofrece enviarlas por correo a contacto@avanzape.com con un clic.
+- [ ] **RUC, razón social y domicilio fiscal** en `src/lib/site-config.ts` (`legal.ruc`, `legal.fiscalAddress`). Son datos obligatorios del proveedor en la hoja; se muestran solos al completarse.
+- [ ] Verificar los textos de la hoja con la herramienta oficial de Indecopi "Tu Libro de Reclamaciones".
+- [ ] Responder cada hoja por escrito en 15 días hábiles y conservar las hojas.

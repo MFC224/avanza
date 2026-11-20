@@ -6,6 +6,8 @@ import { FloatingContact } from "@/components/ui/floating-contact";
 import { CommandMenu } from "@/components/ui/command-menu";
 import { AutoLanguageTranslator } from "@/components/ui/auto-language-translator";
 import { AvanzaBrandLogo } from "@/components/ui/avanza-brand-logo";
+import { CookieConsent, CookieSettingsLink } from "@/components/layout/cookie-consent";
+import { BookOpen } from "lucide-react";
 
 export default function PublicLayout({
   children,
@@ -13,7 +15,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--paper)] text-[var(--ink)] font-sans antialiased relative">
+    <div data-tone="paper" className="min-h-screen flex flex-col bg-[var(--paper)] text-[var(--ink)] font-sans antialiased relative">
       {/* Global Command Palette (Cmd + K keyboard listener preserved) */}
       <CommandMenu />
 
@@ -52,6 +54,17 @@ export default function PublicLayout({
               <p className="type-small text-[var(--muted-on-ink)] max-w-sm">
                 Páginas web, sistemas a medida y automatización con inteligencia artificial para empresas del Perú.
               </p>
+              {/* Acceso visible al Libro de Reclamaciones (Ley 29571, D.S. 011-2011-PCM) */}
+              <Link
+                href="/reclamaciones"
+                className="group mt-4 inline-flex items-center gap-4 w-fit border border-[var(--line-on-ink)] hover:border-[var(--paper)] transition-colors px-5 py-4 rounded-[6px]"
+              >
+                <BookOpen className="w-7 h-7 text-[var(--paper)] shrink-0" aria-hidden="true" />
+                <span className="flex flex-col">
+                  <span className="type-body text-[var(--paper)]">Libro de Reclamaciones</span>
+                  <span className="type-small text-[var(--muted-on-ink)]">Registra tu queja o reclamo en línea</span>
+                </span>
+              </Link>
             </div>
 
             <nav className="md:col-span-2 flex flex-col gap-3" aria-label="Servicios">
@@ -82,11 +95,14 @@ export default function PublicLayout({
               <Link href="/privacidad" className="hover:text-[var(--paper)] transition-colors">Privacidad</Link>
               <Link href="/terminos" className="hover:text-[var(--paper)] transition-colors">Términos</Link>
               <Link href="/reclamaciones" className="hover:text-[var(--paper)] transition-colors">Libro de Reclamaciones</Link>
+              <CookieSettingsLink className="hover:text-[var(--paper)] transition-colors cursor-pointer" />
               <AutoLanguageTranslator />
             </div>
           </div>
         </div>
       </footer>
+
+      <CookieConsent />
 
       {/* Floating Action Widget (WhatsApp Quick Consultation) */}
       <FloatingContact />

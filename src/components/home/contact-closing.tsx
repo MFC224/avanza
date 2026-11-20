@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/site/reveal";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 /**
@@ -29,7 +30,7 @@ export function ContactClosing() {
       className="w-full bg-[var(--ink)] text-[var(--paper)] py-[120px] lg:py-[200px]"
     >
       <div className="max-w-7xl mx-auto px-5 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-7">
+        <Reveal className="lg:col-span-7">
           <h2 id="cierre-titulo" className="type-display max-w-[14ch]">
             Cuéntanos qué necesitas
           </h2>
@@ -42,11 +43,12 @@ export function ContactClosing() {
           >
             Cotizar proyecto
           </Link>
-        </div>
+        </Reveal>
 
         <ul className="lg:col-span-5 flex flex-col gap-12 lg:pt-4">
-          {PEOPLE.map((person) => (
+          {PEOPLE.map((person, index) => (
             <li key={person.name}>
+              <Reveal staggerIndex={index + 1}>
               <p className="type-card">{person.name}</p>
               <p className="type-small text-[var(--muted-on-ink)] mt-1">{person.role}</p>
               <a
@@ -57,6 +59,7 @@ export function ContactClosing() {
               >
                 WhatsApp {person.phone}
               </a>
+              </Reveal>
             </li>
           ))}
           <li>

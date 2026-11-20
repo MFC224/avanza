@@ -449,7 +449,7 @@ const SITE_CONFIG = {
       email: "manuel@avanzape.com",
     },
     magno: {
-      name: "Magno Alomia",
+      name: "Magno Alomía",
       role: "Co-Fundador & Business Growth Director",
       phone: "+51942498841",
       displayPhone: "+51 942 498 841",
@@ -940,7 +940,7 @@ test("UT-33", "SiteConfig", "Valida la configuración canónica del dominio .com
   assertEqual(SITE_CONFIG.domain, "avanzape.com");
   assertEqual(SITE_CONFIG.url, "https://avanzape.com");
   assertEqual(SITE_CONFIG.founders.manuel.name, "Manuel Callañaupa");
-  assertEqual(SITE_CONFIG.founders.magno.name, "Magno Alomia");
+  assertEqual(SITE_CONFIG.founders.magno.name, "Magno Alomía");
   assertEqual(SITE_CONFIG.contact.commercialPhoneRaw, "+51942498841");
   assertEqual(SITE_CONFIG.contact.email, "contacto@avanzape.com");
 });
@@ -1088,7 +1088,7 @@ test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas ana
   const homeContent = fs.readFileSync(homePath, "utf-8");
   assert(!homeContent.includes("CinematicWarp"), "page.tsx no debe importar ni renderizar CinematicWarp");
   assert(!homeContent.includes("LuxuryMeshGradient"), "page.tsx no debe renderizar fondos decorativos");
-  assert(homeContent.includes("WorkShowcase"), "page.tsx debe mostrar primero el trabajo real (WorkShowcase)");
+  assert(homeContent.includes("ArcCarousel"), "page.tsx debe mostrar el carrusel de páginas web (ArcCarousel)");
 
   // 3. Verificación de cumplimiento Ley 29733 en Privacidad (Flujo transfronterizo y retención)
   assert(fs.existsSync(privacidadPath), "privacidad/page.tsx debe existir");

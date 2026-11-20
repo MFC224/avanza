@@ -84,7 +84,7 @@ export default function SettingsPage() {
             </div>
             <div className="flex justify-between py-2">
               <span className="text-zinc-400">Directores</span>
-              <span className="text-zinc-300">Manuel Callañaupa (Tech) · Magno Alomia (Commercial)</span>
+              <span className="text-zinc-300">Manuel Callañaupa (Tech) · Magno Alomía (Commercial)</span>
             </div>
           </div>
         </div>

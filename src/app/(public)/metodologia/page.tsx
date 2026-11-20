@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section } from "@/components/site/section";
 import { SectionHeading } from "@/components/site/section-heading";
 import { SiteButton } from "@/components/site/site-button";
+import { Reveal } from "@/components/site/reveal";
 import { PROCESS_STEPS } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -37,8 +38,9 @@ export default function MetodologiaPage() {
 
         <ol className="flex flex-col gap-16 lg:gap-20">
           {PROCESS_STEPS.map((step, index) => (
-            <li
-              key={step.title}
+            <li key={step.title}>
+            <Reveal
+              staggerIndex={index}
               className="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-4"
             >
               <div className="lg:col-span-5 flex items-baseline gap-6">
@@ -50,6 +52,7 @@ export default function MetodologiaPage() {
               <p className="lg:col-span-7 type-body text-[var(--muted-on-paper)] max-w-[56ch] lg:pt-3">
                 {DETAILS[index]}
               </p>
+            </Reveal>
             </li>
           ))}
         </ol>

@@ -5,7 +5,8 @@ import { z } from "zod";
  * Conforme a las disposiciones de INDECOPI y Ley N° 29571 (Código de Protección y Defensa del Consumidor del Perú).
  */
 
-export const complaintSchema = z.object({
+export const complaintSchema = z
+  .object({
   fullName: z
     .string()
     .trim()
@@ -33,7 +34,11 @@ export const complaintSchema = z.object({
     .trim()
     .min(5, "Ingresa tu dirección o ciudad de residencia.")
     .max(200),
+  isMinor: z.boolean().default(false),
+  guardianName: z.string().trim().max(120).optional().default(""),
+  guardianDocument: z.string().trim().max(20).optional().default(""),
   serviceType: z.enum(["SERVICIO", "PRODUCTO"]).default("SERVICIO"),
+  serviceDescription: z.string().trim().max(300).optional().default(""),
   complaintType: z.enum(["RECLAMO", "QUEJA"], {
     error: "Selecciona si es un Reclamo o una Queja.",
   }),
@@ -51,7 +56,18 @@ export const complaintSchema = z.object({
   termsAccepted: z.literal(true, {
     error: "Debes declarar la veracidad de los datos conforme a ley.",
   }),
-});
+})
+  .superRefine((data, ctx) => {
+    // Si quien reclama es menor de edad, la hoja exige los datos de su padre, madre o apoderado.
+    if (data.isMinor) {
+      if (!data.guardianName || data.guardianName.length < 3) {
+        ctx.addIssue({ code: "custom", path: ["guardianName"], message: "Ingresa el nombre del padre, madre o apoderado." });
+      }
+      if (!data.guardianDocument || data.guardianDocument.length < 6) {
+        ctx.addIssue({ code: "custom", path: ["guardianDocument"], message: "Ingresa el documento del padre, madre o apoderado." });
+      }
+    }
+  });
 
 export type ComplaintFormData = z.infer<typeof complaintSchema>;
 

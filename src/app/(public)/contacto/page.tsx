@@ -234,12 +234,12 @@ export default function ContactoPage() {
                       id="consent"
                       checked={consentGiven}
                       onChange={(e) => setConsentGiven(e.target.checked)}
-                      className="mt-1 w-4 h-4 rounded-none text-black focus:ring-0 border-neutral-400 cursor-pointer"
+                      className="mt-1 w-4 h-4 rounded-none text-[var(--ink)] focus:ring-0 border-[var(--line-on-paper)] cursor-pointer"
                       required
                     />
                     <label htmlFor="consent" className="type-small text-[var(--muted-on-paper)] leading-relaxed cursor-pointer select-none font-normal">
                       He leído y acepto la{" "}
-                      <Link href="/privacidad" target="_blank" className="text-[var(--ink)] underline hover:text-black">
+                      <Link href="/privacidad" target="_blank" className="text-[var(--ink)] underline hover:text-[var(--ink)]">
                         Política de Privacidad
                       </Link>{" "}
                       y autorizo el tratamiento de mis datos personales para fines de cotización conforme a la <strong>Ley N° 29733</strong> de la República del Perú.
@@ -249,7 +249,7 @@ export default function ContactoPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="px-8 py-4 bg-[var(--brand)] hover:bg-[#032085] text-white type-button transition-colors cursor-pointer inline-flex items-center justify-center select-none disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
+                    className="px-8 py-4 bg-[var(--brand)] hover:opacity-90 text-[var(--on-brand)] type-button transition-colors cursor-pointer inline-flex items-center justify-center select-none disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
                   >
                     {loading ? "Enviando…" : "Enviar solicitud"}
                   </button>

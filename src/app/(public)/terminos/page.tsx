@@ -19,17 +19,17 @@ export default function TerminosPage() {
       <Reveal>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-8 transition-colors group"
+          className="inline-flex items-center gap-2 text-sm text-[var(--muted-on-paper)] hover:text-[var(--ink)] underline underline-offset-4 mb-8 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>Volver al inicio</span>
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+          <div className="w-10 h-10 bg-transparent border border-[var(--line-on-paper)] flex items-center justify-center text-[var(--ink)] underline underline-offset-4">
             <Scale className="w-5 h-5" />
           </div>
-          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
+          <span className="text-xs font-medium text-[var(--ink)] underline underline-offset-4 bg-transparent border border-[var(--line-on-paper)] px-3 py-1">
             Contratación Ágil & Propiedad 100% del Cliente
           </span>
         </div>
@@ -37,23 +37,23 @@ export default function TerminosPage() {
         <h1 className="type-display text-[var(--ink)] mb-6">
           Términos de Servicio y Estándares de Entrega
         </h1>
-        <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed">
+        <p className="text-[var(--muted-on-paper)] text-base md:text-lg mb-10 leading-relaxed">
           Nuestra filosofía de ingeniería elimina la burocracia de las agencias tradicionales. Estos términos definen con total transparencia los compromisos, garantías y la cesión absoluta de la propiedad intelectual a tu favor.
         </p>
       </Reveal>
 
-      <div className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
+      <div className="bg-[var(--paper)] border border-[var(--line-on-paper)] p-8 md:p-12 space-y-10 text-[var(--ink)] leading-relaxed text-sm md:text-base">
         {/* IP Clause Highlight */}
-        <div className="p-6 bg-blue-50/70 border border-blue-200/90">
+        <div className="p-6 bg-transparent border border-[var(--line-on-paper)]">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center shrink-0">
               <Award className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-medium text-slate-900 text-lg mb-1">
+              <h3 className="font-medium text-[var(--ink)] text-lg mb-1">
                 Garantía de Cero Bloqueo (Zero Vendor Lock-In)
               </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-[var(--muted-on-paper)] text-sm leading-relaxed">
                 El cliente es el propietario absoluto del 100% del código fuente, repositorios de Git, bases de datos PostgreSQL, documentación técnica y activos digitales generados una vez liquidado el sprint correspondiente.
               </p>
             </div>
@@ -61,14 +61,14 @@ export default function TerminosPage() {
         </div>
 
         <section>
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-blue-600" />
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <Code2 className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             1. Alcance de los Servicios
           </h2>
           <p>
             <strong>{SITE_CONFIG.name}</strong> provee servicios profesionales especializados de desarrollo de software bajo metodología ágil de entregas continuas:
           </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li><strong>Páginas Web y Aplicaciones de Alto Rendimiento:</strong> Arquitectura moderna basada en Next.js 16, React 19 y Tailwind CSS.</li>
             <li><strong>Sistemas Web & CRM a Medida:</strong> Bases de datos relacionales seguras con Supabase PostgreSQL y autenticación segura SSR.</li>
             <li><strong>Automatización con Agentes de IA:</strong> Modelos LLM, canalizaciones RAG e integraciones bidireccionales con WhatsApp y ERPs.</li>
@@ -76,8 +76,8 @@ export default function TerminosPage() {
           </ul>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             2. Ciclos de Entrega y Metodología (Sprints de 7 a 14 Días)
           </h2>
@@ -89,9 +89,9 @@ export default function TerminosPage() {
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-blue-600" />
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             3. Confidencialidad y Acuerdo NDA
           </h2>
           <p>
@@ -102,8 +102,8 @@ export default function TerminosPage() {
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             4. Garantía Técnica Post-Lanzamiento (30 Días)
           </h2>
           <p>
@@ -111,17 +111,17 @@ export default function TerminosPage() {
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             5. Ley Aplicable y Jurisdicción
           </h2>
-          <p className="text-slate-600">
+          <p className="text-[var(--muted-on-paper)]">
             Los presentes términos se rigen e interpretan bajo las leyes de la <strong>República del Perú</strong>. Ante cualquier discrepancia técnica o comercial, las partes procurarán resolverla de mutuo acuerdo y, en su defecto, se someterán a la jurisdicción de los jueces y tribunales del Distrito Judicial de Lima.
           </p>
         </section>
       </div>
 
-      <div className="mt-12 text-center text-xs text-slate-500">
+      <div className="mt-12 text-center text-xs text-[var(--muted-on-paper)]">
         <p>© {new Date().getFullYear()} {SITE_CONFIG.legalName} · Lima, Perú</p>
       </div>
     </div>

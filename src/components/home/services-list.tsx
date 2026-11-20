@@ -22,12 +22,13 @@ export function ServicesList() {
         </Reveal>
 
         <dl className="mt-16 lg:mt-24 flex flex-col gap-16 lg:gap-20">
-          {SERVICES.map((service) => {
+          {SERVICES.map((service, index) => {
             const examples = projectsFor(service.id).map((p) => p.name);
             const proof = examples.length > 0 ? examples.join(", ") : service.proofNote;
             return (
-              <div
+              <Reveal
                 key={service.id}
+                staggerIndex={index}
                 className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-x-16 gap-y-4"
               >
                 <dt className="type-section text-[var(--ink)]">{service.name}</dt>
@@ -39,7 +40,7 @@ export function ServicesList() {
                     </p>
                   )}
                 </dd>
-              </div>
+              </Reveal>
             );
           })}
         </dl>

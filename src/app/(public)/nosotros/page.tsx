@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section } from "@/components/site/section";
 import { SectionHeading } from "@/components/site/section-heading";
 import { SiteButton } from "@/components/site/site-button";
+import { Reveal } from "@/components/site/reveal";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -59,10 +60,12 @@ export default function NosotrosPage() {
         />
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-12">
-          {VALUES.map((value) => (
+          {VALUES.map((value, index) => (
             <li key={value.title}>
-              <h2 className="type-card">{value.title}</h2>
-              <p className="type-body text-[var(--muted-on-paper)] mt-3">{value.description}</p>
+              <Reveal staggerIndex={index}>
+                <h2 className="type-card">{value.title}</h2>
+                <p className="type-body text-[var(--muted-on-paper)] mt-3">{value.description}</p>
+              </Reveal>
             </li>
           ))}
         </ul>
@@ -71,8 +74,9 @@ export default function NosotrosPage() {
       <Section tone="ink">
         <h2 className="type-section max-w-3xl">Los fundadores</h2>
         <ul className="mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
-          {FOUNDERS.map((founder) => (
+          {FOUNDERS.map((founder, index) => (
             <li key={founder.name}>
+              <Reveal staggerIndex={index}>
               <h3 className="type-card">{founder.name}</h3>
               <p className="type-small text-[var(--muted-on-ink)] mt-1">{founder.role}</p>
               <p className="type-body text-[var(--muted-on-ink)] mt-5 max-w-[46ch]">{founder.bio}</p>
@@ -92,6 +96,7 @@ export default function NosotrosPage() {
                   {founder.email}
                 </a>
               </p>
+              </Reveal>
             </li>
           ))}
         </ul>

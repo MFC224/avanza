@@ -19,17 +19,17 @@ export default function PrivacidadPage() {
       <Reveal>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-8 transition-colors group"
+          className="inline-flex items-center gap-2 text-sm text-[var(--muted-on-paper)] hover:text-[var(--ink)] underline underline-offset-4 mb-8 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>Volver al inicio</span>
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+          <div className="w-10 h-10 bg-transparent border border-[var(--line-on-paper)] flex items-center justify-center text-[var(--ink)] underline underline-offset-4">
             <ShieldCheck className="w-5 h-5" />
           </div>
-          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
+          <span className="text-xs font-medium text-[var(--ink)] underline underline-offset-4 bg-transparent border border-[var(--line-on-paper)] px-3 py-1">
             Marco Legal · Ley N° 29733 (Perú)
           </span>
         </div>
@@ -37,93 +37,93 @@ export default function PrivacidadPage() {
         <h1 className="type-display text-[var(--ink)] mb-6">
           Política de Privacidad y Protección de Datos
         </h1>
-        <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed">
+        <p className="text-[var(--muted-on-paper)] text-base md:text-lg mb-10 leading-relaxed">
           En <strong>{SITE_CONFIG.name}</strong> ({SITE_CONFIG.legalName}), la privacidad, integridad y protección de la información corporativa y personal de nuestros clientes es un principio fundamental de ingeniería.
         </p>
       </Reveal>
 
-      <div className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
+      <div className="bg-[var(--paper)] border border-[var(--line-on-paper)] p-8 md:p-12 space-y-10 text-[var(--ink)] leading-relaxed text-sm md:text-base">
         <section>
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-blue-600" />
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             1. Marco Normativo y Titular del Tratamiento
           </h2>
           <p>
             El presente documento regula el tratamiento de datos personales recopilados a través de nuestro sitio web y plataformas operativas, de conformidad con la <strong>Ley N° 29733</strong> (Ley de Protección de Datos Personales del Perú) y su Reglamento aprobado por <strong>Decreto Supremo N° 003-2013-JUS</strong>.
           </p>
           <p className="mt-2">
-            El responsable del banco de datos es <strong>{SITE_CONFIG.legalName}</strong>, con domicilio legal y operativo en Lima, Perú, representado por sus fundadores técnicos Manuel Callañaupa y Magno Alomia.
+            El responsable del banco de datos es <strong>{SITE_CONFIG.legalName}</strong>, con domicilio legal y operativo en Lima, Perú, representado por sus fundadores técnicos Manuel Callañaupa y Magno Alomía.
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <Lock className="w-5 h-5 text-blue-600" />
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <Lock className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             2. Datos Personales que Recopilamos
           </h2>
           <p>
             Recopilamos únicamente los datos necesarios para brindar servicios profesionales de arquitectura de software, estimación técnica y soporte comercial:
           </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li><strong>Datos de contacto comercial:</strong> Nombre, apellidos, teléfono corporativo / WhatsApp y correo electrónico.</li>
             <li><strong>Datos del requerimiento:</strong> Tipo de software solicitado (Página Web, CRM, Agente IA, App Móvil), tamaño de empresa y urgencia de entrega.</li>
             <li><strong>Datos técnicos de navegación:</strong> Métricas anónimas de rendimiento (LCP, FID/INP) para garantizar 90Hz–120Hz de fluidez visual sin cookies invasivas de terceros.</li>
           </ul>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             3. Finalidad del Tratamiento
           </h2>
           <p>
             Los datos proporcionados son tratados exclusivamente para:
           </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li>Elaborar y remitir propuestas técnicas, presupuestos y cronogramas de sprints de software.</li>
             <li>Coordinar reuniones de alineamiento arquitectónico y demos de producto en vivo.</li>
             <li>Gestionar la relación contractual, emisión de comprobantes de pago y entrega de código fuente bajo estándares de confidencialidad (NDA).</li>
           </ul>
-          <p className="mt-3 font-medium text-slate-800">
+          <p className="mt-3 font-medium text-[var(--ink)]">
             AVANZA no comercializa, no alquila y no comparte sus datos personales con terceros para fines publicitarios.
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             4. Seguridad y Medidas de Protección Técnica
           </h2>
           <p>
             Implementamos protocolos de seguridad Zero-Trust de grado corporativo:
           </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li>Cifrado en tránsito mediante protocolos TLS 1.3 / SSL de 256 bits.</li>
             <li>Aislamiento de base de datos relacional con <strong>Row-Level Security (RLS)</strong> en Supabase PostgreSQL.</li>
             <li>Protección contra bots y spam mediante mecanismos de honeypot y sanitización estricta de esquemas Zod en Node.js 24.</li>
           </ul>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <Globe className="w-5 h-5 text-blue-600" />
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <Globe className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             5. Flujo Transfronterizo de Datos (Estados Unidos)
           </h2>
           <p>
             En estricto cumplimiento del <strong>artículo 15 de la Ley N° 29733</strong> y el Reglamento de la Autoridad Nacional de Protección de Datos Personales (ANPD), informamos a los usuarios y clientes que el servicio opera sobre infraestructura cloud moderna que implica la transferencia transfronteriza y almacenamiento seguro de datos personales en centros de datos ubicados en los <strong>Estados Unidos de América</strong>:
           </p>
-          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-slate-600">
+          <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li><strong>Vercel Inc. (San Francisco, EE.UU.):</strong> Alojamiento de frontend, funciones serverless edge y renderizado SSR.</li>
             <li><strong>Supabase Inc. / AWS (Norteamérica):</strong> Base de datos relacional PostgreSQL con cifrado en reposo AES-256 y políticas de aislamiento de datos.</li>
             <li><strong>Google Cloud Platform / Gemini Paid API (EE.UU.):</strong> Modelos de inteligencia artificial bajo contrato comercial de pago donde los datos de los usuarios <em>nunca son utilizados para el re-entrenamiento de modelos públicos</em>.</li>
             <li><strong>Resend Inc. (EE.UU.):</strong> Infraestructura de envío de correos transaccionales y notificaciones de cotización.</li>
           </ul>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-[var(--muted-on-paper)]">
             Todos los proveedores internacionales seleccionados por AVANZA cuentan con certificaciones de seguridad auditadas (SOC 2 Type II, ISO 27001) garantizando niveles de protección adecuados según la normativa peruana.
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
-            <Clock className="w-5 h-5 text-blue-600" />
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3 flex items-center gap-2">
+            <Clock className="w-5 h-5 text-[var(--ink)] underline underline-offset-4" />
             6. Política de Retención y Purga de Datos
           </h2>
           <p>
@@ -131,39 +131,39 @@ export default function PrivacidadPage() {
           </p>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             7. Ejercicio de Derechos ARCO
           </h2>
           <p>
             Como titular de los datos personales, usted tiene derecho a ejercer en cualquier momento sus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> reconocidos por la Ley N° 29733.
           </p>
-          <div className="mt-4 p-5 bg-slate-50 border border-slate-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="mt-4 p-5 bg-transparent border border-[var(--line-on-paper)] flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <div>
-              <p className="font-medium text-slate-900">Canal oficial de Atención ARCO</p>
-              <p className="text-xs text-slate-500">Respuesta formal en un plazo máximo de 5 días hábiles.</p>
+              <p className="font-medium text-[var(--ink)]">Canal oficial de Atención ARCO</p>
+              <p className="text-xs text-[var(--muted-on-paper)]">Respuesta formal en un plazo máximo de 5 días hábiles.</p>
             </div>
             <a
               href={`mailto:${SITE_CONFIG.contact.email}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 text-xs font-medium text-slate-800 hover:text-blue-600 hover:border-blue-300 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--paper)] border border-[var(--line-on-paper)] text-xs font-medium text-[var(--ink)] hover:text-[var(--ink)] underline underline-offset-4 hover:border-[var(--line-on-paper)] transition-colors"
             >
-              <Mail className="w-4 h-4 text-blue-600" />
+              <Mail className="w-4 h-4 text-[var(--ink)] underline underline-offset-4" />
               <span>{SITE_CONFIG.contact.email}</span>
             </a>
           </div>
         </section>
 
-        <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-medium text-slate-900 mb-3">
+        <section className="border-t border-[var(--line-on-paper)] pt-8">
+          <h2 className="text-xl font-medium text-[var(--ink)] mb-3">
             8. Modificaciones y Vigencia
           </h2>
-          <p className="text-slate-600">
+          <p className="text-[var(--muted-on-paper)]">
             Esta política entra en vigencia a partir del 1 de Noviembre de 2026 y podrá ser actualizada periódicamente para reflejar mejoras técnicas o cambios normativos. Cualquier modificación sustancial será notificada a través de esta misma URL.
           </p>
         </section>
       </div>
 
-      <div className="mt-12 text-center text-xs text-slate-500">
+      <div className="mt-12 text-center text-xs text-[var(--muted-on-paper)]">
         <p>© {new Date().getFullYear()} {SITE_CONFIG.legalName} · Lima, Perú</p>
       </div>
     </div>

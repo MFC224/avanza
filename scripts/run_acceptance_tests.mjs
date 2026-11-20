@@ -183,16 +183,20 @@ runTest("UAT-05", "Work Showcase", "El portafolio muestra los 6 proyectos reales
   assert(!projects.includes("Scott Smith"), "No debe incluir proyectos de demostración anteriores");
 });
 
-runTest("UAT-06", "Work Showcase Motion", "Movimiento del portafolio ligado al scroll y respetando 'reducir movimiento'", () => {
-  const code = readSrc("src/components/home/work-showcase.tsx");
-  assert(code.includes("useScroll"), "Debe ligar el movimiento al scroll");
+runTest("UAT-06", "Arc Carousel Motion", "Carrusel en arco que avanza cada 10 s, se pausa y respeta 'reducir movimiento'", () => {
+  const code = readSrc("src/components/home/arc-carousel.tsx");
+  assert(code.includes("AUTOPLAY_MS = 10_000"), "Debe avanzar cada 10 segundos");
   assert(code.includes("useReducedMotion"), "Debe respetar prefers-reduced-motion");
+  assert(code.includes("visibilitychange"), "Debe pausarse con la pestaña oculta");
+  assert(code.includes("ArrowRight") && code.includes("ArrowLeft"), "Debe poder manejarse con teclado");
 });
 
-runTest("UAT-07", "Work Showcase Links", "Los sitios públicos se abren en pestaña nueva y los sistemas internos no llevan enlace", () => {
-  const code = readSrc("src/components/home/work-showcase.tsx");
+runTest("UAT-07", "Arc Carousel Content", "El carrusel muestra solo páginas web públicas y abre cada sitio en pestaña nueva", () => {
+  const code = readSrc("src/components/home/arc-carousel.tsx");
+  assert(code.includes('p.service === "web" && p.url'), "El carrusel debe mostrar solo páginas web con sitio público");
   assert(code.includes('target="_blank"') && code.includes('rel="noopener noreferrer"'), "Los enlaces externos deben abrir en pestaña nueva de forma segura");
-  assert(code.includes("Sistema de uso interno"), "Los sistemas sin sitio público deben indicarlo");
+  const systems = readSrc("src/components/home/systems-offer.tsx");
+  assert(systems.includes('projectsFor("systems")'), "Los sistemas se ofrecen en su propia sección");
 });
 
 // ---------------------------------------------------------------------------
@@ -332,7 +336,9 @@ runTest("UAT-21", "Libro de Reclamaciones", "Generación de código único forma
   assert(schemaCode.includes("DNI") && schemaCode.includes("RUC"), "Debe contemplar documentos peruanos DNI y RUC");
 
   const pageCode = readSrc("src/app/(public)/reclamaciones/page.tsx");
-  assert(pageCode.includes("generateComplaintCode"), "La página debe usar el generador de código de reclamo");
+  const actionCode = readSrc("src/app/(public)/reclamaciones/actions.ts");
+  assert(actionCode.includes("register_complaint"), "La hoja debe registrarse en la base de datos con número correlativo");
+  assert(pageCode.includes("quince (15)") || readSrc("src/app/(public)/reclamaciones/reclamacion-legal.tsx").includes("quince (15)"), "Debe indicar el plazo legal de 15 días hábiles");
 });
 
 runTest("UAT-22", "IP Ownership Guarantee", "Garantía contractual de 100% cesión de código fuente sin suscripciones cautivas", () => {

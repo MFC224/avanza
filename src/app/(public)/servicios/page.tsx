@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Section } from "@/components/site/section";
 import { SectionHeading } from "@/components/site/section-heading";
 import { SiteButton } from "@/components/site/site-button";
+import { Reveal } from "@/components/site/reveal";
 import { SERVICES, projectsFor } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function ServiciosPage() {
         const examples = projectsFor(service.id);
         return (
           <Section key={service.id} tone="paper" id={service.id} className="py-[80px] lg:py-[120px]">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-10">
+            <Reveal className="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-10">
               <div className="lg:col-span-5">
                 <h2 className="type-section">{service.name}</h2>
                 <p className="type-body text-[var(--muted-on-paper)] mt-5 max-w-[44ch]">
@@ -91,7 +92,7 @@ export default function ServiciosPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </Section>
         );
       })}
