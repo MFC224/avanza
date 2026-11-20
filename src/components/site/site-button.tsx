@@ -33,13 +33,14 @@ export function SiteButton({
       ? "bg-[var(--paper)] text-[var(--ink)] hover:bg-neutral-200"
       : "bg-[var(--brand)] text-[var(--paper)] hover:bg-[#032085]";
   } else {
+    // Variante secundaria: enlace de texto subrayado, sin recuadro.
     colorClasses = isInk
-      ? "bg-transparent text-[var(--paper)] hover:bg-white/10 border border-[var(--line-on-ink)]"
-      : "bg-transparent text-[var(--ink)] hover:bg-black/5 border border-[var(--line-on-paper)]";
+      ? "bg-transparent text-[var(--paper)] underline underline-offset-[6px] decoration-[var(--muted-on-ink)] hover:decoration-[var(--paper)] !px-0"
+      : "bg-transparent text-[var(--ink)] underline underline-offset-[6px] decoration-[var(--muted-on-paper)] hover:decoration-[var(--ink)] !px-0";
   }
 
   const baseClasses = cn(
-    "text-button inline-flex items-center justify-center px-6 py-3.5 rounded-none font-medium transition-colors duration-200 cursor-pointer select-none",
+    "type-button inline-flex items-center justify-center px-7 py-4 rounded-none transition-colors duration-200 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]",
     colorClasses,
     className
   );

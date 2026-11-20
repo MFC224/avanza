@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ShieldCheck, Lock, FileText, ArrowLeft, Mail, Globe, Clock } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { Reveal } from "@/components/site/reveal";
-import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
@@ -17,7 +16,6 @@ export const metadata: Metadata = {
 export default function PrivacidadPage() {
   return (
     <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
-      <LuxuryMeshGradient />
       <Reveal>
         <Link
           href="/"
@@ -28,15 +26,15 @@ export default function PrivacidadPage() {
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
             <ShieldCheck className="w-5 h-5" />
           </div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full">
+          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
             Marco Legal · Ley N° 29733 (Perú)
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+        <h1 className="type-display text-[var(--ink)] mb-6">
           Política de Privacidad y Protección de Datos
         </h1>
         <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed">
@@ -44,9 +42,9 @@ export default function PrivacidadPage() {
         </p>
       </Reveal>
 
-      <div className="bg-white rounded-3xl border border-slate-200/90 p-8 md:p-12 shadow-sm space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
+      <div className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <FileText className="w-5 h-5 text-blue-600" />
             1. Marco Normativo y Titular del Tratamiento
           </h2>
@@ -59,7 +57,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <Lock className="w-5 h-5 text-blue-600" />
             2. Datos Personales que Recopilamos
           </h2>
@@ -74,7 +72,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             3. Finalidad del Tratamiento
           </h2>
           <p>
@@ -91,7 +89,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             4. Seguridad y Medidas de Protección Técnica
           </h2>
           <p>
@@ -105,7 +103,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <Globe className="w-5 h-5 text-blue-600" />
             5. Flujo Transfronterizo de Datos (Estados Unidos)
           </h2>
@@ -124,7 +122,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <Clock className="w-5 h-5 text-blue-600" />
             6. Política de Retención y Purga de Datos
           </h2>
@@ -134,20 +132,20 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             7. Ejercicio de Derechos ARCO
           </h2>
           <p>
             Como titular de los datos personales, usted tiene derecho a ejercer en cualquier momento sus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> reconocidos por la Ley N° 29733.
           </p>
-          <div className="mt-4 p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="mt-4 p-5 bg-slate-50 border border-slate-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <div>
-              <p className="font-semibold text-slate-900">Canal oficial de Atención ARCO</p>
+              <p className="font-medium text-slate-900">Canal oficial de Atención ARCO</p>
               <p className="text-xs text-slate-500">Respuesta formal en un plazo máximo de 5 días hábiles.</p>
             </div>
             <a
               href={`mailto:${SITE_CONFIG.contact.email}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 hover:text-blue-600 hover:border-blue-300 transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 text-xs font-medium text-slate-800 hover:text-blue-600 hover:border-blue-300 transition-colors"
             >
               <Mail className="w-4 h-4 text-blue-600" />
               <span>{SITE_CONFIG.contact.email}</span>
@@ -156,7 +154,7 @@ export default function PrivacidadPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             8. Modificaciones y Vigencia
           </h2>
           <p className="text-slate-600">

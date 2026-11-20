@@ -8,7 +8,6 @@ import { complaintSchema, generateComplaintCode } from "@/lib/complaints-schema"
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/site/reveal";
-import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 import { ReclamacionSuccess } from "./reclamacion-success";
 import { ReclamacionConsumerSection } from "./reclamacion-consumer-section";
 
@@ -60,7 +59,6 @@ export default function ReclamacionesPage() {
 
   return (
     <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative">
-      <LuxuryMeshGradient />
       <Reveal>
         <Link
           href="/"
@@ -71,25 +69,25 @@ export default function ReclamacionesPage() {
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
             <BookOpen className="w-5 h-5" />
           </div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full">
+          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
             D.S. N° 011-2011-PCM · INDECOPI
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+        <h1 className="type-display text-[var(--ink)] mb-6">
           Libro de Reclamaciones Virtual
         </h1>
         <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed">
           Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), ponemos a tu disposición nuestro registro virtual para canalizar cualquier queja o reclamo respecto a nuestros servicios de software.
         </p>
 
-        <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-900 text-xs md:text-sm mb-10 flex items-start gap-3">
+        <div className="p-4 bg-amber-50/80 border border-amber-200 text-amber-900 text-xs md:text-sm mb-10 flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div>
-            <p className="font-bold">Definiciones conforme a la normativa peruana:</p>
+            <p className="font-medium">Definiciones conforme a la normativa peruana:</p>
             <p className="mt-1">
               <strong>Queja:</strong> Disconformidad frente a la mala atención al público o malestar administrativo.
             </p>
@@ -128,18 +126,18 @@ export default function ReclamacionesPage() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-3xl border border-slate-200/90 p-8 md:p-12 shadow-sm space-y-8 text-slate-800"
+          className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-8 text-slate-800"
         >
           <ReclamacionConsumerSection form={form} setForm={setForm} errors={errors} />
 
           {/* Section 2: Detalle del Reclamo o Queja */}
           <div className="pt-4">
-            <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 mb-6">
+            <h3 className="text-lg font-medium text-slate-900 border-b border-slate-200 pb-3 mb-6">
               2. Detalle del Bien y de la Reclamación
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-slate-700">Tipo de Contratación *</Label>
+                <Label className="text-xs font-medium text-slate-700">Tipo de Contratación *</Label>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2 cursor-pointer text-sm">
                     <input
@@ -167,7 +165,7 @@ export default function ReclamacionesPage() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-xs font-bold text-slate-700">Tipo de Disconformidad *</Label>
+                <Label className="text-xs font-medium text-slate-700">Tipo de Disconformidad *</Label>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2 cursor-pointer text-sm">
                     <input
@@ -195,7 +193,7 @@ export default function ReclamacionesPage() {
               </div>
 
               <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="description" className="text-xs font-bold text-slate-700">
+                <Label htmlFor="description" className="text-xs font-medium text-slate-700">
                   Detalle de los Hechos (Motivo del Reclamo o Queja) *
                 </Label>
                 <textarea
@@ -214,7 +212,7 @@ export default function ReclamacionesPage() {
               </div>
 
               <div className="space-y-1.5 md:col-span-2">
-                <Label htmlFor="request" className="text-xs font-bold text-slate-700">
+                <Label htmlFor="request" className="text-xs font-medium text-slate-700">
                   Pedido Concreto del Consumidor *
                 </Label>
                 <textarea
@@ -238,7 +236,7 @@ export default function ReclamacionesPage() {
                 type="checkbox"
                 checked={form.termsAccepted}
                 onChange={(e) => setForm({ ...form, termsAccepted: e.target.checked })}
-                className="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                className="mt-1 h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500"
               />
               <span className="text-xs text-slate-600 leading-relaxed">
                 Declaro bajo juramento que los datos consignados en el presente formulario son verídicos y corresponden a los hechos acontecidos, conforme a lo establecido en la Ley N° 29571.
@@ -252,7 +250,7 @@ export default function ReclamacionesPage() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+            className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium flex items-center justify-center gap-2 transition-all"
           >
             {loading ? (
               <span>Registrando reclamación...</span>

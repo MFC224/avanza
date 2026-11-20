@@ -1071,7 +1071,7 @@ test("UT-41", "Sprint1WhiteLuxury", "Valida tokens White Luxury en globals.css, 
 });
 
 // --- MÓDULO 14: Sprint 2 Secondary Pages, Legal Compliance (Ley 29733) & Analog Load Removal ---
-test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas analógicas (CinematicWarp/Overlay), presencia de LuxuryMeshGradient y cumplimiento Ley 29733", () => {
+test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas analógicas y fondos decorativos, portada con trabajo real y cumplimiento Ley 29733", () => {
   const meshGradientPath = path.join(ROOT_DIR, "src", "components", "ui", "luxury-mesh-gradient.tsx");
   const homePath = path.join(ROOT_DIR, "src", "app", "(public)", "page.tsx");
   const privacidadPath = path.join(ROOT_DIR, "src", "app", "(public)", "privacidad", "page.tsx");
@@ -1081,13 +1081,14 @@ test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas ana
   const serviciosPath = path.join(ROOT_DIR, "src", "app", "(public)", "servicios", "page.tsx");
   const nosotrosPath = path.join(ROOT_DIR, "src", "app", "(public)", "nosotros", "page.tsx");
 
-  // 1. Verificación de creación de LuxuryMeshGradient
-  assert(fs.existsSync(meshGradientPath), "luxury-mesh-gradient.tsx debe existir");
+  // 1. El fondo decorativo LuxuryMeshGradient se retiró (PLAN_DISENO_UNICO.md, sección 2)
+  assert(!fs.existsSync(meshGradientPath), "luxury-mesh-gradient.tsx ya no debe existir");
 
   // 2. Verificación de retiro de CinematicWarp de la portada
   const homeContent = fs.readFileSync(homePath, "utf-8");
   assert(!homeContent.includes("CinematicWarp"), "page.tsx no debe importar ni renderizar CinematicWarp");
-  assert(homeContent.includes("LuxuryMeshGradient"), "page.tsx debe renderizar LuxuryMeshGradient");
+  assert(!homeContent.includes("LuxuryMeshGradient"), "page.tsx no debe renderizar fondos decorativos");
+  assert(homeContent.includes("WorkShowcase"), "page.tsx debe mostrar primero el trabajo real (WorkShowcase)");
 
   // 3. Verificación de cumplimiento Ley 29733 en Privacidad (Flujo transfronterizo y retención)
   assert(fs.existsSync(privacidadPath), "privacidad/page.tsx debe existir");

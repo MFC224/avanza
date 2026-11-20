@@ -1,57 +1,47 @@
 import React from "react";
-import { MessageCircle, Phone, ShieldCheck } from "lucide-react";
+
+/** Canales directos como enlaces de texto (PLAN_DISENO_UNICO.md, sección 5). */
+const CHANNELS = [
+  {
+    label: "WhatsApp",
+    detail: "+51 942 498 841, Magno Alomía",
+    href: "https://wa.me/51942498841?text=Hola%20Magno,%20quisiera%20conversar%20sobre%20un%20proyecto",
+    external: true,
+  },
+  {
+    label: "Teléfono",
+    detail: "+51 921 195 037, Manuel Callañaupa",
+    href: "tel:+51921195037",
+    external: false,
+  },
+  {
+    label: "Correo",
+    detail: "contacto@avanzape.com",
+    href: "mailto:contacto@avanzape.com",
+    external: false,
+  },
+];
 
 export function ContactoDirectChannels() {
   return (
-    <>
-      <div className="space-y-4 my-8">
-        <a
-          href="https://wa.me/51942498841?text=Hola%20Magno,%20quisiera%20conversar%20sobre%20un%20proyecto"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-between p-5 border border-[var(--line-on-paper)] bg-white text-[var(--ink)] hover:border-black transition-colors"
-        >
-          <div className="flex items-center gap-4">
-            <MessageCircle className="w-5 h-5 text-[var(--ink)]" />
-            <div>
-              <span className="text-card font-normal block">
-                WhatsApp Directo
-              </span>
-              <span className="text-small text-[var(--muted-on-paper)] font-normal">
-                +51 942 498 841 · Magno Alomía
-              </span>
-            </div>
-          </div>
-          <span className="text-small text-[var(--brand)] font-normal">
-            Chat &rarr;
-          </span>
-        </a>
-
-        <a
-          href="tel:+51921195037"
-          className="flex items-center justify-between p-5 border border-[var(--line-on-paper)] bg-white text-[var(--ink)] hover:border-black transition-colors"
-        >
-          <div className="flex items-center gap-4">
-            <Phone className="w-5 h-5 text-[var(--ink)]" />
-            <div>
-              <span className="text-card font-normal block">
-                Llamada Telefónica
-              </span>
-              <span className="text-small text-[var(--muted-on-paper)] font-normal">
-                +51 921 195 037 · Manuel Callañaupa
-              </span>
-            </div>
-          </div>
-          <span className="text-small text-[var(--brand)] font-normal">
-            Llamar &rarr;
-          </span>
-        </a>
-      </div>
-
-      <div className="flex items-center gap-3 text-small text-[var(--muted-on-paper)] pt-4 border-t border-[var(--line-on-paper)] font-normal">
-        <ShieldCheck className="w-4 h-4 text-[var(--ink)] shrink-0" />
-        <span>Garantía de confidencialidad comercial y NDA disponible.</span>
-      </div>
-    </>
+    <div className="mt-2 flex flex-col gap-8">
+      <ul className="flex flex-col gap-6">
+        {CHANNELS.map((channel) => (
+          <li key={channel.label}>
+            <p className="type-small text-[var(--muted-on-paper)]">{channel.label}</p>
+            <a
+              href={channel.href}
+              {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="type-body text-[var(--ink)] underline underline-offset-[6px] decoration-[var(--muted-on-paper)] hover:decoration-[var(--ink)] transition-colors"
+            >
+              {channel.detail}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p className="type-small text-[var(--muted-on-paper)] max-w-[40ch]">
+        Si lo necesitas, firmamos un acuerdo de confidencialidad antes de conversar los detalles.
+      </p>
+    </div>
   );
 }

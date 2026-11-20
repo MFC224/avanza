@@ -5,19 +5,20 @@ import { cn } from "@/lib/utils";
 import { useSectionTone, SectionTone } from "./section";
 
 export interface SectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
-  eyebrow?: string;
   title: string;
   description?: string;
   tone?: SectionTone;
   align?: "left" | "center";
+  /** Nivel del título. Usa "h1" en el primer encabezado de cada página. */
+  as?: "h1" | "h2";
 }
 
 export function SectionHeading({
-  eyebrow,
   title,
   description,
   tone,
   align = "left",
+  as: Heading = "h2",
   className,
   ...props
 }: SectionHeadingProps) {
@@ -28,34 +29,25 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-12 lg:mb-18 flex flex-col",
+        "mb-14 lg:mb-20 flex flex-col",
         align === "center" ? "items-center text-center" : "items-start text-left",
         className
       )}
       {...props}
     >
-      {eyebrow && (
-        <span
-          className={cn(
-            "text-small mb-3 font-normal",
-            isInk ? "text-[var(--muted-on-ink)]" : "text-[var(--muted-on-paper)]"
-          )}
-        >
-          {eyebrow}
-        </span>
-      )}
-      <h2
+      <Heading
         className={cn(
-          "text-section font-normal tracking-tight max-w-3xl",
+          Heading === "h1" ? "type-display" : "type-section",
+          "max-w-4xl",
           isInk ? "text-[var(--paper)]" : "text-[var(--ink)]"
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {description && (
         <p
           className={cn(
-            "text-body mt-4 max-w-[60ch]",
+            "type-body mt-6 max-w-[60ch]",
             isInk ? "text-[var(--muted-on-ink)]" : "text-[var(--muted-on-paper)]"
           )}
         >

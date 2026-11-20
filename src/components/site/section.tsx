@@ -31,7 +31,7 @@ export function Section({
       <section
         data-tone={tone}
         className={cn(
-          "py-24 lg:py-40 transition-colors duration-300",
+          "py-[120px] lg:py-[200px]",
           isInk
             ? "bg-[var(--ink)] text-[var(--paper)]"
             : "bg-[var(--paper)] text-[var(--ink)]",

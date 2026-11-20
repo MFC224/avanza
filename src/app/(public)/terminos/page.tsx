@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, Code2, Award } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { Reveal } from "@/components/site/reveal";
-import { LuxuryMeshGradient } from "@/components/ui/luxury-mesh-gradient";
 
 export const metadata: Metadata = {
   title: "Términos de Servicio y Contratación",
@@ -17,7 +16,6 @@ export const metadata: Metadata = {
 export default function TerminosPage() {
   return (
     <div className="w-full min-h-screen py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative">
-      <LuxuryMeshGradient />
       <Reveal>
         <Link
           href="/"
@@ -28,15 +26,15 @@ export default function TerminosPage() {
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+          <div className="w-10 h-10 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
             <Scale className="w-5 h-5" />
           </div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full">
+          <span className="text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200/80 px-3 py-1">
             Contratación Ágil & Propiedad 100% del Cliente
           </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4">
+        <h1 className="type-display text-[var(--ink)] mb-6">
           Términos de Servicio y Estándares de Entrega
         </h1>
         <p className="text-slate-600 text-base md:text-lg mb-10 leading-relaxed">
@@ -44,15 +42,15 @@ export default function TerminosPage() {
         </p>
       </Reveal>
 
-      <div className="bg-white rounded-3xl border border-slate-200/90 p-8 md:p-12 shadow-sm space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
+      <div className="bg-white border border-slate-200/90 p-8 md:p-12 space-y-10 text-slate-700 leading-relaxed text-sm md:text-base">
         {/* IP Clause Highlight */}
-        <div className="p-6 rounded-2xl bg-blue-50/70 border border-blue-200/90">
+        <div className="p-6 bg-blue-50/70 border border-blue-200/90">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center shrink-0">
               <Award className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 text-lg mb-1">
+              <h3 className="font-medium text-slate-900 text-lg mb-1">
                 Garantía de Cero Bloqueo (Zero Vendor Lock-In)
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -63,7 +61,7 @@ export default function TerminosPage() {
         </div>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <Code2 className="w-5 h-5 text-blue-600" />
             1. Alcance de los Servicios
           </h2>
@@ -79,7 +77,7 @@ export default function TerminosPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-emerald-600" />
             2. Ciclos de Entrega y Metodología (Sprints de 7 a 14 Días)
           </h2>
@@ -92,7 +90,7 @@ export default function TerminosPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-medium text-slate-900 mb-3 flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-blue-600" />
             3. Confidencialidad y Acuerdo NDA
           </h2>
@@ -105,7 +103,7 @@ export default function TerminosPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             4. Garantía Técnica Post-Lanzamiento (30 Días)
           </h2>
           <p>
@@ -114,7 +112,7 @@ export default function TerminosPage() {
         </section>
 
         <section className="border-t border-slate-100 pt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">
+          <h2 className="text-xl font-medium text-slate-900 mb-3">
             5. Ley Aplicable y Jurisdicción
           </h2>
           <p className="text-slate-600">

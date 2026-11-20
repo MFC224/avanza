@@ -9,9 +9,9 @@ import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "/", label: "Inicio" },
+  { href: "/#trabajo", label: "Trabajo" },
   { href: "/servicios", label: "Servicios" },
-  { href: "/metodologia", label: "Metodología" },
+  { href: "/metodologia", label: "Cómo trabajamos" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -40,14 +40,14 @@ export function PublicHeader() {
         "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
         isTransparent
           ? "bg-transparent text-white border-b border-transparent"
-          : "bg-white/95 backdrop-blur-md text-[var(--ink)] border-b border-[var(--line-on-paper)] shadow-xs"
+          : "bg-white text-[var(--ink)] border-b border-[var(--line-on-paper)]"
       )}
     >
       <div className="max-w-7xl mx-auto px-5 lg:px-12 py-4 flex items-center justify-between">
         {/* Brand Logo - clean without animated ping dot */}
         <Link
           href="/"
-          className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="flex items-center group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
           aria-label="AVANZA Software Studio - Inicio"
         >
           <AvanzaBrandLogo
@@ -67,8 +67,8 @@ export function PublicHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-small transition-opacity hover:opacity-70",
-                  isActive ? "font-medium" : "font-normal opacity-90",
+                  "type-small transition-opacity hover:opacity-70 underline-offset-[6px]",
+                  isActive ? "underline" : "",
                   isTransparent ? "text-white" : "text-[var(--ink)]"
                 )}
               >
@@ -83,7 +83,7 @@ export function PublicHeader() {
           <Link
             href="/contacto"
             className={cn(
-              "text-button px-5 py-2.5 rounded-none font-medium transition-colors duration-200 select-none inline-flex items-center justify-center",
+              "type-button px-5 py-3 rounded-none transition-colors duration-200 select-none inline-flex items-center justify-center",
               isTransparent
                 ? "bg-white text-black hover:bg-neutral-200"
                 : "bg-[var(--brand)] text-white hover:bg-[#032085]"
@@ -97,10 +97,8 @@ export function PublicHeader() {
             <SheetTrigger
               aria-label="Abrir menú de navegación"
               className={cn(
-                "lg:hidden p-2 rounded-none transition-colors border cursor-pointer inline-flex items-center justify-center",
-                isTransparent
-                  ? "text-white border-white/20 hover:bg-white/10"
-                  : "text-[var(--ink)] border-[var(--line-on-paper)] hover:bg-black/5"
+                "lg:hidden w-11 h-11 rounded-none transition-opacity cursor-pointer inline-flex items-center justify-center hover:opacity-70",
+                isTransparent ? "text-white" : "text-[var(--ink)]"
               )}
             >
               <Menu className="w-5 h-5" />
@@ -110,7 +108,7 @@ export function PublicHeader() {
               className="bg-white border-neutral-200 p-8 flex flex-col justify-between w-full sm:max-w-md"
             >
               <div>
-                <div className="pb-6 border-b border-neutral-200">
+                <div className="pb-6">
                   <AvanzaBrandLogo variant="horizontal" size={32} theme="light" />
                 </div>
                 <nav className="flex flex-col gap-6 mt-8" aria-label="Navegación móvil">
@@ -119,8 +117,8 @@ export function PublicHeader() {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "text-section text-[var(--ink)] hover:opacity-70 transition-opacity font-normal",
-                        pathname === item.href && "font-medium text-[var(--brand)]"
+                        "type-section text-[var(--ink)] hover:opacity-70 transition-opacity",
+                        pathname === item.href && "underline underline-offset-8"
                       )}
                     >
                       {item.label}
@@ -129,12 +127,12 @@ export function PublicHeader() {
                 </nav>
               </div>
 
-              <div className="pt-6 border-t border-neutral-200 space-y-4">
+              <div className="pt-6 space-y-4">
                 <Link
                   href="/contacto"
-                  className="w-full text-button py-3.5 bg-[var(--brand)] text-white text-center block rounded-none hover:bg-[#032085] transition-colors"
+                  className="w-full type-button py-3.5 bg-[var(--brand)] text-white text-center block rounded-none hover:bg-[#032085] transition-colors"
                 >
-                  Cotizar Proyecto
+                  Cotizar proyecto
                 </Link>
               </div>
             </SheetContent>

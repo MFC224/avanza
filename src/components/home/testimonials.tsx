@@ -1,34 +1,30 @@
 import React from "react";
 import { Reveal } from "@/components/site/reveal";
 
+/**
+ * Testimonios reales sin permiso para publicar nombres (decisión del dueño, T1.3).
+ * Sin estrellas, sin recuadros: la cita es el contenido.
+ */
 interface TestimonialItem {
   quote: string;
-  role: string;
-  industry: string;
-  companySize: string;
+  attribution: string;
 }
 
 const TESTIMONIALS: TestimonialItem[] = [
   {
     quote:
       "Estábamos atascados con una agencia tradicional que nos pedía 4 meses. AVANZA entendió el negocio desde el primer día y en el Sprint 1 ya teníamos la plataforma transaccional operando.",
-    role: "CEO y cofundador",
-    industry: "Fintech",
-    companySize: "Startup",
+    attribution: "Cofundador de una startup financiera",
   },
   {
     quote:
       "Llevábamos la gestión en 6 archivos de Excel con constantes desajustes de stock. El sistema web a medida que nos desarrollaron automatizó los despachos y eliminó los errores humanos por completo.",
-    role: "Gerente de operaciones",
-    industry: "Logística",
-    companySize: "Empresa mediana",
+    attribution: "Gerente de operaciones de una empresa de logística",
   },
   {
     quote:
       "El bot con Inteligencia Artificial contesta a nuestros clientes en segundos a cualquier hora y agenda las visitas automáticamente. Triplicamos la tasa de cierre sin contratar más personal.",
-    role: "Director de marketing",
-    industry: "Inmobiliaria",
-    companySize: "Empresa mediana",
+    attribution: "Director de marketing de una inmobiliaria",
   },
 ];
 
@@ -36,49 +32,32 @@ export function TestimonialsSection() {
   return (
     <section
       data-tone="paper"
-      className="w-full bg-[var(--paper)] text-[var(--ink)] py-24 lg:py-36 border-t border-[var(--line-on-paper)] overflow-hidden"
-      aria-label="Testimonios y casos de éxito"
+      aria-labelledby="testimonios-titulo"
+      className="w-full bg-[var(--paper)] text-[var(--ink)] py-[120px] lg:py-[200px]"
     >
       <div className="max-w-7xl mx-auto px-5 lg:px-12 w-full">
-        {/* Header */}
-        <Reveal className="mb-14 lg:mb-20">
-          <span className="text-small text-[var(--muted-on-paper)] block mb-3 font-normal">
-            Testimonios
-          </span>
-          <h2 className="text-section font-normal text-[var(--ink)] tracking-tight max-w-3xl">
-            La confianza de quienes ya escalaron su operación con nosotros
+        <Reveal>
+          <h2 id="testimonios-titulo" className="type-section text-[var(--ink)] max-w-3xl">
+            Lo que dicen nuestros clientes
           </h2>
         </Reveal>
 
-        {/* Three Columns on White */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-          {TESTIMONIALS.map((item, idx) => (
-            <Reveal
-              key={idx}
-              staggerIndex={idx}
-              className="flex flex-col justify-between"
-            >
-              <div>
-                <p className="text-card font-normal text-[var(--ink)] leading-[1.35] mb-6">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-              </div>
-
-              <div>
-                <div className="w-12 h-px bg-[var(--line-on-paper)] mb-4" />
-                <p className="text-small text-[var(--muted-on-paper)] font-normal">
-                  {item.role} · {item.industry} ({item.companySize})
-                </p>
-              </div>
-            </Reveal>
+        <div className="mt-16 lg:mt-24 grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20">
+          {TESTIMONIALS.map((item) => (
+            <figure key={item.attribution} className="flex flex-col">
+              <blockquote className="type-body lg:text-xl lg:leading-[1.55] text-[var(--ink)]">
+                &ldquo;{item.quote}&rdquo;
+              </blockquote>
+              <figcaption className="type-small text-[var(--muted-on-paper)] mt-8">
+                {item.attribution}
+              </figcaption>
+            </figure>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-small text-[var(--muted-on-paper)] font-normal">
-            Nombres reservados por estricto acuerdo de confidencialidad.
-          </p>
-        </div>
+        <p className="type-small text-[var(--muted-on-paper)] mt-16">
+          Publicamos las citas sin nombres por acuerdo de confidencialidad con cada cliente.
+        </p>
       </div>
     </section>
   );

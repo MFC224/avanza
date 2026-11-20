@@ -165,69 +165,76 @@ html.lenis body {
 }
 
 /* =========================================================================
-   SQUARESPACE-TIER TYPOGRAPHIC UTILITIES (Geist Strict Scale - Section 5.2)
+   AVANZA TYPE SCALE (PLAN_DISENO_UNICO.md, 3.2)
+   Prefijo "type-" a propósito: una clase "text-*" choca con los colores del
+   tema de Tailwind (text-card = color blanco) y tailwind-merge la borra.
+   Van en @layer components para que una utilidad de Tailwind (p. ej. lg:text-xl)
+   pueda ajustarlas cuando haga falta.
    ========================================================================= */
-.text-display {
+@layer components {
+.type-display {
   font-size: 2.5rem; /* 40px */
-  line-height: 1.05;
+  line-height: 1.04;
   font-weight: 300;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 @media (min-width: 768px) {
-  .text-display {
-    font-size: 4rem; /* 64px */
+  .type-display {
+    font-size: 4.5rem; /* 72px */
   }
 }
 
-.text-section {
+.type-section {
   font-size: 1.75rem; /* 28px */
-  line-height: 1.15;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 @media (min-width: 768px) {
-  .text-section {
-    font-size: 2.5rem; /* 40px */
+  .type-section {
+    font-size: 2.75rem; /* 44px */
   }
 }
 
-.text-card {
+.type-card {
   font-size: 1.25rem; /* 20px */
   line-height: 1.25;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
 }
 @media (min-width: 768px) {
-  .text-card {
-    font-size: 1.5rem; /* 24px */
+  .type-card {
+    font-size: 1.625rem; /* 26px */
   }
 }
 
-.text-body {
+.type-body {
   font-size: 1rem; /* 16px */
   line-height: 1.6;
   font-weight: 400;
   letter-spacing: 0;
 }
 @media (min-width: 768px) {
-  .text-body {
+  .type-body {
     font-size: 1.125rem; /* 18px */
   }
 }
 
-.text-small {
+.type-small {
   font-size: 0.875rem; /* 14px */
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: 0;
 }
 
-.text-button {
-  font-size: 0.8125rem; /* 13px */
+.type-button {
+  font-size: 0.9375rem; /* 15px */
   line-height: 1;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+}
 }
 
 .lenis.lenis-smooth {
@@ -266,4 +273,27 @@ body {
 #goog-gt-tt {
   display: none !important;
   visibility: hidden !important;
+}
+
+/* =========================================================================
+   ENTRADA DE LA PORTADA (único momento orquestado, PLAN_DISENO_UNICO 3.4)
+   CSS puro: funciona sin JavaScript y respeta "reducir movimiento".
+   ========================================================================= */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  animation: hero-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    animation: none;
+  }
 }

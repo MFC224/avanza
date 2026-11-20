@@ -141,52 +141,58 @@ runTest("UAT-01", "Branding & Logo", "Renderizado exacto del Isotipo de 3 vigas 
   assert(layoutCode.includes("<AvanzaBrandLogo"), "El layout público debe renderizar AvanzaBrandLogo");
 });
 
-runTest("UAT-02", "Design System", "Depuración total de jerga técnica 'cyberpunk/hacker' en favor de tono ejecutivo B2B", () => {
+runTest("UAT-02", "Design System", "Lenguaje claro para el cliente: sin jerga informal y con los tres servicios reales", () => {
   const homeCode = readSrc("src/app/(public)/page.tsx");
   const bannedWords = ["cyberpunk", "hacker", "glitch", "neon-glow", "matrix-terminal"];
   for (const word of bannedWords) {
     assert(!homeCode.toLowerCase().includes(word), `El home no debe contener jerga técnica informal: ${word}`);
   }
-  assert(homeCode.includes("Velocidad SCRUM"), "Debe comunicar velocidad SCRUM");
-  assert(homeCode.includes("Arquitectura Cloud"), "Debe comunicar arquitectura cloud formal");
-  assert(homeCode.includes("Cero Vendor Lock-In"), "Debe garantizar cero vendor lock-in");
+  const projects = readSrc("src/lib/projects.ts");
+  assert(projects.includes("Páginas web"), "Debe ofrecer páginas web");
+  assert(projects.includes("Sistemas a medida"), "Debe ofrecer sistemas a medida");
+  assert(projects.includes("Automatización con IA"), "Debe ofrecer automatización con IA");
+  assert(projects.includes("El código es tuyo"), "Debe garantizar la propiedad del código");
 });
 
 runTest("UAT-03", "White Luxury", "Canvas blanco estricto (#ffffff) con fondo inmaculado y sin modo oscuro forzado", () => {
   const layoutCode = readSrc("src/app/layout.tsx");
   assert(!layoutCode.includes("className=\"dark\""), "El layout raíz no debe forzar la clase dark");
-  
+
   const globalsCss = readSrc("src/app/globals.css");
   assert(globalsCss.includes("--background: #ffffff;"), "El token de fondo debe ser #ffffff blanco puro");
   assert(globalsCss.includes("--foreground: #0f172a;"), "El texto principal debe tener contraste óptimo Slate 900 #0f172a");
 });
 
-runTest("UAT-04", "GPU Optimization", "Fondo dinámico acelerado por hardware (translate3d/translateZ) sin sobrecarga en la CPU", () => {
-  const meshCode = readSrc("src/components/ui/luxury-mesh-gradient.tsx");
-  assert(meshCode.includes("translate3d") || meshCode.includes("translateZ"), "Debe forzar capa GPU");
-  assert(meshCode.includes("backfaceVisibility"), "Debe optimizar backfaceVisibility para evitar repaints");
+runTest("UAT-04", "Type Scale", "Escala tipográfica type-* sin choque con colores de Tailwind ni con tailwind-merge", () => {
+  const globalsCss = readSrc("src/app/globals.css");
+  for (const cls of ["type-display", "type-section", "type-card", "type-body", "type-small", "type-button"]) {
+    assert(globalsCss.includes(`.${cls} {`), `globals.css debe definir .${cls}`);
+  }
+  assert(!/\.text-(display|section|card|body|small|button) \{/.test(globalsCss), "No deben existir clases tipográficas propias con prefijo text-");
 });
 
 // ---------------------------------------------------------------------------
-// CATEGORÍA 2: SQUARESPACE SIGNATURE 3D COVER-FLOW CAROUSEL
+// CATEGORÍA 2: TRABAJO REAL (PORTAFOLIO)
 // ---------------------------------------------------------------------------
 
-runTest("UAT-05", "Portfolio Row", "Apertura y presencia de la tarjeta editorial ('Scott Smith Tutoring')", () => {
-  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
-  assert(rowCode.includes("academic-lessons"), "El primer slide debe ser academic-lessons");
-  assert(rowCode.includes("Scott Smith Tutoring"), "Debe pertenecer a Scott Smith Tutoring");
+runTest("UAT-05", "Work Showcase", "El portafolio muestra los 6 proyectos reales de AVANZA", () => {
+  const projects = readSrc("src/lib/projects.ts");
+  for (const name of ["Molinos Cusco", "Qorikancha Expeditions", "Import L&R", "SV Tuning & Performance", "AOL-DOMO", "Control de ceremonias"]) {
+    assert(projects.includes(name), `Debe incluir el proyecto ${name}`);
+  }
+  assert(!projects.includes("Scott Smith"), "No debe incluir proyectos de demostración anteriores");
 });
 
-runTest("UAT-06", "Portfolio Controls", "Controles discretos de desplazamiento izquierda y derecha", () => {
-  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
-  assert(rowCode.includes("scroll(\"left\")"), "Debe permitir desplazamiento a la izquierda");
-  assert(rowCode.includes("scroll(\"right\")"), "Debe permitir desplazamiento a la derecha");
+runTest("UAT-06", "Work Showcase Motion", "Movimiento del portafolio ligado al scroll y respetando 'reducir movimiento'", () => {
+  const code = readSrc("src/components/home/work-showcase.tsx");
+  assert(code.includes("useScroll"), "Debe ligar el movimiento al scroll");
+  assert(code.includes("useReducedMotion"), "Debe respetar prefers-reduced-motion");
 });
 
-runTest("UAT-07", "Portfolio Keyboard Navigation", "Soporte de navegación accesible por teclado (ArrowLeft y ArrowRight)", () => {
-  const rowCode = readSrc("src/components/home/portfolio-row.tsx");
-  assert(rowCode.includes("ArrowLeft"), "Debe capturar flecha izquierda");
-  assert(rowCode.includes("ArrowRight"), "Debe capturar flecha derecha");
+runTest("UAT-07", "Work Showcase Links", "Los sitios públicos se abren en pestaña nueva y los sistemas internos no llevan enlace", () => {
+  const code = readSrc("src/components/home/work-showcase.tsx");
+  assert(code.includes('target="_blank"') && code.includes('rel="noopener noreferrer"'), "Los enlaces externos deben abrir en pestaña nueva de forma segura");
+  assert(code.includes("Sistema de uso interno"), "Los sistemas sin sitio público deben indicarlo");
 });
 
 // ---------------------------------------------------------------------------

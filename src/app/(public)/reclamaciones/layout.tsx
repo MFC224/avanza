@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Libro de Reclamaciones Virtual | AVANZA",
+  title: "Libro de Reclamaciones",
   description: "Libro de Reclamaciones Virtual conforme a las disposiciones de INDECOPI y la Ley N° 29571 del Perú.",
   alternates: {
     canonical: "/reclamaciones",

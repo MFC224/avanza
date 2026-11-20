@@ -9,17 +9,13 @@ import { Section } from "@/components/site/section";
 import { SectionHeading } from "@/components/site/section-heading";
 import { Reveal } from "@/components/site/reveal";
 import { detectUserCountry, COUNTRIES, CountryInfo } from "@/lib/country-detector";
-import {
-  MessageCircle,
-  Send,
-  CheckCircle2,
-} from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 const SERVICES = [
-  { id: "Página Web de Alto Impacto", label: "Página Web" },
-  { id: "Sistema Web / CRM Interno", label: "Sistema Web & CRM" },
-  { id: "Solución de Inteligencia Artificial", label: "Agentes con IA" },
-  { id: "Aplicación Móvil iOS / Android", label: "App Móvil" },
+  { id: "Página web", label: "Página web" },
+  { id: "Sistema a medida", label: "Sistema a medida" },
+  { id: "Automatización con IA", label: "Automatización con IA" },
+  { id: "Aún no lo sé", label: "Aún no lo sé" },
 ];
 
 export default function ContactoPage() {
@@ -27,7 +23,7 @@ export default function ContactoPage() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [servicio, setServicio] = useState("Página Web de Alto Impacto");
+  const [servicio, setServicio] = useState("Página web");
   const [nombre, setNombre] = useState("");
   const [contacto, setContacto] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -87,14 +83,14 @@ export default function ContactoPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 1. Contact Form & Direct Channels (Paper) */}
-      <Section tone="paper">
+      <Section tone="paper" className="pt-[96px] lg:pt-[140px]">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 flex flex-col">
             <Reveal>
               <SectionHeading
-                eyebrow="Contacto Directo"
-                title="Hablemos de tus requerimientos de software"
-                description="Sin intermediarios ni demoras burocráticas. Déjanos tus datos mínimos y uno de nuestros directores te responderá hoy mismo."
+                as="h1"
+                title="Cotiza tu proyecto"
+                description="Déjanos tus datos y te responde uno de los fundadores. En menos de 24 horas te enviamos alcance, plazo y precio."
               />
               <ContactoDirectChannels />
             </Reveal>
@@ -102,53 +98,54 @@ export default function ContactoPage() {
 
           <div className="lg:col-span-7">
             <Reveal delay={0.1}>
-              <div className="border border-[var(--line-on-paper)] p-8 lg:p-10 bg-white">
-                <h3 className="text-section font-normal text-[var(--ink)] mb-2">
+              <div>
+                <h2 className="type-card text-[var(--ink)] mb-10">
                   Cuéntanos tu proyecto
-                </h3>
-                <p className="text-small text-[var(--muted-on-paper)] mb-8 font-normal">
-                  Completa los datos y te enviamos un cronograma y presupuesto en menos de 24 horas.
-                </p>
+                </h2>
 
                 {status === "success" && (
-                  <div className="mb-6 p-4 border border-emerald-300 bg-emerald-50 text-emerald-900 text-small flex items-center gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <div role="status" className="mb-8 type-body text-[var(--ink)] flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
                     <span>¡Solicitud recibida! Magno o Manuel te responderán en breve.</span>
                   </div>
                 )}
 
                 {status === "error" && (
-                  <div className="mb-6 p-4 border border-red-300 bg-red-50 text-red-900 text-small">
+                  <div role="alert" className="mb-8 type-body text-red-800">
                     {errorMessage}
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <input
-                    type="text"
-                    name="_honey"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    className="hidden opacity-0 absolute -z-10 pointer-events-none"
-                    aria-hidden="true"
-                  />
+                <form onSubmit={handleSubmit} className="space-y-10">
+                  <div aria-hidden="true" className="hidden">
+                    <label htmlFor="_honey">No llenar este campo</label>
+                    <input
+                      id="_honey"
+                      type="text"
+                      name="_honey"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
 
                   <div>
-                    <label className="text-small text-[var(--muted-on-paper)] block mb-2 font-normal">
-                      1. Tipo de solución requerida
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
+                    <p id="servicio-label" className="type-small text-[var(--muted-on-paper)] block mb-4">
+                      Qué necesitas
+                    </p>
+                    <div className="flex flex-wrap gap-x-8 gap-y-3" role="radiogroup" aria-labelledby="servicio-label">
                       {SERVICES.map((item) => {
                         const isSelected = servicio === item.id;
                         return (
                           <button
                             key={item.id}
                             type="button"
+                            role="radio"
+                            aria-checked={isSelected}
                             onClick={() => setServicio(item.id)}
-                            className={`p-3 text-small text-left border transition-colors cursor-pointer ${
+                            className={`type-body text-left transition-colors cursor-pointer underline-offset-[8px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] ${
                               isSelected
-                                ? "border-black bg-black text-white font-medium"
-                                : "border-[var(--line-on-paper)] bg-white text-[var(--ink)] hover:border-black"
+                                ? "text-[var(--ink)] underline"
+                                : "text-[var(--muted-on-paper)] hover:text-[var(--ink)]"
                             }`}
                           >
                             {item.label}
@@ -159,28 +156,28 @@ export default function ContactoPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="nombre" className="text-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
-                      2. Nombre o Empresa *
+                    <label htmlFor="nombre" className="type-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
+                      Tu nombre o empresa
                     </label>
                     <input
                       id="nombre"
                       name="nombre"
                       value={nombre}
                       onChange={(e) => setNombre(e.target.value)}
-                      placeholder="Ej. Carlos Mendoza o Kallpa SAC"
+                      placeholder="Ej. María Quispe o Comercial Andina SAC"
                       required
                       autoComplete="name"
-                      className="w-full h-12 px-4 border border-[var(--line-on-paper)] text-[var(--ink)] text-body focus:outline-none focus:border-black"
+                      className="w-full h-12 px-0 border-0 border-b border-[var(--muted-on-paper)] bg-transparent text-[var(--ink)] type-body focus:outline-none focus:border-[var(--ink)] focus-visible:border-b-2"
                     />
                   </div>
 
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label htmlFor="pais" className="text-small text-[var(--muted-on-paper)] font-normal">
-                        3. País de contacto *
+                      <label htmlFor="pais" className="type-small text-[var(--muted-on-paper)] font-normal">
+                        País
                       </label>
                       {detectedCountry && (
-                        <span className="text-small text-[var(--muted-on-paper)] font-normal">
+                        <span className="type-small text-[var(--muted-on-paper)] font-normal">
                           {detectedCountry.flag} {detectedCountry.name}
                         </span>
                       )}
@@ -190,7 +187,7 @@ export default function ContactoPage() {
                       name="pais"
                       value={pais}
                       onChange={(e) => setPais(e.target.value)}
-                      className="w-full h-12 px-4 border border-[var(--line-on-paper)] bg-white text-[var(--ink)] text-body focus:outline-none focus:border-black cursor-pointer"
+                      className="w-full h-12 px-0 border-0 border-b border-[var(--muted-on-paper)] bg-transparent text-[var(--ink)] type-body focus:outline-none focus:border-[var(--ink)] focus-visible:border-b-2 cursor-pointer"
                     >
                       {COUNTRIES.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -201,24 +198,24 @@ export default function ContactoPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="contacto" className="text-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
-                      4. WhatsApp o Correo Electrónico *
+                    <label htmlFor="contacto" className="type-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
+                      WhatsApp o correo
                     </label>
                     <input
                       id="contacto"
                       name="contacto"
                       value={contacto}
                       onChange={(e) => setContacto(e.target.value)}
-                      placeholder="Ej. +51 987 654 321 o carlos@empresa.com"
+                      placeholder="Ej. +51 987 654 321 o maria@empresa.com"
                       required
                       autoComplete="tel email"
-                      className="w-full h-12 px-4 border border-[var(--line-on-paper)] text-[var(--ink)] text-body focus:outline-none focus:border-black"
+                      className="w-full h-12 px-0 border-0 border-b border-[var(--muted-on-paper)] bg-transparent text-[var(--ink)] type-body focus:outline-none focus:border-[var(--ink)] focus-visible:border-b-2"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mensaje" className="text-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
-                      5. Alcance o notas adicionales (opcional)
+                    <label htmlFor="mensaje" className="type-small text-[var(--muted-on-paper)] block mb-1.5 font-normal">
+                      Cuéntanos qué necesitas (opcional)
                     </label>
                     <textarea
                       id="mensaje"
@@ -226,12 +223,12 @@ export default function ContactoPage() {
                       rows={3}
                       value={mensaje}
                       onChange={(e) => setMensaje(e.target.value)}
-                      placeholder="Describe requerimientos específicos o fechas objetivo..."
-                      className="w-full p-4 border border-[var(--line-on-paper)] text-[var(--ink)] text-body focus:outline-none focus:border-black resize-none"
+                      placeholder="Qué quieres lograr, para cuándo, qué tienes hoy…"
+                      className="w-full py-3 px-0 border-0 border-b border-[var(--muted-on-paper)] bg-transparent text-[var(--ink)] type-body focus:outline-none focus:border-[var(--ink)] resize-none"
                     />
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 border border-[var(--line-on-paper)] bg-neutral-50">
+                  <div className="flex items-start gap-3">
                     <input
                       type="checkbox"
                       id="consent"
@@ -240,7 +237,7 @@ export default function ContactoPage() {
                       className="mt-1 w-4 h-4 rounded-none text-black focus:ring-0 border-neutral-400 cursor-pointer"
                       required
                     />
-                    <label htmlFor="consent" className="text-small text-[var(--muted-on-paper)] leading-relaxed cursor-pointer select-none font-normal">
+                    <label htmlFor="consent" className="type-small text-[var(--muted-on-paper)] leading-relaxed cursor-pointer select-none font-normal">
                       He leído y acepto la{" "}
                       <Link href="/privacidad" target="_blank" className="text-[var(--ink)] underline hover:text-black">
                         Política de Privacidad
@@ -252,23 +249,22 @@ export default function ContactoPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full h-13 px-8 bg-[var(--brand)] hover:bg-[#032085] text-white text-button transition-colors cursor-pointer flex items-center justify-center gap-2 select-none"
+                    className="px-8 py-4 bg-[var(--brand)] hover:bg-[#032085] text-white type-button transition-colors cursor-pointer inline-flex items-center justify-center select-none disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>{loading ? "Enviando Solicitud..." : "Solicitar cotización técnica"}</span>
+                    {loading ? "Enviando…" : "Enviar solicitud"}
                   </button>
 
-                  <div className="pt-2 text-center">
+                  <p className="type-small text-[var(--muted-on-paper)]">
+                    ¿Prefieres escribir directo?{" "}
                     <a
                       href={waUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-small text-[var(--brand)] hover:underline inline-flex items-center gap-2 font-normal"
+                      className="text-[var(--ink)] underline underline-offset-[6px]"
                     >
-                      <MessageCircle className="w-3.5 h-3.5" />
-                      <span>Escribir directamente por WhatsApp con un clic</span>
+                      Escríbenos por WhatsApp
                     </a>
-                  </div>
+                  </p>
                 </form>
               </div>
             </Reveal>
@@ -276,14 +272,12 @@ export default function ContactoPage() {
         </div>
       </Section>
 
-      {/* 2. FAQ Accordion (Ink) */}
+      {/* Preguntas frecuentes (tinta) */}
       <Section tone="ink">
         <Reveal>
           <SectionHeading
             tone="ink"
-            eyebrow="Resolución de Dudas"
-            title="Preguntas frecuentes antes de iniciar"
-            description="Respuestas directas sobre nuestros estándares de desarrollo, contratos y entregas."
+            title="Preguntas frecuentes"
           />
         </Reveal>
 

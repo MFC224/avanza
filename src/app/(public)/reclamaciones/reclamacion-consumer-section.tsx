@@ -30,12 +30,12 @@ export function ReclamacionConsumerSection({
 }: ConsumerSectionProps) {
   return (
     <div>
-      <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 mb-6">
+      <h3 className="text-lg font-medium text-slate-900 border-b border-slate-200 pb-3 mb-6">
         1. Identificación del Consumidor Reclamante
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="space-y-1.5 md:col-span-2">
-          <Label htmlFor="fullName" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="fullName" className="text-xs font-medium text-slate-700">
             Nombre Completo o Razón Social *
           </Label>
           <Input
@@ -49,7 +49,7 @@ export function ReclamacionConsumerSection({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="documentType" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="documentType" className="text-xs font-medium text-slate-700">
             Tipo de Documento *
           </Label>
           <select
@@ -61,7 +61,7 @@ export function ReclamacionConsumerSection({
                 documentType: e.target.value as "DNI" | "CE" | "RUC" | "PASAPORTE",
               })
             }
-            className="w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full h-11 px-3.5 border border-slate-300 bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="DNI">DNI (Documento Nacional de Identidad)</option>
             <option value="RUC">RUC (Registro Único de Contribuyentes)</option>
@@ -71,7 +71,7 @@ export function ReclamacionConsumerSection({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="documentNumber" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="documentNumber" className="text-xs font-medium text-slate-700">
             Número de Documento *
           </Label>
           <Input
@@ -87,7 +87,7 @@ export function ReclamacionConsumerSection({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="email" className="text-xs font-medium text-slate-700">
             Correo Electrónico *
           </Label>
           <Input
@@ -102,7 +102,7 @@ export function ReclamacionConsumerSection({
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="phone" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="phone" className="text-xs font-medium text-slate-700">
             Teléfono / WhatsApp *
           </Label>
           <Input
@@ -116,7 +116,7 @@ export function ReclamacionConsumerSection({
         </div>
 
         <div className="space-y-1.5 md:col-span-2">
-          <Label htmlFor="address" className="text-xs font-bold text-slate-700">
+          <Label htmlFor="address" className="text-xs font-medium text-slate-700">
             Dirección o Ciudad de Residencia *
           </Label>
           <Input

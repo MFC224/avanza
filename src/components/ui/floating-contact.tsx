@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -21,31 +21,8 @@ export function FloatingContact() {
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"arm" | "whatsapp">("arm");
 
-  useEffect(() => {
-    let triggered = false;
-    const trigger = () => {
-      if (!triggered) {
-        triggered = true;
-        setBubbleVisible(true);
-      }
-    };
-
-    const timer = setTimeout(trigger, 20000);
-
-    const handleScroll = () => {
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight > 0 && window.scrollY / scrollHeight >= 0.5) {
-        trigger();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  // El globo de invitación automática se retiró (PLAN_DISENO_UNICO.md, sección 2):
+  // ya no aparece solo y no se superpone al contenido.
 
   const quickTopics = [
     {
@@ -252,7 +229,7 @@ export function FloatingContact() {
         aria-label="Abrir cotizador y asistente"
       >
         <Bot className="w-4 h-4 text-white" />
-        <span className="font-medium text-button">Cotizar</span>
+        <span className="font-medium type-button">Cotizar</span>
       </motion.button>
     </div>
   );

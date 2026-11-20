@@ -21,29 +21,29 @@ export interface ServiceEstimate {
 export const ESTIMATOR_SERVICES: Record<string, ServiceEstimate> = {
   web: {
     id: "web",
-    name: "Página Web de Alto Impacto",
+    name: "Página web",
     badge: "Ventas & Conversión",
     baseDays: "7 a 10 días",
-    roi: "+180% en leads calificados",
-    deliverable: "Next.js 16 + SEO + Animaciones Awwwards",
+    roi: "Más consultas de clientes desde tu web",
+    deliverable: "Diseño propio, preparado para buscadores y con botón a WhatsApp.",
     estimatedDaysRange: [7, 10],
   },
   crm: {
     id: "crm",
-    name: "Sistema Web / CRM Interno",
+    name: "Sistema a medida",
     badge: "Operación & Gestión",
     baseDays: "12 a 14 días",
-    roi: "Ahorro de ~45 hrs manuales / mes",
-    deliverable: "PostgreSQL 3NF + Roles + Dashboard",
+    roi: "Menos trabajo manual y menos errores",
+    deliverable: "Usuarios con permisos, reportes claros y acceso desde cualquier dispositivo.",
     estimatedDaysRange: [12, 14],
   },
   ai: {
     id: "ai",
-    name: "Automatización con Agentes IA",
+    name: "Automatización con IA",
     badge: "Productividad x10",
     baseDays: "10 a 14 días",
-    roi: "Atención 24/7 sin personal extra",
-    deliverable: "Pipelines LLM + RAG + WhatsApp Bot",
+    roi: "Atención a cualquier hora sin sumar personal",
+    deliverable: "Asistente conectado a WhatsApp y a tus datos, con revisión humana.",
     estimatedDaysRange: [10, 14],
   },
   app: {
@@ -58,14 +58,14 @@ export const ESTIMATOR_SERVICES: Record<string, ServiceEstimate> = {
 };
 
 export const ESTIMATOR_URGENCIAS = [
-  { label: "Sprint Express", desc: "Entrega en 7 - 14 días", speedBonus: "Prioridad Máxima" },
-  { label: "Sprint Estándar", desc: "Entrega en 3 - 4 semanas", speedBonus: "Fases Graduales" },
+  { label: "Lo antes posible", desc: "Entrega en 1 a 2 semanas", speedBonus: "Prioridad Máxima" },
+  { label: "Sin apuro", desc: "Entrega en 3 a 4 semanas", speedBonus: "Fases Graduales" },
 ];
 
 export const ESTIMATOR_ESCALAS = [
-  { label: "Pyme / Negocio Local", desc: "1 a 10 colaboradores" },
-  { label: "Empresa en Crecimiento", desc: "10 a 50 colaboradores" },
-  { label: "Corporativo", desc: "+50 colaboradores o multi-sucursal" },
+  { label: "Negocio pequeño", desc: "1 a 10 personas" },
+  { label: "Empresa en crecimiento", desc: "10 a 50 personas" },
+  { label: "Empresa grande", desc: "Más de 50 personas o varias sedes" },
 ];
 
 /**

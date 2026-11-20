@@ -1,46 +1,40 @@
-# Registro Oficial de Imágenes — AVANZA Software Studio
+# Registro de imágenes — AVANZA Software Studio
 
-**Última actualización:** 10 de noviembre de 2026  
-**Regla de conformidad:** Toda imagen del proyecto debe cumplir con los requisitos de la sección 6 de `MEJORAS_VISUALES.md` y `ENCARGO_IMAGENES.md` (formato WebP/AVIF, dimensiones adecuadas, peso menor a 250 KB general / 400 KB hero, texto `alt` en español descriptivo menor a 125 caracteres, sin logos de terceros ni rostros ajenos, licencia verificable).
+**Última actualización:** 19 de noviembre de 2026
+**Regla:** toda imagen sigue la sección 6 de `MEJORAS_VISUALES.md`: WebP, peso máximo 250 KB (400 KB la portada), texto alternativo en español y licencia verificable. No se añade ningún archivo sin su fila aquí.
 
 ---
 
-## 1. Inventario de Activos Visuales
+## 1. Inventario
 
 | Archivo | Dónde se usa | Descripción | Origen | Fuente | Licencia |
 |---|---|---|---|---|---|
-| `public/images/hero-studio-desk-night.webp` | `hero-motion.tsx` (Portada escritorio) | Escritorio minimalista de estudio de noche con portátil grafito visto desde atrás, lámpara de disco con luz cálida y espacio negativo central. | Generada | Subagente Imagen AVANZA (Imagen 3 / Modelo editorial). Prompt: *Editorial commercial photograph, minimalist dark studio desk at night, matte graphite laptop open seen from behind on the right, warm disc desk lamp on the left, black ceramic mug and notebook, dark shelving in shadow, floor-to-ceiling window with soft out-of-focus city lights, large empty dark area in the centre, shallow depth of field, no text, no logos, no people, 16:9.* | Generación IA Propietaria (10/11/2026). Libre de derechos comerciales. |
-| `public/images/hero-studio-desk-night-mobile.webp` | `hero-motion.tsx` (Portada móvil 9:16) | Composición vertical en proporción 9:16 con escritorio y lámpara en tercio inferior y penumbra superior para título. | Generada | Subagente Imagen AVANZA (10/11/2026). | Generación IA Propietaria (10/11/2026). Libre de derechos comerciales. |
-| `public/images/portfolio-aol-domo.webp` | `portfolio-row.tsx` (Portafolio 01) | Captura de la portada de AOL-DOMO, Sitio corporativo · Holding empresarial. | Captura propia | https://www.aol-domo.com/ (10/11/2026) | Propia · Derechos del cliente y AVANZA. |
-| `public/images/portfolio-molinos-cusco.webp` | `portfolio-row.tsx` (Portafolio 02) | Captura de la portada de Molinos Cusco, Plataforma B2B · Industria alimentaria. | Captura propia | https://molinos-cusco-cusipata.vercel.app/ (10/11/2026) | Propia · Derechos del cliente y AVANZA. |
-| `public/images/portfolio-qorikancha.webp` | `portfolio-row.tsx` (Portafolio 03) | Captura de la portada de Qorikancha Expeditions, Sitio web · Turismo de lujo. | Captura propia | https://qorikancha-cusco-luxury-tourism.vercel.app/ (10/11/2026) | Propia · Derechos del cliente y AVANZA. |
-| `public/images/portfolio-sv-tuning.webp` | `portfolio-row.tsx` (Portafolio 04) | Captura de la portada de SV Tuning & Performance, Sitio web · Taller automotriz. | Captura propia | https://sv-tuning-performance.vercel.app/ (10/11/2026) | Propia · Derechos del cliente y AVANZA. |
-| `public/images/portfolio-import-lr-pos.webp` | Respaldo (Portafolio 05) | Captura provisional de ingreso. En código se utiliza tarjeta tipográfica editorial hasta entrega de panel con datos demo. | Captura propia | https://lumina-wholesale-pos.vercel.app/ (10/11/2026) | Propia · Sistema interno en producción. |
-| `public/images/portfolio-graduation-control.webp` | `portfolio-row.tsx` (Portafolio 06) | Captura de la portada de Control de ceremonias, Sistema de invitados y acceso. | Captura propia | https://graduate-conti.vercel.app/ (10/11/2026) | Propia · Sistema interno en producción. |
-| `public/images/services-web.webp` | `services-tabs.tsx` (Pestaña 01: Web) | Mano sosteniendo teléfono vertical sobre mesa de madera clara con luz natural de ventana (4:5). | Pendiente | — | — |
-| `public/images/services-crm.webp` | `services-tabs.tsx` (Pestaña 02: CRM) | Monitor en escritorio ordenado mostrando panel con tablas abstractas desenfocadas (4:5). | Pendiente | — | — |
-| `public/images/services-ai.webp` | `services-tabs.tsx` (Pestaña 03: IA) | Teléfono sobre soporte en mostrador mostrando burbujas de chat abstractas (4:5). | Pendiente | — | — |
-| `public/images/services-fintech.webp` | `services-tabs.tsx` (Pestaña 04: Fintech) | Terminal de cobro y portátil cerrado sobre mostrador de piedra clara con luz matutina (4:5). | Pendiente | — | — |
-| `public/images/founders-portrait.webp` | `founders-block.tsx` (Fundadores) | Retrato formal de Manuel Callañaupa y Magno Alomía. Oculto en el código; la cita ocupa el ancho completo mientras se realiza la sesión fotográfica. | Pendiente | — | — |
-| `public/images/cta-empty-studio-dawn.webp` | `page.tsx` (Llamada Final) | Sala de trabajo amplia y vacía al amanecer con mesa larga y ventanal (21:9). | Pendiente | — | — |
+| `hero-studio-desk-night.webp` | `hero-motion.tsx`, portada en escritorio | Escritorio oscuro de noche con portátil gris visto de espaldas, lámpara de luz cálida y ventana con luces de ciudad desenfocadas. | Generada | Generada por Gemini (Antigravity), tarea G1 de `ENCARGO_IMAGENES.md` | Generación propia, 10/11/2026 |
+| `hero-studio-desk-night-mobile.webp` | `hero-motion.tsx`, portada en celular | La misma escena en vertical 9:16, con el escritorio en el tercio inferior. | Generada | Generada por Gemini (Antigravity) | Generación propia, 10/11/2026 |
+| `portfolio-molinos-cusco.webp` | `work-showcase.tsx`, `/servicios` | Portada del sitio de Molinos Cusco con el título "El silencio del origen andino". | Captura propia | https://molinos-cusco-cusipata.vercel.app/ | Propia (proyecto de AVANZA), 19/11/2026 |
+| `portfolio-qorikancha.webp` | `work-showcase.tsx`, `/servicios` | Portada de Qorikancha Expeditions sobre la fachada de una iglesia de Cusco. Recortada a la zona del título para excluir el aviso de cookies. | Captura propia | https://qorikancha-cusco-luxury-tourism.vercel.app/ | Propia (proyecto de AVANZA), 19/11/2026 |
+| `portfolio-import-lr-pos.webp` | `work-showcase.tsx`, `/servicios` | Pantalla de ingreso por PIN del sistema de caja de Import L&R. | Captura propia | https://lumina-wholesale-pos.vercel.app/ | Propia (proyecto de AVANZA), 19/11/2026. **Pendiente:** reemplazar por una captura del panel con datos de demostración. |
+| `portfolio-sv-tuning.webp` | `work-showcase.tsx`, `/servicios` | Portada de SV Tuning & Performance, fondo oscuro con titular en mayúsculas y cifras del taller. | Captura propia | https://sv-tuning-performance.vercel.app/ | Propia (proyecto de AVANZA), 19/11/2026 |
+| `portfolio-aol-domo.webp` | `work-showcase.tsx`, `/servicios` | Portada del sitio corporativo de AOL-DOMO con la marca Atakau sobre fondo amarillo. | Captura propia | https://www.aol-domo.com/ | Propia (proyecto de AVANZA), 19/11/2026 |
+| `portfolio-graduation-control.webp` | `work-showcase.tsx`, `/servicios` | Pantalla de inicio del sistema de control de ceremonias, con accesos para egresados y personal. | Captura propia | https://graduate-conti.vercel.app/ | Propia (proyecto de AVANZA), 19/11/2026 |
+| `logo-avanza.webp` | Encabezado | Logotipo de AVANZA en color. | Propia | Marca de AVANZA | Propia |
+| `logo-avanza-white.webp` | Encabezado sobre fondo oscuro, pie | Logotipo de AVANZA en blanco. | Propia | Marca de AVANZA | Propia |
 
----
+Las capturas de portafolio se tomaron con Chrome a 1440 × 900 px y escala 2, y se exportaron a 1920 × 1200 px (Qorikancha a 1680 × 1050 px por el recorte).
 
-## 2. Resumen Técnico de Pesos y Dimensiones
+## 2. Retiradas el 19 de noviembre de 2026
 
-| Archivo | Formato | Dimensiones | Peso en Disco | Límite Máximo | Cumplimiento |
-|---|---|---|---|---|---|
-| `hero-studio-desk-night.webp` | WebP | 2400 × 1350 px | 83.1 KB | 400 KB | ÓPTIMO (Regenerado a alta resolución) |
-| `hero-studio-desk-night-mobile.webp` | WebP | 768 × 1376 px | 19.9 KB | 400 KB | ÓPTIMO |
-| `portfolio-aol-domo.webp` | WebP | 800 × 500 px | 29.9 KB | 250 KB | ÓPTIMO (Captura real provisional 10/11/2026) |
-| `portfolio-molinos-cusco.webp` | WebP | 800 × 500 px | 27.5 KB | 250 KB | ÓPTIMO (Captura real provisional 10/11/2026) |
-| `portfolio-qorikancha.webp` | WebP | 800 × 500 px | 24.6 KB | 250 KB | ÓPTIMO (Captura real provisional 10/11/2026) |
-| `portfolio-sv-tuning.webp` | WebP | 800 × 500 px | 28.3 KB | 250 KB | ÓPTIMO (Captura real provisional 10/11/2026) |
-| `portfolio-import-lr-pos.webp` | WebP | 800 × 500 px | 8.6 KB | 250 KB | ÓPTIMO (En código: tarjeta tipográfica activa) |
-| `portfolio-graduation-control.webp` | WebP | 800 × 500 px | 9.6 KB | 250 KB | ÓPTIMO (Captura real provisional 10/11/2026) |
-| `services-web.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | Pendiente (Marcador técnico; cuota de modelo IA en espera de reinicio) |
-| `services-crm.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | Pendiente (Marcador técnico; cuota de modelo IA en espera de reinicio) |
-| `services-ai.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | Pendiente (Marcador técnico; cuota de modelo IA en espera de reinicio) |
-| `services-fintech.webp` | WebP | 800 × 1000 px | 1.5 KB | 250 KB | Pendiente (Marcador técnico; cuota de modelo IA en espera de reinicio) |
-| `founders-portrait.webp` | WebP | 1200 × 800 px | 1.8 KB | 250 KB | Pendiente (Oculto en código; en espera de sesión fotográfica propia) |
-| `cta-empty-studio-dawn.webp` | WebP | 1400 × 600 px | 1.6 KB | 250 KB | Pendiente (Marcador técnico; cuota de modelo IA en espera de reinicio) |
+`services-web`, `services-crm`, `services-ai`, `services-fintech`, `founders-portrait` y `cta-empty-studio-dawn`. Eran marcadores negros sin imagen real; el nuevo diseño (`PLAN_DISENO_UNICO.md`) no las necesita.
+
+## 3. Pesos
+
+| Archivo | Dimensiones | Peso |
+|---|---|---|
+| `hero-studio-desk-night.webp` | 2400 × 1350 | 83 KB |
+| `hero-studio-desk-night-mobile.webp` | 768 × 1376 | 20 KB |
+| `portfolio-molinos-cusco.webp` | 1920 × 1200 | 70 KB |
+| `portfolio-qorikancha.webp` | 1680 × 1050 | 74 KB |
+| `portfolio-import-lr-pos.webp` | 1920 × 1200 | 25 KB |
+| `portfolio-sv-tuning.webp` | 1920 × 1200 | 64 KB |
+| `portfolio-aol-domo.webp` | 1920 × 1200 | 73 KB |
+| `portfolio-graduation-control.webp` | 1920 × 1200 | 24 KB |
