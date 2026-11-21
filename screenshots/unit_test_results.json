@@ -325,30 +325,30 @@
     "description": "Valida tokens White Luxury en globals.css, ausencia de clase 'dark' en layout y eliminación de jerga técnica",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 0
+    "latency_ms": 1
   },
   {
     "id": "UT-42",
     "module": "Sprint2SecondaryPagesAndCompliance",
-    "description": "Valida retiro de cargas analógicas (CinematicWarp/Overlay), presencia de LuxuryMeshGradient y cumplimiento Ley 29733",
+    "description": "Valida retiro de cargas analógicas y fondos decorativos, portada con trabajo real y cumplimiento Ley 29733",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 2
   },
   {
     "id": "UT-43",
-    "module": "Sprint3ARMv1",
-    "description": "Valida base de conocimiento de ARM, validación Zod de mensajes, rate limiting (10 msgs/sesión) y fallback de resiliencia",
+    "module": "ARMv2Motor",
+    "description": "Catálogo oficial, motor de conversación, IA opcional y respaldo a WhatsApp",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
     "latency_ms": 2
   },
   {
     "id": "UT-44",
-    "module": "Sprint4ARMv2Scheduling",
-    "description": "Valida motor de agendamiento ARM v2, prevención de solapamientos, generación de Google Meet y tablero de fuga",
+    "module": "ARMv2AgendaCRM",
+    "description": "Agenda sin datos públicos, sin enlaces Meet inventados y con doble reserva bloqueada en la base",
     "status": "PASS",
     "details": "Aserciones superadas satisfactoriamente",
-    "latency_ms": 1
+    "latency_ms": 0
   }
 ]

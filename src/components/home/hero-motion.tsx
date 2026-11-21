@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import Link from "next/link";
 
 /**
@@ -8,6 +8,17 @@ import Link from "next/link";
  * La entrada usa animación CSS (clase .hero-rise en globals.css), el único
  * momento orquestado de la página.
  */
+const heroCommon = { alt: "", sizes: "100vw", quality: 75 };
+const {
+  props: { srcSet: desktopSrcSet },
+} = getImageProps({ ...heroCommon, src: "/images/hero-studio-desk-night.webp", width: 2400, height: 1350 });
+const { props: mobileImg } = getImageProps({
+  ...heroCommon,
+  src: "/images/hero-studio-desk-night-mobile.webp",
+  width: 768,
+  height: 1376,
+});
+
 export function HeroMotion() {
   return (
     <section
@@ -15,24 +26,17 @@ export function HeroMotion() {
       className="relative w-full min-h-[100svh] flex items-center justify-center overflow-hidden bg-[var(--ink)] text-[var(--paper)]"
     >
       <div className="absolute inset-0" aria-hidden="true">
-        <Image
-          src="/images/hero-studio-desk-night.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={80}
-          className="hidden sm:block object-cover object-center"
-        />
-        <Image
-          src="/images/hero-studio-desk-night-mobile.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={80}
-          className="sm:hidden object-cover object-center"
-        />
+        {/* Una sola imagen según el ancho (art direction): el navegador descarga solo la que usa. */}
+        <picture>
+          <source media="(min-width: 640px)" srcSet={desktopSrcSet} sizes="100vw" />
+          <img
+            {...mobileImg}
+            alt=""
+            loading="eager"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        </picture>
         <div className="absolute inset-0 bg-black/55" />
       </div>
 

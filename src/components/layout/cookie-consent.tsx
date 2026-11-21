@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 
 /**
@@ -43,14 +43,29 @@ function readChoice(): Choice | null {
   }
 }
 
+const CONSENT_EVENT = "avanza:consent-changed";
+
+function subscribeConsent(onChange: () => void) {
+  window.addEventListener(CONSENT_EVENT, onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener(CONSENT_EVENT, onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
 export function CookieConsent() {
-  const [open, setOpen] = useState(false);
+  // "pending" en el servidor: el aviso solo se decide en el navegador, sin desajuste de hidratación.
+  const stored = useSyncExternalStore(subscribeConsent, readChoice, () => "pending" as const);
+  const [reopened, setReopened] = useState(false);
+  const open = reopened || stored === null;
 
   useEffect(() => {
-    const choice = readChoice();
-    if (choice === "granted") loadAnalytics();
-    if (choice === null) setOpen(true);
-    const reopen = () => setOpen(true);
+    if (stored === "granted") loadAnalytics();
+  }, [stored]);
+
+  useEffect(() => {
+    const reopen = () => setReopened(true);
     window.addEventListener("avanza:cookies-open", reopen);
     return () => window.removeEventListener("avanza:cookies-open", reopen);
   }, []);
@@ -61,14 +76,14 @@ export function CookieConsent() {
     } catch {
       // Sin almacenamiento: se respeta la elección solo en esta visita.
     }
-    if (choice === "granted") {
-      loadAnalytics();
-    } else if (document.getElementById("ga-script")) {
+    if (choice === "denied" && document.getElementById("ga-script")) {
       // Retiro del consentimiento: se recarga para descargar Analytics.
       window.location.reload();
       return;
     }
-    setOpen(false);
+    if (choice === "granted") loadAnalytics();
+    setReopened(false);
+    window.dispatchEvent(new Event(CONSENT_EVENT));
   }, []);
 
   if (!open) return null;

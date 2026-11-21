@@ -155,8 +155,11 @@ export function ArcCarousel() {
           const offset = signedOffset(index, active, total);
           const angle = offset * STEP_DEG;
           const rad = (angle * Math.PI) / 180;
-          const x = RADIUS * Math.sin(rad) * scale;
-          const y = RADIUS * (1 - Math.cos(rad)) * scale;
+          // Redondeo a 2 decimales: el HTML del servidor ya viene redondeado y, si el
+          // cliente usa más decimales, React avisa de un error de hidratación.
+          const round2 = (n: number) => Math.round(n * 100) / 100;
+          const x = round2(RADIUS * Math.sin(rad) * scale);
+          const y = round2(RADIUS * (1 - Math.cos(rad)) * scale);
           const isCenter = offset === 0;
           const visible = Math.abs(offset) <= 1.5;
           const cardWidth = 720 * scale;
@@ -170,7 +173,7 @@ export function ArcCarousel() {
               animate={{
                 x,
                 y,
-                rotate: angle * 0.85,
+                rotate: round2(angle * 0.85),
                 scale: isCenter ? 1 : 0.84,
                 opacity: visible ? (isCenter ? 1 : 0.55) : 0,
               }}

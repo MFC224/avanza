@@ -143,7 +143,7 @@ export default function ReclamacionesPage() {
                     ))}
                   </div>
                   <TextField {...common} id="amountClaimed" label="Monto reclamado (opcional)" placeholder="Ej. S/ 1,500.00" />
-                  <TextField {...common} id="serviceDescription" label="Descripción del servicio o producto" className="md:col-span-2" />
+                  <TextField {...common} id="serviceDescription" label="Descripción del servicio o producto contratado" className="md:col-span-2" />
                 </div>
               </fieldset>
 
@@ -210,7 +210,8 @@ export default function ReclamacionesPage() {
                     <a href={asEmail(form)} className="underline underline-offset-4">
                       envíala por correo con un clic
                     </a>{" "}
-                    a {SITE_CONFIG.contact.email}. Tiene el mismo valor.
+                    a {SITE_CONFIG.contact.email}. Te responderemos a ese correo con el número de tu hoja de reclamación;
+                    guarda el correo enviado como constancia.
                   </div>
                 )}
 

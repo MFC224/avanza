@@ -71,7 +71,7 @@ export function FloatingContact() {
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                     </span>
                   </h3>
-                  <p className="text-[10px] text-slate-500 font-mono">En línea · ARM v1 & Fundadores</p>
+                  <p className="text-[10px] text-slate-500 font-mono">Asistente ARM · Magno y Manuel</p>
                 </div>
               </div>
 

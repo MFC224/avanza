@@ -1,8 +1,21 @@
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
 
+/**
+ * Las direcciones *.vercel.app (vistas previas y alias del despliegue de producción)
+ * no deben aparecer en Google: solo el dominio oficial se indexa.
+ */
+function isVercelHost(request: NextRequest): boolean {
+  return (request.headers.get("host") ?? "").endsWith(".vercel.app");
+}
+
 export async function proxy(request: NextRequest) {
-  return await updateSession(request);
+  if (isVercelHost(request) && request.nextUrl.pathname === "/robots.txt") {
+    return new NextResponse("User-agent: *\nDisallow: /\n", { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+  }
+  const response = await updateSession(request);
+  if (isVercelHost(request)) response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
 }
 
 export const config = {

@@ -242,52 +242,51 @@ runTest("UAT-11", "Anti Doble-Reserva", "Prevención de colisión de citas y rec
 });
 
 // ---------------------------------------------------------------------------
-// CATEGORÍA 4: INTEGRACIÓN GOOGLE MEET Y ANFITRIONES
+// CATEGORÍA 4 Y 5: ASISTENTE ARM v2, AGENDA Y CONSENTIMIENTO
+// (comportamiento probado de verdad en scripts/tests/*.test.mjs)
 // ---------------------------------------------------------------------------
 
-runTest("UAT-12", "Google Meet Integration", "Generación de enlaces de videoconferencia únicos con formato institucional", () => {
-  const meetUrl = generateGoogleMeetUrl();
-  assert(meetUrl.startsWith("https://meet.google.com/avn-"), "Debe iniciar con el prefijo institucional avn-");
-  assert(meetUrl.endsWith("-avz"), "Debe finalizar con el sufijo corporativo -avz");
-  assert(meetUrl.length === 36, "La longitud del enlace Meet debe ser canónica (36 caracteres)");
+function walkSrc(dir = path.join(ROOT_DIR, "src"), out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkSrc(full, out);
+    else if (/\.(ts|tsx)$/.test(entry.name)) out.push(fs.readFileSync(full, "utf-8"));
+  }
+  return out;
+}
+
+runTest("UAT-12", "Sin enlaces Meet falsos", "La web no inventa salas de Google Meet: el equipo pega el enlace real al confirmar", () => {
+  assert(!walkSrc().some((code) => code.includes("meet.google.com/avn-")), "No debe generarse ningún enlace meet.google.com/avn-…");
+  assert(readSrc("src/app/(dashboard)/agenda/page.tsx").includes("meet_url"), "La agenda interna debe permitir pegar el enlace real");
 });
 
-runTest("UAT-13", "Host Assignment", "Asignación obligatoria de los fundadores Manuel & Magno como anfitriones de la sesión", () => {
-  const dashCode = readSrc("src/app/(dashboard)/dashboard/page.tsx");
-  assert(dashCode.includes("Manuel & Magno"), "El dashboard debe declarar a Manuel & Magno como anfitriones");
-  
-  const schedCode = readSrc("src/lib/arm-scheduling.ts");
-  assert(schedCode.includes("Manuel & Magno"), "La lógica de agendamiento debe fijar anfitriones Manuel & Magno");
+runTest("UAT-13", "Host Assignment", "Las videollamadas quedan a cargo de Magno y Manuel", () => {
+  const migration = fs.readFileSync(path.join(ROOT_DIR, "supabase", "migrations", "20261121_arm_crm.sql"), "utf-8");
+  assert(migration.includes("'Magno y Manuel'"), "La cita debe asignar a Magno y Manuel por defecto");
 });
 
-// ---------------------------------------------------------------------------
-// CATEGORÍA 5: ASISTENTE CONVERSACIONAL ARM v1 Y LEADS
-// ---------------------------------------------------------------------------
-
-runTest("UAT-14", "ARM v1 Pricing", "Cotización verídica de servicios según el catálogo oficial en Soles (S/ 1,200 a S/ 3,500)", () => {
-  const armEngineCode = readSrc("src/lib/arm-engine.ts");
-  assert(armEngineCode.includes("S/ 1,200"), "Debe cotizar Páginas Web desde S/ 1,200");
-  assert(armEngineCode.includes("S/ 2,800"), "Debe cotizar Sistemas CRM desde S/ 2,800");
-  assert(armEngineCode.includes("S/ 3,500"), "Debe cotizar Soluciones de IA desde S/ 3,500");
+runTest("UAT-14", "ARM Pricing", "Cotización verídica de servicios según el catálogo oficial en Soles", () => {
+  const catalog = readSrc("src/lib/arm/catalog.ts");
+  assert(catalog.includes("S/ 1,200"), "Debe cotizar Páginas Web desde S/ 1,200");
+  assert(catalog.includes("S/ 2,800"), "Debe cotizar Sistemas CRM desde S/ 2,800");
+  assert(catalog.includes("S/ 3,500"), "Debe cotizar Soluciones de IA desde S/ 3,500");
 });
 
-runTest("UAT-15", "Scheduling Intent", "Detección automática de intención de reunión/demo y oferta de agendamiento Meet", () => {
-  const armEngineCode = readSrc("src/lib/arm-engine.ts");
-  assert(armEngineCode.includes("reunión") || armEngineCode.includes("agendar"), "Debe reconocer intenciones de agendar o reunión");
-  assert(armEngineCode.includes("Google Meet"), "Debe ofrecer sesión formal por Google Meet");
+runTest("UAT-15", "Scheduling Intent", "La intención de reunión abre la agenda dentro del chat", () => {
+  assert(readSrc("src/lib/arm/engine.ts").includes("offer_booking"), "El motor debe ofrecer la agenda");
+  assert(readSrc("src/components/ui/arm-chat-widget.tsx").includes("ArmBooking"), "El chat debe mostrar el selector de día y hora");
 });
 
-runTest("UAT-16", "Ley 29733 Consent", "Micro-checkbox obligatorio de consentimiento de datos en el chat de ARM", () => {
-  const widgetCode = readSrc("src/components/ui/arm-chat-widget.tsx");
-  assert(widgetCode.includes("arm-consent"), "Debe existir el input de consentimiento arm-consent");
-  assert(widgetCode.includes("Ley N° 29733"), "Debe hacer referencia explícita a la Ley N° 29733");
-  assert(widgetCode.includes("consentChecked"), "Debe condicionar el consentimiento en el estado");
+runTest("UAT-16", "Ley 29733 Consent", "Consentimiento expreso antes de guardar datos personales", () => {
+  const form = readSrc("src/components/arm/arm-contact-form.tsx");
+  assert(form.includes("arm-consent"), "Debe existir el input de consentimiento arm-consent");
+  assert(form.includes("Ley N° 29733"), "Debe hacer referencia explícita a la Ley N° 29733");
+  assert(readSrc("src/lib/arm/schemas.ts").includes("z.literal(true"), "El servidor debe rechazar envíos sin consentimiento");
 });
 
-runTest("UAT-17", "Commercial Fallback", "Enlace de rescate a WhatsApp directo ante dudas no resueltas o límite de mensajes", () => {
-  const widgetCode = readSrc("src/components/ui/arm-chat-widget.tsx");
-  assert(widgetCode.includes("wa.me/51942498841"), "Debe tener fallback al WhatsApp de Magno");
-  assert(widgetCode.includes("921195037"), "Debe tener canal telefónico de Manuel Callañaupa");
+runTest("UAT-17", "Commercial Fallback", "Enlace de rescate a WhatsApp ante errores o límite de mensajes", () => {
+  assert(readSrc("src/components/ui/arm-chat-widget.tsx").includes("wa.me/51942498841"), "Debe tener fallback al WhatsApp de Magno");
+  assert(readSrc("src/app/api/arm/chat/route.ts").includes("fallbackUrl"), "El límite de mensajes debe derivar a WhatsApp");
 });
 
 // ---------------------------------------------------------------------------
@@ -419,21 +418,18 @@ runTest("UAT-28", "Zero Internal Leaks", "Ausencia total de enlaces administrati
 // CATEGORÍA 10: TABLERO EJECUTIVO Y RECUPERACIÓN DE VENTAS
 // ---------------------------------------------------------------------------
 
-runTest("UAT-29", "Sales Dropoff Analytics", "Registro de objeciones comerciales (presupuesto, indecisión) en el tablero y modelo", () => {
-  const dashCode = readSrc("src/app/(dashboard)/dashboard/page.tsx");
-  assert(dashCode.includes("sales_dropoff_analytics"), "Debe renderizar la tabla sales_dropoff_analytics");
-  assert(dashCode.includes("dropoffs"), "Debe consumir los registros de dropoffs");
-
-  const schedCode = readSrc("src/lib/arm-scheduling.ts");
-  assert(schedCode.includes("Presupuesto"), "Debe registrar objeción de presupuesto");
-  assert(schedCode.includes("inMemoryDropoffs"), "Debe almacenar memoria forense de fuga");
+runTest("UAT-29", "Sales Dropoff Analytics", "Conversaciones que se fueron sin dejar datos, con servicio y objeciones (sin datos personales)", () => {
+  const queries = readSrc("src/lib/crm/queries.ts");
+  assert(queries.includes("abandoned"), "El tablero debe calcular las conversaciones perdidas");
+  const record = readSrc("src/lib/crm/conversations.ts");
+  assert(record.includes("objections"), "Debe registrar objeciones");
+  assert(!/recordArmTurn[\s\S]*transcript:[\s\S]*markConversationOutcome/.test(record), "El registro anónimo no debe guardar la transcripción");
 });
 
-runTest("UAT-30", "Appointments Live View", "Visualización en vivo de citas confirmadas con enlace a Google Meet y anfitrión", () => {
-  const dashCode = readSrc("src/app/(dashboard)/dashboard/page.tsx");
-  assert(dashCode.includes("appointments"), "Debe renderizar la lista de appointments");
-  assert(dashCode.includes("meet_url"), "Debe renderizar el enlace meet_url");
-  assert(dashCode.includes("Manuel & Magno"), "Debe explicitar a Manuel & Magno en la vista");
+runTest("UAT-30", "Appointments Live View", "Agenda interna con confirmación, enlace real y estados", () => {
+  const agenda = readSrc("src/app/(dashboard)/agenda/page.tsx");
+  assert(agenda.includes("updateAppointment"), "Debe permitir confirmar, marcar realizada o cancelar");
+  assert(readSrc("src/app/(dashboard)/dashboard/page.tsx").includes("Próximas videollamadas"), "El tablero debe mostrar las próximas reuniones");
 });
 
 // ---------------------------------------------------------------------------

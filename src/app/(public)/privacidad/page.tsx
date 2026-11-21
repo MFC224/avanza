@@ -49,7 +49,7 @@ export default function PrivacidadPage() {
             1. Marco Normativo y Titular del Tratamiento
           </h2>
           <p>
-            El presente documento regula el tratamiento de datos personales recopilados a través de nuestro sitio web y plataformas operativas, de conformidad con la <strong>Ley N° 29733</strong> (Ley de Protección de Datos Personales del Perú) y su Reglamento aprobado por <strong>Decreto Supremo N° 003-2013-JUS</strong>.
+            El presente documento regula el tratamiento de datos personales recopilados a través de nuestro sitio web y plataformas operativas, de conformidad con la <strong>Ley N° 29733</strong> (Ley de Protección de Datos Personales del Perú) y su Reglamento vigente, aprobado por <strong>Decreto Supremo N° 016-2024-JUS</strong> (que reemplazó al D.S. N° 003-2013-JUS).
           </p>
           <p className="mt-2">
             El responsable del banco de datos es <strong>{SITE_CONFIG.legalName}</strong>, con domicilio legal y operativo en Lima, Perú, representado por sus fundadores técnicos Manuel Callañaupa y Magno Alomía.
@@ -67,7 +67,7 @@ export default function PrivacidadPage() {
           <ul className="list-disc pl-6 mt-3 space-y-1.5 text-[var(--muted-on-paper)]">
             <li><strong>Datos de contacto comercial:</strong> Nombre, apellidos, teléfono corporativo / WhatsApp y correo electrónico.</li>
             <li><strong>Datos del requerimiento:</strong> Tipo de software solicitado (Página Web, CRM, Agente IA, App Móvil), tamaño de empresa y urgencia de entrega.</li>
-            <li><strong>Datos técnicos de navegación:</strong> Métricas anónimas de rendimiento (LCP, FID/INP) para garantizar 90Hz–120Hz de fluidez visual sin cookies invasivas de terceros.</li>
+            <li><strong>Datos de navegación:</strong> solo si aceptas las cookies de analítica, Google Analytics registra de forma agregada qué páginas se visitan. Puedes cambiar tu elección en cualquier momento desde el enlace de cookies al pie de la página.</li>
           </ul>
         </section>
 
@@ -114,7 +114,8 @@ export default function PrivacidadPage() {
             <li><strong>Vercel Inc. (San Francisco, EE.UU.):</strong> Alojamiento de frontend, funciones serverless edge y renderizado SSR.</li>
             <li><strong>Supabase Inc. / AWS (Norteamérica):</strong> Base de datos relacional PostgreSQL con cifrado en reposo AES-256 y políticas de aislamiento de datos.</li>
             <li><strong>Google Cloud Platform / Gemini Paid API (EE.UU.):</strong> Modelos de inteligencia artificial bajo contrato comercial de pago donde los datos de los usuarios <em>nunca son utilizados para el re-entrenamiento de modelos públicos</em>.</li>
-            <li><strong>Resend Inc. (EE.UU.):</strong> Infraestructura de envío de correos transaccionales y notificaciones de cotización.</li>
+            <li><strong>Google LLC (EE.UU.):</strong> Google Analytics, solo si aceptas las cookies de analítica, y Google Translate, solo si eliges ver la web en otro idioma (guarda una cookie con tu elección).</li>
+            <li><strong>Telegram Messenger (Emiratos Árabes Unidos / Reino Unido):</strong> Avisos internos al equipo de AVANZA cuando alguien solicita una cotización o agenda una reunión (nombre, medio de contacto y servicio de interés). Solo lo usa el equipo; no se comparte con terceros.</li>
           </ul>
           <p className="mt-3 text-[var(--muted-on-paper)]">
             Todos los proveedores internacionales seleccionados por AVANZA cuentan con certificaciones de seguridad auditadas (SOC 2 Type II, ISO 27001) garantizando niveles de protección adecuados según la normativa peruana.

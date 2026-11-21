@@ -1,227 +1,176 @@
-import {
-  LayoutDashboard,
-  Calendar,
-  Video,
-  Clock,
-  UserCheck,
-  TrendingUp,
-  AlertTriangle,
-  ExternalLink,
-  ShieldCheck,
-  MessageSquare,
-} from "lucide-react";
-import { getAppointmentsList, getDropoffAnalytics } from "@/lib/arm-scheduling";
+import Link from "next/link";
+import { getDashboardData, requestTime } from "@/lib/crm/queries";
+import { LEAD_STAGES, OPEN_STAGES, formatPEN, sourceLabel, weightedValue } from "@/lib/crm/stages";
+import { getService } from "@/lib/arm/catalog";
+import { formatPhone } from "@/lib/crm/whatsapp";
+import { AppointmentBadge, EmptyState, Kpi, Panel, StageBadge, TemperatureBadge, limaDateTime, relativeTime } from "@/components/crm/badges";
+import { WhatsappMenu } from "@/components/crm/whatsapp-menu";
 
-export default function DashboardPage() {
-  const appointments = getAppointmentsList();
-  const dropoffs = getDropoffAnalytics();
+export const metadata = { title: "Hoy" };
+
+const OBJECTION_LABELS: Record<string, string> = {
+  precio: "Precio",
+  plazo: "Plazo",
+  confianza: "Confianza",
+  alternativa: "Plantillas / otra opción",
+  mensualidad: "Mensualidades",
+};
+
+export default async function DashboardPage() {
+  const d = await getDashboardData();
+  const pipeline = d.openLeads.reduce((sum, l) => sum + weightedValue(l.estimated_value, l.stage), 0);
+  const closed = d.wonCount + d.lostCount;
+  const winRate = closed ? Math.round((d.wonCount / closed) * 100) : null;
+  const armRate = d.arm.total ? Math.round((d.arm.withContact / d.arm.total) * 100) : null;
+  const now = requestTime();
 
   return (
-    <div className="space-y-8 p-1 sm:p-2">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2.5">
-            <LayoutDashboard className="w-7 h-7 text-blue-500" />
-            <span>Tablero Central · Operaciones & ARM v2</span>
-          </h1>
-          <p className="text-xs text-zinc-400 mt-1 font-mono">
-            Sincronización en vivo · Zona Horaria: America/Lima (UTC-5)
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3.5 py-1.5 rounded-full w-fit">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>ARM v2 Activo · Agendamiento Google Meet</span>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-semibold text-white">Hoy</h1>
+        <p className="text-sm text-zinc-400">A quién contactar, qué reuniones vienen y cómo va el embudo.</p>
       </div>
 
-      {/* KPI Metric Cards */}
-      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
-        {[
-          {
-            title: "Citas Agendadas",
-            value: appointments.length.toString(),
-            detail: "Confirmadas en Google Calendar",
-            icon: Calendar,
-            color: "text-blue-400",
-          },
-          {
-            title: "Tasa de Cierre",
-            value: "78.4%",
-            detail: "Prospectos calificados por ARM",
-            icon: TrendingUp,
-            color: "text-emerald-400",
-          },
-          {
-            title: "Duración de Cita",
-            value: "25 min",
-            detail: "Colchón de 15m entre slots",
-            icon: Clock,
-            color: "text-cyan-400",
-          },
-          {
-            title: "Fugas Detectadas",
-            value: dropoffs.length.toString(),
-            detail: "En proceso de rescate comercial",
-            icon: AlertTriangle,
-            color: "text-amber-400",
-          },
-        ].map((metric) => {
-          const Icon = metric.icon;
-          return (
-            <div
-              key={metric.title}
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 shadow-sm space-y-2"
-            >
-              <div className="flex items-center justify-between text-zinc-400">
-                <span className="text-xs font-medium font-mono uppercase tracking-wider">
-                  {metric.title}
-                </span>
-                <Icon className={`w-4 h-4 ${metric.color}`} />
-              </div>
-              <p className="text-2xl sm:text-3xl font-black text-white">{metric.value}</p>
-              <p className="text-[11px] text-zinc-500 font-mono">{metric.detail}</p>
-            </div>
-          );
-        })}
+      {d.error && (
+        <p role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
+          No se pudieron leer los datos: {d.error}
+        </p>
+      )}
+
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+        <Kpi label="Leads nuevos (7 días)" value={String(d.newLast7)} />
+        <Kpi label="Leads calientes abiertos" value={String(d.hotOpen)} hint="Puntaje de 60 o más" />
+        <Kpi label="Embudo ponderado" value={formatPEN(pipeline)} hint="Valor × probabilidad de cada etapa" />
+        <Kpi
+          label="Tasa de cierre (90 días)"
+          value={winRate === null ? "—" : `${winRate}%`}
+          hint={`${d.wonCount} ganados · ${formatPEN(d.wonValue)}`}
+        />
       </div>
 
-      {/* SECTION 1: Citas Técnicas Agendadas (Appointments) */}
-      <div className="rounded-3xl border border-zinc-800 bg-zinc-900/50 overflow-hidden shadow-lg">
-        <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
-              <Calendar className="w-4 h-4" />
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <Panel title={`Seguimientos para hoy (${d.followUps.length})`} action={<Link href="/leads" className="text-xs text-blue-400 hover:underline">Ver embudo</Link>}>
+            {d.followUps.length === 0 ? (
+              <EmptyState>No hay seguimientos pendientes. Buen momento para reactivar leads perdidos.</EmptyState>
+            ) : (
+              <ul className="divide-y divide-zinc-800">
+                {d.followUps.slice(0, 15).map((l) => {
+                  const overdue = new Date(l.next_action_at!).getTime() < now;
+                  return (
+                    <li key={l.id} className="py-3 flex flex-wrap items-center gap-3">
+                      <div className="min-w-0 flex-1">
+                        <Link href={`/leads/${l.id}`} className="font-medium text-white hover:underline">
+                          {l.contact_name}
+                        </Link>
+                        <p className="text-xs text-zinc-400 truncate">
+                          {l.next_action ?? "Hacer seguimiento"} ·{" "}
+                          <span className={overdue ? "text-red-300" : "text-zinc-400"}>{relativeTime(l.next_action_at, now)}</span>
+                        </p>
+                      </div>
+                      <StageBadge stage={l.stage} />
+                      <TemperatureBadge temperature={l.temperature} score={l.score} />
+                      <WhatsappMenu
+                        compact
+                        phone={l.phone}
+                        stage={l.stage}
+                        context={{ name: l.contact_name, service: getService(l.service_id)?.shortName ?? l.service_name }}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </Panel>
+        </div>
+
+        <Panel title="Próximas videollamadas" action={<Link href="/agenda" className="text-xs text-blue-400 hover:underline">Agenda</Link>}>
+          {d.upcoming.length === 0 ? (
+            <EmptyState>Sin reuniones agendadas.</EmptyState>
+          ) : (
+            <ul className="space-y-3">
+              {d.upcoming.map((a) => (
+                <li key={a.id} className="text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-white">{limaDateTime(a.scheduled_at)}</span>
+                    <AppointmentBadge status={a.status} />
+                  </div>
+                  <p className="text-xs text-zinc-400">
+                    {a.lead_id ? <Link href={`/leads/${a.lead_id}`} className="hover:underline">{a.client_name}</Link> : a.client_name} ·{" "}
+                    {formatPhone(a.client_contact)}
+                  </p>
+                  {!a.meet_url && <p className="text-xs text-amber-300">Falta enviar el enlace de Meet</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </Panel>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Panel title="Embudo abierto">
+          <ul className="space-y-2.5">
+            {LEAD_STAGES.filter((s) => OPEN_STAGES.includes(s.id)).map((s) => {
+              const leads = d.openLeads.filter((l) => l.stage === s.id);
+              const value = leads.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0);
+              const max = Math.max(1, ...OPEN_STAGES.map((id) => d.openLeads.filter((l) => l.stage === id).length));
+              return (
+                <li key={s.id}>
+                  <Link href={`/leads?stage=${s.id}`} className="flex justify-between text-sm hover:underline">
+                    <span className="text-zinc-300">{s.label}</span>
+                    <span className="text-zinc-400 tabular-nums">{leads.length} · {formatPEN(value)}</span>
+                  </Link>
+                  <div className="mt-1 h-1.5 rounded bg-zinc-800">
+                    <div className="h-1.5 rounded bg-blue-500" style={{ width: `${(leads.length / max) * 100}%` }} />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
+
+        <Panel title="Asistente ARM (30 días)">
+          <dl className="grid grid-cols-3 gap-2 text-center">
+            <div><dt className="text-xs text-zinc-400">Conversaciones</dt><dd className="text-xl text-white tabular-nums">{d.arm.total}</dd></div>
+            <div><dt className="text-xs text-zinc-400">Dejaron datos</dt><dd className="text-xl text-white tabular-nums">{armRate === null ? "—" : `${armRate}%`}</dd></div>
+            <div><dt className="text-xs text-zinc-400">Se fueron</dt><dd className="text-xl text-white tabular-nums">{d.arm.abandoned}</dd></div>
+          </dl>
+          <div className="mt-4 space-y-3 text-sm">
+            <div>
+              <p className="text-xs text-zinc-400 mb-1">Qué buscaban los que se fueron</p>
+              {d.arm.abandonedServices.length === 0 ? <p className="text-zinc-500">—</p> : d.arm.abandonedServices.slice(0, 4).map(([id, n]) => (
+                <p key={id} className="flex justify-between"><span>{getService(id)?.shortName ?? id}</span><span className="tabular-nums text-zinc-400">{n}</span></p>
+              ))}
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Sesiones de Ingeniería Agendadas</h2>
-              <p className="text-xs text-zinc-400 font-mono">
-                Tabla `appointments` · Anfitriones oficiales: Manuel & Magno · Doble reserva prevenida
-              </p>
+              <p className="text-xs text-zinc-400 mb-1">Objeciones más comunes</p>
+              {d.arm.objections.length === 0 ? <p className="text-zinc-500">—</p> : d.arm.objections.slice(0, 4).map(([o, n]) => (
+                <p key={o} className="flex justify-between"><span>{OBJECTION_LABELS[o] ?? o}</span><span className="tabular-nums text-zinc-400">{n}</span></p>
+              ))}
             </div>
           </div>
-          <span className="text-xs font-mono bg-zinc-800 text-zinc-300 px-3 py-1 rounded-full">
-            {appointments.length} Citas Programadas
-          </span>
-        </div>
+        </Panel>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-950/40 text-zinc-400 font-mono uppercase text-[10px]">
-                <th className="py-3.5 px-6">Cliente / Empresa</th>
-                <th className="py-3.5 px-6">Fecha & Hora (Lima)</th>
-                <th className="py-3.5 px-6">Duración</th>
-                <th className="py-3.5 px-6">Anfitriones</th>
-                <th className="py-3.5 px-6">Sala Google Meet</th>
-                <th className="py-3.5 px-6 text-right">Estado</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
-              {appointments.map((apt) => (
-                <tr key={apt.id} className="hover:bg-zinc-800/30 transition-colors">
-                  <td className="py-4 px-6 font-medium text-white">
-                    <div>{apt.client_name}</div>
-                    <div className="text-[11px] text-zinc-500 font-mono mt-0.5">{apt.client_contact}</div>
-                  </td>
-                  <td className="py-4 px-6 font-mono text-zinc-300">
-                    {apt.display_scheduled_at}
-                  </td>
-                  <td className="py-4 px-6 font-mono">
-                    <span className="bg-zinc-800 px-2 py-0.5 rounded text-zinc-300 text-[11px]">
-                      {apt.duration_minutes} min
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-zinc-400 font-medium">
-                    {apt.host_name}
-                  </td>
-                  <td className="py-4 px-6">
-                    <a
-                      href={apt.meet_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-600/20 border border-blue-500/30 text-blue-400 hover:text-white hover:bg-blue-600 transition-all font-mono text-[11px]"
-                    >
-                      <Video className="w-3.5 h-3.5" />
-                      <span>Ingresar a Meet</span>
-                      <ExternalLink className="w-3 h-3 ml-0.5 opacity-70" />
-                    </a>
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      {apt.status}
-                    </span>
-                  </td>
-                </tr>
+        <Panel title="De dónde llegan (90 días)">
+          {d.sources.length === 0 ? <EmptyState>Aún no hay leads.</EmptyState> : (
+            <ul className="space-y-1.5 text-sm">
+              {d.sources.map(([source, n]) => (
+                <li key={source} className="flex justify-between">
+                  <Link href={`/leads?source=${source}`} className="hover:underline">{sourceLabel(source)}</Link>
+                  <span className="tabular-nums text-zinc-400">{n}</span>
+                </li>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* SECTION 2: Tablero de Fuga de Ventas (sales_dropoff_analytics) */}
-      <div className="rounded-3xl border border-zinc-800 bg-zinc-900/50 overflow-hidden shadow-lg">
-        <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
-              <AlertTriangle className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-white">Métricas de Fuga & Objeciones de Venta</h2>
-              <p className="text-xs text-zinc-400 font-mono">
-                Tabla `sales_dropoff_analytics` · Análisis forense para optimización comercial
-              </p>
-            </div>
-          </div>
-          <span className="text-xs font-mono bg-zinc-800 text-zinc-300 px-3 py-1 rounded-full">
-            {dropoffs.length} Casos Registrados
-          </span>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-950/40 text-zinc-400 font-mono uppercase text-[10px]">
-                <th className="py-3.5 px-6">ID Sesión</th>
-                <th className="py-3.5 px-6">Servicio Consultado</th>
-                <th className="py-3.5 px-6">Razón de Abandono</th>
-                <th className="py-3.5 px-6">Objeción del Cliente</th>
-                <th className="py-3.5 px-6 text-right">Acción de Rescate</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-zinc-800/60 text-zinc-300">
-              {dropoffs.map((d) => (
-                <tr key={d.id} className="hover:bg-zinc-800/30 transition-colors">
-                  <td className="py-4 px-6 font-mono text-zinc-400">
-                    {d.session_id}
-                  </td>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    {d.inquired_service}
-                  </td>
-                  <td className="py-4 px-6 font-mono text-amber-400">
-                    {d.dropoff_reason}
-                  </td>
-                  <td className="py-4 px-6 text-zinc-300 max-w-xs">
-                    {d.client_objection}
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <a
-                      href="https://wa.me/51942498841?text=Hola%20Magno,%20estoy%20revisando%20el%20tablero%20de%20fuga%20de%20clientes%20de%20AVANZA."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all font-mono text-[11px]"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5" />
-                      <span>Contactar por WhatsApp</span>
-                    </a>
-                  </td>
-                </tr>
+            </ul>
+          )}
+          {d.lostReasons.length > 0 && (
+            <div className="mt-4">
+              <p className="text-xs text-zinc-400 mb-1">Por qué perdimos</p>
+              {d.lostReasons.slice(0, 4).map(([r, n]) => (
+                <p key={r} className="flex justify-between text-sm"><span>{r}</span><span className="tabular-nums text-zinc-400">{n}</span></p>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          )}
+        </Panel>
       </div>
     </div>
   );
