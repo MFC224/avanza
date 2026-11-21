@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,13 +10,19 @@ type Theme = "light" | "dark";
  * Botón de modo claro u oscuro. El tema inicial lo fija el script de
  * src/app/layout.tsx según el dispositivo; aquí solo se cambia y se recuerda.
  */
-export function ThemeToggle({ className }: { className?: string }) {
-  const [theme, setTheme] = useState<Theme | null>(null);
+function subscribeTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
 
-  useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme");
-    setTheme(current === "dark" ? "dark" : "light");
-  }, []);
+function readTheme(): Theme {
+  return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+}
+
+export function ThemeToggle({ className }: { className?: string }) {
+  // null en el servidor; en el navegador sigue el atributo data-theme de <html>.
+  const theme = useSyncExternalStore(subscribeTheme, readTheme, () => null);
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
@@ -26,7 +32,6 @@ export function ThemeToggle({ className }: { className?: string }) {
     } catch {
       // Sin almacenamiento: el cambio dura hasta recargar.
     }
-    setTheme(next);
   };
 
   const isDark = theme === "dark";

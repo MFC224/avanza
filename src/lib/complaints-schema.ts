@@ -38,7 +38,8 @@ export const complaintSchema = z
   guardianName: z.string().trim().max(120).optional().default(""),
   guardianDocument: z.string().trim().max(20).optional().default(""),
   serviceType: z.enum(["SERVICIO", "PRODUCTO"]).default("SERVICIO"),
-  serviceDescription: z.string().trim().max(300).optional().default(""),
+  // El formato oficial (D.S. 011-2011-PCM) pide identificar el bien o servicio contratado.
+  serviceDescription: z.string().trim().min(5, "Describe el servicio o producto contratado.").max(300),
   complaintType: z.enum(["RECLAMO", "QUEJA"], {
     error: "Selecciona si es un Reclamo o una Queja.",
   }),

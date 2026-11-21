@@ -1,94 +1,85 @@
-import { Settings, Shield, Database, UserCheck } from "lucide-react";
+import { CheckCircle2, CircleAlert } from "lucide-react";
+import { getStaffContext } from "@/lib/crm/auth";
+import { Panel } from "@/components/crm/badges";
 
-export default function SettingsPage() {
+export const metadata = { title: "Configuración" };
+
+/**
+ * Estado real de la configuración (antes esta página mostraba textos fijos como
+ * "RLS activado" aunque no fuera cierto). Solo indica si cada variable existe, nunca su valor.
+ */
+export default async function SettingsPage() {
+  const ctx = await getStaffContext();
+  const has = (k: string) => Boolean(process.env[k]);
+  const checks = [
+    {
+      label: "Base de datos del CRM",
+      ok: Boolean(ctx?.dbReady),
+      help: "Ejecutar supabase/migrations/20261121_arm_crm.sql en Supabase (SQL Editor).",
+    },
+    {
+      label: "Guardado de leads desde la web (SUPABASE_SERVICE_ROLE_KEY)",
+      ok: has("SUPABASE_SERVICE_ROLE_KEY"),
+      help: "Supabase > Project Settings > API > service_role. Pegarla en Vercel > Settings > Environment Variables. Nunca en el código.",
+    },
+    {
+      label: "Redacción con IA del asistente (GEMINI_API_KEY)",
+      ok: has("GEMINI_API_KEY"),
+      help: "Opcional. Sin ella el asistente responde con su motor propio, sin IA.",
+    },
+    {
+      label: "Avisos al celular por Telegram (TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)",
+      ok: has("TELEGRAM_BOT_TOKEN") && has("TELEGRAM_CHAT_ID"),
+      help: "Opcional, recomendado: crear un bot con @BotFather y agregar las dos variables.",
+    },
+    {
+      label: "Webhook de avisos (CRM_NOTIFY_WEBHOOK_URL)",
+      ok: has("CRM_NOTIFY_WEBHOOK_URL"),
+      help: "Opcional: Make, Zapier, n8n, Slack o Discord.",
+    },
+    {
+      label: "Dominio canónico (NEXT_PUBLIC_SITE_URL)",
+      ok: has("NEXT_PUBLIC_SITE_URL"),
+      help: "Debe coincidir con el dominio principal de Vercel (con o sin www).",
+    },
+  ];
+
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-          <Settings className="w-8 h-8 text-blue-500" />
-          Configuración del Sistema
-        </h1>
-        <p className="text-zinc-400 text-sm mt-1">
-          Ajustes generales, seguridad de API y estado de los servicios de AVANZA.
+        <h1 className="text-2xl font-semibold text-white">Configuración</h1>
+        <p className="text-sm text-zinc-400">Qué está activo en este despliegue. Sesión: {ctx?.email}</p>
+      </div>
+      <Panel title="Estado del sistema">
+        <ul className="space-y-4">
+          {checks.map((c) => (
+            <li key={c.label} className="flex gap-3">
+              {c.ok ? (
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" aria-label="Activo" />
+              ) : (
+                <CircleAlert className="w-5 h-5 text-amber-400 shrink-0" aria-label="Pendiente" />
+              )}
+              <div>
+                <p className="text-sm text-white">{c.label}</p>
+                {!c.ok && <p className="text-xs text-zinc-400">{c.help}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+      <Panel title="Acceso del equipo">
+        <p className="text-sm text-zinc-300">
+          Solo las cuentas de la tabla <code>crm_staff</code> entran al CRM. Para agregar a alguien: créale una cuenta en
+          Supabase (Authentication &gt; Users) y ejecuta en SQL Editor:
         </p>
-      </div>
-
-      <div className="grid gap-6">
-        {/* Card 1: Perfil y Seguridad */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 space-y-4">
-          <div className="flex items-center gap-3 pb-4 border-b border-zinc-800">
-            <Shield className="w-6 h-6 text-indigo-400" />
-            <div>
-              <h2 className="text-lg font-bold text-white">Seguridad & Autenticación</h2>
-              <p className="text-xs text-zinc-400">Políticas de acceso para el equipo administrativo.</p>
-            </div>
-          </div>
-          <div className="space-y-2 text-sm text-zinc-300">
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Nivel de Encriptación</span>
-              <span className="font-mono text-emerald-400">AES-256 / SSL TLS 1.3</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Protección de Rutas</span>
-              <span className="font-mono text-emerald-400">Supabase SSR Middleware</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-zinc-400">Row Level Security (RLS)</span>
-              <span className="font-mono text-emerald-400">Activado (Estricto)</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2: Estado de Base de Datos */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 space-y-4">
-          <div className="flex items-center gap-3 pb-4 border-b border-zinc-800">
-            <Database className="w-6 h-6 text-cyan-400" />
-            <div>
-              <h2 className="text-lg font-bold text-white">Infraestructura de Datos</h2>
-              <p className="text-xs text-zinc-400">Conexión activa con el motor PostgreSQL de Supabase.</p>
-            </div>
-          </div>
-          <div className="space-y-2 text-sm text-zinc-300">
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Motor de Base de Datos</span>
-              <span className="font-mono text-zinc-200">PostgreSQL (Supabase Cloud)</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Esquema Actual</span>
-              <span className="font-mono text-indigo-400">schema_avanza_v2 (Normalizado 3NF)</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-zinc-400">Tablas Principales</span>
-              <span className="font-mono text-zinc-300">companies, leads, projects, sprints, qa_tests, financial_milestones</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Datos de la Empresa */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 space-y-4">
-          <div className="flex items-center gap-3 pb-4 border-b border-zinc-800">
-            <UserCheck className="w-6 h-6 text-emerald-400" />
-            <div>
-              <h2 className="text-lg font-bold text-white">Identidad Corporativa</h2>
-              <p className="text-xs text-zinc-400">Datos públicos para cotizaciones y contratos.</p>
-            </div>
-          </div>
-          <div className="space-y-2 text-sm text-zinc-300">
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Empresa</span>
-              <span className="font-semibold text-white">AVANZA Technology Studio</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-zinc-900">
-              <span className="text-zinc-400">Correo Comercial</span>
-              <span className="text-zinc-300">avanza.mmoficial@gmail.com</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-zinc-400">Directores</span>
-              <span className="text-zinc-300">Manuel Callañaupa (Tech) · Magno Alomía (Commercial)</span>
-            </div>
-          </div>
-        </div>
-      </div>
+        <pre className="mt-3 overflow-x-auto rounded-lg bg-zinc-950 p-3 text-xs text-zinc-300">
+{`insert into public.crm_staff (user_id, email)
+select id, email from auth.users where email = 'correo@ejemplo.com';`}
+        </pre>
+        <p className="mt-3 text-xs text-zinc-400">
+          Recomendado: en Supabase &gt; Authentication &gt; Sign In / Providers, desactiva “Allow new users to sign up”.
+        </p>
+      </Panel>
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function LoginPage() {
                 autoComplete="email"
                 required
                 className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500"
-                placeholder="admin@avanza.dev"
+                placeholder="tu-correo@avanzape.com"
               />
             </div>
             <div className="grid gap-2">

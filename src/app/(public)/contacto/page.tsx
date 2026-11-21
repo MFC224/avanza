@@ -56,7 +56,11 @@ export default function ContactoPage() {
     }
 
     const selectedCountryObj = COUNTRIES.find((c) => c.code === pais) || COUNTRIES[0];
+    const honey = e.currentTarget.elements.namedItem("_honey") as HTMLInputElement | null;
     const formData = new FormData();
+    // El campo trampa antes no se enviaba, así que el filtro antispam nunca actuaba.
+    formData.append("_honey", honey?.value ?? "");
+    formData.append("consentimiento", "si");
     formData.append("nombre", nombre);
     formData.append("contacto", contacto);
     formData.append("servicio", servicio);

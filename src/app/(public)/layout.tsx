@@ -43,7 +43,7 @@ export default function PublicLayout({
       {/* Pie de página: texto simple sobre tinta, sin iconos ni separadores */}
       <footer
         data-tone="ink"
-        className="bg-[var(--ink)] text-[var(--paper)] pt-24 pb-12 lg:pt-32"
+        className="bg-[var(--ink)] text-[var(--paper)] pt-24 pb-28 lg:pt-32"
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-12">
           <div className="grid gap-14 md:grid-cols-12 pb-20">

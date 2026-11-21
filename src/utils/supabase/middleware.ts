@@ -8,7 +8,8 @@ const PROTECTED_ROUTES = [
   '/projects',
   '/sprints',
   '/finances',
-  '/settings'
+  '/settings',
+  '/agenda'
 ];
 
 export async function updateSession(request: NextRequest) {

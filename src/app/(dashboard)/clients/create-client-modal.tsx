@@ -59,17 +59,27 @@ export function CreateClientModal() {
             
             <div className="grid gap-2">
               <Label htmlFor="company" className="text-zinc-300">Empresa / Startup</Label>
-              <Input id="company" name="company" required className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" placeholder="Ej. TechCorp" />
+              <Input id="company" name="company" className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" placeholder="Ej. TechCorp" />
             </div>
             
             <div className="grid gap-2">
               <Label htmlFor="email" className="text-zinc-300">Correo electrónico</Label>
-              <Input id="email" name="email" type="email" required className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" placeholder="juan@ejemplo.com" />
+              <Input id="email" name="email" type="email" className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" placeholder="juan@ejemplo.com" />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="phone" className="text-zinc-300">WhatsApp</Label>
+              <Input id="phone" name="phone" inputMode="tel" className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" placeholder="987 654 321" />
             </div>
             
             <div className="grid gap-2">
               <Label htmlFor="status" className="text-zinc-300">Estado</Label>
-              <Input id="status" name="status" defaultValue="Activo" className="bg-zinc-900 border-zinc-800 text-white focus:border-blue-500" />
+              <select id="status" name="status" defaultValue="Activo" className="h-9 rounded-md bg-zinc-900 border border-zinc-800 px-3 text-sm text-white">
+                <option>Activo</option>
+                <option>En proyecto</option>
+                <option>Soporte</option>
+                <option>Inactivo</option>
+              </select>
             </div>
           </div>
           <DialogFooter>

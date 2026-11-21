@@ -1115,98 +1115,34 @@ test("UT-42", "Sprint2SecondaryPagesAndCompliance", "Valida retiro de cargas ana
   assert(!nosotrosContent.includes("bases de datos 3NF"), "nosotros/page.tsx no debe contener jerga bases de datos 3NF");
 });
 
-// --- MÓDULO 15: Sprint 3 ARM v1 (Base de Conocimiento, Rate Limiting, Zod & Resilient Fallback) ---
-test("UT-43", "Sprint3ARMv1", "Valida base de conocimiento de ARM, validación Zod de mensajes, rate limiting (10 msgs/sesión) y fallback de resiliencia", () => {
-  const kbPath = path.join(ROOT_DIR, "AVANZA_KNOWLEDGE_BASE_ARM.md");
-  const armEnginePath = path.join(ROOT_DIR, "src", "lib", "arm-engine.ts");
-  const armRoutePath = path.join(ROOT_DIR, "src", "app", "api", "arm", "chat", "route.ts");
-  const armWidgetPath = path.join(ROOT_DIR, "src", "components", "ui", "arm-chat-widget.tsx");
-
-  // 1. Verificación de archivo de base de conocimiento maestro
-  assert(fs.existsSync(kbPath), "AVANZA_KNOWLEDGE_BASE_ARM.md debe existir en la raíz");
-  const kbContent = fs.readFileSync(kbPath, "utf-8");
-  assert(kbContent.includes("S/ 1,200"), "KB debe especificar rango web desde S/ 1,200");
-  assert(kbContent.includes("S/ 2,800"), "KB debe especificar rango CRM desde S/ 2,800");
-  assert(kbContent.includes("S/ 3,500"), "KB debe especificar rango IA desde S/ 3,500");
-  assert(kbContent.includes("Ley N° 29733"), "KB debe incluir protocolo de consentimiento de la Ley N° 29733");
-  assert(kbContent.includes("+51 942 498 841"), "KB debe incluir WhatsApp oficial de Magno");
-  assert(kbContent.includes("+51 921 195 037"), "KB debe incluir teléfono oficial de Manuel");
-
-  // 2. Validación de esquema Zod para mensajes ARM
-  const validMsg = armChatSchema.safeParse({
-    sessionId: "session_test_12345",
-    message: "¿Cuánto cuesta desarrollar un CRM?",
-    consentGiven: true,
-  });
-  assertEqual(validMsg.success, true);
-  assertEqual(validMsg.data.message, "¿Cuánto cuesta desarrollar un CRM?");
-
-  // Rechazo de mensaje vacío
-  const emptyMsg = armChatSchema.safeParse({
-    sessionId: "session_test_12345",
-    message: "   ",
-  });
-  assertEqual(emptyMsg.success, false);
-
-  // Rechazo de mensaje excesivo (> 500 caracteres)
-  const hugeMsg = armChatSchema.safeParse({
-    sessionId: "session_test_12345",
-    message: "a".repeat(501),
-  });
-  assertEqual(hugeMsg.success, false);
-
-  // 3. Verificación de Rate Limiting (Máximo 10 mensajes por sesión)
-  const rateLimiter = createMockRateLimiter();
-  const testSession = "test_sess_rate_limit";
-  const testIp = "192.168.1.100";
-
-  for (let i = 0; i < 10; i++) {
-    const res = rateLimiter(testSession, `ip_${i}`);
-    assert(res.allowed, `Mensaje ${i + 1} debe ser permitido`);
+// --- MÓDULO 15: ARM v2 (motor de ventas). Las pruebas de comportamiento reales están en scripts/tests/ ---
+test("UT-43", "ARMv2Motor", "Catálogo oficial, motor de conversación, IA opcional y respaldo a WhatsApp", () => {
+  const read = (rel) => fs.readFileSync(path.join(ROOT_DIR, rel), "utf-8");
+  const kb = read("AVANZA_KNOWLEDGE_BASE_ARM.md");
+  assert(kb.includes("Ley N° 29733"), "KB debe incluir protocolo de consentimiento de la Ley N° 29733");
+  for (const f of ["catalog", "extract", "profile", "engine", "scheduling", "schemas", "gemini", "rate-limit"]) {
+    assert(fs.existsSync(path.join(ROOT_DIR, "src", "lib", "arm", `${f}.ts`)), `src/lib/arm/${f}.ts debe existir`);
   }
-  const blockedSession = rateLimiter(testSession, "ip_overflow");
-  assertEqual(blockedSession.allowed, false);
-  assert(blockedSession.reason.includes("10 mensajes"));
-
-  // 4. Verificación de existencia de motor, endpoint y widget UI
-  assert(fs.existsSync(armEnginePath), "src/lib/arm-engine.ts debe existir");
-  const engineContent = fs.readFileSync(armEnginePath, "utf-8");
-  assert(engineContent.includes("ARM_SERVICES_CATALOG"), "arm-engine.ts debe exportar ARM_SERVICES_CATALOG");
-  assert(engineContent.includes("checkArmRateLimit"), "arm-engine.ts debe exportar checkArmRateLimit");
-  assert(engineContent.includes("resolveGroundedArmResponse"), "arm-engine.ts debe exportar resolveGroundedArmResponse");
-
-  assert(fs.existsSync(armRoutePath), "src/app/api/arm/chat/route.ts debe existir");
-  const routeContent = fs.readFileSync(armRoutePath, "utf-8");
-  assert(routeContent.includes("export async function POST"), "route.ts debe exportar método POST");
-  assert(routeContent.includes("status: 429"), "route.ts debe manejar código HTTP 429 para rate limit");
-
-  assert(fs.existsSync(armWidgetPath), "src/components/ui/arm-chat-widget.tsx debe existir");
-  const widgetContent = fs.readFileSync(armWidgetPath, "utf-8");
-  assert(widgetContent.includes("errorFallback"), "arm-chat-widget.tsx debe incluir fallback de resiliencia");
-  assert(widgetContent.includes("+51 942 498 841"), "arm-chat-widget.tsx debe ofrecer WhatsApp de los fundadores como respaldo");
+  const catalog = read("src/lib/arm/catalog.ts");
+  for (const price of ["S/ 1,200", "S/ 2,800", "S/ 3,500"]) assert(catalog.includes(price), `El catálogo debe incluir ${price}`);
+  const route = read("src/app/api/arm/chat/route.ts");
+  assert(route.includes("status: 429"), "La ruta del chat debe responder 429 ante abuso");
+  assert(route.includes("crafted ?? plan.reply"), "Si la IA falla, debe responder el motor propio");
+  assert(!read("src/lib/arm/gemini.ts").includes("?key="), "La clave de Gemini no debe ir en la URL");
+  assert(read("src/components/ui/arm-chat-widget.tsx").includes("wa.me/51942498841"), "El widget debe ofrecer WhatsApp de respaldo");
+  assert(fs.existsSync(path.join(ROOT_DIR, "scripts", "tests", "arm-engine.test.mjs")), "Debe existir la suite real del motor");
 });
 
-// --- MÓDULO 16: Sprint 4 ARM v2 (Scheduling, Concurrency Control, Google Meet & Dropoff Analytics) ---
-test("UT-44", "Sprint4ARMv2Scheduling", "Valida motor de agendamiento ARM v2, prevención de solapamientos, generación de Google Meet y tablero de fuga", () => {
-  const schedulingTsPath = path.join(ROOT_DIR, "src", "lib", "arm-scheduling.ts");
-  const scheduleRoutePath = path.join(ROOT_DIR, "src", "app", "api", "arm", "schedule", "route.ts");
-  const dashboardPath = path.join(ROOT_DIR, "src", "app", "(dashboard)", "dashboard", "page.tsx");
-
-  assert(fs.existsSync(schedulingTsPath), "src/lib/arm-scheduling.ts debe existir");
-  assert(fs.existsSync(scheduleRoutePath), "src/app/api/arm/schedule/route.ts debe existir");
-  assert(fs.existsSync(dashboardPath), "src/app/(dashboard)/dashboard/page.tsx debe existir");
-
-  const schedulingCode = fs.readFileSync(schedulingTsPath, "utf-8");
-  assert(schedulingCode.includes("checkAvailability"), "arm-scheduling.ts debe exportar checkAvailability");
-  assert(schedulingCode.includes("bookAppointment"), "arm-scheduling.ts debe exportar bookAppointment");
-  assert(schedulingCode.includes("https://meet.google.com/"), "arm-scheduling.ts debe generar enlace Google Meet");
-  assert(schedulingCode.includes("duration_minutes: 25"), "arm-scheduling.ts debe fijar 25 minutos de duración");
-  assert(schedulingCode.includes("America/Lima"), "arm-scheduling.ts debe operar en America/Lima");
-
-  const dashboardCode = fs.readFileSync(dashboardPath, "utf-8");
-  assert(dashboardCode.includes("appointments"), "dashboard/page.tsx debe contener tabla appointments");
-  assert(dashboardCode.includes("sales_dropoff_analytics"), "dashboard/page.tsx debe contener tabla de fuga");
-  assert(dashboardCode.includes("Manuel & Magno"), "dashboard/page.tsx debe mostrar a Manuel & Magno como anfitriones");
+// --- MÓDULO 16: ARM v2 (agenda y CRM persistentes) ---
+test("UT-44", "ARMv2AgendaCRM", "Agenda sin datos públicos, sin enlaces Meet inventados y con doble reserva bloqueada en la base", () => {
+  const read = (rel) => fs.readFileSync(path.join(ROOT_DIR, rel), "utf-8");
+  const schedule = read("src/app/api/arm/schedule/route.ts");
+  assert(!schedule.includes("getAppointmentsList"), "GET /api/arm/schedule no debe listar citas de clientes");
+  assert(schedule.includes("openSlots"), "GET /api/arm/schedule debe devolver solo horarios libres");
+  const migration = read("supabase/migrations/20261121_arm_crm.sql");
+  assert(migration.includes("appointments_active_slot_unique"), "La base debe impedir la doble reserva");
+  assert(migration.includes("crm_staff_all"), "Las tablas del CRM deben quedar solo para el equipo (RLS)");
+  assert(read("src/app/(dashboard)/dashboard/page.tsx").includes("getDashboardData"), "El tablero debe leer datos reales");
 });
 
 // -------------------------------------------------------------

@@ -8,7 +8,10 @@ export type ConversionEvent =
   | "submit_estimator"
   | "open_arm_assistant"
   | "submit_contact_form"
-  | "click_whatsapp_direct";
+  | "click_whatsapp_direct"
+  | "arm_lead_captured"
+  | "arm_booking_created"
+  | "arm_whatsapp_handoff";
 
 export function trackEvent(
   eventName: ConversionEvent,

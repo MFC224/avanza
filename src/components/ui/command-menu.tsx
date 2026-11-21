@@ -1,5 +1,7 @@
 "use client";
 
+import { SITE_CONFIG } from "@/lib/site-config";
+
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
@@ -98,10 +100,10 @@ export function CommandMenu() {
     },
     {
       id: "services",
-      title: "Ver los 17 Servicios de Software & IA",
+      title: "Ver servicios: páginas web, sistemas e IA",
       category: "Navegación",
       icon: Layers,
-      badge: "17 Módulos",
+      badge: "Servicios",
       action: () => {
         router.push("/servicios");
         setIsOpen(false);
@@ -192,12 +194,12 @@ export function CommandMenu() {
     },
     {
       id: "copy-email",
-      title: "Copiar Correo Oficial: contacto@avanzastudio.com",
+      title: `Copiar correo: ${SITE_CONFIG.contact.email}`,
       category: "Acción Rápida",
       icon: Copy,
-      badge: "contacto@avanzastudio.com",
+      badge: SITE_CONFIG.contact.email,
       action: () => {
-        copyToClipboard("contacto@avanzastudio.com", "Correo copiado");
+        copyToClipboard(SITE_CONFIG.contact.email, "Correo copiado");
       },
     },
   ];
